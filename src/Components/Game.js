@@ -45,7 +45,7 @@ class Game extends React.Component {
             gameResources: updatedGameResources
         });
     }**/
-
+    
     /**handlerChange() {
         this.setState ({
            test: 'yyy'
@@ -56,7 +56,7 @@ class Game extends React.Component {
     render() {
         var gameResources = this.state.gameResources.slice()
         return(
-            <table>
+            <table> 
                 {gameResources.map(resource => (
                     <tr>                  
                         <td><ResourcePanel resourceData={resource} /></td>                   
