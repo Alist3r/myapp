@@ -1,9 +1,9 @@
-const ResourcesList = [
+const resourcesList = [
     {
         name: 'Athleticism', 
         currentValue: 0, 
         maxValue: 100, 
-        incRatio: 0.16, 
+        incRatio: 0.50, 
         unlocked: true
     },
     {
@@ -15,4 +15,4 @@ const ResourcesList = [
     }
 ]
 
-export default ResourcesList;
+export default resourcesList;

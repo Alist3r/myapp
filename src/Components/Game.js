@@ -1,27 +1,37 @@
 import React from 'react'
 import ResourcePanel from './ResourcesPanel.js'
-import ResourcesList from '../Utilities/ResourcesList.js'
+import resourcesList from '../Utilities/ResourcesList.js'
+import {saveState, loadState} from '../Utilities/UtilityFunctions.js'
 
 class Game extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             gameTime: 0,
-            gameResources: ResourcesList.slice()
+            gameResources: resourcesList.slice()
         }
+        
+        if(localStorage.getItem('gameTime')) {
+            this.state = loadState();
+        }
+      
     }
 
     tick() {
         this.setState({
             gameTime: this.state.gameTime + 1
         });
+
+        if(this.state.gameTime % 5 === 0) {
+            saveState(this.state)
+        }
     }
 
     componentDidMount() {
         this.timerID = setInterval(
             () => this.tick(),
             1000
-          );
+        );
     }
 
     componentWillUnmount() {
@@ -34,6 +44,9 @@ class Game extends React.Component {
         return(
             <div>
                 <div>Game Time: {this.state.gameTime}</div>
+                {/* poi da togliere */}
+                <div><button onClick={() => {localStorage.clear()}}>Clear Storage</button></div>
+                {/* ^^^^^^^^^^^^^^^ */}
                 <table> 
                     {gameResources.map(resource => (
                         <tr key={i++}>                  
