@@ -11,6 +11,7 @@ class Game extends React.Component {
             gameResources: resourcesList.slice()
         }
         
+        //If a storage exist, the load the datas
         if(localStorage.getItem('gameTime')) {
             this.state = loadState();
         }
@@ -42,19 +43,29 @@ class Game extends React.Component {
         let gameResources = this.state.gameResources.slice()
         let i=0;
         return(
-            <div>
-                <div>Game Time: {this.state.gameTime}</div>
-                {/* poi da togliere */}
-                <div><button onClick={() => {localStorage.clear()}}>Clear Storage</button></div>
-                {/* ^^^^^^^^^^^^^^^ */}
-                <table> 
-                    {gameResources.map(resource => (
-                        <tr key={i++}>                  
-                            <td><ResourcePanel  resourceData={resource}  /></td>                   
-                        </tr>
-                    ))}
-                </table>
-            </div>
+            
+            <table id='mainTable'>
+                <tr>
+                    <td>
+                        <div>Game Time: {this.state.gameTime}</div>
+                        {/* poi da togliere */}
+                        <div><button onClick={() => {localStorage.clear()}}>Clear Storage</button></div>
+                        {/* ^^^^^^^^^^^^^^^ */}
+                        <table> 
+                            {gameResources.map(resource => (
+                                <tr key={i++}>                  
+                                    <td><ResourcePanel  resourceData={resource}  /></td>                   
+                                </tr>
+                            ))}
+                        </table>
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+
+            </table>
+         
             
         )
     }
