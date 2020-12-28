@@ -1,6 +1,9 @@
 import React from 'react'
 import ResourcePanel from './ResourcesPanel.js'
+import ActivityPanel from './ActivityPanel.js'
+
 import resourcesList from '../Utilities/ResourcesList.js'
+import activityList from '../Utilities/ActivityList.js'
 import {saveState, loadState} from '../Utilities/UtilityFunctions.js'
 
 class Game extends React.Component {
@@ -8,14 +11,12 @@ class Game extends React.Component {
         super(props)
         this.state = {
             gameTime: 0,
-            gameResources: resourcesList.slice()
+            gameResources: resourcesList.slice(),
+            gameActivities: activityList.slice()
         }
         
         //If a storage exist, the load the datas
-        if(localStorage.getItem('gameTime')) {
-            this.state = loadState();
-        }
-      
+        this.state = loadState(this.state);   
     }
 
     tick() {
@@ -41,6 +42,7 @@ class Game extends React.Component {
 
     render() {
         let gameResources = this.state.gameResources.slice()
+        let gameActivities = this.state.gameActivities.slice()
         let i=0;
         return(
             
@@ -60,7 +62,7 @@ class Game extends React.Component {
                         </table>
                     </td>
                     <td>
-                        
+                    <ActivityPanel activity={gameActivities[0]} />
                     </td>
                 </tr>
 
