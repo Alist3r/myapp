@@ -62,7 +62,7 @@ class Game extends React.Component {
                         </table>
                     </td>
                     <td>
-                    <ActivityPanel activity={gameActivities[0]} />
+                    <ActivityPanel activity={gameActivities[0]} resourceList ={gameResources} />
                     </td>
                 </tr>
 

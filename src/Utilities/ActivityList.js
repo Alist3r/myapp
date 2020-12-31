@@ -2,12 +2,13 @@ const activityList = [
     {
         name: 'Punch the Wall', 
         stage: 0,
-        effectPerClick: {
-            "Athleticism": 1
-        },
-        effectPerTick: {},
+        upgradeCost: null,
+        effectPerClick: [
+            { resource: 'Athleticism', clickValue: 1 }
+        ],
+        effectPerTick: null,
         defaultUnlocked: true,
-        unlockedFrom: {}     
+        unlockedFrom: null    
     }
 ]
 
