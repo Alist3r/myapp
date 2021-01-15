@@ -1,6 +1,7 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
+  color: black;
 }
 
 .activity {
@@ -10,6 +11,7 @@ body {
   padding: 5px;
   width: 200px;
   border-radius: 3px;
+  font: 14px "Century Gothic", Futura, sans-serif;
 }
 
 .activity:active {

@@ -1,4 +1,5 @@
 import React from 'react'
+import Tooltip from '../Components/Tooltip.js'
 
 class ActivityPanel extends React.Component {
   constructor(props) {
@@ -33,7 +34,9 @@ class ActivityPanel extends React.Component {
   render() {
     let activity = this.state.activity
       return(
-          <button onClick={() => this.doActivity()} className='activity'> {activity.name} | lv: {activity.stage}</button>           
+        <Tooltip description={activity.description} direction="right">
+          <button onClick={() => this.doActivity()} className='activity'> {activity.name} | lv: {activity.stage}</button>       
+        </Tooltip>    
       )
     }
 }
