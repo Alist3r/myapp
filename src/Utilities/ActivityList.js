@@ -1,7 +1,8 @@
 const activityList = [
     {
         name: 'Punch the Wall', 
-        description: 'asdasdaaasda',
+        description: 'Punches on a wall',
+        effectDesc:  'Gain 1 Athleticism and 2 Psiche on every click',
         stage: 0,
         upgradeCost: null,
         effectPerClick: [
