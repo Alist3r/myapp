@@ -44,6 +44,7 @@ class Game extends React.Component {
         let gameResources = this.state.gameResources.slice()
         let gameActivities = this.state.gameActivities.slice()
         let i=0;
+        let j=0;
         return(
             
             <table id='mainTable'>
@@ -62,7 +63,15 @@ class Game extends React.Component {
                         </table>
                     </td>
                     <td>
-                    <ActivityPanel activity={gameActivities[0]} resourceList ={gameResources} />
+                        <table>
+                            {gameActivities.map(activity => (
+                                <tr key={j++}>                  
+                                    <td>
+                                        <ActivityPanel activity={activity} resourceList ={gameResources} />
+                                    </td>
+                                </tr>
+                            ))}
+                        </table>
                     </td>
                 </tr>
 

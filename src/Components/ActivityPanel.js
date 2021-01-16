@@ -35,7 +35,7 @@ class ActivityPanel extends React.Component {
     let activity = this.state.activity
       return(
         <Tooltip description={activity.description} effectDesc={activity.effectDesc} direction="right">
-          <button onClick={() => this.doActivity()} className='activity'> {activity.name} | lv: {activity.stage}</button>       
+          <button onClick={() => this.doActivity()} className='activity'> {activity.name} {activity.stage != null && ( <span>[{activity.stage}]</span>)} </button>       
         </Tooltip>    
       )
     }
