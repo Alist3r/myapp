@@ -16,6 +16,8 @@ const Tooltip = (props) => {
     setActive(false);
   };
 
+  var activity = props.activity
+
   return (
     <div
       className="Tooltip-Wrapper"
@@ -28,9 +30,21 @@ const Tooltip = (props) => {
       {active && (
         <div className={`Tooltip-Tip ${props.direction || "top"}`}>
           <div>
-            <div className="Tooltip-Description">{props.description}</div>
+            <div className="Tooltip-Description">{activity.description}</div>
             <div className="Tooltip-Divider"></div>
-            <div className="Tooltip-EffectDesc">{props.effectDesc}</div>
+            <div className="Tooltip-EffectDesc">{activity.effectDesc}</div>
+            <div className="Tooltip-Title">Costs</div>
+            <div className="Tooltip-Divider"></div>
+            {activity.upgradeCost && (activity.upgradeCost.map(upgradeCost => (
+                
+              <span>
+                {upgradeCost.resource}: {(upgradeCost.upgradeCostRatio * activity.stage)+upgradeCost.cost}
+                <br></br>
+              </span>
+                             
+            )))}
+            <div className="Tooltip-Title">Effects</div>
+            <div className="Tooltip-Divider"></div>
           </div>
         </div>
       )}

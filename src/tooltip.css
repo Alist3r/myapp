@@ -15,8 +15,7 @@
 .Tooltip-Tip {
   position: absolute;
   left: 50%;
-  width: 210px;
-  height: auto;
+  width: 250px;
   transform: translateX(-50%);
   padding: 10px;
   color: var(--tooltip-text-color);
@@ -37,6 +36,11 @@
   border-bottom: 1px solid black;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.Tooltip-Title {
+  text-align: center;
+  letter-spacing: 1px;
 }
 
 .Tooltip-EffectDesc {
