@@ -19,7 +19,7 @@ const activityList = [
         effectDesc:  'Every level of meditate grants Psiche points',
         stage: 0,
         upgradeCost: [
-            { resource: 'Psiche', cost: 50 }
+            { resource: 'Psiche', cost: 50, upgradeCostRatio: 0.8 }
         ],
         effectPerClick: null,
         effectPerTick: [
