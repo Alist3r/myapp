@@ -15,12 +15,12 @@
 .Tooltip-Tip {
   position: absolute;
   left: 50%;
-  width: 250px;
+  width: 240px;
   transform: translateX(-50%);
   padding: 10px;
   color: var(--tooltip-text-color);
   background: var(--tooltip-background-color);
-  font: 14px "Century Gothic", Futura, sans-serif;
+  font: 13px "Century Gothic", Futura, sans-serif;
   z-index: 100;
   border: 1px solid black;
   
@@ -28,8 +28,6 @@
 
 .Tooltip-Description {
   text-align: center;
-  font-weight: bold;
-  color: rgb(104, 104, 104);
 }
 
 .Tooltip-Divider {
@@ -41,10 +39,18 @@
 .Tooltip-Title {
   text-align: center;
   letter-spacing: 1px;
+  font-size: 12px;
 }
 
 .Tooltip-EffectDesc {
-  font-size: 13px;
+  font-size: 12px;
+  text-align:center;
+  margin-bottom: 10px;
+  color: grey;
+}
+
+.Tooltip-EffectRow {
+  color: grey;
 }
 
 /* CSS border triangles */
@@ -74,7 +80,7 @@
 .Tooltip-Tip.right {
   left: calc(100% + var(--tooltip-margin));
   top: 50%;
-  transform: translateX(0) translateY(-50%);
+  transform: translateX(0) translateY(-15px);
 }
 /* CSS border triangles 
 .Tooltip-Tip.right::before {

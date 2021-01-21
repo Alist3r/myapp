@@ -8,10 +8,10 @@ body {
   background-color: #fff;
   cursor:pointer;
   border:1px solid black;
-  padding: 5px;
-  width: 200px;
+  padding: 7px;
+  width: 220px;
   border-radius: 3px;
-  font: 14px "Century Gothic", Futura, sans-serif;
+  font: 13px "Century Gothic", Futura, sans-serif;
 }
 
 .activity:active {

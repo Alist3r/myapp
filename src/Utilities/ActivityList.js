@@ -23,7 +23,7 @@ const activityList = [
         ],
         effectPerClick: null,
         effectPerTick: [
-            { resource: 'Psiche', ratio: 0.2 }
+            { resource: 'Psiche', perSecRatio: 0.2, percRatio: null, flatRatio: null }
         ],
         defaultUnlocked: true,
         unlockedFrom: null    

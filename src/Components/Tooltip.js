@@ -37,7 +37,7 @@ const Tooltip = (props) => {
             <div className="Tooltip-Divider"></div>
             {activity.upgradeCost && (activity.upgradeCost.map(upgradeCost => (
                 
-              <span>
+              <span className="Tooltip-EffectRow">
                 {upgradeCost.resource}: {(upgradeCost.upgradeCostRatio * activity.stage)+upgradeCost.cost}
                 <br></br>
               </span>
@@ -45,6 +45,14 @@ const Tooltip = (props) => {
             )))}
             <div className="Tooltip-Title">Effects</div>
             <div className="Tooltip-Divider"></div>
+            {activity.effectPerTick && (activity.effectPerTick.map(effectPerTick => (
+              <span className="Tooltip-EffectRow">     
+                {effectPerTick.resource}: {effectPerTick.perSecRatio && (<span>{effectPerTick.perSecRatio}/sec</span>)}
+                /** COMPLETARE */
+                  
+                <br></br>
+              </span>
+            )))}
           </div>
         </div>
       )}
