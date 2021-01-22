@@ -38,7 +38,7 @@ class ResourcePanel extends React.Component {
     let resource = this.state.resource
     let stamp = (Math.round(resource.currentValue * 100) / 100).toFixed(2);
       return(
-          <div>{resource.name}: {stamp}/{resource.maxValue}</div>           
+          <div>{resource.name}: {stamp}/{resource.maxValue} ({resource.incRatio}/<span className="Span-Sec">sec</span>)</div>           
       )
     }
 }

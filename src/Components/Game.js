@@ -51,7 +51,7 @@ class Game extends React.Component {
                 <tr>
                     <td>
                         <div>Game Time: {this.state.gameTime}</div>
-                        {/* poi da togliere */}
+                        {/* DA TOGLIERE */}
                         <div><button onClick={() => {localStorage.clear()}}>Clear Storage</button></div>
                         {/* ^^^^^^^^^^^^^^^ */}
                         <table> 

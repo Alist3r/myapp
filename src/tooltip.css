@@ -53,6 +53,10 @@
   color: grey;
 }
 
+.Tooltip-Sec {
+  font-size: 11px;
+}
+
 /* CSS border triangles */
 .Tooltip-Tip::before {
   content: " ";

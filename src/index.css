@@ -4,12 +4,16 @@ body {
   color: black;
 }
 
+.Span-Sec {
+  font-size: 12px;
+}
+
 .activity {
   background-color: #fff;
-  cursor:pointer;
-  border:1px solid black;
-  padding: 7px;
-  width: 220px;
+  cursor: pointer;
+  border: 1px solid black;
+  padding: 10px;
+  width: 250px;
   border-radius: 3px;
   font: 13px "Century Gothic", Futura, sans-serif;
 }
@@ -21,4 +25,6 @@ body {
 .activity:focus {
   outline: none;
 }
+
+
 
