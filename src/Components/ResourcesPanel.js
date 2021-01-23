@@ -37,8 +37,9 @@ class ResourcePanel extends React.Component {
   render() {
     let resource = this.state.resource
     let stamp = (Math.round(resource.currentValue * 100) / 100).toFixed(2);
+    let cutIncRatio = (Math.round(resource.incRatio * 100) / 100).toFixed(2);  
       return(
-          <div>{resource.name}: {stamp}/{resource.maxValue} ({resource.incRatio}/<span className="Span-Sec">sec</span>)</div>           
+          <div>{resource.name}: {stamp}/{resource.maxValue} ({cutIncRatio}/<span className="Span-Sec">sec</span>)</div>           
       )
     }
 }

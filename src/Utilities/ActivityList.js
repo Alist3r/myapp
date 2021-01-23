@@ -16,16 +16,15 @@ const activityList = [
     {
         name: 'Meditate', 
         description: 'Enter a meditate state',
-        effectDesc:  'Every level of meditate grants Psiche points',
+        effectDesc:  'Every level of meditate grants Psiche and Athleticism production',
         stage: 0,
         upgradeCost: [
-            { resource: 'Psiche', cost: 50, upgradeCostRatio: 0.8 }
+            { resource: 'Psiche', cost: 50, upgradeCostRatio: 0.3 }
         ],
         effectPerClick: null,
         effectPerTick: [
             { resource: 'Psiche', perSecRatio: 0.2, percRatio: null, flatRatio: null },
-            { resource: 'Psiche', perSecRatio: null, percRatio: 3, flatRatio: null },
-            { resource: 'Psiche', perSecRatio: null, percRatio: null, flatRatio: 2 }
+            { resource: 'Athleticism', perSecRatio: null, percRatio: 3, flatRatio: null }
         ],
         defaultUnlocked: true,
         unlockedFrom: null    

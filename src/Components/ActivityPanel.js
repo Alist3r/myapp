@@ -27,8 +27,48 @@ class ActivityPanel extends React.Component {
           }
         }
       });
-
     }
+
+    if(activityToDo.effectPerTick != null) {
+      let upgradeCosts = activityToDo.upgradeCost.slice()
+      let upgradable = false
+      upgradeCosts.forEach(cost => {
+        for(let i=0; i<resourcesList.length;i++) {
+          if((resourcesList[i].name === cost.resource) && resourcesList[i].currentValue >= cost.cost) {
+            upgradable = true
+          } 
+          else {
+            upgradable = false
+          }
+        }
+      })
+
+      if(upgradable) {
+        let effects = activityToDo.effectPerTick.slice()
+        
+        effects.forEach(effect => {
+          for(let i=0; i<resourcesList.length;i++) {
+            if(resourcesList[i].name === effect.resource) {
+              let indexToPay = upgradeCosts.findIndex(x => x.resource === resourcesList[i].name)
+              if(indexToPay !== -1) {
+                resourcesList[i].currentValue -= upgradeCosts[indexToPay].cost
+                if (effect.perSecRatio != null)
+                  resourcesList[i].incRatio += effect.perSecRatio
+                /* DA AGGIUNGERE ALTRE TIPOLOGIE DI INCREMENTO */   
+                upgradeCosts[indexToPay].cost += ((upgradeCosts[indexToPay].upgradeCostRatio * upgradeCosts[indexToPay].cost))
+                activityToDo.stage += 1
+              } 
+             
+              this.setState ({
+                gameResources: resourcesList,
+                activity: activityToDo
+              })
+            }  
+          }
+        })
+      }
+    }
+
   }
 
   render() {
