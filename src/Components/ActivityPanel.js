@@ -57,14 +57,16 @@ class ActivityPanel extends React.Component {
                 /* DA AGGIUNGERE ALTRE TIPOLOGIE DI INCREMENTO */   
                 upgradeCosts[indexToPay].cost += ((upgradeCosts[indexToPay].upgradeCostRatio * upgradeCosts[indexToPay].cost))
                 activityToDo.stage += 1
-              } 
-             
-              this.setState ({
-                gameResources: resourcesList,
-                activity: activityToDo
-              })
+              }        
             }  
           }
+
+          activityToDo.upgradeCost = upgradeCosts.slice()
+          this.setState ({
+            gameResources: resourcesList,
+            activity: activityToDo
+          })
+          
         })
       }
     }
