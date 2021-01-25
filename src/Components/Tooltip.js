@@ -17,6 +17,7 @@ const Tooltip = (props) => {
   };
 
   var activity = props.activity
+  var resources = props.resourcesList.slice()
 
   return (
     <div
@@ -37,10 +38,11 @@ const Tooltip = (props) => {
             {/*--------- COSTS ---------*/}
             <div className="Tooltip-Title">Costs</div>
             <div className="Tooltip-Divider"></div>
-            {activity.upgradeCost && (activity.upgradeCost.map(upgradeCost => (
-                
+            {activity.upgradeCost && (activity.upgradeCost.map(upgradeCost => (             
               <span className="Tooltip-EffectRow">
-                {upgradeCost.resource}: {(upgradeCost.upgradeCostRatio * activity.stage)+upgradeCost.cost}
+                {upgradeCost.resource}: {resources.map(resource => (
+                  resource.name === upgradeCost.resource && (<span>{(Math.round(resource.currentValue*100)/100).toFixed(2)}</span>)                
+                ))} / {upgradeCost.cost}
                 <br></br>
               </span>
                              
@@ -51,11 +53,10 @@ const Tooltip = (props) => {
             <div className="Tooltip-Divider"></div>
             {activity.effectPerTick && (activity.effectPerTick.map(effectPerTick => (
 
-              <span className="Tooltip-EffectRow">     
-                {effectPerTick.resource}:
-                  {effectPerTick.perSecRatio && (<span> {effectPerTick.perSecRatio}/<span className="Tooltip-Sec">sec</span></span>)}  
-                  {effectPerTick.percRatio && (<span> {effectPerTick.percRatio}%</span>)}
-                  {effectPerTick.flatRatio && (<span> {effectPerTick.flatRatio} </span>)}               
+              <span className="Tooltip-EffectRow">             
+                  {effectPerTick.perSecRatio && (<span>{effectPerTick.resource}: {effectPerTick.perSecRatio}/<span className="Tooltip-Sec">sec</span></span>)}  
+                  {effectPerTick.percRatio && (<span>{effectPerTick.resource}: {effectPerTick.percRatio}%</span>)}
+                  {effectPerTick.flatRatio && (<span>Max {effectPerTick.resource}: +{effectPerTick.flatRatio} </span>)}               
                 <br></br>
               </span>
 

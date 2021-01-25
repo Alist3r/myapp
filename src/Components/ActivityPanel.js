@@ -29,54 +29,59 @@ class ActivityPanel extends React.Component {
       });
     }
 
+    // ---------- TICK EFFECT ---------- //
     if(activityToDo.effectPerTick != null) {
       let upgradeCosts = activityToDo.upgradeCost.slice()
-      let upgradable = false
+      let upgradable = true 
+      
       upgradeCosts.forEach(cost => {
-        for(let i=0; i<resourcesList.length;i++) {
-          if((resourcesList[i].name === cost.resource) && resourcesList[i].currentValue >= cost.cost) {
-            upgradable = true
-          } 
-          else {
-            upgradable = false
-          }
-        }
+        let resourceIndex = resourcesList.findIndex(x => x.name === cost.resource)
+        if (upgradable && resourcesList[resourceIndex].currentValue >= cost.cost)
+          upgradable = true
+        else
+          upgradable = false
       })
 
       if(upgradable) {
         let effects = activityToDo.effectPerTick.slice()
-        
-        effects.forEach(effect => {
-          for(let i=0; i<resourcesList.length;i++) {
-            if(resourcesList[i].name === effect.resource) {
-              let indexToPay = upgradeCosts.findIndex(x => x.resource === resourcesList[i].name)
-              if(indexToPay !== -1) {
-                resourcesList[i].currentValue -= upgradeCosts[indexToPay].cost
-                if (effect.perSecRatio != null)
-                  resourcesList[i].incRatio += effect.perSecRatio
-                /* DA AGGIUNGERE ALTRE TIPOLOGIE DI INCREMENTO */   
-                upgradeCosts[indexToPay].cost += ((upgradeCosts[indexToPay].upgradeCostRatio * upgradeCosts[indexToPay].cost))
-                activityToDo.stage += 1
-              }        
-            }  
-          }
 
-          activityToDo.upgradeCost = upgradeCosts.slice()
-          this.setState ({
-            gameResources: resourcesList,
-            activity: activityToDo
-          })
-          
+        //paying resources  
+        for(let i=0; i<resourcesList.length;i++) {
+          let indexToPay = upgradeCosts.findIndex(x => x.resource === resourcesList[i].name)  
+            if(indexToPay !== -1) {
+              resourcesList[i].currentValue -= upgradeCosts[indexToPay].cost  
+              upgradeCosts[indexToPay].cost += ((upgradeCosts[indexToPay].upgradeCostRatio * upgradeCosts[indexToPay].cost))
+            } 
+        }
+        
+        //applying effects
+        effects.forEach(effect => {          
+            let index = resourcesList.findIndex(x => x.name === effect.resource)                     
+            if (effect.perSecRatio != null)
+              resourcesList[index].incRatio += effect.perSecRatio
+            if (effect.percRatio != null)
+              resourcesList[index].incRatio += ((resourcesList[index].incRatio * effect.percRatio) / 100)
+            if (effect.flatRatio != null)
+              resourcesList[index].maxValue += effect.flatRatio     
         })
       }
+
+      activityToDo.upgradeCost = upgradeCosts.slice()
+      this.setState ({
+        gameResources: resourcesList,
+        activity: activityToDo
+      })
+      activityToDo.stage += 1
     }
 
+    // ---------- FLAT EFFECT ---------- //
   }
 
   render() {
     let activity = this.state.activity
+    let resources = this.state.gameResources
       return(
-        <Tooltip activity={activity} direction="right">
+        <Tooltip activity={activity} resourcesList={resources} direction="right">
           <button onClick={() => this.doActivity()} className='activity'> {activity.name} {activity.stage != null && ( <span>[{activity.stage}]</span>)} </button>       
         </Tooltip>    
       )

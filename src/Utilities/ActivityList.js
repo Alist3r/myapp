@@ -19,12 +19,14 @@ const activityList = [
         effectDesc:  'Every level of meditate grants Psiche and Athleticism production',
         stage: 0,
         upgradeCost: [
-            { resource: 'Psiche', cost: 50, upgradeCostRatio: 0.3 }
+            { resource: 'Psiche', cost: 50, upgradeCostRatio: 0.3 },
+            { resource: 'Athleticism', cost: 15, upgradeCostRatio: 0.5}
         ],
         effectPerClick: null,
         effectPerTick: [
             { resource: 'Psiche', perSecRatio: 0.2, percRatio: null, flatRatio: null },
-            { resource: 'Athleticism', perSecRatio: null, percRatio: 3, flatRatio: null }
+            { resource: 'Athleticism', perSecRatio: null, percRatio: 3, flatRatio: null },
+            { resource: 'Psiche', perSecRatio: null, percRatio: null, flatRatio: 50}
         ],
         defaultUnlocked: true,
         unlockedFrom: null    
