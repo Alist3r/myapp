@@ -18,11 +18,26 @@ class ActivityPanel extends React.Component {
     var upgradable = true 
     var havetoPay = false
     var upgradeCosts = []
+    var clickCosts = []
 
     if(activityToDo.upgradeCost != null) {
       upgradeCosts = activityToDo.upgradeCost.slice()
     
       upgradeCosts.forEach(cost => { //Checking if resources are enough
+        let index = resourcesList.findIndex(x => x.name === cost.resource)
+        if (upgradable && resourcesList[index].currentValue >= cost.cost)
+          upgradable = true
+        else
+          upgradable = false
+      })
+
+      havetoPay = true
+    }
+
+    if(activityToDo.clickCost != null) {
+      clickCosts = activityToDo.clickCost.slice()
+
+      clickCosts.forEach(cost => {
         let index = resourcesList.findIndex(x => x.name === cost.resource)
         if (upgradable && resourcesList[index].currentValue >= cost.cost)
           upgradable = true
@@ -39,11 +54,21 @@ class ActivityPanel extends React.Component {
       //paying resources and update the next cost
       if(havetoPay) {
         for(let i=0; i<resourcesList.length;i++) {
-          let index = upgradeCosts.findIndex(x => x.resource === resourcesList[i].name)  
-          if(index !== -1) {
-            resourcesList[i].currentValue -= upgradeCosts[index].cost  
-            upgradeCosts[index].cost += ((upgradeCosts[index].upgradeCostRatio * upgradeCosts[index].cost))
-          } 
+
+          if(upgradeCosts.length > 0) {
+            let index = upgradeCosts.findIndex(x => x.resource === resourcesList[i].name)  
+            if(index !== -1) {
+              resourcesList[i].currentValue -= upgradeCosts[index].cost  
+              upgradeCosts[index].cost += ((upgradeCosts[index].upgradeCostRatio * upgradeCosts[index].cost))
+            } 
+          }
+
+          if(clickCosts.length > 0) {
+            let index = clickCosts.findIndex(x => x.resource === resourcesList[i].name)
+            if(index !== -1) {
+              resourcesList[i].currentValue -= clickCosts[index].cost
+            }
+          }
         }
       }
       
@@ -57,7 +82,7 @@ class ActivityPanel extends React.Component {
           if (effect.maxValue != null)
             resourcesList[index].maxValue += effect.maxValue
           if (effect.clickRatio != null)
-          resourcesList[index].currentValue += effect.clickRatio     
+            resourcesList[index].currentValue += effect.clickRatio     
       })
 
       activityToDo.upgradeCost = upgradeCosts.slice()

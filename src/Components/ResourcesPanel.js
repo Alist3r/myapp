@@ -1,5 +1,6 @@
 import React from 'react'
 import {roundNumber} from '../Utilities/UtilityFunctions.js'
+import * as constants from '../Utilities/StringsConst.js'
 
 class ResourcePanel extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class ResourcePanel extends React.Component {
     var updatedResource = this.state.resource
 
     if(updatedResource.currentValue < updatedResource.maxValue) {
-      updatedResource.currentValue += (updatedResource.incRatio / 10)
+      updatedResource.currentValue += ((updatedResource.incRatio * constants.OPT_GAMESPEED) / 10)
     }
     else  {
       updatedResource.currentValue = updatedResource.maxValue
@@ -37,8 +38,14 @@ class ResourcePanel extends React.Component {
 
   render() {
     let resource = this.state.resource
+
       return(
-          <div>{resource.name}: {roundNumber(resource.currentValue)}/{roundNumber(resource.maxValue)} ({roundNumber(resource.incRatio)}/<span className="Resource-Span-Sec">sec</span>)</div>           
+          <div>
+            <div className="Resource-Cell-Name">{resource.name}</div> 
+            <div className="Resource-Cell-Value">{roundNumber(resource.currentValue)}</div>
+            <div className="Resource-Cell-MaxValue">/{roundNumber(resource.maxValue)}</div> 
+            <div className="Resource-Cell-IncRatio">({roundNumber(resource.incRatio * constants.OPT_GAMESPEED)}/<span className="Resource-Span-Sec">sec</span>)</div>
+            </div>           
       )
     }
 }

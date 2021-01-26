@@ -41,10 +41,8 @@ const Tooltip = (props) => {
         <div className={`Tooltip-Tip ${props.direction || "top"}`}>
           <div>
             <div className="Tooltip-Description">{activity.description}</div>
-            <div className="Tooltip-Divider"></div>
-            <div className="Tooltip-EffectDesc">{activity.effectDesc}</div>
 
-            {/*--------- COSTS ---------*/}
+            {/*--------- UPGRADE COSTS ---------*/}
             <div className="Tooltip-Title">Costs</div>
             <div className="Tooltip-Divider"></div>
             {activity.upgradeCost && (activity.upgradeCost.map(upgradeCost => (             
@@ -53,9 +51,17 @@ const Tooltip = (props) => {
                   resource.name === upgradeCost.resource && (<span className={currentValueColor(resource.currentValue,upgradeCost.cost)}>{roundNumber(resource.currentValue)} / {roundNumber(upgradeCost.cost)}{upgradeCost.cost > resource.maxValue && (<span>*</span>)} </span>)                
                 ))} 
                 <br></br>
-              </span>
-                             
+              </span>                         
             )))}
+
+            {/*--------- CLICK COSTS ---------*/}
+            {activity.clickCost && (activity.clickCost.map(clickCost =>
+              <span className="Tooltip-EffectRow">
+                {clickCost.resource}: {resources.map(resource => (
+                  resource.name === clickCost.resource && (<span className={currentValueColor(resource.currentValue,clickCost.cost)}>{roundNumber(resource.currentValue)} / {roundNumber(clickCost.cost)}{clickCost.cost > resource.maxValue && (<span>*</span>)} </span>)
+                ))}
+              </span>
+            ))}
 
             {/*--------- EFFECTS ---------*/}
             <div className="Tooltip-Title">Effects</div>

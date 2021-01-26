@@ -1,7 +1,7 @@
 import React from 'react'
 import ResourcePanel from './ResourcesPanel.js'
 import ActivityPanel from './ActivityPanel.js'
-import GameTime from './GameTime.js'
+import TopBar from './TopBar.js'
 
 import resourcesList from '../Utilities/ResourcesList.js'
 import activityList from '../Utilities/ActivityList.js'
@@ -37,40 +37,79 @@ class Game extends React.Component {
         clearInterval(this.timerID);
     }  
 
+    unlockActivity(activity) {
+        let unlocked = activity.unlocked
+
+        if(unlocked === false) {
+            let unlockCondition = activity.unlockedFrom.slice()
+            let unlockable = true
+            let resourcesList = this.state.gameResources.slice()
+            let activityList = this.state.gameActivities.slice()
+
+            for (let i=0; i < unlockCondition.length; i++) {
+
+                //UNLOCK BY RESOURCES VALUES
+                if(unlockable && unlockCondition[i].resource != null) {
+                    let index = resourcesList.findIndex(x => x.name === unlockCondition[i].resource) 
+                    if (resourcesList[index].currentValue >= unlockCondition[i].neededValue)
+                        unlockable = true
+                    else {
+                        unlockable = false
+                    }   
+                }
+
+                //UNLOCK BY ACTIVITY STAGE
+                if(unlockable && unlockCondition[i].activity != null) {
+                    let index = activityList.findIndex(x => x.name === unlockCondition[i].activity)
+                    if (activityList[index].stage >= unlockCondition[i].neededStage)
+                        unlockable = true
+                    else
+                        unlockable = false
+                }
+               
+            }
+
+            if(unlockable) {
+                activity.unlocked = true
+            }
+        }
+        return activity.unlocked
+    }
+
+    unlockResource(resource) {
+        if(resource.unlocked === false && resource.currentValue > 0)
+            resource.unlocked = true
+        
+        return resource.unlocked
+    }
+
+    changeSpeed(speedValue) {
+        let updatedSpeed = this.state.gameSpeed
+        updatedSpeed = speedValue
+        this.setState({
+          gameSpeed: updatedSpeed
+        });
+      }
+
     render() {
         let gameResources = this.state.gameResources.slice()
         let gameActivities = this.state.gameActivities.slice()
-  
-        let i=0;
-        let j=0;
+ 
         return(
+            
             <div>
-                <GameTime gameState={this.state} />
-                <table id='mainTable'>
-                    <tr>
-                        <td>
-                            <table> 
-                                {gameResources.map(resource => (
-                                    <tr key={i++}>                  
-                                        <td><ResourcePanel  resource={resource}  /></td>                   
-                                    </tr>
-                                ))}
-                            </table>
-                        </td>
-                        <td>
-                            <table>
-                                {gameActivities.map(activity => (
-                                    <tr key={j++}>                  
-                                        <td>
-                                            <ActivityPanel activity={activity} resources ={gameResources} />
-                                        </td>
-                                    </tr>
-                                ))}
-                            </table>
-                        </td>
-                    </tr>
+                <TopBar gameState={this.state}/>
+                <div className="Left-Panel">
+                    {gameResources.map(resource => (                                     
+                        <div>{this.unlockResource(resource) && (<ResourcePanel  resource={resource} />)}</div>                                        
+                    ))}
+                </div>
 
-                </table>
+                <div className="Middle-Panel">
+                    {gameActivities.map(activity => (                  
+                        <div>{this.unlockActivity(activity) && (<ActivityPanel activity={activity} resources ={gameResources} />)}</div>                                      
+                    ))}            
+                </div>
             </div>                        
             
         )

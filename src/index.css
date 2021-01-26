@@ -1,7 +1,59 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
-  margin: 20px;
   color: black;
+  width: 100%;
+  margin: 0px;
+  height: 100%;
+}
+
+.Top-Bar {
+  widows: 100%;
+  border-bottom: 1px solid black;
+  padding: 5px;
+}
+
+.Top-Bar-Div {
+  display: table-cell;
+  width: 200px;
+}
+
+.Left-Panel {
+  width: 25%;
+  min-width: 300px;
+  max-width: 500px;
+  display: table-cell;
+}
+
+.Resource-Cell-Name {
+  width: 80px;
+  max-width: 100px;
+  display: table-cell;
+  padding: 1px;
+  padding-left: 3px;
+}
+
+.Resource-Cell-Value {
+  width: 50px;
+  max-width: 50px;
+  display: table-cell;
+}
+
+.Resource-Cell-MaxValue {
+  width: 63px;
+  max-width: 63px;
+  display: table-cell;
+}
+
+.Resource-Cell-IncRatio {
+  width: 50px;
+  max-width: 50px;
+  display: table-cell;
+}
+
+.Middle-Panel {
+  min-width: 500px;
+  max-width: 650px;
+  display: table-cell;
 }
 
 .Resource-Span-Sec {
