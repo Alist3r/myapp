@@ -17,4 +17,4 @@ const resourcesList = [
     }
 ]
 
-export default resourcesList;
+export default resourcesList

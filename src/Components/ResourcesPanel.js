@@ -5,7 +5,7 @@ class ResourcePanel extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      resource: props.resourceData
+      resource: props.resource
     }
   }
 

@@ -40,6 +40,7 @@ class Game extends React.Component {
     render() {
         let gameResources = this.state.gameResources.slice()
         let gameActivities = this.state.gameActivities.slice()
+  
         let i=0;
         let j=0;
         return(
@@ -51,7 +52,7 @@ class Game extends React.Component {
                             <table> 
                                 {gameResources.map(resource => (
                                     <tr key={i++}>                  
-                                        <td><ResourcePanel  resourceData={resource}  /></td>                   
+                                        <td><ResourcePanel  resource={resource}  /></td>                   
                                     </tr>
                                 ))}
                             </table>
@@ -61,7 +62,7 @@ class Game extends React.Component {
                                 {gameActivities.map(activity => (
                                     <tr key={j++}>                  
                                         <td>
-                                            <ActivityPanel activity={activity} resourcesList ={gameResources} />
+                                            <ActivityPanel activity={activity} resources ={gameResources} />
                                         </td>
                                     </tr>
                                 ))}

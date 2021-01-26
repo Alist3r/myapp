@@ -6,14 +6,14 @@ class ActivityPanel extends React.Component {
     super(props)
     this.state = {
       activity: props.activity,
-      gameResources: props.resourcesList
+      resources: props.resources
     }
   }
 
 
   doActivity() {
     var activityToDo = this.state.activity //one activity
-    var resourcesList = this.state.gameResources
+    var resourcesList = this.state.resources
       
     var upgradable = true 
     var havetoPay = false
@@ -23,8 +23,8 @@ class ActivityPanel extends React.Component {
       upgradeCosts = activityToDo.upgradeCost.slice()
     
       upgradeCosts.forEach(cost => { //Checking if resources are enough
-        let resourceIndex = resourcesList.findIndex(x => x.name === cost.resource)
-        if (upgradable && resourcesList[resourceIndex].currentValue >= cost.cost)
+        let index = resourcesList.findIndex(x => x.name === cost.resource)
+        if (upgradable && resourcesList[index].currentValue >= cost.cost)
           upgradable = true
         else
           upgradable = false
@@ -39,11 +39,11 @@ class ActivityPanel extends React.Component {
       //paying resources and update the next cost
       if(havetoPay) {
         for(let i=0; i<resourcesList.length;i++) {
-          let indexToPay = upgradeCosts.findIndex(x => x.resource === resourcesList[i].name)  
-            if(indexToPay !== -1) {
-              resourcesList[i].currentValue -= upgradeCosts[indexToPay].cost  
-              upgradeCosts[indexToPay].cost += ((upgradeCosts[indexToPay].upgradeCostRatio * upgradeCosts[indexToPay].cost))
-            } 
+          let index = upgradeCosts.findIndex(x => x.resource === resourcesList[i].name)  
+          if(index !== -1) {
+            resourcesList[i].currentValue -= upgradeCosts[index].cost  
+            upgradeCosts[index].cost += ((upgradeCosts[index].upgradeCostRatio * upgradeCosts[index].cost))
+          } 
         }
       }
       
@@ -71,7 +71,7 @@ class ActivityPanel extends React.Component {
 
   render() {
     let activity = this.state.activity
-    let resources = this.state.gameResources
+    let resources = this.state.resources
       return(
         <Tooltip activity={activity} resourcesList={resources} direction="right">
           <button onClick={() => this.doActivity()} className='Activity-Btn'> {activity.name} {activity.stage != null && ( <span>[{activity.stage}]</span>)} </button>       
