@@ -5,7 +5,7 @@ import GameTime from './GameTime.js'
 
 import resourcesList from '../Utilities/ResourcesList.js'
 import activityList from '../Utilities/ActivityList.js'
-import {loadState} from '../Utilities/UtilityFunctions.js'
+import * as utility from '../Utilities/UtilityFunctions.js'
 
 class Game extends React.Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class Game extends React.Component {
         }
         
         //If a storage exist, the load the datas
-        this.state = loadState(this.state);   
+        this.state = utility.loadState(this.state);   
     }
 
     tick() {

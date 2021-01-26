@@ -1,5 +1,5 @@
 import React from 'react'
-import {saveState} from '../Utilities/UtilityFunctions.js'
+import * as utility from '../Utilities/UtilityFunctions.js'
 
 class GameTime extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class GameTime extends React.Component {
     });
 
     if(updateState.gameTime % 5 === 0) {
-        saveState(this.state.gameState)
+        utility.saveState(this.state.gameState)
     }
 }
 

@@ -21,11 +21,11 @@ const activityList = [
         stage: 0,
         upgradeCost: [
             { resource: resNames.RES_ATL, cost: 15, upgradeCostRatio: 0.5},
-            { resource: resNames.RES_PSI, cost: 50, upgradeCostRatio: 0.3 }
+            { resource: resNames.RES_PSI, cost: 30, upgradeCostRatio: 0.3 }
         ],
         effect: [
             { resource: resNames.RES_ATL, perSecRatio: null, percRatio: 3, clickRatio: null, maxValue: null },
-            { resource: resNames.RES_ATL, maxValue: 20},
+            { resource: resNames.RES_ATL, maxValue: 1},
             { resource: resNames.RES_PSI, perSecRatio: 0.2},
             { resource: resNames.RES_PSI, maxValue: 50}
         ],

@@ -50,8 +50,8 @@ const Tooltip = (props) => {
             {activity.upgradeCost && (activity.upgradeCost.map(upgradeCost => (             
               <span className="Tooltip-EffectRow">
                 {upgradeCost.resource}: {resources.map(resource => (
-                  resource.name === upgradeCost.resource && (<span className={currentValueColor(resource.currentValue,upgradeCost.cost)}>{roundNumber(resource.currentValue)}</span>)                
-                ))} / {roundNumber(upgradeCost.cost)} 
+                  resource.name === upgradeCost.resource && (<span className={currentValueColor(resource.currentValue,upgradeCost.cost)}>{roundNumber(resource.currentValue)} / {roundNumber(upgradeCost.cost)}{upgradeCost.cost > resource.maxValue && (<span>*</span>)} </span>)                
+                ))} 
                 <br></br>
               </span>
                              

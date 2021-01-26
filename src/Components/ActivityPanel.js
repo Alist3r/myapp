@@ -61,7 +61,10 @@ class ActivityPanel extends React.Component {
       })
 
       activityToDo.upgradeCost = upgradeCosts.slice()
-      if (activityToDo.stage != null) activityToDo.stage += 1
+
+      if (activityToDo.stage != null) 
+        activityToDo.stage += 1
+        
       this.setState ({
         gameResources: resourcesList,
         activity: activityToDo
