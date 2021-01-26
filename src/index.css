@@ -4,11 +4,11 @@ body {
   color: black;
 }
 
-.Span-Sec {
-  font-size: 12px;
+.Resource-Span-Sec {
+  font-size: 11px;
 }
 
-.activity {
+.Activity-Btn {
   background-color: #fff;
   cursor: pointer;
   border: 1px solid black;
@@ -18,11 +18,11 @@ body {
   font: 13px "Century Gothic", Futura, sans-serif;
 }
 
-.activity:active {
+.Activity-Btn:active {
   background-color: #bdbdbd;
 }
 
-.activity:focus {
+.Activity-Btn:focus {
   outline: none;
 }
 

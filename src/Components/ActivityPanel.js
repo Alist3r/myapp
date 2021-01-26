@@ -6,52 +6,62 @@ class ActivityPanel extends React.Component {
     super(props)
     this.state = {
       activity: props.activity,
-      gameResources: props.resourceList
+      gameResources: props.resourcesList
     }
   }
 
+
   doActivity() {
     var activityToDo = this.state.activity //one activity
-    var resourcesList = this.state.gameResources.slice() //entire resource list
+    var resourcesList = this.state.gameResources
 
     // ---------- CLICK EFFECT ---------- //
-    if(activityToDo.effectPerClick != null) { 
+    /*if(activityToDo.effectPerClick != null) { 
       let effects = activityToDo.effectPerClick.slice()
-      effects.forEach(effect => { //load effects list
-        for(let i=0; i<resourcesList.length;i++) { //apply effect to matching resource
-          if(resourcesList[i].name === effect.resource) {
-            resourcesList[i].currentValue += effect.clickValue //add effect clickvalue
-            this.setState({
-              gameResources: resourcesList
-            })
-          }
-        }
+      effects.forEach(effect => { //for each effect
+
+        let resourceIndex = resourcesList.findIndex(x => x.name === effect.resource) //find the respective resource
+        resourcesList[resourceIndex].currentValue += effect.clickValue //add effect clickvalue
+        this.setState({
+          gameResources: resourcesList
+        })
+
       });
-    }
+    }*/
 
     // ---------- TICK EFFECT ---------- //
-    if(activityToDo.effectPerTick != null) {
-      let upgradeCosts = activityToDo.upgradeCost.slice()
-      let upgradable = true 
+    if(activityToDo.effect != null) {
       
-      upgradeCosts.forEach(cost => {
-        let resourceIndex = resourcesList.findIndex(x => x.name === cost.resource)
-        if (upgradable && resourcesList[resourceIndex].currentValue >= cost.cost)
-          upgradable = true
-        else
-          upgradable = false
-      })
+      var upgradable = true 
+      var havetoPay = false
+      var upgradeCosts = []
+
+      if(activityToDo.upgradeCost != null) {
+        upgradeCosts = activityToDo.upgradeCost.slice()
+      
+        upgradeCosts.forEach(cost => { //Checking if resources are enough
+          let resourceIndex = resourcesList.findIndex(x => x.name === cost.resource)
+          if (upgradable && resourcesList[resourceIndex].currentValue >= cost.cost)
+            upgradable = true
+          else
+            upgradable = false
+        })
+
+        havetoPay = true
+      }
 
       if(upgradable) {
-        let effects = activityToDo.effectPerTick.slice()
+        let effects = activityToDo.effect.slice()
 
-        //paying resources  
-        for(let i=0; i<resourcesList.length;i++) {
-          let indexToPay = upgradeCosts.findIndex(x => x.resource === resourcesList[i].name)  
-            if(indexToPay !== -1) {
-              resourcesList[i].currentValue -= upgradeCosts[indexToPay].cost  
-              upgradeCosts[indexToPay].cost += ((upgradeCosts[indexToPay].upgradeCostRatio * upgradeCosts[indexToPay].cost))
-            } 
+        //paying resources and update the next cost
+        if(havetoPay) {
+          for(let i=0; i<resourcesList.length;i++) {
+            let indexToPay = upgradeCosts.findIndex(x => x.resource === resourcesList[i].name)  
+              if(indexToPay !== -1) {
+                resourcesList[i].currentValue -= upgradeCosts[indexToPay].cost  
+                upgradeCosts[indexToPay].cost += ((upgradeCosts[indexToPay].upgradeCostRatio * upgradeCosts[indexToPay].cost))
+              } 
+          }
         }
         
         //applying effects
@@ -61,20 +71,20 @@ class ActivityPanel extends React.Component {
               resourcesList[index].incRatio += effect.perSecRatio
             if (effect.percRatio != null)
               resourcesList[index].incRatio += ((resourcesList[index].incRatio * effect.percRatio) / 100)
-            if (effect.flatRatio != null)
-              resourcesList[index].maxValue += effect.flatRatio     
+            if (effect.maxValue != null)
+              resourcesList[index].maxValue += effect.maxValue
+            if (effect.clickRatio != null)
+            resourcesList[index].currentValue += effect.clickRatio     
+        })
+
+        activityToDo.upgradeCost = upgradeCosts.slice()
+        if (activityToDo.stage != null) activityToDo.stage += 1
+        this.setState ({
+          gameResources: resourcesList,
+          activity: activityToDo
         })
       }
-
-      activityToDo.upgradeCost = upgradeCosts.slice()
-      this.setState ({
-        gameResources: resourcesList,
-        activity: activityToDo
-      })
-      activityToDo.stage += 1
     }
-
-    // ---------- FLAT EFFECT ---------- //
   }
 
   render() {
@@ -82,7 +92,7 @@ class ActivityPanel extends React.Component {
     let resources = this.state.gameResources
       return(
         <Tooltip activity={activity} resourcesList={resources} direction="right">
-          <button onClick={() => this.doActivity()} className='activity'> {activity.name} {activity.stage != null && ( <span>[{activity.stage}]</span>)} </button>       
+          <button onClick={() => this.doActivity()} className='Activity-Btn'> {activity.name} {activity.stage != null && ( <span>[{activity.stage}]</span>)} </button>       
         </Tooltip>    
       )
     }

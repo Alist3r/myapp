@@ -1,10 +1,11 @@
 import React from 'react'
 import ResourcePanel from './ResourcesPanel.js'
 import ActivityPanel from './ActivityPanel.js'
+import GameTime from './GameTime.js'
 
 import resourcesList from '../Utilities/ResourcesList.js'
 import activityList from '../Utilities/ActivityList.js'
-import {saveState, loadState} from '../Utilities/UtilityFunctions.js'
+import {loadState} from '../Utilities/UtilityFunctions.js'
 
 class Game extends React.Component {
     constructor(props) {
@@ -21,18 +22,14 @@ class Game extends React.Component {
 
     tick() {
         this.setState({
-            gameTime: this.state.gameTime + 1
+            
         });
-
-        if(this.state.gameTime % 5 === 0) {
-            saveState(this.state)
-        }
     }
 
     componentDidMount() {
         this.timerID = setInterval(
             () => this.tick(),
-            1000
+            100
         );
     }
 
@@ -46,37 +43,34 @@ class Game extends React.Component {
         let i=0;
         let j=0;
         return(
-            
-            <table id='mainTable'>
-                <tr>
-                    <td>
-                        <div>Game Time: {this.state.gameTime}</div>
-                        {/* DA TOGLIERE */}
-                        <div><button onClick={() => {localStorage.clear()}}>Clear Storage</button></div>
-                        {/* ^^^^^^^^^^^^^^^ */}
-                        <table> 
-                            {gameResources.map(resource => (
-                                <tr key={i++}>                  
-                                    <td><ResourcePanel  resourceData={resource}  /></td>                   
-                                </tr>
-                            ))}
-                        </table>
-                    </td>
-                    <td>
-                        <table>
-                            {gameActivities.map(activity => (
-                                <tr key={j++}>                  
-                                    <td>
-                                        <ActivityPanel activity={activity} resourceList ={gameResources} />
-                                    </td>
-                                </tr>
-                            ))}
-                        </table>
-                    </td>
-                </tr>
+            <div>
+                <GameTime gameState={this.state} />
+                <table id='mainTable'>
+                    <tr>
+                        <td>
+                            <table> 
+                                {gameResources.map(resource => (
+                                    <tr key={i++}>                  
+                                        <td><ResourcePanel  resourceData={resource}  /></td>                   
+                                    </tr>
+                                ))}
+                            </table>
+                        </td>
+                        <td>
+                            <table>
+                                {gameActivities.map(activity => (
+                                    <tr key={j++}>                  
+                                        <td>
+                                            <ActivityPanel activity={activity} resourcesList ={gameResources} />
+                                        </td>
+                                    </tr>
+                                ))}
+                            </table>
+                        </td>
+                    </tr>
 
-            </table>
-         
+                </table>
+            </div>                        
             
         )
     }

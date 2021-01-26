@@ -15,7 +15,7 @@
 .Tooltip-Tip {
   position: absolute;
   left: 50%;
-  width: 240px;
+  width: 250px;
   transform: translateX(-50%);
   padding: 10px;
   color: var(--tooltip-text-color);
@@ -32,7 +32,7 @@
 
 .Tooltip-Divider {
   border-bottom: 1px solid black;
-  margin-top: 5px;
+  margin-top: 2px;
   margin-bottom: 5px;
 }
 
@@ -40,6 +40,7 @@
   text-align: center;
   letter-spacing: 1px;
   font-size: 12px;
+  margin-top: 15px;
 }
 
 .Tooltip-EffectDesc {
@@ -56,6 +57,15 @@
 .Tooltip-Sec {
   font-size: 11px;
 }
+
+.Tooltip-Resource-CurrentValue-Color-Red {
+  color: red
+}
+
+.Tooltip-Resource-CurrentValue-Color-Grey {
+  color: grey
+}
+
 
 /* CSS border triangles */
 .Tooltip-Tip::before {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../tooltip.css";
+import {roundNumber} from '../Utilities/UtilityFunctions.js'
 
 const Tooltip = (props) => {
   let timeout;
@@ -15,6 +16,14 @@ const Tooltip = (props) => {
     clearInterval(timeout);
     setActive(false);
   };
+
+  const currentValueColor = (currentValue, costValue) => {
+    let classColor = "Tooltip-Resource-CurrentValue-Color-Grey"
+    if(currentValue < costValue) 
+      classColor = "Tooltip-Resource-CurrentValue-Color-Red"
+    
+    return classColor
+  }
 
   var activity = props.activity
   var resources = props.resourcesList.slice()
@@ -41,7 +50,7 @@ const Tooltip = (props) => {
             {activity.upgradeCost && (activity.upgradeCost.map(upgradeCost => (             
               <span className="Tooltip-EffectRow">
                 {upgradeCost.resource}: {resources.map(resource => (
-                  resource.name === upgradeCost.resource && (<span>{(Math.round(resource.currentValue*100)/100).toFixed(2)}</span>)                
+                  resource.name === upgradeCost.resource && (<span className={currentValueColor(resource.currentValue,upgradeCost.cost)}>{roundNumber(resource.currentValue)}</span>)                
                 ))} / {upgradeCost.cost}
                 <br></br>
               </span>
@@ -51,16 +60,17 @@ const Tooltip = (props) => {
             {/*--------- EFFECTS ---------*/}
             <div className="Tooltip-Title">Effects</div>
             <div className="Tooltip-Divider"></div>
-            {activity.effectPerTick && (activity.effectPerTick.map(effectPerTick => (
+            {activity.effect.map(effect => (
 
               <span className="Tooltip-EffectRow">             
-                  {effectPerTick.perSecRatio && (<span>{effectPerTick.resource}: {effectPerTick.perSecRatio}/<span className="Tooltip-Sec">sec</span></span>)}  
-                  {effectPerTick.percRatio && (<span>{effectPerTick.resource}: {effectPerTick.percRatio}%</span>)}
-                  {effectPerTick.flatRatio && (<span>Max {effectPerTick.resource}: +{effectPerTick.flatRatio} </span>)}               
+                  {effect.perSecRatio && (<span>{effect.resource}: {effect.perSecRatio}/<span className="Tooltip-Sec">sec</span></span>)}  
+                  {effect.percRatio && (<span>{effect.resource}: {effect.percRatio}%</span>)}
+                  {effect.maxValue && (<span>Max {effect.resource}: +{effect.maxValue} </span>)}     
+                  {effect.clickRatio && (<span>{effect.resource}: +{effect.clickRatio} </span>)}           
                 <br></br>
               </span>
 
-            )))}
+            ))}
           </div>
         </div>
       )}

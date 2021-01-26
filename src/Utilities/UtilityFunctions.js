@@ -41,4 +41,8 @@ export function loadState(state) {
     return updatedstate
 }
 
+export function roundNumber(number) {
+    return (Math.round(number * 100) / 100).toFixed(2); 
+}
+
 
