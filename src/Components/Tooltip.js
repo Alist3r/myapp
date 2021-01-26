@@ -51,7 +51,7 @@ const Tooltip = (props) => {
               <span className="Tooltip-EffectRow">
                 {upgradeCost.resource}: {resources.map(resource => (
                   resource.name === upgradeCost.resource && (<span className={currentValueColor(resource.currentValue,upgradeCost.cost)}>{roundNumber(resource.currentValue)}</span>)                
-                ))} / {upgradeCost.cost}
+                ))} / {roundNumber(upgradeCost.cost)}
                 <br></br>
               </span>
                              
