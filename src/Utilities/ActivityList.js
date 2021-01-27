@@ -17,14 +17,14 @@ const activityList = [
         description: 'Just doing some Jogging around, helping you to produce Athleticism',
         stage: 0,
         upgradeCost: [
-            {resource: resNames.RES_ATL, cost: 10, upgradeCostRatio: 0.3}
+            {resource: resNames.RES_ATL, cost: 10, upgradeCostRatio: 0.008}
         ],
         effect: [
-            {resource: resNames.RES_ATL, perSecRatio: 0.5}
+            {resource: resNames.RES_ATL, perSecRatio: 0.52}
         ],
         unlocked: false,
         unlockedFrom: [
-            {resource: resNames.RES_ATL, neededValue: 35}
+            {resource: resNames.RES_ATL, neededValue: 10}
         ]
     },
     {   //REST
@@ -46,7 +46,7 @@ const activityList = [
         description: 'Enter a meditate state, improves your mental state. Produces Psiche.',
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_PSI, cost: 7, upgradeCostRatio: 0.3 }
+            { resource: resNames.RES_PSI, cost: 7, upgradeCostRatio: 0.008 }
         ],
         effect: [
             { resource: resNames.RES_PSI, perSecRatio: 0.08}
@@ -55,6 +55,25 @@ const activityList = [
         unlockedFrom: [
             {resource: resNames.RES_PSI, neededValue: 5}
         ]    
+    },
+    {   //DO NOTHING
+        name: resNames.ACT_DONOTH,
+        description: 'Sacrifice your physics and mental excercise but gain Free Time',
+        stage: 0,
+        upgradeCost: [
+            { resource: resNames.RES_ATL, cost: 40, upgradeCostRatio: 0.008},
+            { resource: resNames.RES_PSI, cost: 25, upgradeCostRatio: 0.007}
+        ],
+        effect: [
+            { resource: resNames.RES_ATL, perSecRatio: -0.02},
+            { resource: resNames.RES_PSI, perSecRatio: -0.01},
+            { resource: resNames.RES_FRT, perSecRatio: 0.05}
+        ],
+        unlocked: false,
+        unlockedFrom: [
+            {activity: resNames.ACT_JOGG, neededStage: 15},
+            {activity: resNames.ACT_MEDIT, neededStage: 3}
+        ]
     }
 
 ]

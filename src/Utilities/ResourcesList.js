@@ -16,6 +16,22 @@ const resourcesList = [
         incRatio: 0, 
         unlocked: false,
         unlockedFrom: null
+    },
+    {
+        name: resNames.RES_FRT, 
+        currentValue: 0, 
+        maxValue: 500, 
+        incRatio: 0, 
+        unlocked: false,
+        unlockedFrom: null
+    },
+    {
+        name: resNames.RES_KNO, 
+        currentValue: 0, 
+        maxValue: 400, 
+        incRatio: 0, 
+        unlocked: false,
+        unlockedFrom: null
     }
 ]
 

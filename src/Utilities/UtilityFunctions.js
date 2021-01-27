@@ -1,3 +1,4 @@
+import * as constants from '../Utilities/StringsConst.js'
 
 export function saveState(state) {
     localStorage.setItem('gameTime', state.gameTime);
@@ -50,6 +51,31 @@ export function loadState(state) {
 
     return updatedstate
 }
+
+export function tooltipReverseTimerConverter (costValue, currentValue, incRatio) {
+    let formattedTimeStamp = ""
+
+    if(incRatio > 0) {
+
+        let timeStamp = Math.floor((costValue - currentValue) / (incRatio * constants.OPT_GAMESPEED))
+
+        let hours = Math.floor(timeStamp / 60 / 60)
+        let minutes = Math.floor(timeStamp / 60) - (hours * 60);
+        let seconds = timeStamp % 60 
+
+        if(hours > 0) {
+            formattedTimeStamp += hours + "h "
+        }
+        if(minutes > 0) {
+            formattedTimeStamp += minutes + "m "
+        }
+
+        formattedTimeStamp += seconds + "s"
+        formattedTimeStamp = "(" + formattedTimeStamp + ")"
+    }   
+
+    return formattedTimeStamp
+  }
 
 export function roundNumber(number) {
     return (Math.round(number * 100) / 100).toFixed(2); 

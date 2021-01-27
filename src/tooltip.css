@@ -23,7 +23,7 @@
   font: 13px "Century Gothic", Futura, sans-serif;
   z-index: 100;
   border: 1px solid black;
-  
+  text-align: left;
 }
 
 .Tooltip-Description {

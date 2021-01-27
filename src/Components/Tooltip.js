@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../tooltip.css";
 import {roundNumber} from '../Utilities/UtilityFunctions.js'
+import {tooltipReverseTimerConverter} from '../Utilities/UtilityFunctions.js'
 
 const Tooltip = (props) => {
   let timeout;
@@ -48,7 +49,10 @@ const Tooltip = (props) => {
             {activity.upgradeCost && (activity.upgradeCost.map(upgradeCost => (             
               <span className="Tooltip-EffectRow">
                 {upgradeCost.resource}: {resources.map(resource => (
-                  resource.name === upgradeCost.resource && (<span className={currentValueColor(resource.currentValue,upgradeCost.cost)}>{roundNumber(resource.currentValue)} / {roundNumber(upgradeCost.cost)}{upgradeCost.cost > resource.maxValue && (<span>*</span>)} </span>)                
+                  resource.name === upgradeCost.resource && (
+                    <span className={currentValueColor(resource.currentValue,upgradeCost.cost)}>
+                      {roundNumber(resource.currentValue)} / {roundNumber(upgradeCost.cost)}{upgradeCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < upgradeCost.cost && (<span> {tooltipReverseTimerConverter(upgradeCost.cost,resource.currentValue,resource.incRatio)}</span>)} 
+                    </span>)                
                 ))} 
                 <br></br>
               </span>                         
@@ -58,7 +62,10 @@ const Tooltip = (props) => {
             {activity.clickCost && (activity.clickCost.map(clickCost =>
               <span className="Tooltip-EffectRow">
                 {clickCost.resource}: {resources.map(resource => (
-                  resource.name === clickCost.resource && (<span className={currentValueColor(resource.currentValue,clickCost.cost)}>{roundNumber(resource.currentValue)} / {roundNumber(clickCost.cost)}{clickCost.cost > resource.maxValue && (<span>*</span>)} </span>)
+                  resource.name === clickCost.resource && (
+                    <span className={currentValueColor(resource.currentValue,clickCost.cost)}>
+                      {roundNumber(resource.currentValue)} / {roundNumber(clickCost.cost)}{clickCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < clickCost.cost && (<span> {tooltipReverseTimerConverter(clickCost.cost,resource.currentValue,resource.incRatio)}</span>)} 
+                    </span>)
                 ))}
               </span>
             ))}

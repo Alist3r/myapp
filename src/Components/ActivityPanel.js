@@ -10,6 +10,32 @@ class ActivityPanel extends React.Component {
     }
   }
 
+  isUpgradable(costs, resources) {
+    let upgradable = true
+    costs.forEach(cost => {
+      let index = resources.findIndex(x => x.name === cost.resource)
+        if (upgradable && resources[index].currentValue >= cost.cost)
+          upgradable = true
+        else
+          upgradable = false
+    })
+
+    return upgradable
+  }
+
+  checkUpgradable(costs, resources) {
+    let cssClass = "Activity-Btn"
+    if(costs != null) {
+      if(this.isUpgradable(costs, resources)) {
+        cssClass = "Activity-Btn Upgradable"
+      }
+    }
+    else {
+      cssClass = "Activity-Btn Upgradable"
+    }
+    
+    return cssClass
+  }
 
   doActivity() {
     var activityToDo = this.state.activity //one activity
@@ -22,28 +48,30 @@ class ActivityPanel extends React.Component {
 
     if(activityToDo.upgradeCost != null) {
       upgradeCosts = activityToDo.upgradeCost.slice()
-    
-      upgradeCosts.forEach(cost => { //Checking if resources are enough
+      upgradable = this.isUpgradable(upgradeCosts, resourcesList)
+
+      /*upgradeCosts.forEach(cost => { //Checking if resources are enough
         let index = resourcesList.findIndex(x => x.name === cost.resource)
         if (upgradable && resourcesList[index].currentValue >= cost.cost)
           upgradable = true
         else
           upgradable = false
-      })
+      })*/
 
       havetoPay = true
     }
 
     if(activityToDo.clickCost != null) {
       clickCosts = activityToDo.clickCost.slice()
+      upgradable = this.isUpgradable(clickCosts, resourcesList)
 
-      clickCosts.forEach(cost => {
+      /*clickCosts.forEach(cost => {
         let index = resourcesList.findIndex(x => x.name === cost.resource)
         if (upgradable && resourcesList[index].currentValue >= cost.cost)
           upgradable = true
         else
           upgradable = false
-      })
+      })*/
 
       havetoPay = true
     }
@@ -53,13 +81,13 @@ class ActivityPanel extends React.Component {
 
       //paying resources and update the next cost
       if(havetoPay) {
-        for(let i=0; i<resourcesList.length;i++) {
+        for(let i=0; i < resourcesList.length;i++) {
 
           if(upgradeCosts.length > 0) {
             let index = upgradeCosts.findIndex(x => x.resource === resourcesList[i].name)  
             if(index !== -1) {
               resourcesList[i].currentValue -= upgradeCosts[index].cost  
-              upgradeCosts[index].cost += ((upgradeCosts[index].upgradeCostRatio * upgradeCosts[index].cost))
+              upgradeCosts[index].cost += ((upgradeCosts[index].upgradeCostRatio * upgradeCosts[index].cost * (activityToDo.stage+1)))
             } 
           }
 
@@ -81,8 +109,11 @@ class ActivityPanel extends React.Component {
             resourcesList[index].incRatio += ((resourcesList[index].incRatio * effect.percRatio) / 100)
           if (effect.maxValue != null)
             resourcesList[index].maxValue += effect.maxValue
-          if (effect.clickRatio != null)
-            resourcesList[index].currentValue += effect.clickRatio     
+          if (effect.clickRatio != null) 
+            resourcesList[index].currentValue += effect.clickRatio  
+
+          if(resourcesList[index].unlocked === false)
+            resourcesList[index].unlocked = true   
       })
 
       activityToDo.upgradeCost = upgradeCosts.slice()
@@ -100,9 +131,16 @@ class ActivityPanel extends React.Component {
   render() {
     let activity = this.state.activity
     let resources = this.state.resources
+    let costs
+
+    if(activity.upgradeCost != null)
+      costs = activity.upgradeCost
+    if(activity.clickCost != null)
+      costs = activity.clickCost
+
       return(
         <Tooltip activity={activity} resourcesList={resources} direction="right">
-          <span onClick={() => this.doActivity()} className='Activity-Btn'> {activity.name} {activity.stage != null && ( <span>[{activity.stage}]</span>)} </span>       
+          <span onClick={() => this.doActivity()} className={this.checkUpgradable(costs,resources)}> {activity.name} {activity.stage != null && ( <span>[{activity.stage}]</span>)} </span>       
         </Tooltip>    
       )
     }

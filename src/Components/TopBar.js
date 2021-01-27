@@ -43,12 +43,17 @@ class TopBar extends React.Component {
     return formattedTimeStamp
   }
 
+  resetData() {
+    localStorage.clear()
+    window.location.reload();
+  }
+
   render() {
       return(
         <div className="Top-Bar">
           <div className="Top-Bar-Div">Game Time: {this.timeCounterConverter(this.state.gameState.gameTime)}</div>
           <div className="Top-Bar-Div">Game Speed: {constants.OPT_GAMESPEED}x</div>
-          <div className="Top-Bar-Div"><button onClick={() => {localStorage.clear()}}>Clear Storage</button></div>    
+          <div className="Top-Bar-Div"><button onClick={() => this.resetData()}>Clear Storage</button></div>    
         </div>     
       )
     }
