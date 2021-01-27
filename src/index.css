@@ -6,6 +6,12 @@ body {
   height: 100%;
 }
 
+.Game-Main-Container {
+  width: 100%;
+  min-width: 1080px;
+  height: auto;
+}
+
 .Top-Bar {
   widows: 100%;
   border-bottom: 1px solid black;
@@ -21,7 +27,10 @@ body {
   width: 25%;
   min-width: 300px;
   max-width: 500px;
-  display: table-cell;
+  display: inline-block;
+  font-size: 13px;
+  padding: 5px;
+  vertical-align: top;
 }
 
 .Resource-Cell-Name {
@@ -30,6 +39,7 @@ body {
   display: table-cell;
   padding: 1px;
   padding-left: 3px;
+  font-size: 12px;
 }
 
 .Resource-Cell-Value {
@@ -42,6 +52,7 @@ body {
   width: 63px;
   max-width: 63px;
   display: table-cell;
+  color: grey;
 }
 
 .Resource-Cell-IncRatio {
@@ -51,23 +62,52 @@ body {
 }
 
 .Middle-Panel {
-  min-width: 500px;
+  min-width: 400px;
   max-width: 650px;
-  display: table-cell;
+  display: inline-block;
+  padding-top: 5px;
+  vertical-align: top;
 }
 
 .Resource-Span-Sec {
   font-size: 11px;
 }
 
+.Middle-Panel-Tabs-Container {
+  border-bottom: 1px solid black;
+  padding: 2px;
+  margin-bottom: 10px;
+}
+
+.Middle-Panel-Tab-Name {
+  margin: 3px;
+  margin-bottom: 7px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+  .Middle-Panel-Tab-Name:hover {
+    font-weight: bold;
+  }
+
+.Middle-Panel-Activity-Container {
+  width: auto;
+  width: 250px;
+  display: inline;
+  margin: 5px;
+}
+
 .Activity-Btn {
   background-color: #fff;
   cursor: pointer;
   border: 1px solid black;
-  padding: 10px;
-  width: 250px;
+  padding: 8px;
+  width: 240px;
   border-radius: 3px;
   font: 13px "Century Gothic", Futura, sans-serif;
+  text-align: center;
+  float:left;
+  display: table-cell;
 }
 
 .Activity-Btn:active {

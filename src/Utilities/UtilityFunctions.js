@@ -3,6 +3,7 @@ export function saveState(state) {
     localStorage.setItem('gameTime', state.gameTime);
     localStorage.setItem("gameResources", JSON.stringify(state.gameResources));
     localStorage.setItem("gameActivities", JSON.stringify(state.gameActivities));
+    localStorage.setItem("activeTab", JSON.stringify(state.activeTab));
 }
 
 export function loadState(state) {
@@ -10,6 +11,7 @@ export function loadState(state) {
     let gameTime
     let gameResources
     let gameActivities
+    let activeTab
 
     if(parseInt(localStorage.getItem('gameTime'))) {
         gameTime = parseInt(localStorage.getItem('gameTime'))
@@ -32,10 +34,18 @@ export function loadState(state) {
         gameActivities = state.gameActivities
     }
 
+    if(parseInt(localStorage.getItem('activeTab'))) {
+        activeTab = parseInt(localStorage.getItem('activeTab'))
+    }
+    else {
+        activeTab = state.activeTab
+    }
+
     updatedstate = {
         gameTime,
         gameResources,
-        gameActivities
+        gameActivities,
+        activeTab
     }
 
     return updatedstate

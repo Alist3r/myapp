@@ -6,6 +6,7 @@ import TopBar from './TopBar.js'
 import resourcesList from '../Utilities/ResourcesList.js'
 import activityList from '../Utilities/ActivityList.js'
 import * as utility from '../Utilities/UtilityFunctions.js'
+import * as constants from '../Utilities/StringsConst.js'
 
 class Game extends React.Component {
     constructor(props) {
@@ -13,7 +14,8 @@ class Game extends React.Component {
         this.state = {
             gameTime: 0,
             gameResources: resourcesList.slice(),
-            gameActivities: activityList.slice()
+            gameActivities: activityList.slice(),
+            activeTab: constants.TAB_ACT
         }
         
         //If a storage exist, the load the datas
@@ -21,9 +23,7 @@ class Game extends React.Component {
     }
 
     tick() {
-        this.setState({
-            
-        });
+       this.setState({})
     }
 
     componentDidMount() {
@@ -83,13 +83,12 @@ class Game extends React.Component {
         return resource.unlocked
     }
 
-    changeSpeed(speedValue) {
-        let updatedSpeed = this.state.gameSpeed
-        updatedSpeed = speedValue
+    updateActiveTab(tabToActivate) {
         this.setState({
-          gameSpeed: updatedSpeed
-        });
-      }
+            activeTab: tabToActivate
+        })
+    }
+   
 
     render() {
         let gameResources = this.state.gameResources.slice()
@@ -97,7 +96,7 @@ class Game extends React.Component {
  
         return(
             
-            <div>
+            <div className="Game-Main-Container">
                 <TopBar gameState={this.state}/>
                 <div className="Left-Panel">
                     {gameResources.map(resource => (                                     
@@ -106,9 +105,20 @@ class Game extends React.Component {
                 </div>
 
                 <div className="Middle-Panel">
-                    {gameActivities.map(activity => (                  
-                        <div>{this.unlockActivity(activity) && (<ActivityPanel activity={activity} resources ={gameResources} />)}</div>                                      
-                    ))}            
+                    {/** TABS SELECTOR */}
+                    <div className="Middle-Panel-Tabs-Container">
+                        <span className="Middle-Panel-Tab-Name" style={{'fontWeight': this.state.activeTab === constants.TAB_ACT ? 'bold' : 'normal'}} onClick={() => this.updateActiveTab(constants.TAB_ACT)}>{constants.TAB_ACT}</span>
+                        <span>|</span>
+                        <span className="Middle-Panel-Tab-Name" style={{'fontWeight': this.state.activeTab === "Attributes" ? 'bold' : 'normal'}} onClick={() => this.updateActiveTab("Attributes")}>Attributes</span>
+                    </div>
+                    {/** ACTIVITY PANEL */}
+                    <div className="Middle-Panel-Activity-Tab" style={{'visibility': this.state.activeTab === constants.TAB_ACT ? 'visible' : 'hidden'}}>
+                        {gameActivities.map(activity => (                  
+                            <div className="Middle-Panel-Activity-Container" > 
+                                {this.unlockActivity(activity) && (<ActivityPanel activity={activity} resources ={gameResources} />)}
+                            </div>                              
+                        ))}     
+                    </div>       
                 </div>
             </div>                        
             
