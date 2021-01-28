@@ -29,7 +29,7 @@ class Game extends React.Component {
     componentDidMount() {
         this.timerID = setInterval(
             () => this.tick(),
-            1000
+            100
         );
     }
 
@@ -65,7 +65,8 @@ class Game extends React.Component {
                         unlockable = true
                     else
                         unlockable = false
-                }              
+                }
+               
             }
 
             if(unlockable) {
@@ -73,6 +74,13 @@ class Game extends React.Component {
             }
         }
         return activity.unlocked
+    }
+
+    unlockResource(resource) {
+        if(resource.unlocked === false && resource.currentValue > 0)
+            resource.unlocked = true
+        
+        return resource.unlocked
     }
 
     updateActiveTab(tabToActivate) {
@@ -92,27 +100,26 @@ class Game extends React.Component {
                 <TopBar gameState={this.state}/>
                 <div className="Left-Panel">
                     {gameResources.map(resource => (                                     
-                        <div>{resource.unlocked && (<ResourcePanel  resource={resource} />)}</div>                                        
+                        <div>{this.unlockResource(resource) && (<ResourcePanel  resource={resource} />)}</div>                                        
                     ))}
                 </div>
 
-                {/** MIDDLE */}
                 <div className="Middle-Panel">
-
                     {/** TABS SELECTOR */}
-                    <div className="Middle-Panel-Tabs-Selector">
+                    <div className="Middle-Panel-Tabs-Container">
                         <span className="Middle-Panel-Tab-Name" style={{'fontWeight': this.state.activeTab === constants.TAB_ACT ? 'bold' : 'normal'}} onClick={() => this.updateActiveTab(constants.TAB_ACT)}>{constants.TAB_ACT}</span>
                         <span>|</span>
                         <span className="Middle-Panel-Tab-Name" style={{'fontWeight': this.state.activeTab === "Attributes" ? 'bold' : 'normal'}} onClick={() => this.updateActiveTab("Attributes")}>Attributes</span>
                     </div>
-
                     {/** ACTIVITY PANEL */}
-                    <div className="Middle-Panel-Tabs-Container">
+                    <div className="Middle-Panel-Game-View">
                         <div className="Middle-Panel-Activity-Tab" style={{'visibility': this.state.activeTab === constants.TAB_ACT ? 'visible' : 'hidden'}}>
                             {gameActivities.map(activity => (                  
-                                <div className="Middle-Panel-Activity-Container" > 
-                                    {this.unlockActivity(activity) && (<ActivityPanel activity={activity} resources ={gameResources} />)}
-                                </div>                              
+                                this.unlockActivity(activity) && (
+                                    <div className="Middle-Panel-Activity-Container" > 
+                                        <ActivityPanel activity={activity} resources ={gameResources} />
+                                    </div>
+                                )             
                             ))}     
                         </div>  
                     </div>     

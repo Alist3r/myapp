@@ -49,30 +49,12 @@ class ActivityPanel extends React.Component {
     if(activityToDo.upgradeCost != null) {
       upgradeCosts = activityToDo.upgradeCost.slice()
       upgradable = this.isUpgradable(upgradeCosts, resourcesList)
-
-      /*upgradeCosts.forEach(cost => { //Checking if resources are enough
-        let index = resourcesList.findIndex(x => x.name === cost.resource)
-        if (upgradable && resourcesList[index].currentValue >= cost.cost)
-          upgradable = true
-        else
-          upgradable = false
-      })*/
-
       havetoPay = true
     }
 
     if(activityToDo.clickCost != null) {
       clickCosts = activityToDo.clickCost.slice()
       upgradable = this.isUpgradable(clickCosts, resourcesList)
-
-      /*clickCosts.forEach(cost => {
-        let index = resourcesList.findIndex(x => x.name === cost.resource)
-        if (upgradable && resourcesList[index].currentValue >= cost.cost)
-          upgradable = true
-        else
-          upgradable = false
-      })*/
-
       havetoPay = true
     }
 
@@ -140,7 +122,10 @@ class ActivityPanel extends React.Component {
 
       return(
         <Tooltip activity={activity} resourcesList={resources} direction="right">
-          <span onClick={() => this.doActivity()} className={this.checkUpgradable(costs,resources)}> {activity.name} {activity.stage != null && ( <span>[{activity.stage}]</span>)} </span>       
+          <span onClick={() => this.doActivity()} className={this.checkUpgradable(costs,resources)}> 
+            <span className="Activity-Btn-Label">{activity.name} {activity.stage != null && (<span>[{activity.stage}]</span>)}</span>
+            {activity.stage != null && (<span className="Activity-Btn-Sell">Sell</span>)}
+          </span>       
         </Tooltip>    
       )
     }
