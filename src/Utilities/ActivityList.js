@@ -12,6 +12,20 @@ const activityList = [
         unlocked: true,
         unlockedFrom: null    
     },
+    {   //REST
+        name: resNames.ACT_REST,
+        description: 'Rest and consume some of your Athleticism',
+        stage: null,
+        upgradeCost: null,
+        clickCost: [
+            {resource: resNames.RES_ATL, cost: 100}
+        ],
+        effect: [
+            {resource: resNames.RES_PSI, clickRatio: 1}
+        ],
+        unlocked: true,
+        unlockedFrom: null
+    },
     {   //JOGGING
         name: resNames.ACT_JOGG,
         description: 'Just doing some Jogging around, helping you to produce Athleticism',
@@ -26,20 +40,6 @@ const activityList = [
         unlockedFrom: [
             {resource: resNames.RES_ATL, neededValue: 10}
         ]
-    },
-    {   //REST
-        name: resNames.ACT_REST,
-        description: 'Rest and consume some of your Athleticism',
-        stage: null,
-        upgradeCost: null,
-        clickCost: [
-            {resource: resNames.RES_ATL, cost: 100}
-        ],
-        effect: [
-            {resource: resNames.RES_PSI, clickRatio: 1}
-        ],
-        unlocked: true,
-        unlockedFrom: null
     },
     {   //MEDITATE
         name: resNames.ACT_MEDIT, 
