@@ -77,8 +77,37 @@ export function tooltipReverseTimerConverter (costValue, currentValue, incRatio)
     return formattedTimeStamp
   }
 
-export function roundNumber(number) {
-    return (Math.round(number * 100) / 100).toFixed(2); 
+export function roundNumber(number, decimal) {
+    let formatNumber = (Math.round(number * 100) / 100).toFixed(decimal)
+
+    if(formatNumber > 4999 && formatNumber <= 999999) 
+        formatNumber = (Math.round(number * 1) / 1000).toFixed(2) + "K"
+    
+    if(formatNumber > 999999 && formatNumber <= 999999999) 
+        formatNumber = (Math.round(number * 1) / 1000000).toFixed(2) + "M"  
+    
+    if(formatNumber > 999999999 && formatNumber <= 999999999999)   
+        formatNumber = (Math.round(number * 1) / 1000000000).toFixed(2) + "G"  
+    
+    if(formatNumber > 999999999 && formatNumber <= 999999999999999)   
+        formatNumber = (Math.round(number * 1) / 1000000000000).toFixed(2) + "T"  
+
+    if(formatNumber > 999999999999999 && formatNumber <= 999999999999999999)   
+        formatNumber = (Math.round(number * 1) / 1000000000000000).toFixed(2) + "P"  
+
+    if(formatNumber > 999999999999999999 && formatNumber <= 999999999999999999999)   
+        formatNumber = (Math.round(number * 1) / 1000000000000000000).toFixed(2) + "E"
+
+    if(formatNumber > 999999999999999999999 && formatNumber <= 999999999999999999999999)   
+        formatNumber = (Math.round(number * 1) / 1000000000000000000000).toFixed(2) + "Z"
+
+    if(formatNumber > 999999999999999999999999 && formatNumber <= 999999999999999999999999999)   
+        formatNumber = (Math.round(number * 1) / 1000000000000000000000000).toFixed(2) + "Y"
+    
+    if(formatNumber > 999999999999999999999999999)
+        formatNumber = (Math.round(number * 1) / 1000000000000000000000000).toFixed(2) + "Y"   
+
+    return formatNumber; 
 }
 
 

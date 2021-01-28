@@ -110,6 +110,44 @@ class ActivityPanel extends React.Component {
     }
   }
 
+  sellActivity() {
+    let activityToSell = this.state.activity
+    let resources = this.state.resources
+    
+
+    if(activityToSell.stage != null && activityToSell.stage > 0) {
+      let costs = activityToSell.upgradeCost.slice()
+      let effects = activityToSell.effect.slice()
+
+      costs.forEach(cost => {
+        let index = resources.findIndex(x => x.name === cost.resource)  
+        cost.cost -= ((cost.upgradeCostRatio * cost.cost * (activityToSell.stage)))
+        resources[index].currentValue += cost.cost  
+      })
+
+      effects.forEach(effect => {
+        let index = resources.findIndex(x => x.name === effect.resource)
+        if (effect.perSecRatio != null)
+          resources[index].incRatio -= effect.perSecRatio
+        if (effect.percRatio != null)
+          resources[index].incRatio -= ((resources[index].incRatio * effect.percRatio) / 100)
+        if (effect.maxValue != null)
+          resources[index].maxValue -= effect.maxValue
+        if (effect.clickRatio != null) 
+          resources[index].currentValue -= effect.clickRatio 
+      })
+
+
+      activityToSell.stage -= 1
+
+      this.setState ({
+        gameResources: resources,
+        activity: activityToSell
+      })
+    }
+
+  }
+
   render() {
     let activity = this.state.activity
     let resources = this.state.resources
@@ -124,7 +162,7 @@ class ActivityPanel extends React.Component {
         <Tooltip activity={activity} resourcesList={resources} direction="right">
           <span onClick={() => this.doActivity()} className={this.checkUpgradable(costs,resources)}> 
             <span className="Activity-Btn-Label">{activity.name} {activity.stage != null && (<span>[{activity.stage}]</span>)}</span>
-            {activity.stage != null && (<span className="Activity-Btn-Sell">Sell</span>)}
+            {activity.stage != null && (<button onClick={(e) => {e.stopPropagation(); this.sellActivity()}} className="Activity-Btn-Sell">Sell</button>)}
           </span>       
         </Tooltip>    
       )

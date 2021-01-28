@@ -107,9 +107,8 @@ class Game extends React.Component {
                 <div className="Middle-Panel">
                     {/** TABS SELECTOR */}
                     <div className="Middle-Panel-Tabs-Container">
-                        <span className="Middle-Panel-Tab-Name" style={{'fontWeight': this.state.activeTab === constants.TAB_ACT ? 'bold' : 'normal'}} onClick={() => this.updateActiveTab(constants.TAB_ACT)}>{constants.TAB_ACT}</span>
-                        <span>|</span>
-                        <span className="Middle-Panel-Tab-Name" style={{'fontWeight': this.state.activeTab === "Attributes" ? 'bold' : 'normal'}} onClick={() => this.updateActiveTab("Attributes")}>Attributes</span>
+                        <span className="Middle-Panel-Tab-Name" style={{'fontWeight': this.state.activeTab === constants.TAB_ACT ? 'bold' : 'normal'}} onClick={() => this.updateActiveTab(constants.TAB_ACT)}>{constants.TAB_ACT} <span>/</span></span>
+                        <span className="Middle-Panel-Tab-Name" style={{'fontWeight': this.state.activeTab === constants.TAB_TAL ? 'bold' : 'normal'}} onClick={() => this.updateActiveTab(constants.TAB_TAL)}>{constants.TAB_TAL} <span>/</span></span>
                     </div>
                     {/** ACTIVITY PANEL */}
                     <div className="Middle-Panel-Game-View">

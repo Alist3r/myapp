@@ -49,7 +49,7 @@ const activityList = [
             { resource: resNames.RES_PSI, cost: 7, upgradeCostRatio: 0.008 }
         ],
         effect: [
-            { resource: resNames.RES_PSI, perSecRatio: 0.08}
+            { resource: resNames.RES_PSI, perSecRatio: 0.36}
         ],
         unlocked: false,
         unlockedFrom: [
@@ -61,18 +61,36 @@ const activityList = [
         description: 'Sacrifice your physics and mental excercise but gain Free Time',
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_ATL, cost: 40, upgradeCostRatio: 0.008},
-            { resource: resNames.RES_PSI, cost: 25, upgradeCostRatio: 0.007}
+            { resource: resNames.RES_ATL, cost: 40, upgradeCostRatio: 0.01},
+            { resource: resNames.RES_PSI, cost: 25, upgradeCostRatio: 0.009}
         ],
         effect: [
-            { resource: resNames.RES_ATL, perSecRatio: -0.02},
-            { resource: resNames.RES_PSI, perSecRatio: -0.01},
-            { resource: resNames.RES_FRT, perSecRatio: 0.05}
+            { resource: resNames.RES_ATL, perSecRatio: -0.03},
+            { resource: resNames.RES_PSI, perSecRatio: -0.02},
+            { resource: resNames.RES_FRT, perSecRatio: 0.10},
+            { resource: resNames.RES_ATL, maxValue: 250},
+            { resource: resNames.RES_PSI, maxValue: 125}
         ],
         unlocked: false,
         unlockedFrom: [
             {activity: resNames.ACT_JOGG, neededStage: 15},
             {activity: resNames.ACT_MEDIT, neededStage: 3}
+        ]
+    },
+    {   //READING BOOK
+        name: resNames.ACT_READB,
+        description: 'Spends your Free Time to reading books',
+        stage: 0,
+        upgradeCost: [
+            { resource: resNames.RES_FRT, cost: 60, upgradeCostRatio: 0.009}
+        ],
+        effect: [
+            { resource: resNames.RES_KNO, perSecRatio: 0.04},
+            { resource: resNames.RES_FRT, perSecRatio: -0.007}
+        ],
+        unlocked: false,
+        unlockedFrom: [
+            {resource: resNames.RES_FRT, neededValue: 1}
         ]
     }
 
