@@ -1,34 +1,39 @@
 import * as resNames from './StringsConst.js';
 
+//001 Athleticism
+//002 Psiche
+//003 Knowledge
+//004 Free Time
+
 const resourcesList = [
-    {
-        name: resNames.RES_ATL, 
+    {   //ATHLETICISM
+        name: resNames.RES_001.name, 
         currentValue: 0, 
         maxValue: 1000, 
         incRatio: 0, 
         unlocked: true,
         unlockedFrom: null
     },
-    {
-        name: resNames.RES_PSI, 
+    {   //PSICHE
+        name: resNames.RES_002.name, 
         currentValue: 0, 
-        maxValue: 500, 
+        maxValue: 800, 
         incRatio: 0, 
         unlocked: false,
         unlockedFrom: null
     },
-    {
-        name: resNames.RES_FRT, 
-        currentValue: 0, 
-        maxValue: 500, 
-        incRatio: 0, 
-        unlocked: false,
-        unlockedFrom: null
-    },
-    {
-        name: resNames.RES_KNO, 
+    {   //KNOWLEDGE
+        name: resNames.RES_003.name, 
         currentValue: 0, 
         maxValue: 400, 
+        incRatio: 0, 
+        unlocked: false,
+        unlockedFrom: null
+    },
+    {   //FREE TIME
+        name: resNames.RES_004.name, 
+        currentValue: 0, 
+        maxValue: 500, 
         incRatio: 0, 
         unlocked: false,
         unlockedFrom: null
