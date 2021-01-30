@@ -81,31 +81,31 @@ export function roundNumber(number, decimal) {
     let formatNumber = (Math.round(number * 100) / 100).toFixed(decimal)
 
     if(formatNumber > 4999 && formatNumber <= 999999) 
-        formatNumber = (Math.round(number * 1) / 1000).toFixed(2) + "K"
+        formatNumber = (Math.round(number * 1) / 1000).toFixed(decimal) + "K"
     
     if(formatNumber > 999999 && formatNumber <= 999999999) 
-        formatNumber = (Math.round(number * 1) / 1000000).toFixed(2) + "M"  
+        formatNumber = (Math.round(number * 1) / 1000000).toFixed(decimal) + "M"  
     
     if(formatNumber > 999999999 && formatNumber <= 999999999999)   
-        formatNumber = (Math.round(number * 1) / 1000000000).toFixed(2) + "G"  
+        formatNumber = (Math.round(number * 1) / 1000000000).toFixed(decimal) + "G"  
     
     if(formatNumber > 999999999 && formatNumber <= 999999999999999)   
-        formatNumber = (Math.round(number * 1) / 1000000000000).toFixed(2) + "T"  
+        formatNumber = (Math.round(number * 1) / 1000000000000).toFixed(decimal) + "T"  
 
     if(formatNumber > 999999999999999 && formatNumber <= 999999999999999999)   
-        formatNumber = (Math.round(number * 1) / 1000000000000000).toFixed(2) + "P"  
+        formatNumber = (Math.round(number * 1) / 1000000000000000).toFixed(decimal) + "P"  
 
     if(formatNumber > 999999999999999999 && formatNumber <= 999999999999999999999)   
-        formatNumber = (Math.round(number * 1) / 1000000000000000000).toFixed(2) + "E"
+        formatNumber = (Math.round(number * 1) / 1000000000000000000).toFixed(decimal) + "E"
 
     if(formatNumber > 999999999999999999999 && formatNumber <= 999999999999999999999999)   
-        formatNumber = (Math.round(number * 1) / 1000000000000000000000).toFixed(2) + "Z"
+        formatNumber = (Math.round(number * 1) / 1000000000000000000000).toFixed(decimal) + "Z"
 
     if(formatNumber > 999999999999999999999999 && formatNumber <= 999999999999999999999999999)   
-        formatNumber = (Math.round(number * 1) / 1000000000000000000000000).toFixed(2) + "Y"
+        formatNumber = (Math.round(number * 1) / 1000000000000000000000000).toFixed(decimal) + "Y"
     
     if(formatNumber > 999999999999999999999999999)
-        formatNumber = (Math.round(number * 1) / 1000000000000000000000000).toFixed(2) + "Y"   
+        formatNumber = (Math.round(number * 1) / 1000000000000000000000000).toFixed(decimal) + "Y"   
 
     return formatNumber; 
 }

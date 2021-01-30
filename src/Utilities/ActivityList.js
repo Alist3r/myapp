@@ -13,6 +13,7 @@ import * as resNames from './StringsConst.js';
 //004 Rest
 //005 Reading Books
 //006 Do nothing
+//007 Go to Job
 
 const activityList = [
     {   //WALKING
@@ -28,36 +29,36 @@ const activityList = [
     },
     {   //REST
         name: resNames.ACT_004.name,
-        description: 'Rest and consume some of your Athleticism',
+        description: resNames.ACT_004.description,
         stage: null,
         upgradeCost: null,
         clickCost: [
             {resource: resNames.RES_001.name, cost: 100}
         ],
         effect: [
-            {resource: resNames.RES_002.name, clickRatio: 1}
+            { resource: resNames.RES_002.name, clickRatio: 1}
         ],
         unlocked: true,
         unlockedFrom: null
     },
     {   //JOGGING
         name: resNames.ACT_003.name,
-        description: 'Just doing some Jogging around, helping you to produce Athleticism',
+        description: resNames.ACT_003.description,
         stage: 0,
         upgradeCost: [
-            {resource: resNames.RES_001.name, cost: 10, upgradeCostRatio: 0.009}
+            { resource: resNames.RES_001.name, cost: 10, upgradeCostRatio: 0.009}
         ],
         effect: [
-            {resource: resNames.RES_001.name, perSecRatio: 0.52}
+            { resource: resNames.RES_001.name, perSecRatio: 0.56}
         ],
         unlocked: false,
         unlockedFrom: [
-            {resource: resNames.RES_001.name, neededValue: 10}
+            { resource: resNames.RES_001.name, neededValue: 10}
         ]
     },
     {   //MEDITATE
         name: resNames.ACT_002.name, 
-        description: 'Enter a meditate state, improves your mental state. Produces Psiche.',
+        description: resNames.ACT_002.description,
         stage: 0,
         upgradeCost: [
             { resource: resNames.RES_002.name, cost: 5, upgradeCostRatio: 0.01 }
@@ -67,12 +68,12 @@ const activityList = [
         ],
         unlocked: false,
         unlockedFrom: [
-            {resource: resNames.RES_002.name, neededValue: 1}
+            { resource: resNames.RES_002.name, neededValue: 1}
         ]    
     },
     {   //DO NOTHING
         name: resNames.ACT_006.name,
-        description: 'Sacrifice your physics and mental excercise but gain Free Time',
+        description: resNames.ACT_006.description,
         stage: 0,
         upgradeCost: [
             { resource: resNames.RES_001.name, cost: 40, upgradeCostRatio: 0.01},
@@ -82,29 +83,50 @@ const activityList = [
             { resource: resNames.RES_001.name, perSecRatio: -0.03},
             { resource: resNames.RES_002.name, perSecRatio: -0.02},
             { resource: resNames.RES_004.name, perSecRatio: 0.10},
-            { resource: resNames.RES_001.name, maxValue: 250},
-            { resource: resNames.RES_002.name, maxValue: 125}
+            { resource: resNames.RES_001.name, maxValue: 400},
+            { resource: resNames.RES_002.name, maxValue: 200}
         ],
         unlocked: false,
         unlockedFrom: [
-            {activity: resNames.ACT_003.name, neededStage: 15},
-            {activity: resNames.ACT_002.name, neededStage: 3}
+            { activity: resNames.ACT_003.name, neededStage: 15},
+            { activity: resNames.ACT_002.name, neededStage: 3}
         ]
     },
     {   //READING BOOK
         name: resNames.ACT_005.name,
-        description: 'Spends your Free Time to reading books',
+        description: resNames.ACT_005.description,
+        grade: 0,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_004.name, cost: 60, upgradeCostRatio: 0.009}
+            { resource: resNames.RES_004.name, cost: 35, upgradeCostRatio: 0.03}
         ],
         effect: [
-            { resource: resNames.RES_003.name, perSecRatio: 0.04},
-            { resource: resNames.RES_004.name, perSecRatio: -0.007}
+            { resource: resNames.RES_003.name, perSecRatio: 0.03},
+            { resource: resNames.RES_004.name, perSecRatio: -0.32}
         ],
+        modulable: true,
         unlocked: false,
         unlockedFrom: [
             {resource: resNames.RES_004.name, neededValue: 1}
+        ]
+    },
+    {   //GO TO JOB
+        name: resNames.ACT_007.name,
+        description: resNames.ACT_007.description,
+        grade: null,
+        stage: 0,
+        upgradeCost: [
+            { resource: resNames.RES_004.name, cost: 100, upgradeCostRatio: 0.03},
+            { resource: resNames.RES_003.name, cost: 150, upgradeCostRatio: 0.03}
+        ],
+        effect: [
+            { resource: resNames.RES_005.name, perSecRatio: 0.003},
+            { resource: resNames.RES_004.name, perSecRatio: -0.16}
+        ],
+        modulable: false,
+        unlocked: false,
+        unlockedFrom: [
+            {resource: resNames.RES_003.name, neededValue: 15}
         ]
     }
 

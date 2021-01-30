@@ -2,6 +2,7 @@ import React from 'react'
 import ResourcePanel from './ResourcesPanel.js'
 import ActivityPanel from './ActivityPanel.js'
 import TopBar from './TopBar.js'
+import BeltResourcePanel from './BeltResourcePanel.js'
 
 import resourcesList from '../Utilities/ResourcesList.js'
 import activityList from '../Utilities/ActivityList.js'
@@ -100,7 +101,7 @@ class Game extends React.Component {
                 <TopBar gameState={this.state}/>
                 <div className="Left-Panel">
                     {gameResources.map(resource => (                                     
-                        <div>{this.unlockResource(resource) && (<ResourcePanel  resource={resource} />)}</div>                                        
+                         <div style={{'visibility': resource.type !== constants.RES_TYPE_002.name ? 'visible' : 'hidden'}}>{this.unlockResource(resource) && (<ResourcePanel  resource={resource} />)}</div>                                     
                     ))}
                 </div>
 
@@ -121,7 +122,13 @@ class Game extends React.Component {
                                 )             
                             ))}     
                         </div>  
-                    </div>     
+                    </div>  
+                    {/** BELT RESOURCE PANEL */}
+                    <div className="Middle-Panel-Bag-Resources">
+                        {gameResources.map(resource => (                                     
+                            resource.type === constants.RES_TYPE_002.name && (<div>{this.unlockResource(resource) && (<BeltResourcePanel  resource={resource} />)}</div>)                               
+                        ))}
+                    </div> 
                 </div>
             </div>                        
             

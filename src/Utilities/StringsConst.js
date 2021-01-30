@@ -1,7 +1,11 @@
+
+export const OPT_GAMESPEED = 20
+
 //001 Athleticism
 //002 Psiche
 //003 Knowledge
 //004 Free Time
+//005 Demir
 
 export const RES_001 = {
     name: "Athleticism"
@@ -14,6 +18,17 @@ export const RES_003 = {
 }
 export const RES_004 = {
     name: "Free Time"
+}
+export const RES_005 = {
+    name: "Demir"
+}
+
+//RESOURCES TYPE
+//001 
+//002 inBag
+
+export const RES_TYPE_002 = {
+    name: "inBag"
 }
 
 //001 Walking
@@ -47,6 +62,10 @@ export const ACT_006 = {
     name: "Do Nothing",
     description: "Sacrifice your physics and mental excercise but gain Free Time"
 }
+export const ACT_007 = {
+    name: "Go to Job",
+    description: "You are enough knoledgble to find a job and gain some Demir"
+}
 
 export const TAL_GOALF = "Goals Focus"
 export const TAL_OPTT  = "Optimized Time"
@@ -55,4 +74,4 @@ export const TAB_ACT = "Activities"
 export const TAB_ROO = "Your Room"
 export const TAB_TAL = "Talents"
 
-export const OPT_GAMESPEED = 1
+

@@ -31,6 +31,7 @@ body {
   font-size: 13px;
   padding: 5px;
   vertical-align: top;
+  min-height: 400px;
 }
 
 .Resource-Cell-Name {
@@ -107,7 +108,7 @@ body {
 }
 
 .Middle-Panel-Activity-Container {
-  width: 230px;
+  width: 250;
   display: inline-block;
   padding-left: 10px;
   padding-right: 10px;
@@ -119,9 +120,11 @@ body {
   cursor: pointer;
   border: 1px solid grey;
   color: grey;
-  padding: 8px;
+  padding: 10px;
   padding-right: 0;
-  width: 230px;
+  padding-left: 0;
+  width: 250px;
+  max-width: 250px;
   border-radius: 3px;
   font: 90% "Century Gothic", Futura, sans-serif;
   text-align: center;
@@ -155,15 +158,16 @@ body {
 
 .Activity-Btn-Sell {
   float: right;
-  padding: 0px 7px 0px 7px !important;
-  margin: 0px 0;
+  padding: 1px 7px 1px 7px !important;
+  margin: -1px 0;
   background-color: lightgray;
-  border: 1px dotted black;
+  border: 1px solid lightgray;
   border-right: none;
   border-radius: 4px 0px 0px 4px;
   max-width: 35px;
   cursor: pointer;
-  color: darkslateblue;
+  color: black;
+
 }
 
   .Activity-Btn-Sell:hover {
@@ -174,4 +178,42 @@ body {
     outline: none;
   }
 
+.Activity-Btn-Grade {
+  float: right;
+  padding: 1px 5px 1px 5px !important;
+  margin: -1px 0;
+  margin-right: 2px;
+  background-color: lightgray;
+  border: 1px solid lightgray;
+  border-radius: 7px;
+  width: 19px;
+  cursor: pointer;
+  color: black;
+}
+
+  .Activity-Btn-Grade:hover {
+    background-color: whitesmoke;
+  }
+
+  .Activity-Btn-Grade:focus {
+    outline: none;
+  }
+
+.Activity-Btn-Grade.Plus {
+  border-radius: 0px 5px 5px 0px;
+  border-left-color: white;
+}
+
+.Activity-Btn-Grade.Minus {
+  border-radius: 5px 0px 0px 5px;
+  margin-right: 0px;
+  border-right: none;
+}
+
+.Middle-Panel-Bag-Resources {
+  border: 1px solid black;
+  margin-top:5px;
+  height: 20px;
+  padding: 3px;
+}
 

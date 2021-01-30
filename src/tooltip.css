@@ -51,6 +51,13 @@
   font-size: 12px;
 }
 
+.Tooltip-Cooldown {
+  color: grey;
+  float: right;
+  font-size: 11px;
+  margin-top: 20px;
+}
+
 .Tooltip-Sec {
   font-size: 11px;
 }

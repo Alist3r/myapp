@@ -93,7 +93,6 @@ class ActivityPanel extends React.Component {
             resourcesList[index].maxValue += effect.maxValue
           if (effect.clickRatio != null) 
             resourcesList[index].currentValue += effect.clickRatio  
-
           if(resourcesList[index].unlocked === false)
             resourcesList[index].unlocked = true   
       })
@@ -102,6 +101,9 @@ class ActivityPanel extends React.Component {
 
       if (activityToDo.stage != null) 
         activityToDo.stage += 1
+
+      if(activityToDo.modulable != null) 
+        activityToDo.grade += 1
         
       this.setState ({
         gameResources: resourcesList,
@@ -125,9 +127,78 @@ class ActivityPanel extends React.Component {
         resources[index].currentValue += cost.cost  
       })
 
+      
       effects.forEach(effect => {
         let index = resources.findIndex(x => x.name === effect.resource)
+        if(resources[index].incRatio > 0) {
+          if (effect.perSecRatio != null)
+            resources[index].incRatio -= effect.perSecRatio
+          if (effect.percRatio != null)
+            resources[index].incRatio -= ((resources[index].incRatio * effect.percRatio) / 100)
+          if (effect.maxValue != null)
+            resources[index].maxValue -= effect.maxValue
+          if (effect.clickRatio != null) 
+            resources[index].currentValue -= effect.clickRatio 
+        }
+      })
+
+
+      if(activityToSell.modulable === true) {
+        if(activityToSell.grade === activityToSell.stage) {
+          activityToSell.grade -= 1
+        }
+      }
+      activityToSell.stage -= 1
+      
+
+      this.setState ({
+        resources: resources,
+        activity: activityToSell
+      })
+    }
+
+  }
+
+  upGrade() {
+    let activity = this.state.activity
+    let resources = this.state.resources.slice()
+    let effects = activity.effect.slice()
+
+    if(activity.grade < activity.stage) {
+      activity.grade += 1
+
+      effects.forEach(effect => {          
+        let index = resources.findIndex(x => x.name === effect.resource)                     
         if (effect.perSecRatio != null)
+          resources[index].incRatio += effect.perSecRatio
+        if (effect.percRatio != null)
+          resources[index].incRatio += ((resources[index].incRatio * effect.percRatio) / 100)
+        if (effect.maxValue != null)
+          resources[index].maxValue += effect.maxValue
+        if (effect.clickRatio != null) 
+         resources[index].currentValue += effect.clickRatio  
+        if(resources[index].unlocked === false)
+          resources[index].unlocked = true   
+      })
+
+      this.setState ({
+        gameResources: resources,
+        activity: activity
+      })
+    }
+  }
+
+  downGrade() {
+    let activity = this.state.activity
+    let resources = this.state.resources
+    let effects = activity.effect.slice()
+
+    if(activity.grade > 0) {
+      activity.grade -= 1
+
+      effects.forEach(effect => {
+        let index = resources.findIndex(x => x.name === effect.resource)
+        if (effect.perSecRatio != null) 
           resources[index].incRatio -= effect.perSecRatio
         if (effect.percRatio != null)
           resources[index].incRatio -= ((resources[index].incRatio * effect.percRatio) / 100)
@@ -137,12 +208,9 @@ class ActivityPanel extends React.Component {
           resources[index].currentValue -= effect.clickRatio 
       })
 
-
-      activityToSell.stage -= 1
-
       this.setState ({
         gameResources: resources,
-        activity: activityToSell
+        activity: activity
       })
     }
 
@@ -161,8 +229,18 @@ class ActivityPanel extends React.Component {
       return(
         <Tooltip activity={activity} resourcesList={resources} direction="right">
           <span onClick={() => this.doActivity()} className={this.checkUpgradable(costs,resources)}> 
-            <span className="Activity-Btn-Label">{activity.name} {activity.stage != null && (<span>[{activity.stage}]</span>)}</span>
+            <span className="Activity-Btn-Label">
+              {activity.name} {activity.stage != null && (<span>[{activity.modulable && (<span>{activity.grade}/</span>)}{activity.stage}]</span>)}
+            </span>
+            
             {activity.stage != null && (<button onClick={(e) => {e.stopPropagation(); this.sellActivity()}} className="Activity-Btn-Sell">Sell</button>)}
+            
+            {activity.modulable === true && (
+              <span>
+                <button onClick={(e) => {e.stopPropagation(); this.upGrade()}} className="Activity-Btn-Grade Plus">+</button>
+                <button onClick={(e) => {e.stopPropagation(); this.downGrade()}} className="Activity-Btn-Grade Minus">-</button>
+              </span>
+            )}
           </span>       
         </Tooltip>    
       )

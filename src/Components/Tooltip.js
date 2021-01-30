@@ -64,7 +64,7 @@ const Tooltip = (props) => {
                 {clickCost.resource}: {resources.map(resource => (
                   resource.name === clickCost.resource && (
                     <span className={currentValueColor(resource.currentValue,clickCost.cost)}>
-                      {roundNumber(resource.currentValue,2)} / {roundNumber(clickCost.cost,2)}{clickCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < clickCost.cost && (<span> {tooltipReverseTimerConverter(clickCost.cost,resource.currentValue,resource.incRatio)}</span>)} 
+                      {roundNumber(resource.currentValue,2)} / {roundNumber(clickCost.cost,0)}{clickCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < clickCost.cost && (<span> {tooltipReverseTimerConverter(clickCost.cost,resource.currentValue,resource.incRatio)}</span>)} 
                     </span>)
                 ))}
               </span>
@@ -83,7 +83,7 @@ const Tooltip = (props) => {
                 <br></br>
               </span>
 
-            ))}
+            ))}         
           </div>
         </div>
       )}

@@ -4,6 +4,7 @@ import * as resNames from './StringsConst.js';
 //002 Psiche
 //003 Knowledge
 //004 Free Time
+//005 Demir
 
 const resourcesList = [
     {   //ATHLETICISM
@@ -37,6 +38,16 @@ const resourcesList = [
         incRatio: 0, 
         unlocked: false,
         unlockedFrom: null
+    },
+    {   //DEMIR
+        name: resNames.RES_005.name, 
+        currentValue: 0, 
+        maxValue: 500, 
+        incRatio: 0, 
+        unlocked: false,
+        unlockedFrom: null,
+        type: resNames.RES_TYPE_002.name,
+        color: "darkorange"
     }
 ]
 

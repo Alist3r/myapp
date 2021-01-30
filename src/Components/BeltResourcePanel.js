@@ -2,7 +2,7 @@ import React from 'react'
 import {roundNumber} from '../Utilities/UtilityFunctions.js'
 import * as constants from '../Utilities/StringsConst.js'
 
-class ResourcePanel extends React.Component {
+class BeltResourcePanel extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -10,7 +10,7 @@ class ResourcePanel extends React.Component {
     }
   }
 
-  componentDidMount() {
+  /*componentDidMount() {
     this.timerID = setInterval(
       () => this.tick(),
       100
@@ -45,7 +45,7 @@ class ResourcePanel extends React.Component {
     this.setState({
       resource: updatedResource
     });
-  }
+  }*/
 
   render() {
     let resource = this.state.resource
@@ -61,5 +61,5 @@ class ResourcePanel extends React.Component {
     }
 }
 
-export default ResourcePanel;
+export default BeltResourcePanel;
 
