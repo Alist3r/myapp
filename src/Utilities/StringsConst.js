@@ -1,5 +1,5 @@
 
-export const OPT_GAMESPEED = 20
+export const OPT_GAMESPEED = 1
 
 //001 Athleticism
 //002 Psiche
@@ -66,12 +66,25 @@ export const ACT_007 = {
     name: "Go to Job",
     description: "You are enough knoledgble to find a job and gain some Demir"
 }
+export const ACT_008 = {
+    name: "Massage",
+    description: "Spend some time to receive a massage. Expande your physic and mental status"
+}
+
+//ROOMOBJECT
+//001 Treadmill
+
+export const OBJ_001 = {
+    name: "Treadmill",
+    description: "Buying a new Treadmill. Now you can make excercise in your home",
+}
 
 export const TAL_GOALF = "Goals Focus"
 export const TAL_OPTT  = "Optimized Time"
 
-export const TAB_ACT = "Activities"
-export const TAB_ROO = "Your Room"
-export const TAB_TAL = "Talents"
+//TABS
+
+export const TAB_001 = "Activities"
+export const TAB_002 = "Your Room"
 
 

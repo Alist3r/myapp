@@ -10,7 +10,7 @@ const resourcesList = [
     {   //ATHLETICISM
         name: resNames.RES_001.name, 
         currentValue: 0, 
-        maxValue: 1000, 
+        maxValue: 2000, 
         incRatio: 0, 
         unlocked: true,
         unlockedFrom: null
@@ -18,7 +18,7 @@ const resourcesList = [
     {   //PSICHE
         name: resNames.RES_002.name, 
         currentValue: 0, 
-        maxValue: 800, 
+        maxValue: 1500, 
         incRatio: 0, 
         unlocked: false,
         unlockedFrom: null
@@ -41,7 +41,7 @@ const resourcesList = [
     },
     {   //DEMIR
         name: resNames.RES_005.name, 
-        currentValue: 0, 
+        currentValue: 0.1, 
         maxValue: 500, 
         incRatio: 0, 
         unlocked: false,

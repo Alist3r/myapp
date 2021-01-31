@@ -12,6 +12,8 @@ body {
   height: auto;
 }
 
+/* TOP BAR */
+
 .Top-Bar {
   widows: 100%;
   border-bottom: 1px solid black;
@@ -22,6 +24,8 @@ body {
   display: table-cell;
   width: 200px;
 }
+
+/* LEFT PANEL */
 
 .Left-Panel {
   width: 25%;
@@ -65,6 +69,8 @@ body {
   font-size: 90%;
 }
 
+/* MIDDLE PANEL */
+
 .Middle-Panel {
   min-width: 500px;
   max-width: 600px;
@@ -88,7 +94,7 @@ body {
 .Middle-Panel-Tab-Name {
   margin: 3px;
   margin-bottom: 7px;
-  font-size: 13px;
+  font-size: 12px;
   cursor: pointer;
   -webkit-user-select: none;  
   -moz-user-select: none;    
@@ -101,6 +107,8 @@ body {
   border-radius: 5px;
   margin-top: 5px;
 }
+
+/* MIDDLE PANEL ACTIVITY */
 
 .Middle-Panel-Activity-Tab {
   text-align: center;
@@ -210,10 +218,78 @@ body {
   border-right: none;
 }
 
+/* MIDDLE PANEL ROOM */
+
+.Middle-Panel-Room-Tab {
+  padding: 10px;
+}
+
+.Middle-Panel-Room-Slot {
+  text-align: center;
+  width: 80px;
+  color: black;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 5px;
+  padding-right: 5px;
+  font-size: 13px;
+}
+
+.Middle-Panel-Room-Slot-Label {
+  font-size: 11px;
+}
+
+.Middle-Panel-Room-Slot-Value {
+  font-size: 18px;
+}
+
+/* MIDDLE PANEL BAG RESOURCE */
+
 .Middle-Panel-Bag-Resources {
   border: 1px solid black;
-  margin-top:5px;
-  height: 20px;
-  padding: 3px;
+  border-top: none;
+  height: fit-content;
+  border-radius: 5px;
+}
+
+.Belt-Resource-Cell-Name {
+  display: table-cell;
+  font-size: 12px;
+  min-width: 40px;
+  max-width: 50px;
+}
+
+.Belt-Resource-Cell-Icon-Container {
+  display: table-cell;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+.Belt-Resource-Cell-Icon-Img {
+  margin-top: 3px;
+  vertical-align: middle;
+}
+
+.Belt-Resource-Cell-Value {
+  display: table-cell;
+  font-size: 12px;
+  min-width: 47px;
+  max-width: 52px;
+}
+
+.Belt-Resource-Cell-MaxValue {
+  display: table-cell;
+  font-size: 9px;
+  min-width: 20px;
+  max-width: 30px;
+}
+
+.Belt-Resource-Cell-IncRatio {
+  font-size: 10px;
+  text-align: left;
+  min-width: 110px;
+  max-width: 110px;
 }
 

@@ -4,7 +4,9 @@ export function saveState(state) {
     localStorage.setItem('gameTime', state.gameTime);
     localStorage.setItem("gameResources", JSON.stringify(state.gameResources));
     localStorage.setItem("gameActivities", JSON.stringify(state.gameActivities));
+    localStorage.setItem("gameRoomObjects", JSON.stringify(state.gameRoomObjects));
     localStorage.setItem("activeTab", JSON.stringify(state.activeTab));
+    localStorage.setItem("roomSlot", JSON.stringify(state.roomSlot));
 }
 
 export function loadState(state) {
@@ -12,7 +14,9 @@ export function loadState(state) {
     let gameTime
     let gameResources
     let gameActivities
+    let gameRoomObjects
     let activeTab
+    let roomSlot
 
     if(parseInt(localStorage.getItem('gameTime'))) {
         gameTime = parseInt(localStorage.getItem('gameTime'))
@@ -35,6 +39,13 @@ export function loadState(state) {
         gameActivities = state.gameActivities
     }
 
+    if(JSON.parse(localStorage.getItem("gameRoomObjects"))) {
+        gameRoomObjects = JSON.parse(localStorage.getItem("gameRoomObjects"))
+    }
+    else {
+        gameRoomObjects = state.gameRoomObjects
+    }
+
     if(parseInt(localStorage.getItem('activeTab'))) {
         activeTab = parseInt(localStorage.getItem('activeTab'))
     }
@@ -42,11 +53,20 @@ export function loadState(state) {
         activeTab = state.activeTab
     }
 
+    if(parseInt(localStorage.getItem('roomSlot'))) {
+        roomSlot = parseInt(localStorage.getItem('roomSlot'))
+    }
+    else {
+        roomSlot = state.roomSlot
+    }
+
     updatedstate = {
         gameTime,
         gameResources,
         gameActivities,
-        activeTab
+        gameRoomObjects,
+        activeTab,
+        roomSlot
     }
 
     return updatedstate

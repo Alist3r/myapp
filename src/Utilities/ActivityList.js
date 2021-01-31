@@ -61,7 +61,7 @@ const activityList = [
         description: resNames.ACT_002.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_002.name, cost: 5, upgradeCostRatio: 0.01 }
+            { resource: resNames.RES_002.name, cost: 3, upgradeCostRatio: 0.01 }
         ],
         effect: [
             { resource: resNames.RES_002.name, perSecRatio: 0.36}
@@ -82,9 +82,7 @@ const activityList = [
         effect: [
             { resource: resNames.RES_001.name, perSecRatio: -0.03},
             { resource: resNames.RES_002.name, perSecRatio: -0.02},
-            { resource: resNames.RES_004.name, perSecRatio: 0.10},
-            { resource: resNames.RES_001.name, maxValue: 400},
-            { resource: resNames.RES_002.name, maxValue: 200}
+            { resource: resNames.RES_004.name, perSecRatio: 0.27}
         ],
         unlocked: false,
         unlockedFrom: [
@@ -101,8 +99,8 @@ const activityList = [
             { resource: resNames.RES_004.name, cost: 35, upgradeCostRatio: 0.03}
         ],
         effect: [
-            { resource: resNames.RES_003.name, perSecRatio: 0.03},
-            { resource: resNames.RES_004.name, perSecRatio: -0.32}
+            { resource: resNames.RES_003.name, perSecRatio: 0.27},
+            { resource: resNames.RES_004.name, perSecRatio: -0.13}
         ],
         modulable: true,
         unlocked: false,
@@ -116,17 +114,37 @@ const activityList = [
         grade: null,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_004.name, cost: 100, upgradeCostRatio: 0.03},
-            { resource: resNames.RES_003.name, cost: 150, upgradeCostRatio: 0.03}
+            { resource: resNames.RES_004.name, cost: 150, upgradeCostRatio: 0.03},
+            { resource: resNames.RES_003.name, cost: 60, upgradeCostRatio: 0.03}
         ],
         effect: [
-            { resource: resNames.RES_005.name, perSecRatio: 0.003},
-            { resource: resNames.RES_004.name, perSecRatio: -0.16}
+            { resource: resNames.RES_005.name, perSecRatio: 0.09},
+            { resource: resNames.RES_004.name, perSecRatio: -0.08}
         ],
         modulable: false,
         unlocked: false,
         unlockedFrom: [
-            {resource: resNames.RES_003.name, neededValue: 15}
+            { resource: resNames.RES_003.name, neededValue: 70}
+        ]
+    },
+    {   //MASSAGE
+        name: resNames.ACT_008.name,
+        description: resNames.ACT_008.description,
+        grade: null,
+        stage: 0,
+        upgradeCost: [
+            { resource: resNames.RES_004.name, cost: 80, upgradeCostRatio: 0.03},
+            { resource: resNames.RES_005.name, cost: 25, upgradeCostRatio: 0.03}
+        ],
+        effect: [
+            { resource: resNames.RES_001.name, maxValue: 800 },
+            { resource: resNames.RES_002.name, maxValue: 300 },
+            { resource: resNames.RES_003.name, maxValue: 100 },
+        ],
+        modulable: false,
+        unlocked: false,
+        unlockedFrom: [
+            { resource: resNames.RES_005.name, neededValue: 0.01}
         ]
     }
 

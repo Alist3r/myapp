@@ -1,13 +1,17 @@
 import React from 'react'
 import ResourcePanel from './ResourcesPanel.js'
 import ActivityPanel from './ActivityPanel.js'
+import RoomObject from './RoomObject.js'
 import TopBar from './TopBar.js'
 import BeltResourcePanel from './BeltResourcePanel.js'
 
 import resourcesList from '../Utilities/ResourcesList.js'
 import activityList from '../Utilities/ActivityList.js'
+import roomObjectsList from '../Utilities/RoomObjectsList.js'
+import tabList from '../Utilities/TabList.js'
 import * as utility from '../Utilities/UtilityFunctions.js'
 import * as constants from '../Utilities/StringsConst.js'
+import TabSelector from './TabSelector.js'
 
 class Game extends React.Component {
     constructor(props) {
@@ -16,7 +20,9 @@ class Game extends React.Component {
             gameTime: 0,
             gameResources: resourcesList.slice(),
             gameActivities: activityList.slice(),
-            activeTab: constants.TAB_ACT
+            gameRoomObjects: roomObjectsList.slice(),
+            activeTab: constants.TAB_002,
+            roomSlot: 3
         }
         
         //If a storage exist, the load the datas
@@ -84,7 +90,7 @@ class Game extends React.Component {
         return resource.unlocked
     }
 
-    updateActiveTab(tabToActivate) {
+    updateActiveTab = (tabToActivate) => {
         this.setState({
             activeTab: tabToActivate
         })
@@ -94,6 +100,7 @@ class Game extends React.Component {
     render() {
         let gameResources = this.state.gameResources.slice()
         let gameActivities = this.state.gameActivities.slice()
+        let gameRoomObjects = this.state.gameRoomObjects.slice()
  
         return(
             
@@ -108,12 +115,14 @@ class Game extends React.Component {
                 <div className="Middle-Panel">
                     {/** TABS SELECTOR */}
                     <div className="Middle-Panel-Tabs-Container">
-                        <span className="Middle-Panel-Tab-Name" style={{'fontWeight': this.state.activeTab === constants.TAB_ACT ? 'bold' : 'normal'}} onClick={() => this.updateActiveTab(constants.TAB_ACT)}>{constants.TAB_ACT} <span>/</span></span>
-                        <span className="Middle-Panel-Tab-Name" style={{'fontWeight': this.state.activeTab === constants.TAB_TAL ? 'bold' : 'normal'}} onClick={() => this.updateActiveTab(constants.TAB_TAL)}>{constants.TAB_TAL} <span>/</span></span>
+                        {tabList.map(tab => (
+                            <TabSelector tab={tab} isActive={this.state.activeTab === tab.name ? true : false} resources={gameResources} activities={gameActivities} updateActiveTab={this.updateActiveTab}/>
+                        ))}
                     </div>
-                    {/** ACTIVITY PANEL */}
+                    
                     <div className="Middle-Panel-Game-View">
-                        <div className="Middle-Panel-Activity-Tab" style={{'visibility': this.state.activeTab === constants.TAB_ACT ? 'visible' : 'hidden'}}>
+                        {/** ACTIVITY PANEL */}
+                        <div className="Middle-Panel-Activity-Tab" style={{'display': this.state.activeTab === constants.TAB_001 ? 'block' : 'none'}}>
                             {gameActivities.map(activity => (                  
                                 this.unlockActivity(activity) && (
                                     <div className="Middle-Panel-Activity-Container" > 
@@ -122,7 +131,23 @@ class Game extends React.Component {
                                 )             
                             ))}     
                         </div>  
+
+                        {/** YOUR ROOM PANEL */}
+                        <div className="Middle-Panel-Room-Tab" style={{'display': this.state.activeTab === constants.TAB_002 ? 'block' : 'none'}}>
+                            <div className="Middle-Panel-Room-Slot">
+                                <div className="Middle-Panel-Room-Slot-Label">Room Slot</div>
+                                <div className="Middle-Panel-Room-Slot-Value">{this.state.roomSlot}</div>
+                            </div>
+                            <div>
+                                {gameRoomObjects.map(roomObject => (
+                                    <div className="Middle-Panel-RoomObj-Container">
+                                        <RoomObject roomObject={roomObject} resources = {gameResources} />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>  
+
                     {/** BELT RESOURCE PANEL */}
                     <div className="Middle-Panel-Bag-Resources">
                         {gameResources.map(resource => (                                     

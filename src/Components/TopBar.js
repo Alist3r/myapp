@@ -48,12 +48,24 @@ class TopBar extends React.Component {
     window.location.reload();
   }
 
+  /*reloadData() {
+    utility.saveState(this.state.gameState)
+    let realoadedState = utility.loadState(this.state);    
+
+    this.setState({
+      gameState: realoadedState
+    })
+  }*/
+
   render() {
       return(
         <div className="Top-Bar">
           <div className="Top-Bar-Div">Game Time: {this.timeCounterConverter(this.state.gameState.gameTime)}</div>
           <div className="Top-Bar-Div">Game Speed: {constants.OPT_GAMESPEED}x</div>
-          <div className="Top-Bar-Div"><button onClick={() => this.resetData()}>Clear Storage</button></div>    
+          <div className="Top-Bar-Div">
+            <div style={{display: 'inline-block',cursor: 'pointer'}} onClick={() => this.resetData()}>[Reset]</div>
+            {/*/<div style={{display: 'inline-block',cursor: 'pointer'}} onClick={() => this.reloadData()}>[Reload]</div>*/}
+          </div>    
         </div>     
       )
     }
