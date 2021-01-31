@@ -115,7 +115,7 @@ body {
   padding: 15px;
 }
 
-.Middle-Panel-Activity-Container {
+.Middle-Panel-Activity-Container,.Middle-Panel-RoomObj-Container {
   width: 250;
   display: inline-block;
   padding-left: 10px;
@@ -164,7 +164,7 @@ body {
   display: inline-block;
 }
 
-.Activity-Btn-Sell {
+.Activity-Btn-Sell,.RoomObject-Btn-Sell {
   float: right;
   padding: 1px 7px 1px 7px !important;
   margin: -1px 0;
@@ -178,11 +178,11 @@ body {
 
 }
 
-  .Activity-Btn-Sell:hover {
+  .Activity-Btn-Sell:hover,.RoomObject-Btn-Sell:hover {
     background-color: whitesmoke;
   }
 
-  .Activity-Btn-Sell:focus {
+  .Activity-Btn-Sell:focus,.RoomObject-Btn-Sell:focus {
     outline: none;
   }
 
@@ -227,14 +227,6 @@ body {
 .Middle-Panel-Room-Panel {
   text-align: center;
   margin-top: 10px;
-}
-
-.Middle-Panel-RoomObj-Container {
-  width: 250;
-  display: inline-block;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 10px;
 }
 
 .Middle-Panel-Room-Slot {

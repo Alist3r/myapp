@@ -11,7 +11,7 @@ class RoomObject extends React.Component {
   }
 
   buyObject() {
-    
+
   }
 
   render() {
@@ -23,7 +23,7 @@ class RoomObject extends React.Component {
           {roomObject.name} {roomObject.stage != null && roomObject.isBought && (<span>[{roomObject.stage}]</span>)}
         </span>
 
-        {roomObject.isBought === false && (<button onClick={(e) => {e.stopPropagation(); this.buyObject()}} className="Activity-Btn-Sell">Buy</button>)}
+        {roomObject.isBought === false && (<button onClick={(e) => {e.stopPropagation(); this.buyObject()}} className="RoomObject-Btn-Sell">Buy</button>)}
 
       </div>
     )
