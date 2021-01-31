@@ -227,7 +227,7 @@ class ActivityPanel extends React.Component {
       costs = activity.clickCost
 
       return(
-        <Tooltip activity={activity} resourcesList={resources} direction="right">
+        <Tooltip activity={activity} resourcesList={resources} tooltipType="activity" direction="right">
           <span onClick={() => this.doActivity()} className={this.checkUpgradable(costs,resources)}> 
             <span className="Activity-Btn-Label">
               {activity.name} {activity.stage != null && (<span>[{activity.modulable && (<span>{activity.grade}/</span>)}{activity.stage}]</span>)}

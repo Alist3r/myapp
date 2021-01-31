@@ -2,6 +2,7 @@ import React from 'react'
 import {roundNumber} from '../Utilities/UtilityFunctions.js'
 import * as constants from '../Utilities/StringsConst.js'
 import icondemir from '../Images/icon-demir.png'
+import Tooltip from './Tooltip.js'
 
 class BeltResourcePanel extends React.Component {
   constructor(props) {
@@ -54,8 +55,9 @@ class BeltResourcePanel extends React.Component {
 
     if(resource.color != null) {
       style = {
-        padding: '10px',
-        borderRight: '1px dashed black',   
+        padding: '5px',
+        border: '1px solid black', 
+        borderRadius: '5px',  
         maxWidth: '100px'
       }
     }
@@ -66,21 +68,23 @@ class BeltResourcePanel extends React.Component {
   render() {
     let resource = this.state.resource
 
-      return(
-          <div style={this.getResourceNameStyle()}>
-            
-            <div className="Belt-Resource-Cell-Icon-Container">
+    return(
+        <div style={this.getResourceNameStyle()}>
+          
+          <div className="Belt-Resource-Cell-Icon-Container">
+            <Tooltip tooltipType="belt-resource-icon" resource={resource}>
               <img className="Belt-Resource-Cell-Icon-Img" src={icondemir} alt="icon-demir"/>
-            </div> 
-            <div style={{display: 'table-cell'}}>
-              <div className="Belt-Resource-Cell-Value" style={{'color': resource.currentValue >= (resource.maxValue * 90 /100 ) ? 'darkorange' : 'black'}}>{roundNumber(resource.currentValue,2)}</div>
-              <div className="Belt-Resource-Cell-MaxValue">/{roundNumber(resource.maxValue)}</div> 
-              <div className="Belt-Resource-Cell-IncRatio">{roundNumber(resource.incRatio * constants.OPT_GAMESPEED,2)}/<span className="Resource-Span-Sec">sec</span></div>
-            </div>
-            
-          </div>           
-      )
-    }
+            </Tooltip>
+          </div> 
+          <div style={{display: 'table-cell'}}>
+            <div className="Belt-Resource-Cell-Value" style={{'color': resource.currentValue >= (resource.maxValue * 90 /100 ) ? 'darkorange' : 'black'}}>{roundNumber(resource.currentValue,2)}</div>
+            <div className="Belt-Resource-Cell-MaxValue">/{roundNumber(resource.maxValue)}</div> 
+            <div className="Belt-Resource-Cell-IncRatio">{roundNumber(resource.incRatio * constants.OPT_GAMESPEED,2)}/<span className="Resource-Span-Sec">sec</span></div>
+          </div>
+          
+        </div>           
+    )
+  }
 }
 
 export default BeltResourcePanel;

@@ -224,17 +224,32 @@ body {
   padding: 10px;
 }
 
+.Middle-Panel-Room-Panel {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.Middle-Panel-RoomObj-Container {
+  width: 250;
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+}
+
 .Middle-Panel-Room-Slot {
   text-align: center;
   width: 80px;
   color: black;
+  border: 1px solid black;
   background-color: lightgray;
-  border-radius: 10px;
+  border-radius: 5px;
   padding-top: 3px;
   padding-bottom: 3px;
   padding-right: 5px;
-  padding-right: 5px;
+  padding-left: 5px;
   font-size: 13px;
+  margin-left: 10px;
 }
 
 .Middle-Panel-Room-Slot-Label {
@@ -245,13 +260,36 @@ body {
   font-size: 18px;
 }
 
+.RoomObject-Btn {
+  background-color: #fff;
+  cursor: pointer;
+  border: 1px solid grey;
+  color: grey;
+  padding: 10px;
+  padding-right: 0;
+  padding-left: 0;
+  width: 250px;
+  max-width: 250px;
+  border-radius: 3px;
+  font: 90% "Century Gothic", Futura, sans-serif;
+  text-align: center;
+  display: table-cell;
+  -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+}
+
+.RoomObject-Btn-Label {
+  display: inline-block;
+}
+
 /* MIDDLE PANEL BAG RESOURCE */
 
 .Middle-Panel-Bag-Resources {
-  border: 1px solid black;
   border-top: none;
   height: fit-content;
-  border-radius: 5px;
+  margin-top: 5px;
 }
 
 .Belt-Resource-Cell-Name {

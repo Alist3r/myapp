@@ -1,7 +1,7 @@
 import React from 'react'
-import ResourcePanel from './ResourcesPanel.js'
-import ActivityPanel from './ActivityPanel.js'
-import RoomObject from './RoomObject.js'
+import ResourceTab from './ResourceTab.js'
+import ActivityTab from './ActivityTab.js'
+import RoomTab from './RoomTab.js'
 import TopBar from './TopBar.js'
 import BeltResourcePanel from './BeltResourcePanel.js'
 
@@ -21,7 +21,7 @@ class Game extends React.Component {
             gameResources: resourcesList.slice(),
             gameActivities: activityList.slice(),
             gameRoomObjects: roomObjectsList.slice(),
-            activeTab: constants.TAB_002,
+            activeTab: constants.TAB_001,
             roomSlot: 3
         }
         
@@ -43,45 +43,6 @@ class Game extends React.Component {
     componentWillUnmount() {
         clearInterval(this.timerID);
     }  
-
-    unlockActivity(activity) {
-        let unlocked = activity.unlocked
-
-        if(unlocked === false) {
-            let unlockCondition = activity.unlockedFrom.slice()
-            let unlockable = true
-            let resourcesList = this.state.gameResources.slice()
-            let activityList = this.state.gameActivities.slice()
-
-            for (let i=0; i < unlockCondition.length; i++) {
-
-                //UNLOCK BY RESOURCES VALUES
-                if(unlockable && unlockCondition[i].resource != null) {
-                    let index = resourcesList.findIndex(x => x.name === unlockCondition[i].resource) 
-                    if (resourcesList[index].currentValue >= unlockCondition[i].neededValue)
-                        unlockable = true
-                    else {
-                        unlockable = false
-                    }   
-                }
-
-                //UNLOCK BY ACTIVITY STAGE
-                if(unlockable && unlockCondition[i].activity != null) {
-                    let index = activityList.findIndex(x => x.name === unlockCondition[i].activity)
-                    if (activityList[index].stage >= unlockCondition[i].neededStage)
-                        unlockable = true
-                    else
-                        unlockable = false
-                }
-               
-            }
-
-            if(unlockable) {
-                activity.unlocked = true
-            }
-        }
-        return activity.unlocked
-    }
 
     unlockResource(resource) {
         if(resource.unlocked === false && resource.currentValue > 0)
@@ -105,13 +66,17 @@ class Game extends React.Component {
         return(
             
             <div className="Game-Main-Container">
+
+                {/** TOP BAR */}
                 <TopBar gameState={this.state}/>
+
+                {/** LEFT PANEL */}
                 <div className="Left-Panel">
-                    {gameResources.map(resource => (                                     
-                         <div style={{'visibility': resource.type !== constants.RES_TYPE_002.name ? 'visible' : 'hidden'}}>{this.unlockResource(resource) && (<ResourcePanel  resource={resource} />)}</div>                                     
-                    ))}
+                    {/** ACTIVITIY PANEL */}
+                    <ResourceTab resources={gameResources}/>
                 </div>
 
+                {/** MILLE PANEL */}
                 <div className="Middle-Panel">
                     {/** TABS SELECTOR */}
                     <div className="Middle-Panel-Tabs-Container">
@@ -122,30 +87,11 @@ class Game extends React.Component {
                     
                     <div className="Middle-Panel-Game-View">
                         {/** ACTIVITY PANEL */}
-                        <div className="Middle-Panel-Activity-Tab" style={{'display': this.state.activeTab === constants.TAB_001 ? 'block' : 'none'}}>
-                            {gameActivities.map(activity => (                  
-                                this.unlockActivity(activity) && (
-                                    <div className="Middle-Panel-Activity-Container" > 
-                                        <ActivityPanel activity={activity} resources ={gameResources} />
-                                    </div>
-                                )             
-                            ))}     
-                        </div>  
+                        <ActivityTab activities={gameActivities} resources={gameResources} activeTab={this.state.activeTab} />
 
                         {/** YOUR ROOM PANEL */}
-                        <div className="Middle-Panel-Room-Tab" style={{'display': this.state.activeTab === constants.TAB_002 ? 'block' : 'none'}}>
-                            <div className="Middle-Panel-Room-Slot">
-                                <div className="Middle-Panel-Room-Slot-Label">Room Slot</div>
-                                <div className="Middle-Panel-Room-Slot-Value">{this.state.roomSlot}</div>
-                            </div>
-                            <div>
-                                {gameRoomObjects.map(roomObject => (
-                                    <div className="Middle-Panel-RoomObj-Container">
-                                        <RoomObject roomObject={roomObject} resources = {gameResources} />
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                        <RoomTab roomObjects={gameRoomObjects} resources={gameResources} activeTab={this.state.activeTab} roomSlot={this.state.roomSlot}/>
+                        
                     </div>  
 
                     {/** BELT RESOURCE PANEL */}

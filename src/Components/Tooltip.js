@@ -26,19 +26,28 @@ const Tooltip = (props) => {
     return classColor
   }
 
-  var activity = props.activity
-  var resources = props.resourcesList.slice()
+  var activity 
+  if(props.activity != null) activity = props.activity 
+
+  var resources
+  if(props.resourcesList != null) resources = props.resourcesList.slice()
+
+  var resource
+  if(props.resource != null) resource = props.resource
+
+  var tooltipType = props.tooltipType
 
   return (
     <div
       className="Tooltip-Wrapper"
+
       // When to show the tooltip
       onMouseEnter={showTip}
       onMouseLeave={hideTip}
     >
-      {/* Wrapping */}
       {props.children}
-      {active && (
+      {/** ACTIVITY TOOLTIP */}
+      {active && tooltipType === "activity" && (
         <div className={`Tooltip-Tip ${props.direction || "top"}`}>
           <div>
             <div className="Tooltip-Description">{activity.description}</div>
@@ -86,6 +95,13 @@ const Tooltip = (props) => {
             ))}         
           </div>
         </div>
+      )}
+
+      {/** BELT RESOURCE TOOLTIP */}
+      {active && tooltipType === "belt-resource-icon" && (
+        <div style={{textAlign: 'center'}} className={`Tooltip-Tip ${props.direction || "top"}`}>
+            {resource.name}
+        </div>  
       )}
     </div>
   );
