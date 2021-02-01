@@ -3,7 +3,7 @@ import RoomObject from './RoomObject.js'
 
 import * as constants from '../Utilities/StringsConst.js'
 
-class RoomTab extends React.Component {
+class RoomObjectTab extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -20,6 +20,16 @@ class RoomTab extends React.Component {
         })
     }
 
+    isUnlocked(roomObj) {
+        let unlocked = roomObj.unlocked
+
+        if (unlocked === false) {
+            /** TO DO */
+        }
+
+        return unlocked
+    }
+
     render() {
         let roomObjects = this.state.roomObjects.slice()
         let resources = this.state.resources.slice()
@@ -32,9 +42,11 @@ class RoomTab extends React.Component {
                 </div>
                 <div className="Middle-Panel-Room-Panel">
                     {roomObjects.map(roomObject => (
-                        <div className="Middle-Panel-RoomObj-Container">
-                            <RoomObject roomObject={roomObject} resources={resources} />
-                        </div>
+                        this.isUnlocked(roomObject) && (
+                            <div className="Middle-Panel-RoomObj-Container">
+                                <RoomObject roomObject={roomObject} resources={resources} />
+                            </div>
+                        )
                     ))}
                 </div>
             </div>
@@ -42,4 +54,4 @@ class RoomTab extends React.Component {
     }
 }
 
-export default RoomTab;
+export default RoomObjectTab;

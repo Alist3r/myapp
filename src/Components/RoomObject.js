@@ -11,19 +11,28 @@ class RoomObject extends React.Component {
   }
 
   buyObject() {
+    
+  }
 
+  getRoomObjectStyle(roomObj) {
+    let className = "RoomObject-Btn"
+    if(roomObj.isActive) 
+      className = "RoomObject-Btn Active"
+
+    return className
   }
 
   render() {
     let roomObject = this.state.roomObject
 
     return(
-      <div className="RoomObject-Btn">
+      <div className={this.getRoomObjectStyle(roomObject)}>
         <span className="RoomObject-Btn-Label">
           {roomObject.name} {roomObject.stage != null && roomObject.isBought && (<span>[{roomObject.stage}]</span>)}
         </span>
 
         {roomObject.isBought === false && (<button onClick={(e) => {e.stopPropagation(); this.buyObject()}} className="RoomObject-Btn-Sell">Buy</button>)}
+        {roomObject.isActive === false && roomObject.isBought === true && (<button onClick={(e) => {e.stopPropagation(); this.activateObject()}} className="RoomObject-Btn-Sell">Use</button>)}
 
       </div>
     )

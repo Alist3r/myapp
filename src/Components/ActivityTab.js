@@ -1,5 +1,5 @@
 import React from 'react'
-import ActivityPanel from './ActivityPanel.js'
+import Activity from './Activity.js'
 
 import * as constants from '../Utilities/StringsConst.js'
 
@@ -67,7 +67,7 @@ class ActivityTab extends React.Component {
                 {activities.map(activity => (                  
                     this.unlockActivity(activity) && (
                         <div className="Middle-Panel-Activity-Container" > 
-                            <ActivityPanel activity={activity} resources ={resources} />
+                            <Activity activity={activity} resources ={resources} />
                         </div>
                     )             
                 ))}     

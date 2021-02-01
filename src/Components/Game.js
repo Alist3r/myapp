@@ -1,7 +1,7 @@
 import React from 'react'
 import ResourceTab from './ResourceTab.js'
 import ActivityTab from './ActivityTab.js'
-import RoomTab from './RoomTab.js'
+import RoomObjectTab from './RoomObjectTab.js'
 import TopBar from './TopBar.js'
 import BeltResourcePanel from './BeltResourcePanel.js'
 
@@ -24,7 +24,7 @@ class Game extends React.Component {
             activeTab: constants.TAB_001,
             roomSlot: 3
         }
-        
+
         //If a storage exist, the load the datas
         this.state = utility.loadState(this.state);   
     }
@@ -90,7 +90,7 @@ class Game extends React.Component {
                         <ActivityTab activities={gameActivities} resources={gameResources} activeTab={this.state.activeTab} />
 
                         {/** YOUR ROOM PANEL */}
-                        <RoomTab roomObjects={gameRoomObjects} resources={gameResources} activeTab={this.state.activeTab} roomSlot={this.state.roomSlot}/>
+                        <RoomObjectTab roomObjects={gameRoomObjects} resources={gameResources} activeTab={this.state.activeTab} roomSlot={this.state.roomSlot}/>
                         
                     </div>  
 

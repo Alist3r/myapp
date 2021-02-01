@@ -253,6 +253,7 @@ body {
 }
 
 .RoomObject-Btn {
+  box-sizing: border-box;
   background-color: #fff;
   cursor: pointer;
   border: 1px solid grey;
@@ -270,6 +271,11 @@ body {
   -moz-user-select: none;    
   -ms-user-select: none;      
   user-select: none;
+}
+
+.RoomObject-Btn.Active {
+  box-sizing: border-box;
+  border-left: 8px solid green;
 }
 
 .RoomObject-Btn-Label {

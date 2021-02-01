@@ -1,7 +1,7 @@
 import React from 'react'
-import Tooltip from '../Components/Tooltip.js'
+import Tooltip from './Tooltip.js'
 
-class ActivityPanel extends React.Component {
+class Activity extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -247,5 +247,5 @@ class ActivityPanel extends React.Component {
     }
 }
 
-export default ActivityPanel;
+export default Activity;
 

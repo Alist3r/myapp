@@ -2,7 +2,7 @@ import React from 'react'
 import {roundNumber} from '../Utilities/UtilityFunctions.js'
 import * as constants from '../Utilities/StringsConst.js'
 
-class ResourcePanel extends React.Component {
+class Resource extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -61,5 +61,5 @@ class ResourcePanel extends React.Component {
     }
 }
 
-export default ResourcePanel;
+export default Resource;
 

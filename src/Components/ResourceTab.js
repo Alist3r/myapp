@@ -1,5 +1,5 @@
 import React from 'react'
-import ResourcePanel from './ResourcesPanel.js'
+import Resource from './Resource.js'
 
 import * as constants from '../Utilities/StringsConst.js'
 
@@ -25,7 +25,7 @@ class ResourceTab extends React.Component {
             <div>
                 {resources.map(resource => (                                     
                     <div style={{'visibility': resource.type !== constants.RES_TYPE_002.name ? 'visible' : 'hidden'}}>
-                        {this.unlockResource(resource) && (<ResourcePanel  resource={resource} />)}
+                        {this.unlockResource(resource) && (<Resource  resource={resource} />)}
                     </div>                                     
                 ))}
            </div>
