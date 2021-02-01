@@ -91,6 +91,8 @@ class Activity extends React.Component {
             resourcesList[index].incRatio += ((resourcesList[index].incRatio * effect.percRatio) / 100)
           if (effect.maxValue != null)
             resourcesList[index].maxValue += effect.maxValue
+          if (effect.percMaxValue != null)
+            resourcesList[index].maxValue += ((effect.maxValue * effect.percMaxValue) / 100)
           if (effect.clickRatio != null) 
             resourcesList[index].currentValue += effect.clickRatio  
           if(resourcesList[index].unlocked === false)
@@ -128,18 +130,18 @@ class Activity extends React.Component {
       })
 
       
-      effects.forEach(effect => {
-        let index = resources.findIndex(x => x.name === effect.resource)
-        if(resources[index].incRatio > 0) {
-          if (effect.perSecRatio != null)
-            resources[index].incRatio -= effect.perSecRatio
-          if (effect.percRatio != null)
-            resources[index].incRatio -= ((resources[index].incRatio * effect.percRatio) / 100)
-          if (effect.maxValue != null)
-            resources[index].maxValue -= effect.maxValue
-          if (effect.clickRatio != null) 
-            resources[index].currentValue -= effect.clickRatio 
-        }
+      effects.forEach(effect => {          
+        let index = resources.findIndex(x => x.name === effect.resource)                     
+        if (effect.perSecRatio != null)
+          resources[index].incRatio -= effect.perSecRatio
+        if (effect.percRatio != null)
+          resources[index].incRatio = (resources[index].incRatio * 100) / (effect.percRatio + 100)
+        if (effect.maxValue != null)
+          resources[index].maxValue -= effect.maxValue
+        if (effect.percMaxValue != null)
+          resources[index].maxValue = (resources[index].maxValue * 100) / (effect.percMaxValue + 100) 
+        if (effect.clickRatio != null) 
+          resources[index].currentValue -= effect.clickRatio  
       })
 
 

@@ -10,15 +10,17 @@ class RoomObjectTab extends React.Component {
             roomObjects: props.roomObjects,
             resources: props.resources,
             activeTab: props.activeTab,
-            roomSlot: props.roomSlot
+            roomSlotUsed: props.roomSlotUsed,
+            roomSlotMax: props.roomSlotMax
         }
     }
 
-    componentWillReceiveProps({activeTab}) {
+    componentWillReceiveProps({activeTab, roomSlotUsed}) {
         this.setState({
-            activeTab: activeTab
+            activeTab: activeTab,
+            roomSlotUsed: roomSlotUsed
         })
-    }
+    } 
 
     isUnlocked(roomObj) {
         let unlocked = roomObj.unlocked
@@ -36,15 +38,14 @@ class RoomObjectTab extends React.Component {
 
         return (
             <div className="Middle-Panel-Room-Tab" style={{'display': this.state.activeTab === constants.TAB_002 ? 'block' : 'none'}}>
-                <div className="Middle-Panel-Room-Slot">
-                    <div className="Middle-Panel-Room-Slot-Label">Room Slot</div>
-                    <div className="Middle-Panel-Room-Slot-Value">{this.state.roomSlot}</div>
-                </div>
+                <div className="Middle-Panel-Room-Slot-Label">Room Slot</div>
+                <div className="Middle-Panel-Room-Slot-Value">{this.state.roomSlotUsed}/{this.state.roomSlotMax}</div>
+
                 <div className="Middle-Panel-Room-Panel">
                     {roomObjects.map(roomObject => (
                         this.isUnlocked(roomObject) && (
                             <div className="Middle-Panel-RoomObj-Container">
-                                <RoomObject roomObject={roomObject} resources={resources} />
+                                <RoomObject changeRoomSlotUsed={this.props.changeRoomSlotUsed} roomObject={roomObject} resources={resources} roomSlotUsed={this.state.roomSlotUsed} roomSlotMax={this.state.roomSlotMax}/>
                             </div>
                         )
                     ))}

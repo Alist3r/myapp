@@ -24,14 +24,33 @@ const roomObjectsList = [
         description: resNames.OBJ_001.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_005.name, cost: 40, upgradeCostRatio: 0.5},
+            { resource: resNames.RES_005.name, cost: 40, upgradeCostRatio: 1.5},
         ],
         effect: [
-            { resource: resNames.RES_001.name, percRatio: 3},
+            { resource: resNames.RES_001.name, percRatio: 10},
+            { resource: resNames.RES_001.name, percMaxValue: 20}
         ],
         isBought: false,
         isActive: false,
         requiredSlot: 1,
+        unlocked: true,
+        unlockedFrom: null
+    },
+    {
+        name: resNames.OBJ_002.name,
+        description: resNames.OBJ_002.description,
+        stage: 0,
+        upgradeCost: [
+            { resource: resNames.RES_005.name, cost: 55, upgradeCostRatio: 1.6},
+            { resource: resNames.RES_003.name, cost: 200, upgradeCostRatio: 1.3}
+        ],
+        effect: [
+            { resource: resNames.RES_003.name, percRatio: 10},
+            { resource: resNames.RES_003.name, percMaxValue: 15}
+        ],
+        isBought: false,
+        isActive: false,
+        requiredSlot: 3,
         unlocked: true,
         unlockedFrom: null
     }

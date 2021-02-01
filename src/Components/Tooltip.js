@@ -86,8 +86,9 @@ const Tooltip = (props) => {
 
               <span className="Tooltip-EffectRow">             
                   {effect.perSecRatio && (<span>{effect.resource}: {effect.perSecRatio}/<span className="Tooltip-Sec">sec</span></span>)}  
-                  {effect.percRatio && (<span>{effect.resource}: {effect.percRatio}%</span>)}
-                  {effect.maxValue && (<span>Max {effect.resource}: +{effect.maxValue} </span>)}     
+                  {effect.percRatio && (<span>{effect.resource}: {effect.percRatio}% /<span className="Tooltip-Sec">sec</span></span>)}
+                  {effect.maxValue && (<span>Max {effect.resource}: +{effect.maxValue} </span>)} 
+                  {effect.percMaxValue && (<span>Max {effect.resource}: +{effect.percMaxValue}% </span>)}     
                   {effect.clickRatio && (<span>{effect.resource}: +{effect.clickRatio} </span>)}           
                 <br></br>
               </span>

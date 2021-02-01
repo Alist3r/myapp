@@ -20,7 +20,7 @@ class TopBar extends React.Component {
     if(updateState.gameTime % 5 === 0) {
         utility.saveState(this.state.gameState)
     }
-}
+  }
 
   componentDidMount() {
       this.timerID = setInterval(
@@ -32,6 +32,12 @@ class TopBar extends React.Component {
   componentWillUnmount() {
       clearInterval(this.timerID);
   }  
+
+  componentWillReceiveProps({gameState}) {
+    this.setState({
+        gameState: gameState
+    })
+} 
 
   timeCounterConverter(number){
     let timeStamp = number

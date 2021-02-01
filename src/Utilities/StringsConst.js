@@ -1,5 +1,5 @@
 
-export const OPT_GAMESPEED = 1
+export const OPT_GAMESPEED = 20
 
 //001 Athleticism
 //002 Psiche
@@ -73,14 +73,16 @@ export const ACT_008 = {
 
 //ROOMOBJECT
 //001 Treadmill
-
+//002 Library
 export const OBJ_001 = {
     name: "Treadmill",
     description: "Buying a new Treadmill. Now you can make excercise in your home",
 }
 
-export const TAL_GOALF = "Goals Focus"
-export const TAL_OPTT  = "Optimized Time"
+export const OBJ_002 = {
+    name: "Library",
+    description: "Buying and assemble an entire new Library",
+}
 
 //TABS
 

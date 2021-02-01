@@ -58,7 +58,7 @@ class TabSelector extends React.Component {
       <span>
         {this.isUnlocked() && (<span>
           <span className="Middle-Panel-Tab-Name" 
-                style={{'text-decoration': this.props.isActive ? 'underline' : 'none'}} 
+                style={{'font-weight': this.props.isActive ? 'bold' : 'normal'}} 
                 onClick={() => this.props.updateActiveTab(tab.name)}
           >
                   {tab.name}
