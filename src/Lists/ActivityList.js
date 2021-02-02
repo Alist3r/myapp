@@ -1,4 +1,4 @@
-import * as resNames from './StringsConst.js';
+import * as resNames from '../Utilities/StringsConst.js'
 
 //RESOURCERS
 //001 Athleticism

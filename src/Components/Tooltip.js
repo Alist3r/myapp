@@ -52,9 +52,11 @@ const Tooltip = (props) => {
           <div>
             <div className="Tooltip-Description">{activity.description}</div>
 
-            {/*--------- UPGRADE COSTS ---------*/}
+            
             <div className="Tooltip-Title">Costs</div>
             <div className="Tooltip-Divider"></div>
+
+            {/*--------- UPGRADE COSTS ---------*/}
             {activity.upgradeCost && (activity.upgradeCost.map(upgradeCost => (             
               <span className="Tooltip-EffectRow">
                 {upgradeCost.resource}: {resources.map(resource => (
@@ -101,6 +103,7 @@ const Tooltip = (props) => {
               </span>
 
             ))}  
+
             {activity.effectActivity != null && (
                 <span>
                   {activity.effectActivity.map(effect => (

@@ -20,7 +20,6 @@
   padding: 10px;
   color: var(--tooltip-text-color);
   background: var(--tooltip-background-color);
-  font: 13px "Century Gothic", Futura, sans-serif;
   z-index: 100;
   border: 1px solid black;
   text-align: left;

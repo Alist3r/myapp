@@ -5,10 +5,11 @@ import RoomObjectTab from './RoomObjectTab.js'
 import TopBar from './TopBar.js'
 import BeltResourcePanel from './BeltResourcePanel.js'
 
-import resourcesList from '../Utilities/ResourcesList.js'
-import activityList from '../Utilities/ActivityList.js'
-import roomObjectsList from '../Utilities/RoomObjectsList.js'
-import tabList from '../Utilities/TabList.js'
+import resourcesList from '../Lists/ResourcesList.js'
+import activityList from '../Lists/ActivityList.js'
+import roomObjectsList from '../Lists/RoomObjectsList.js'
+import globalEffectsList from '../Lists/GlobalEffectsList.js'
+import tabList from '../Lists/TabList.js'
 import * as utility from '../Utilities/UtilityFunctions.js'
 import * as constants from '../Utilities/StringsConst.js'
 import TabSelector from './TabSelector.js'
@@ -16,23 +17,43 @@ import TabSelector from './TabSelector.js'
 class Game extends React.Component {
     constructor(props) {
         super(props)
+
+        
+
         this.state = {
             gameTime: 0,
             gameResources: resourcesList.slice(),
             gameActivities: activityList.slice(),
             gameRoomObjects: roomObjectsList.slice(),
+            gameGlobalEffects: globalEffectsList.slice(),
             activeTab: constants.TAB_001,
             roomSlotMax: 3,
-            roomSlotUsed: 0
-        }
-
-        //If a storage exist, the load the datas
+            roomSlotUsed: 0,
+        
+        }     
+        
+        //If a storage exist, then load the datas
         this.state = utility.loadState(this.state);   
     }
 
+    updateResources = () => {
+
+        let globalEffects = this.state.gameGlobalEffects.slice()
+        let resources = this.state.gameResources.slice()
+    
+           resources.forEach(resource => {
+               let effectsIndex = globalEffects.findIndex(x => x.name === resource.name)
+               let effectsFromActivity = globalEffects[effectsIndex].activity
+    
+               resource.incRatio += effectsFromActivity.valueFlat
+
+               if(resource.unlocked === false &&resource.currentValue > 0)
+                resource.unlocked = true   
+           });
+      }
+
     tick() {
        this.setState({})
-
     }
 
     componentDidMount() {
@@ -70,6 +91,7 @@ class Game extends React.Component {
         let gameResources = this.state.gameResources.slice()
         let gameActivities = this.state.gameActivities.slice()
         let gameRoomObjects = this.state.gameRoomObjects.slice()
+        let gameGlobalEffects = this.state.gameGlobalEffects.slice()
  
         return(
             
@@ -94,10 +116,10 @@ class Game extends React.Component {
                     </div>
                     
                     <div className="Middle-Panel-Game-View">
-                        {/** ACTIVITY PANEL */}
-                        <ActivityTab activities={gameActivities} resources={gameResources} activeTab={this.state.activeTab} />
+                        {/** ACTIVITY TAB */}
+                        <ActivityTab updateResources={this.updateResources} activities={gameActivities} resources={gameResources} globalEffects={gameGlobalEffects} activeTab={this.state.activeTab} />
 
-                        {/** YOUR ROOM PANEL */}
+                        {/** YOUR ROOM TAB */}
                         <RoomObjectTab changeRoomSlotUsed={this.changeRoomSlotUsed} roomObjects={gameRoomObjects} resources={gameResources} activities={gameActivities} activeTab={this.state.activeTab} roomSlotUsed={this.state.roomSlotUsed} roomSlotMax={this.state.roomSlotMax}/>
                         
                     </div>  

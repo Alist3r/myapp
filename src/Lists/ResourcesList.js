@@ -1,4 +1,4 @@
-import * as resNames from './StringsConst.js';
+import * as resNames from '../Utilities/StringsConst.js';
 
 //001 Athleticism
 //002 Psiche
@@ -9,7 +9,7 @@ import * as resNames from './StringsConst.js';
 const resourcesList = [
     {   //ATHLETICISM
         name: resNames.RES_001.name, 
-        currentValue: 0, 
+        currentValue: 300, 
         maxValue: 2000, 
         incRatio: 0, 
         unlocked: true,
@@ -41,7 +41,7 @@ const resourcesList = [
     },
     {   //DEMIR
         name: resNames.RES_005.name, 
-        currentValue: 500, 
+        currentValue: 0, 
         maxValue: 500, 
         incRatio: 0, 
         unlocked: false,

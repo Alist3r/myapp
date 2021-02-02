@@ -1,6 +1,7 @@
 import React from 'react'
 import Activity from './Activity.js'
 
+import {checkUnlockCondition} from '../Utilities/UtilityFunctions.js'
 import * as constants from '../Utilities/StringsConst.js'
 
 class ActivityTab extends React.Component {
@@ -9,41 +10,19 @@ class ActivityTab extends React.Component {
         this.state = {
             activities: props.activities,
             resources: props.resources,
+            globalEffects: props.globalEffects,
             activeTab: props.activeTab
         }
     }
 
-    unlockActivity(activity) {
-        let unlocked = activity.unlocked
+    isUnlocked(activity) {
 
-        if(unlocked === false) {
+        if(activity.unlocked === false) {
             let unlockCondition = activity.unlockedFrom.slice()
-            let unlockable = true
             let resourcesList = this.state.resources.slice()
             let activityList = this.state.activities.slice()
 
-            for (let i=0; i < unlockCondition.length; i++) {
-
-                //UNLOCK BY RESOURCES VALUES
-                if(unlockable && unlockCondition[i].resource != null) {
-                    let index = resourcesList.findIndex(x => x.name === unlockCondition[i].resource) 
-                    if (resourcesList[index].currentValue >= unlockCondition[i].neededValue)
-                        unlockable = true
-                    else {
-                        unlockable = false
-                    }   
-                }
-
-                //UNLOCK BY ACTIVITY STAGE
-                if(unlockable && unlockCondition[i].activity != null) {
-                    let index = activityList.findIndex(x => x.name === unlockCondition[i].activity)
-                    if (activityList[index].stage >= unlockCondition[i].neededStage)
-                        unlockable = true
-                    else
-                        unlockable = false
-                }
-               
-            }
+            let unlockable = checkUnlockCondition(resourcesList, activityList, unlockCondition)
 
             if(unlockable) {
                 activity.unlocked = true
@@ -61,13 +40,14 @@ class ActivityTab extends React.Component {
     render() {
         let activities = this.state.activities.slice()
         let resources = this.state.resources.slice()
+        let globalEffects = this.state.globalEffects.slice()
 
         return (
             <div className="Middle-Panel-Activity-Tab" style={{'display': this.state.activeTab === constants.TAB_001 ? 'block' : 'none'}}>
                 {activities.map(activity => (                  
-                    this.unlockActivity(activity) && (
+                    this.isUnlocked(activity) && (
                         <div className="Middle-Panel-Activity-Container" > 
-                            <Activity activity={activity} resources ={resources} />
+                            <Activity updateResources={this.props.updateResources} activity={activity} resources={resources} globalEffects={globalEffects} />
                         </div>
                     )             
                 ))}     

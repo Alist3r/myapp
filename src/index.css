@@ -1,5 +1,5 @@
 body {
-  font: 14px "Century Gothic", Futura, sans-serif;
+  font: 14px "Arial";
   color: black;
   width: 100%;
   margin: 0px;
@@ -44,14 +44,13 @@ body {
   display: table-cell;
   padding: 1px;
   padding-left: 3px;
-  font-size: 12px;
 }
 
 .Resource-Cell-Value {
-  width: 50px;
-  max-width: 50px;
+  width: 55px;
+  max-width: 55px;
   display: table-cell;
-  font-size: 90%;
+ 
 }
 
 .Resource-Cell-MaxValue {
@@ -72,9 +71,9 @@ body {
 /* MIDDLE PANEL */
 
 .Middle-Panel {
-  min-width: 500px;
-  max-width: 600px;
-  width: 600px;
+  min-width: 600px;
+  max-width: 650px;
+  width: 630px;
   display: inline-block;
   padding-top: 5px;
   vertical-align: top;
@@ -94,7 +93,7 @@ body {
 .Middle-Panel-Tab-Name {
   margin: 3px;
   margin-bottom: 7px;
-  font-size: 12px;
+  font-size: 13px;
   cursor: pointer;
   -webkit-user-select: none;  
   -moz-user-select: none;    
@@ -134,7 +133,6 @@ body {
   width: 250px;
   max-width: 250px;
   border-radius: 3px;
-  font: 90% "Century Gothic", Futura, sans-serif;
   text-align: center;
   display: table-cell;
   -webkit-user-select: none;  
@@ -263,7 +261,6 @@ body {
   width: 250px;
   max-width: 250px;
   border-radius: 3px;
-  font: 90% "Century Gothic", Futura, sans-serif;
   text-align: center;
   display: table-cell;
   -webkit-user-select: none;  

@@ -1,4 +1,5 @@
 import React from 'react'
+import {checkUnlockCondition} from '../Utilities/UtilityFunctions.js'
 
 class TabSelector extends React.Component {
   constructor(props) {
@@ -18,30 +19,8 @@ class TabSelector extends React.Component {
     
     if(tab.unlocked === false) {
       let unlockCondition = tab.unlockedFrom.slice()
-      let unlockable = true
 
-      for (let i=0; i < unlockCondition.length; i++) {
-
-          //UNLOCK BY RESOURCES VALUES
-          if(unlockable && unlockCondition[i].resource != null) {
-              let index = resources.findIndex(x => x.name === unlockCondition[i].resource) 
-              if (resources[index].currentValue >= unlockCondition[i].neededValue)
-                  unlockable = true
-              else {
-                  unlockable = false
-              }   
-          }
-
-          //UNLOCK BY ACTIVITY STAGE
-          if(unlockable && unlockCondition[i].activity != null) {
-              let index = activities.findIndex(x => x.name === unlockCondition[i].activity)
-              if (activities[index].stage >= unlockCondition[i].neededStage)
-                  unlockable = true
-              else
-                  unlockable = false
-          }
-          
-      }
+      let unlockable = checkUnlockCondition(resources, activities, unlockCondition)
 
       if(unlockable) {
         tab.unlocked = true

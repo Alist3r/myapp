@@ -5,6 +5,7 @@ export function saveState(state) {
     localStorage.setItem("gameResources", JSON.stringify(state.gameResources));
     localStorage.setItem("gameActivities", JSON.stringify(state.gameActivities));
     localStorage.setItem("gameRoomObjects", JSON.stringify(state.gameRoomObjects));
+    localStorage.setItem("gameGlobalEffects", JSON.stringify(state.gameGlobalEffects));
     localStorage.setItem("activeTab", state.activeTab);
     localStorage.setItem("roomSlotMax", JSON.stringify(state.roomSlotMax));
     localStorage.setItem("roomSlotUsed", JSON.stringify(state.roomSlotUsed));
@@ -16,6 +17,7 @@ export function loadState(state) {
     let gameResources
     let gameActivities
     let gameRoomObjects
+    let gameGlobalEffects
     let activeTab
     let roomSlotMax
     let roomSlotUsed
@@ -48,6 +50,13 @@ export function loadState(state) {
         gameRoomObjects = state.gameRoomObjects
     }
 
+    if(JSON.parse(localStorage.getItem("gameGlobalEffects"))) {
+        gameGlobalEffects = JSON.parse(localStorage.getItem("gameGlobalEffects"))
+    }
+    else {
+        gameGlobalEffects = state.gameGlobalEffects
+    }
+
     if(localStorage.getItem('activeTab')) {
         activeTab = localStorage.getItem('activeTab')
     }
@@ -76,6 +85,7 @@ export function loadState(state) {
         gameResources,
         gameActivities,
         gameRoomObjects,
+        gameGlobalEffects,
         activeTab,
         roomSlotMax,
         roomSlotUsed
@@ -152,4 +162,33 @@ export function removePerc(finalValue, percent) {
     return result
 }
 
+export function checkUnlockCondition(resourcesList, activityList, unlockCondition) {
 
+    let unlockable = true
+
+    for (let i=0; i < unlockCondition.length; i++) {
+
+        //UNLOCK BY RESOURCES VALUES
+        if(unlockable && unlockCondition[i].resource != null) {
+            let index = resourcesList.findIndex(x => x.name === unlockCondition[i].resource) 
+            if (resourcesList[index].currentValue >= unlockCondition[i].neededValue)
+                unlockable = true
+            else {
+                unlockable = false
+            }   
+        }
+
+        //UNLOCK BY ACTIVITY STAGE
+        if(unlockable && unlockCondition[i].activity != null) {
+            let index = activityList.findIndex(x => x.name === unlockCondition[i].activity)
+            if (activityList[index].stage >= unlockCondition[i].neededStage)
+                unlockable = true
+            else
+                unlockable = false
+        }
+       
+    }
+
+    return unlockable
+
+}
