@@ -17,6 +17,8 @@ import * as resNames from './StringsConst.js';
 
 //ROOMOBJECTS
 //001 Treadmill
+//002 Library
+//003 Agenda
 
 const roomObjectsList = [
     {   //TREADMILL
@@ -36,7 +38,7 @@ const roomObjectsList = [
         unlocked: true,
         unlockedFrom: null
     },
-    {
+    {   //LIBRARY
         name: resNames.OBJ_002.name,
         description: resNames.OBJ_002.description,
         stage: 0,
@@ -50,7 +52,28 @@ const roomObjectsList = [
         ],
         isBought: false,
         isActive: false,
-        requiredSlot: 3,
+        requiredSlot: 1,
+        unlocked: true,
+        unlockedFrom: null
+    },
+    {   //AGENDA
+        name: resNames.OBJ_003.name,
+        description: resNames.OBJ_003.description,
+        stage: 0,
+        upgradeCost: [
+            { resource: resNames.RES_005.name, cost: 66, upgradeCostRatio: 1.3}
+        ],
+        effect: [
+            { resource: resNames.RES_004.name, percRatio: 10},
+            { resource: resNames.RES_004.name, percMaxValue: 10}
+        ],
+        effectActivity: [
+            { activity: resNames.ACT_002.name, percRatio: 8},
+            { activity: resNames.ACT_003.name, percRatio: 7}
+        ],
+        isBought: false,
+        isActive: false,
+        requiredSlot: 2,
         unlocked: true,
         unlockedFrom: null
     }

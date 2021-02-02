@@ -142,5 +142,14 @@ export function roundNumber(number, decimal) {
     return formatNumber; 
 }
 
+export function percValue(number, percent) {
+    let result = (number * percent) / 100
+    return result
+}
+
+export function removePerc(finalValue, percent) {
+    let result = (finalValue * 100) / (percent + 100)
+    return result
+}
 
 

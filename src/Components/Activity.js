@@ -43,18 +43,18 @@ class Activity extends React.Component {
       
     var upgradable = true 
     var havetoPay = false
-    var upgradeCosts = []
-    var clickCosts = []
+    var costs = []
+
 
     if(activityToDo.upgradeCost != null) {
-      upgradeCosts = activityToDo.upgradeCost.slice()
-      upgradable = this.isUpgradable(upgradeCosts, resourcesList)
+      costs = activityToDo.upgradeCost.slice()
+      upgradable = this.haveResource(costs, resourcesList)
       havetoPay = true
     }
 
     if(activityToDo.clickCost != null) {
-      clickCosts = activityToDo.clickCost.slice()
-      upgradable = this.isUpgradable(clickCosts, resourcesList)
+      costs = activityToDo.clickCost.slice()
+      upgradable = this.isUpgradable(costs, resourcesList)
       havetoPay = true
     }
 
@@ -65,20 +65,15 @@ class Activity extends React.Component {
       if(havetoPay) {
         for(let i=0; i < resourcesList.length;i++) {
 
-          if(upgradeCosts.length > 0) {
-            let index = upgradeCosts.findIndex(x => x.resource === resourcesList[i].name)  
+          if(costs.length > 0) {
+            let index = costs.findIndex(x => x.resource === resourcesList[i].name)  
             if(index !== -1) {
-              resourcesList[i].currentValue -= upgradeCosts[index].cost  
-              upgradeCosts[index].cost += ((upgradeCosts[index].upgradeCostRatio * upgradeCosts[index].cost * (activityToDo.stage+1)))
+              resourcesList[i].currentValue -= costs[index].cost  
+              if(activityToDo.upgradeCost != null)
+                costs[index].cost += ((costs[index].upgradeCostRatio * costs[index].cost * (activityToDo.stage+1)))
             } 
           }
 
-          if(clickCosts.length > 0) {
-            let index = clickCosts.findIndex(x => x.resource === resourcesList[i].name)
-            if(index !== -1) {
-              resourcesList[i].currentValue -= clickCosts[index].cost
-            }
-          }
         }
       }
       
@@ -98,8 +93,6 @@ class Activity extends React.Component {
           if(resourcesList[index].unlocked === false)
             resourcesList[index].unlocked = true   
       })
-
-      activityToDo.upgradeCost = upgradeCosts.slice()
 
       if (activityToDo.stage != null) 
         activityToDo.stage += 1

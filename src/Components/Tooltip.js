@@ -79,21 +79,39 @@ const Tooltip = (props) => {
               </span>
             ))}
 
+            {/*--------- ROOM SLOT COSTS ---------*/}
+            {activity.requiredSlot != null &&(
+              <span className="Tooltip-EffectRow">
+                Room Slot: {activity.requiredSlot}
+              </span>
+            )}
+
             {/*--------- EFFECTS ---------*/}
             <div className="Tooltip-Title">Effects</div>
             <div className="Tooltip-Divider"></div>
             {activity.effect.map(effect => (
 
               <span className="Tooltip-EffectRow">             
-                  {effect.perSecRatio && (<span>{effect.resource}: {effect.perSecRatio}/<span className="Tooltip-Sec">sec</span></span>)}  
-                  {effect.percRatio && (<span>{effect.resource}: {effect.percRatio}% /<span className="Tooltip-Sec">sec</span></span>)}
-                  {effect.maxValue && (<span>Max {effect.resource}: +{effect.maxValue} </span>)} 
-                  {effect.percMaxValue && (<span>Max {effect.resource}: +{effect.percMaxValue}% </span>)}     
-                  {effect.clickRatio && (<span>{effect.resource}: +{effect.clickRatio} </span>)}           
+                {effect.perSecRatio && (<span>{effect.resource}: {effect.perSecRatio}/<span className="Tooltip-Sec">sec</span></span>)}  
+                {effect.percRatio && (<span>{effect.resource}: {effect.percRatio}% /<span className="Tooltip-Sec">sec</span></span>)}
+                {effect.maxValue && (<span>Max {effect.resource}: +{effect.maxValue} </span>)} 
+                {effect.percMaxValue && (<span>Max {effect.resource}: +{effect.percMaxValue}% </span>)}     
+                {effect.clickRatio && (<span>{effect.resource}: +{effect.clickRatio} </span>)}           
                 <br></br>
               </span>
 
-            ))}         
+            ))}  
+            {activity.effectActivity != null && (
+                <span>
+                  {activity.effectActivity.map(effect => (
+                    <span className="Tooltip-EffectRow">
+                      {effect.percRatio && (<span>{effect.activity}: {effect.percRatio}%</span>)}
+                      <br></br>
+                    </span>
+                    
+                  ))}
+                </span>
+            )}       
           </div>
         </div>
       )}

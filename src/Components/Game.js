@@ -98,7 +98,7 @@ class Game extends React.Component {
                         <ActivityTab activities={gameActivities} resources={gameResources} activeTab={this.state.activeTab} />
 
                         {/** YOUR ROOM PANEL */}
-                        <RoomObjectTab changeRoomSlotUsed={this.changeRoomSlotUsed} roomObjects={gameRoomObjects} resources={gameResources} activeTab={this.state.activeTab} roomSlotUsed={this.state.roomSlotUsed} roomSlotMax={this.state.roomSlotMax}/>
+                        <RoomObjectTab changeRoomSlotUsed={this.changeRoomSlotUsed} roomObjects={gameRoomObjects} resources={gameResources} activities={gameActivities} activeTab={this.state.activeTab} roomSlotUsed={this.state.roomSlotUsed} roomSlotMax={this.state.roomSlotMax}/>
                         
                     </div>  
 

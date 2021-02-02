@@ -7,9 +7,73 @@ class RoomObject extends React.Component {
     this.state = {
       roomObject: props.roomObject,
       resources: props.resources,
+      activities: props.activities,
       roomSlotUsed: props.roomSlotUsed,
       roomSlotMax: props.roomSlotMax
     }
+  }
+
+  applyEffects() {
+    let roomObj = this.state.roomObject
+    
+
+    if(roomObj.effect != null) {
+      let effects = roomObj.effect.slice()
+      let resources = this.state.resources.slice()
+      effects.forEach(effect => {          
+        let index = resources.findIndex(x => x.name === effect.resource)                     
+        if (effect.perSecRatio != null)
+          resources[index].incRatio += (effect.perSecRatio * roomObj.stage)
+        if (effect.percRatio != null) {
+          for(let i=0; i<roomObj.stage; i++)
+            resources[index].incRatio += ((resources[index].incRatio * effect.percRatio) / 100)
+        }
+        if (effect.maxValue != null)
+          resources[index].maxValue += (effect.maxValue * roomObj.stage)
+        if (effect.percMaxValue != null) {
+          for(let i=0; i<roomObj.stage; i++)
+            resources[index].maxValue += ((resources[index].maxValue * effect.percMaxValue) / 100)
+          }
+        if (effect.clickRatio != null) 
+          resources[index].currentValue += (effect.clickRatio * roomObj.stage)
+        if(resources[index].unlocked === false)
+          resources[index].unlocked = true   
+      })
+    }
+
+    /*if(roomObj.effectActivity != null) {
+      let effects = roomObj.effectActivity.slice()
+      let activities = this.state.activities.slice()
+      effects.forEach(effect => {
+        let index = activities.findIndex(x => x.name === effect.activity)
+        let activityEffects = activities[index].effect.slice()
+        activityEffects.forEach(actEffect => {
+          actEffect.boost += effect.percRatio
+        })
+      })
+    }*/
+
+  }
+
+  removeEffects(resources, effects, roomObj) {
+    effects.forEach(effect => {          
+      let index = resources.findIndex(x => x.name === effect.resource)                     
+      if (effect.perSecRatio != null)
+        resources[index].incRatio -= (effect.perSecRatio * roomObj.stage)
+      if (effect.percRatio != null) {
+        for(let i=0; i<roomObj.stage; i++)
+        resources[index].incRatio = (((resources[index].incRatio * 100) / (effect.percRatio + 100)))
+      }     
+      if (effect.maxValue != null)
+        resources[index].maxValue -= (effect.maxValue * roomObj.stage)
+      if (effect.percMaxValue != null) {
+        for(let i=0; i<roomObj.stage; i++) 
+          resources[index].maxValue = (((resources[index].maxValue * 100) / (effect.percMaxValue + 100)))
+      }
+      if (effect.clickRatio != null) 
+        resources[index].currentValue -= (effect.clickRatio * roomObj.stage)
+
+    })
   }
 
   isUpgradable(costs, resources) {
@@ -53,6 +117,10 @@ class RoomObject extends React.Component {
         }
       }
 
+      if(roomObj.isActive) {
+        this.applyEffects(resources, roomObj.effect, roomObj)
+      }
+
       roomObj.upgradeCost = upgradeCosts.slice()
       roomObj.isBought = true
 
@@ -72,7 +140,6 @@ class RoomObject extends React.Component {
   objectON(roomObj) {
     let roomSlotUsed = this.state.roomSlotUsed
     let roomSlotMax = this.state.roomSlotMax
-    let effects = roomObj.effect.slice()
     let resources = this.state.resources.slice()
 
     if ((roomSlotUsed + roomObj.requiredSlot) <= roomSlotMax) {
@@ -80,21 +147,7 @@ class RoomObject extends React.Component {
       roomSlotUsed += roomObj.requiredSlot
 
       //applying effects
-      effects.forEach(effect => {          
-        let index = resources.findIndex(x => x.name === effect.resource)                     
-        if (effect.perSecRatio != null)
-          resources[index].incRatio += (effect.perSecRatio * roomObj.stage)
-        if (effect.percRatio != null)
-          resources[index].incRatio += (((resources[index].incRatio * effect.percRatio) / 100) * roomObj.stage)
-        if (effect.maxValue != null)
-          resources[index].maxValue += (effect.maxValue * roomObj.stage)
-        if (effect.percMaxValue != null)
-          resources[index].maxValue += (((resources[index].maxValue * effect.percMaxValue) / 100) * roomObj.stage)
-        if (effect.clickRatio != null) 
-          resources[index].currentValue += (effect.clickRatio * roomObj.stage)
-        if(resources[index].unlocked === false)
-          resources[index].unlocked = true   
-      })
+      this.applyEffects(resources, roomObj)
        
       this.setState({
         roomSlotUsed: roomSlotUsed,
@@ -115,20 +168,7 @@ class RoomObject extends React.Component {
       roomSlotUsed -= roomObj.requiredSlot
 
       //Remove Effect 
-      effects.forEach(effect => {          
-        let index = resources.findIndex(x => x.name === effect.resource)                     
-        if (effect.perSecRatio != null)
-          resources[index].incRatio -= (effect.perSecRatio * roomObj.stage)
-        if (effect.percRatio != null)
-          resources[index].incRatio = (((resources[index].incRatio * 100) / (effect.percRatio + 100)))
-        if (effect.maxValue != null)
-          resources[index].maxValue -= (effect.maxValue * roomObj.stage)
-        if (effect.percMaxValue != null)
-          resources[index].maxValue = (((resources[index].maxValue * 100) / (effect.percMaxValue + 100)))
-        if (effect.clickRatio != null) 
-          resources[index].currentValue -= (effect.clickRatio * roomObj.stage)
- 
-      })
+      this.removeEffects(resources, effects, roomObj)
 
       this.setState({
         roomSlotUsed: roomSlotUsed,
@@ -138,7 +178,6 @@ class RoomObject extends React.Component {
       this.props.changeRoomSlotUsed(roomSlotUsed)
     }
   }
-
 
   getRoomObjectStyle(costs, resources) {
     let roomObj = this.state.roomObject

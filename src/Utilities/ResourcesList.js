@@ -41,7 +41,7 @@ const resourcesList = [
     },
     {   //DEMIR
         name: resNames.RES_005.name, 
-        currentValue: 0, 
+        currentValue: 500, 
         maxValue: 500, 
         incRatio: 0, 
         unlocked: false,

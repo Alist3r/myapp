@@ -9,6 +9,7 @@ class RoomObjectTab extends React.Component {
         this.state = {
             roomObjects: props.roomObjects,
             resources: props.resources,
+            activities: props.activities,
             activeTab: props.activeTab,
             roomSlotUsed: props.roomSlotUsed,
             roomSlotMax: props.roomSlotMax
@@ -35,6 +36,7 @@ class RoomObjectTab extends React.Component {
     render() {
         let roomObjects = this.state.roomObjects.slice()
         let resources = this.state.resources.slice()
+        let activities = this.state.activities.slice()
 
         return (
             <div className="Middle-Panel-Room-Tab" style={{'display': this.state.activeTab === constants.TAB_002 ? 'block' : 'none'}}>
@@ -45,7 +47,7 @@ class RoomObjectTab extends React.Component {
                     {roomObjects.map(roomObject => (
                         this.isUnlocked(roomObject) && (
                             <div className="Middle-Panel-RoomObj-Container">
-                                <RoomObject changeRoomSlotUsed={this.props.changeRoomSlotUsed} roomObject={roomObject} resources={resources} roomSlotUsed={this.state.roomSlotUsed} roomSlotMax={this.state.roomSlotMax}/>
+                                <RoomObject changeRoomSlotUsed={this.props.changeRoomSlotUsed} roomObject={roomObject} resources={resources} activities={activities} roomSlotUsed={this.state.roomSlotUsed} roomSlotMax={this.state.roomSlotMax}/>
                             </div>
                         )
                     ))}

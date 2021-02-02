@@ -33,7 +33,7 @@ const activityList = [
         stage: null,
         upgradeCost: null,
         clickCost: [
-            {resource: resNames.RES_001.name, cost: 100}
+            { resource: resNames.RES_001.name, cost: 100}
         ],
         effect: [
             { resource: resNames.RES_002.name, clickRatio: 1}
@@ -137,9 +137,9 @@ const activityList = [
             { resource: resNames.RES_005.name, cost: 25, upgradeCostRatio: 0.03}
         ],
         effect: [
-            { resource: resNames.RES_001.name, maxValue: 800 },
-            { resource: resNames.RES_002.name, maxValue: 300 },
-            { resource: resNames.RES_003.name, maxValue: 100 },
+            { resource: resNames.RES_001.name, maxValue: 800},
+            { resource: resNames.RES_002.name, maxValue: 300},
+            { resource: resNames.RES_003.name, maxValue: 100},
         ],
         modulable: false,
         unlocked: false,
