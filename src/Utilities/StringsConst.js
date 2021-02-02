@@ -1,5 +1,5 @@
 
-export const OPT_GAMESPEED = 1
+export const OPT_GAMESPEED = 20
 
 //001 Athleticism
 //002 Psiche
