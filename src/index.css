@@ -4,6 +4,9 @@ body {
   width: 100%;
   margin: 0px;
   height: 100%;
+  -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none; 
 }
 
 .Game-Main-Container {
@@ -95,9 +98,6 @@ body {
   margin-bottom: 7px;
   font-size: 13px;
   cursor: pointer;
-  -webkit-user-select: none;  
-  -moz-user-select: none;    
-  -ms-user-select: none; 
 }
 
 .Middle-Panel-Game-View {

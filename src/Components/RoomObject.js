@@ -1,5 +1,6 @@
 import React from 'react'
 import Tooltip from '../Components/Tooltip.js'
+import {percValue, removePerc} from '../Utilities/UtilityFunctions.js'
 
 class RoomObject extends React.Component {
   constructor(props) {
@@ -17,11 +18,14 @@ class RoomObject extends React.Component {
     let roomObj = this.state.roomObject
     
 
+    //EFFECT APPLIED DIRECTLY TO RESOURCES
     if(roomObj.effect != null) {
       let effects = roomObj.effect.slice()
       let resources = this.state.resources.slice()
+      
       effects.forEach(effect => {          
-        let index = resources.findIndex(x => x.name === effect.resource)                     
+        let index = resources.findIndex(x => x.name === effect.resource)       
+
         if (effect.perSecRatio != null)
           resources[index].incRatio += (effect.perSecRatio * roomObj.stage)
         if (effect.percRatio != null) {
@@ -41,39 +45,135 @@ class RoomObject extends React.Component {
       })
     }
 
-    /*if(roomObj.effectActivity != null) {
+    //EFFECT APPLIED TO ACTIVITIES
+    if(roomObj.effectActivity != null) {
       let effects = roomObj.effectActivity.slice()
       let activities = this.state.activities.slice()
+      
+
       effects.forEach(effect => {
         let index = activities.findIndex(x => x.name === effect.activity)
-        let activityEffects = activities[index].effect.slice()
+        activities[index].percBoost += effect.percRatio
+
+        let activityEffects = activities[index].effect
         activityEffects.forEach(actEffect => {
-          actEffect.boost += effect.percRatio
-        })
+          let resources = this.state.resources.slice()
+          let resIndex = resources.findIndex(x => x.name === actEffect.resource)  
+       
+          // FLAT EFFECTS
+          if (actEffect.perSecRatio != null) {
+            resources[resIndex].incRatio -= (actEffect.perSecRatio * activities[index].stage)
+            if (roomObj.isActive) {
+                actEffect.perSecRatio = removePerc(actEffect.perSecRatio, effect.percRatio)
+            }
+            actEffect.perSecRatio += percValue(actEffect.perSecRatio, effect.percRatio * roomObj.stage)          
+            resources[resIndex].incRatio += (actEffect.perSecRatio * activities[index].stage)
+          }
+          if (actEffect.maxValue != null) {
+            resources[resIndex].maxValue -= (actEffect.maxValue * activities[index].stage)
+            if (roomObj.isActive) {
+                actEffect.maxValue = removePerc(actEffect.maxValue, effect.percRatio)
+            }
+            actEffect.maxValue += percValue(actEffect.maxValue, effect.percRatio * roomObj.stage)
+            resources[resIndex].maxValue += (actEffect.maxValue * activities[index].stage)
+          }
+          if (actEffect.clickRatio != null) 
+            actEffect.clickRatio += percValue(actEffect.clickRatio, effect.percRatio * roomObj.stage)
+
+          // % EFFECTS  
+          if (actEffect.percRatio != null) {
+            resources[resIndex].incRatio -= percValue(resources[resIndex].incRatio, actEffect.percRatio) * activities[index].stage
+            if(roomObj.isActive) {
+              actEffect.percRatio = removePerc(actEffect.percRatio, effect.percRatio)
+            }
+            actEffect.percRatio += percValue(actEffect.percRatio, effect.percRatio * roomObj.stage)
+            resources[resIndex].incRatio += percValue(resources[resIndex].incRatio, actEffect.percRatio) * activities[index].stage
+          }
+          if (actEffect.percMaxValue != null) {
+            resources[resIndex].maxValue -= percValue(resources[resIndex].maxValue, actEffect.percRatio) * activities[index].stage
+            if(roomObj.isActive) {
+              actEffect.percMaxValue = removePerc(actEffect.percMaxValue, effect.percRatio)
+            }
+            actEffect.percMaxValue += percValue(actEffect.percMaxValue, effect.percRatio * roomObj.stage)
+            resources[resIndex].maxValue += percValue(resources[resIndex].maxValue, actEffect.percRatio) * activities[index].stage
+          }
+        });
       })
-    }*/
+    }
 
   }
 
-  removeEffects(resources, effects, roomObj) {
-    effects.forEach(effect => {          
-      let index = resources.findIndex(x => x.name === effect.resource)                     
-      if (effect.perSecRatio != null)
-        resources[index].incRatio -= (effect.perSecRatio * roomObj.stage)
-      if (effect.percRatio != null) {
-        for(let i=0; i<roomObj.stage; i++)
-        resources[index].incRatio = (((resources[index].incRatio * 100) / (effect.percRatio + 100)))
-      }     
-      if (effect.maxValue != null)
-        resources[index].maxValue -= (effect.maxValue * roomObj.stage)
-      if (effect.percMaxValue != null) {
-        for(let i=0; i<roomObj.stage; i++) 
-          resources[index].maxValue = (((resources[index].maxValue * 100) / (effect.percMaxValue + 100)))
-      }
-      if (effect.clickRatio != null) 
-        resources[index].currentValue -= (effect.clickRatio * roomObj.stage)
+  removeEffects() {
+    let roomObj = this.state.roomObject
 
-    })
+    if(roomObj.effect != null) {
+      let effects = roomObj.effect.slice()
+      let resources = this.state.resources.slice()
+
+      effects.forEach(effect => {          
+        let index = resources.findIndex(x => x.name === effect.resource)                     
+        if (effect.perSecRatio != null)
+          resources[index].incRatio -= (effect.perSecRatio * roomObj.stage)
+        if (effect.percRatio != null) {
+          for(let i=0; i<roomObj.stage; i++)
+            resources[index].incRatio = (((resources[index].incRatio * 100) / (effect.percRatio + 100)))
+        }     
+        if (effect.maxValue != null)
+          resources[index].maxValue -= (effect.maxValue * roomObj.stage)
+        if (effect.percMaxValue != null) {
+          for(let i=0; i<roomObj.stage; i++) 
+            resources[index].maxValue = (((resources[index].maxValue * 100) / (effect.percMaxValue + 100)))
+        }
+        if (effect.clickRatio != null) 
+          resources[index].currentValue -= (effect.clickRatio * roomObj.stage)
+
+      })
+    }
+
+    //EFFECT REMOVED FROM ACTIVITIES
+    if(roomObj.effectActivity != null) {
+      let effects = roomObj.effectActivity.slice()
+      let activities = this.state.activities.slice()
+      
+
+      effects.forEach(effect => {
+        let index = activities.findIndex(x => x.name === effect.activity)
+        activities[index].percBoost -= effect.percRatio
+
+        let activityEffects = activities[index].effect
+        activityEffects.forEach(actEffect => {
+          let resources = this.state.resources.slice()
+          let resIndex = resources.findIndex(x => x.name === actEffect.resource)  
+       
+          // FLAT EFFECTS
+          if (actEffect.perSecRatio != null) {
+            resources[resIndex].incRatio -= (actEffect.perSecRatio * activities[index].stage)
+            actEffect.perSecRatio = removePerc(actEffect.perSecRatio, effect.percRatio * roomObj.stage)          
+            resources[resIndex].incRatio += (actEffect.perSecRatio * activities[index].stage)
+          }
+          if (actEffect.maxValue != null) {
+            resources[resIndex].maxValue -= (actEffect.maxValue * activities[index].stage)
+            actEffect.maxValue = removePerc(actEffect.maxValue, effect.percRatio * roomObj.stage)
+            resources[resIndex].maxValue += (actEffect.maxValue * activities[index].stage)
+          }
+          if (actEffect.clickRatio != null) 
+            actEffect.clickRatio = removePerc(actEffect.clickRatio, effect.percRatio * roomObj.stage)
+
+          // % EFFECTS  
+          if (actEffect.percRatio != null) {
+            resources[resIndex].incRatio = removePerc(resources[resIndex].incRatio, actEffect.percRatio) * activities[index].stage
+            actEffect.percRatio = removePerc(actEffect.percRatio, effect.percRatio * roomObj.stage)
+            resources[resIndex].incRatio += percValue(resources[resIndex].incRatio, actEffect.percRatio) * activities[index].stage
+          }
+          if (actEffect.percMaxValue != null) {
+            resources[resIndex].maxValue = removePerc(resources[resIndex].maxValue, actEffect.percRatio) * activities[index].stage
+            actEffect.percMaxValue = removePerc(actEffect.percMaxValue, effect.percRatio * roomObj.stage)
+            resources[resIndex].maxValue += percValue(resources[resIndex].maxValue, actEffect.percRatio) * activities[index].stage
+          }
+        });
+      })
+    }
+
   }
 
   isUpgradable(costs, resources) {
@@ -89,8 +189,9 @@ class RoomObject extends React.Component {
     return upgradable
   }
 
-  buyObject(roomObj) {
+  buyObject() {
     let resources = this.state.resources.slice()
+    let roomObj = this.state.roomObject
 
     var upgradable = true 
     var havetoPay = false
@@ -117,15 +218,15 @@ class RoomObject extends React.Component {
         }
       }
 
-      if(roomObj.isActive) {
-        this.applyEffects(resources, roomObj.effect, roomObj)
-      }
-
       roomObj.upgradeCost = upgradeCosts.slice()
       roomObj.isBought = true
 
       if (roomObj.stage != null) 
         roomObj.stage += 1
+
+      if(roomObj.isActive) {
+        this.applyEffects()
+      }
         
       this.setState ({
         resources: resources,
@@ -140,14 +241,14 @@ class RoomObject extends React.Component {
   objectON(roomObj) {
     let roomSlotUsed = this.state.roomSlotUsed
     let roomSlotMax = this.state.roomSlotMax
-    let resources = this.state.resources.slice()
 
     if ((roomSlotUsed + roomObj.requiredSlot) <= roomSlotMax) {
-      roomObj.isActive = true
+     
       roomSlotUsed += roomObj.requiredSlot
 
       //applying effects
-      this.applyEffects(resources, roomObj)
+      this.applyEffects()
+      roomObj.isActive = true
        
       this.setState({
         roomSlotUsed: roomSlotUsed,
@@ -159,8 +260,6 @@ class RoomObject extends React.Component {
   }
 
   objectOFF(roomObj) {
-    let effects = roomObj.effect.slice()
-    let resources = this.state.resources.slice()
     let roomSlotUsed = this.state.roomSlotUsed
 
     if (roomSlotUsed > 0) {
@@ -168,7 +267,7 @@ class RoomObject extends React.Component {
       roomSlotUsed -= roomObj.requiredSlot
 
       //Remove Effect 
-      this.removeEffects(resources, effects, roomObj)
+      this.removeEffects()
 
       this.setState({
         roomSlotUsed: roomSlotUsed,
@@ -197,7 +296,7 @@ class RoomObject extends React.Component {
         roomSlotUsed: roomSlotUsed,
         roomSlotMax: roomSlotMax
     })
-} 
+  } 
 
   render() {
     let roomObject = this.state.roomObject

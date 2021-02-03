@@ -25,7 +25,8 @@ const activityList = [
             { resource: resNames.RES_001.name, clickRatio: 1}
         ],
         unlocked: true,
-        unlockedFrom: null    
+        unlockedFrom: null,
+        percBoost: 0    
     },
     {   //REST
         name: resNames.ACT_004.name,
@@ -39,7 +40,8 @@ const activityList = [
             { resource: resNames.RES_002.name, clickRatio: 1}
         ],
         unlocked: true,
-        unlockedFrom: null
+        unlockedFrom: null,
+        percBoost: 0
     },
     {   //JOGGING
         name: resNames.ACT_003.name,
@@ -54,7 +56,8 @@ const activityList = [
         unlocked: false,
         unlockedFrom: [
             { resource: resNames.RES_001.name, neededValue: 10}
-        ]
+        ],
+        percBoost: 0
     },
     {   //MEDITATE
         name: resNames.ACT_002.name, 
@@ -69,7 +72,8 @@ const activityList = [
         unlocked: false,
         unlockedFrom: [
             { resource: resNames.RES_002.name, neededValue: 1}
-        ]    
+        ],
+        percBoost: 0
     },
     {   //DO NOTHING
         name: resNames.ACT_006.name,
@@ -88,7 +92,8 @@ const activityList = [
         unlockedFrom: [
             { activity: resNames.ACT_003.name, neededStage: 15},
             { activity: resNames.ACT_002.name, neededStage: 3}
-        ]
+        ],
+        percBoost: 0
     },
     {   //READING BOOK
         name: resNames.ACT_005.name,
@@ -106,7 +111,8 @@ const activityList = [
         unlocked: false,
         unlockedFrom: [
             {resource: resNames.RES_004.name, neededValue: 1}
-        ]
+        ],
+        percBoost: 0
     },
     {   //GO TO JOB
         name: resNames.ACT_007.name,
@@ -125,7 +131,8 @@ const activityList = [
         unlocked: false,
         unlockedFrom: [
             { resource: resNames.RES_003.name, neededValue: 70}
-        ]
+        ],
+        percBoost: 0
     },
     {   //MASSAGE
         name: resNames.ACT_008.name,
@@ -145,7 +152,8 @@ const activityList = [
         unlocked: false,
         unlockedFrom: [
             { resource: resNames.RES_005.name, neededValue: 0.01}
-        ]
+        ],
+        percBoost: 0
     }
 
 ]

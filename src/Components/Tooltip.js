@@ -94,11 +94,11 @@ const Tooltip = (props) => {
             {activity.effect.map(effect => (
 
               <span className="Tooltip-EffectRow">             
-                {effect.perSecRatio && (<span>{effect.resource}: {effect.perSecRatio}/<span className="Tooltip-Sec">sec</span></span>)}  
-                {effect.percRatio && (<span>{effect.resource}: {effect.percRatio}% /<span className="Tooltip-Sec">sec</span></span>)}
-                {effect.maxValue && (<span>Max {effect.resource}: +{effect.maxValue} </span>)} 
-                {effect.percMaxValue && (<span>Max {effect.resource}: +{effect.percMaxValue}% </span>)}     
-                {effect.clickRatio && (<span>{effect.resource}: +{effect.clickRatio} </span>)}           
+                {effect.perSecRatio && (<span>{effect.resource}: {roundNumber(effect.perSecRatio,2)}/<span className="Tooltip-Sec">sec</span></span>)}  
+                {effect.percRatio && (<span>{effect.resource}: {roundNumber(effect.percRatio,2)}% /<span className="Tooltip-Sec">sec</span></span>)}
+                {effect.maxValue && (<span>Max {effect.resource}: +{roundNumber(effect.maxValue,2)} </span>)} 
+                {effect.percMaxValue && (<span>Max {effect.resource}: +{roundNumber(effect.percMaxValue,2)}% </span>)}     
+                {effect.clickRatio && (<span>{effect.resource}: +{roundNumber(effect.clickRatio,2)} </span>)}           
                 <br></br>
               </span>
 

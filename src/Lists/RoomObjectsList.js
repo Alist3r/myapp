@@ -14,6 +14,7 @@ import * as resNames from '../Utilities/StringsConst.js';
 //005 Reading Books
 //006 Do nothing
 //007 Go to Job
+//008 Massage
 
 //ROOMOBJECTS
 //001 Treadmill
@@ -69,7 +70,8 @@ const roomObjectsList = [
         ],
         effectActivity: [
             { activity: resNames.ACT_002.name, percRatio: 8},
-            { activity: resNames.ACT_003.name, percRatio: 7}
+            { activity: resNames.ACT_003.name, percRatio: 7},
+            { activity: resNames.ACT_008.name, percRatio: 10}
         ],
         isBought: false,
         isActive: false,

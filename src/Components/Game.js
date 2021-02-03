@@ -36,22 +36,6 @@ class Game extends React.Component {
         this.state = utility.loadState(this.state);   
     }
 
-    updateResources = () => {
-
-        let globalEffects = this.state.gameGlobalEffects.slice()
-        let resources = this.state.gameResources.slice()
-    
-           resources.forEach(resource => {
-               let effectsIndex = globalEffects.findIndex(x => x.name === resource.name)
-               let effectsFromActivity = globalEffects[effectsIndex].activity
-    
-               resource.incRatio += effectsFromActivity.valueFlat
-
-               if(resource.unlocked === false &&resource.currentValue > 0)
-                resource.unlocked = true   
-           });
-      }
-
     tick() {
        this.setState({})
     }

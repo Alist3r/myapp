@@ -1,5 +1,5 @@
 
-export const OPT_GAMESPEED = 20
+export const OPT_GAMESPEED = 1
 
 //001 Athleticism
 //002 Psiche
@@ -37,6 +37,8 @@ export const RES_TYPE_002 = {
 //004 Rest
 //005 Reading Books
 //006 Do nothing
+//007 Go to job
+//008 Massage
 
 export const ACT_001 = {
         name: "Walking",

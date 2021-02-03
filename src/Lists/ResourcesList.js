@@ -9,7 +9,7 @@ import * as resNames from '../Utilities/StringsConst.js';
 const resourcesList = [
     {   //ATHLETICISM
         name: resNames.RES_001.name, 
-        currentValue: 300, 
+        currentValue: 0, 
         maxValue: 2000, 
         incRatio: 0, 
         unlocked: true,

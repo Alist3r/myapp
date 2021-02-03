@@ -76,7 +76,7 @@ class Activity extends React.Component {
     return cssClass
   }
 
-  doActivity(costs) {
+  buyActivity(costs) {
     var activityToDo = this.state.activity //one activity
     var resourcesList = this.state.resources
       
@@ -163,19 +163,7 @@ class Activity extends React.Component {
     if(activity.grade < activity.stage) {
       activity.grade += 1
 
-      effects.forEach(effect => {          
-        let index = resources.findIndex(x => x.name === effect.resource)                     
-        if (effect.perSecRatio != null)
-          resources[index].incRatio += effect.perSecRatio
-        if (effect.percRatio != null)
-          resources[index].incRatio += ((resources[index].incRatio * effect.percRatio) / 100)
-        if (effect.maxValue != null)
-          resources[index].maxValue += effect.maxValue
-        if (effect.clickRatio != null) 
-         resources[index].currentValue += effect.clickRatio  
-        if(resources[index].unlocked === false)
-          resources[index].unlocked = true   
-      })
+      this.applyEffect(resources,effects,"add")
 
       this.setState ({
         gameResources: resources,
@@ -192,17 +180,7 @@ class Activity extends React.Component {
     if(activity.grade > 0) {
       activity.grade -= 1
 
-      effects.forEach(effect => {
-        let index = resources.findIndex(x => x.name === effect.resource)
-        if (effect.perSecRatio != null) 
-          resources[index].incRatio -= effect.perSecRatio
-        if (effect.percRatio != null)
-          resources[index].incRatio -= ((resources[index].incRatio * effect.percRatio) / 100)
-        if (effect.maxValue != null)
-          resources[index].maxValue -= effect.maxValue
-        if (effect.clickRatio != null) 
-          resources[index].currentValue -= effect.clickRatio 
-      })
+      this.applyEffect(resources,effects,"remove")
 
       this.setState ({
         gameResources: resources,
@@ -224,7 +202,7 @@ class Activity extends React.Component {
 
       return(
         <Tooltip activity={activity} resourcesList={resources} tooltipType="activity" direction="right">
-          <span onClick={() => this.doActivity(costs)} className={this.getActivityBtnClass(costs,resources)}> 
+          <span onClick={() => this.buyActivity(costs)} className={this.getActivityBtnClass(costs,resources)}> 
             <span className="Activity-Btn-Label">
               {activity.name} {activity.stage != null && (<span>[{activity.modulable && (<span>{activity.grade}/</span>)}{activity.stage}]</span>)}
             </span>
