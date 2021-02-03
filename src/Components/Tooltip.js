@@ -27,13 +27,16 @@ const Tooltip = (props) => {
   }
 
   var activity 
-  if(props.activity != null) activity = props.activity 
+  if(props.activity != null) 
+    activity = props.activity 
 
   var resources
-  if(props.resourcesList != null) resources = props.resourcesList.slice()
+  if(props.resourcesList != null) 
+    resources = props.resourcesList.slice()
 
   var resource
-  if(props.resource != null) resource = props.resource
+  if(props.resource != null) 
+    resource = props.resource
 
   var tooltipType = props.tooltipType
 
@@ -78,6 +81,7 @@ const Tooltip = (props) => {
                       {roundNumber(resource.currentValue,2)} / {roundNumber(clickCost.cost,0)}{clickCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < clickCost.cost && (<span> {tooltipReverseTimerConverter(clickCost.cost,resource.currentValue,resource.incRatio)}</span>)} 
                     </span>)
                 ))}
+                <br></br>
               </span>
             ))}
 
@@ -98,7 +102,7 @@ const Tooltip = (props) => {
                 {effect.percRatio && (<span>{effect.resource}: {roundNumber(effect.percRatio,2)}% /<span className="Tooltip-Sec">sec</span></span>)}
                 {effect.maxValue && (<span>Max {effect.resource}: +{roundNumber(effect.maxValue,2)} </span>)} 
                 {effect.percMaxValue && (<span>Max {effect.resource}: +{roundNumber(effect.percMaxValue,2)}% </span>)}     
-                {effect.clickRatio && (<span>{effect.resource}: +{roundNumber(effect.clickRatio,2)} </span>)}           
+                {effect.clickRatio && (<span>{effect.resource}: {effect.clickRatio > 0 ? "+" : ""}{roundNumber(effect.clickRatio,2)} </span>)}           
                 <br></br>
               </span>
 

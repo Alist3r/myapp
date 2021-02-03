@@ -1,11 +1,16 @@
 
 export const OPT_GAMESPEED = 1
 
+//000 Food
 //001 Athleticism
 //002 Psiche
 //003 Knowledge
 //004 Free Time
 //005 Demir
+
+export const RES_000 = {
+    name: "Food"
+}
 
 export const RES_001 = {
     name: "Athleticism"
@@ -39,6 +44,7 @@ export const RES_TYPE_002 = {
 //006 Do nothing
 //007 Go to job
 //008 Massage
+//009 Cook Food
 
 export const ACT_001 = {
         name: "Walking",
@@ -61,7 +67,7 @@ export const ACT_005 = {
     description: "Spends your Free Time to reading books"
 }
 export const ACT_006 = {
-    name: "Do Nothing",
+    name: "Save Time",
     description: "Sacrifice your physics and mental excercise but gain Free Time"
 }
 export const ACT_007 = {
@@ -71,6 +77,10 @@ export const ACT_007 = {
 export const ACT_008 = {
     name: "Massage",
     description: "Spend some time to receive a massage. Expande your physic and mental status"
+}
+export const ACT_009 = {
+    name: "Cook Food",
+    description: "You learned how to cook some food"
 }
 
 //ROOMOBJECT

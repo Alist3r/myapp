@@ -65,13 +65,13 @@ const roomObjectsList = [
             { resource: resNames.RES_005.name, cost: 66, upgradeCostRatio: 1.3}
         ],
         effect: [
-            { resource: resNames.RES_004.name, percRatio: 10},
+            { resource: resNames.RES_004.name, perSecRatio: 0.01},
             { resource: resNames.RES_004.name, percMaxValue: 10}
         ],
         effectActivity: [
-            { activity: resNames.ACT_002.name, percRatio: 8},
-            { activity: resNames.ACT_003.name, percRatio: 7},
-            { activity: resNames.ACT_008.name, percRatio: 10}
+            { activity: resNames.ACT_002.name, percRatio: 10},
+            { activity: resNames.ACT_003.name, percRatio: 10},
+            { activity: resNames.ACT_007.name, percRatio: 20}
         ],
         isBought: false,
         isActive: false,

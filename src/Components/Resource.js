@@ -55,7 +55,7 @@ class Resource extends React.Component {
             <div className="Resource-Cell-Name">{resource.name}</div> 
             <div className="Resource-Cell-Value" style={{'color': resource.currentValue >= (resource.maxValue * 90 /100 ) ? 'darkorange' : 'black'}}>{roundNumber(resource.currentValue,2)}</div>
             <div className="Resource-Cell-MaxValue">/{roundNumber(resource.maxValue,2)}</div> 
-            <div className="Resource-Cell-IncRatio">{resource.incRatio > 0 ? "+" : ""}{roundNumber(resource.incRatio * constants.OPT_GAMESPEED,2)}/<span className="Resource-Span-Sec">sec</span></div>
+            <div className="Resource-Cell-IncRatio">{resource.incRatio > 0 ? "+" : ""}{roundNumber(resource.incRatio * constants.OPT_GAMESPEED,2)}/<span className="Resource-Span-Sec">s</span></div>
           </div>           
       )
     }

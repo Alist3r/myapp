@@ -119,8 +119,29 @@ export function tooltipReverseTimerConverter (costValue, currentValue, incRatio)
     return formattedTimeStamp
   }
 
+export function countDecimals(value) {
+    let text = value.toString()
+    // verify if number 0.000005 is represented as "5e-6"
+    if (text.indexOf('e-') > -1) {
+      let [base, trail] = text.split('e-');
+      let deg = parseInt(trail, 10);
+      return deg;
+    }
+    // count decimals for number in representation like "0.123456"
+    if (Math.floor(value) !== value) {
+      return value.toString().split(".")[1].length || 0;
+    }
+    return 0;
+  }
+
 export function roundNumber(number, decimal) {
+
     let formatNumber = (Math.round(number * 100) / 100).toFixed(decimal)
+
+    let numberOfDecimal = countDecimals(number)
+    if(numberOfDecimal >= 3 && number > -1 && number < 1) {
+        formatNumber = (number * 100 / 100).toFixed(3)
+    }    
 
     if(formatNumber > 4999 && formatNumber <= 999999) 
         formatNumber = (Math.round(number * 1) / 1000).toFixed(decimal) + "K"

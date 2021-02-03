@@ -56,46 +56,53 @@ class RoomObject extends React.Component {
         activities[index].percBoost += effect.percRatio
 
         let activityEffects = activities[index].effect
+        let stageOrGrade
+          if(activities[index].modulable)
+            stageOrGrade = activities[index].grade
+          else
+            stageOrGrade = activities[index].stage
+
         activityEffects.forEach(actEffect => {
           let resources = this.state.resources.slice()
           let resIndex = resources.findIndex(x => x.name === actEffect.resource)  
-       
+
+          
           // FLAT EFFECTS
           if (actEffect.perSecRatio != null) {
-            resources[resIndex].incRatio -= (actEffect.perSecRatio * activities[index].stage)
+            resources[resIndex].incRatio -= (actEffect.perSecRatio * stageOrGrade)
             if (roomObj.isActive) {
                 actEffect.perSecRatio = removePerc(actEffect.perSecRatio, effect.percRatio)
             }
             actEffect.perSecRatio += percValue(actEffect.perSecRatio, effect.percRatio * roomObj.stage)          
-            resources[resIndex].incRatio += (actEffect.perSecRatio * activities[index].stage)
+            resources[resIndex].incRatio += (actEffect.perSecRatio * stageOrGrade)
           }
           if (actEffect.maxValue != null) {
-            resources[resIndex].maxValue -= (actEffect.maxValue * activities[index].stage)
+            resources[resIndex].maxValue -= (actEffect.maxValue * stageOrGrade)
             if (roomObj.isActive) {
                 actEffect.maxValue = removePerc(actEffect.maxValue, effect.percRatio)
             }
             actEffect.maxValue += percValue(actEffect.maxValue, effect.percRatio * roomObj.stage)
-            resources[resIndex].maxValue += (actEffect.maxValue * activities[index].stage)
+            resources[resIndex].maxValue += (actEffect.maxValue * stageOrGrade)
           }
           if (actEffect.clickRatio != null) 
             actEffect.clickRatio += percValue(actEffect.clickRatio, effect.percRatio * roomObj.stage)
 
           // % EFFECTS  
           if (actEffect.percRatio != null) {
-            resources[resIndex].incRatio -= percValue(resources[resIndex].incRatio, actEffect.percRatio) * activities[index].stage
+            resources[resIndex].incRatio -= percValue(resources[resIndex].incRatio, actEffect.percRatio) * stageOrGrade
             if(roomObj.isActive) {
               actEffect.percRatio = removePerc(actEffect.percRatio, effect.percRatio)
             }
             actEffect.percRatio += percValue(actEffect.percRatio, effect.percRatio * roomObj.stage)
-            resources[resIndex].incRatio += percValue(resources[resIndex].incRatio, actEffect.percRatio) * activities[index].stage
+            resources[resIndex].incRatio += percValue(resources[resIndex].incRatio, actEffect.percRatio) * stageOrGrade
           }
           if (actEffect.percMaxValue != null) {
-            resources[resIndex].maxValue -= percValue(resources[resIndex].maxValue, actEffect.percRatio) * activities[index].stage
+            resources[resIndex].maxValue -= percValue(resources[resIndex].maxValue, actEffect.percRatio) * stageOrGrade
             if(roomObj.isActive) {
               actEffect.percMaxValue = removePerc(actEffect.percMaxValue, effect.percRatio)
             }
             actEffect.percMaxValue += percValue(actEffect.percMaxValue, effect.percRatio * roomObj.stage)
-            resources[resIndex].maxValue += percValue(resources[resIndex].maxValue, actEffect.percRatio) * activities[index].stage
+            resources[resIndex].maxValue += percValue(resources[resIndex].maxValue, actEffect.percRatio) * stageOrGrade
           }
         });
       })
@@ -140,6 +147,13 @@ class RoomObject extends React.Component {
         let index = activities.findIndex(x => x.name === effect.activity)
         activities[index].percBoost -= effect.percRatio
 
+        let stageOrGrade
+          if(activities[index].modulable)
+            stageOrGrade = activities[index].grade
+          else
+            stageOrGrade = activities[index].stage
+       
+
         let activityEffects = activities[index].effect
         activityEffects.forEach(actEffect => {
           let resources = this.state.resources.slice()
@@ -147,28 +161,28 @@ class RoomObject extends React.Component {
        
           // FLAT EFFECTS
           if (actEffect.perSecRatio != null) {
-            resources[resIndex].incRatio -= (actEffect.perSecRatio * activities[index].stage)
+            resources[resIndex].incRatio -= (actEffect.perSecRatio * stageOrGrade)
             actEffect.perSecRatio = removePerc(actEffect.perSecRatio, effect.percRatio * roomObj.stage)          
-            resources[resIndex].incRatio += (actEffect.perSecRatio * activities[index].stage)
+            resources[resIndex].incRatio += (actEffect.perSecRatio * stageOrGrade)
           }
           if (actEffect.maxValue != null) {
-            resources[resIndex].maxValue -= (actEffect.maxValue * activities[index].stage)
+            resources[resIndex].maxValue -= (actEffect.maxValue * stageOrGrade)
             actEffect.maxValue = removePerc(actEffect.maxValue, effect.percRatio * roomObj.stage)
-            resources[resIndex].maxValue += (actEffect.maxValue * activities[index].stage)
+            resources[resIndex].maxValue += (actEffect.maxValue * stageOrGrade)
           }
           if (actEffect.clickRatio != null) 
             actEffect.clickRatio = removePerc(actEffect.clickRatio, effect.percRatio * roomObj.stage)
 
           // % EFFECTS  
           if (actEffect.percRatio != null) {
-            resources[resIndex].incRatio = removePerc(resources[resIndex].incRatio, actEffect.percRatio) * activities[index].stage
+            resources[resIndex].incRatio = removePerc(resources[resIndex].incRatio, actEffect.percRatio) * stageOrGrade
             actEffect.percRatio = removePerc(actEffect.percRatio, effect.percRatio * roomObj.stage)
-            resources[resIndex].incRatio += percValue(resources[resIndex].incRatio, actEffect.percRatio) * activities[index].stage
+            resources[resIndex].incRatio += percValue(resources[resIndex].incRatio, actEffect.percRatio) * stageOrGrade
           }
           if (actEffect.percMaxValue != null) {
-            resources[resIndex].maxValue = removePerc(resources[resIndex].maxValue, actEffect.percRatio) * activities[index].stage
+            resources[resIndex].maxValue = removePerc(resources[resIndex].maxValue, actEffect.percRatio) * stageOrGrade
             actEffect.percMaxValue = removePerc(actEffect.percMaxValue, effect.percRatio * roomObj.stage)
-            resources[resIndex].maxValue += percValue(resources[resIndex].maxValue, actEffect.percRatio) * activities[index].stage
+            resources[resIndex].maxValue += percValue(resources[resIndex].maxValue, actEffect.percRatio) * stageOrGrade
           }
         });
       })

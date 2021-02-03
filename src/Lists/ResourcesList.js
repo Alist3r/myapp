@@ -1,18 +1,28 @@
 import * as resNames from '../Utilities/StringsConst.js';
 
+//000 
 //001 Athleticism
 //002 Psiche
 //003 Knowledge
 //004 Free Time
 //005 Demir
 
+
 const resourcesList = [
+    {
+        name: resNames.RES_000.name,
+        currentValue: 5000,
+        maxValue: 5000,
+        incRatio: -2.4,
+        unlocked: true,
+        unlockedFrom: null
+    },
     {   //ATHLETICISM
         name: resNames.RES_001.name, 
         currentValue: 0, 
         maxValue: 2000, 
         incRatio: 0, 
-        unlocked: true,
+        unlocked: false,
         unlockedFrom: null
     },
     {   //PSICHE
