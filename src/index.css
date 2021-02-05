@@ -1,5 +1,20 @@
+@font-face {
+  font-family: 'Roboto-Condensed';
+  src: local('Roboto'), url(./fonts/RobotoCondensed-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato'), url(./fonts/Lato-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: local('Poppins'), url(./fonts/Poppins-Regular.ttf) format('truetype');
+}
+
 body {
-  font: 14px "Arial";
+  font: 13px "Poppins";
   color: black;
   width: 100%;
   margin: 0px;
@@ -32,8 +47,8 @@ body {
 
 .Left-Panel {
   width: 25%;
-  min-width: 300px;
-  max-width: 300px;
+  min-width: 350px;
+  max-width: 350px;
   display: inline-block;
   font-size: 13px;
   padding: 5px;
@@ -47,12 +62,14 @@ body {
   display: table-cell;
   padding: 1px;
   padding-left: 3px;
+  font-size: 13px;
 }
 
 .Resource-Cell-Value {
   width: 55px;
   max-width: 55px;
   display: table-cell;
+  font-size: 13px;
  
 }
 
@@ -62,13 +79,14 @@ body {
   display: table-cell;
   color: grey;
   font-size: 90%;
+  font-size: 13px;
 }
 
 .Resource-Cell-IncRatio {
   width: 50px;
   max-width: 50px;
   display: table-cell;
-  font-size: 90%;
+  font-size: 13px;
 }
 
 /* MIDDLE PANEL */

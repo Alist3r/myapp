@@ -1,5 +1,5 @@
 import React from 'react'
-import {roundNumber} from '../Utilities/UtilityFunctions.js'
+import {formatNumber} from '../Utilities/UtilityFunctions.js'
 import * as constants from '../Utilities/StringsConst.js'
 import icondemir from '../Images/icon-demir.png'
 import Tooltip from './Tooltip.js'
@@ -77,9 +77,9 @@ class BeltResourcePanel extends React.Component {
             </Tooltip>
           </div> 
           <div style={{display: 'table-cell'}}>
-            <div className="Belt-Resource-Cell-Value" style={{'color': resource.currentValue >= (resource.maxValue * 90 /100 ) ? 'darkorange' : 'black'}}>{roundNumber(resource.currentValue,2)}</div>
-            <div className="Belt-Resource-Cell-MaxValue">/{roundNumber(resource.maxValue)}</div> 
-            <div className="Belt-Resource-Cell-IncRatio">{roundNumber(resource.incRatio * constants.OPT_GAMESPEED,2)}/<span className="Resource-Span-Sec">sec</span></div>
+            <div className="Belt-Resource-Cell-Value" style={{'color': resource.currentValue >= (resource.maxValue * 90 /100 ) ? 'darkorange' : 'black'}}>{formatNumber(resource.currentValue,2)}</div>
+            <div className="Belt-Resource-Cell-MaxValue">/{formatNumber(resource.maxValue)}</div> 
+            <div className="Belt-Resource-Cell-IncRatio">{formatNumber(resource.incRatio * constants.OPT_GAMESPEED,2)}/<span className="Resource-Span-Sec">sec</span></div>
           </div>
           
         </div>           

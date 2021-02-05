@@ -1,5 +1,5 @@
 import React from 'react'
-import {roundNumber} from '../Utilities/UtilityFunctions.js'
+import {formatNumber, formatNumberWPrefix} from '../Utilities/UtilityFunctions.js'
 import * as constants from '../Utilities/StringsConst.js'
 
 class Resource extends React.Component {
@@ -47,15 +47,17 @@ class Resource extends React.Component {
     });
   }
 
+  
+
   render() {
     let resource = this.state.resource
 
       return(
           <div>
             <div className="Resource-Cell-Name">{resource.name}</div> 
-            <div className="Resource-Cell-Value" style={{'color': resource.currentValue >= (resource.maxValue * 90 /100 ) ? 'darkorange' : 'black'}}>{roundNumber(resource.currentValue,2)}</div>
-            <div className="Resource-Cell-MaxValue">/{roundNumber(resource.maxValue,2)}</div> 
-            <div className="Resource-Cell-IncRatio">{resource.incRatio > 0 ? "+" : ""}{roundNumber(resource.incRatio * constants.OPT_GAMESPEED,2)}/<span className="Resource-Span-Sec">s</span></div>
+            <div className="Resource-Cell-Value" style={{'color': resource.currentValue >= (resource.maxValue * 90 /100 ) ? 'darkorange' : 'black'}}>{formatNumber(resource.currentValue,2)}</div>
+            <div className="Resource-Cell-MaxValue">/{formatNumber(resource.maxValue,2)}</div> 
+            <div className="Resource-Cell-IncRatio">{formatNumberWPrefix(resource.incRatio * constants.OPT_GAMESPEED,2)}/<span className="Resource-Span-Sec">s</span></div>
           </div>           
       )
     }

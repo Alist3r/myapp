@@ -13,14 +13,14 @@ const resourcesList = [
         name: resNames.RES_000.name,
         currentValue: 5000,
         maxValue: 5000,
-        incRatio: -2.4,
+        incRatio: 125879.7687,
         unlocked: true,
         unlockedFrom: null
     },
     {   //ATHLETICISM
         name: resNames.RES_001.name, 
         currentValue: 0, 
-        maxValue: 2000, 
+        maxValue: 4000, 
         incRatio: 0, 
         unlocked: false,
         unlockedFrom: null
@@ -28,7 +28,7 @@ const resourcesList = [
     {   //PSICHE
         name: resNames.RES_002.name, 
         currentValue: 0, 
-        maxValue: 1500, 
+        maxValue: 2000, 
         incRatio: 0, 
         unlocked: false,
         unlockedFrom: null
@@ -36,7 +36,7 @@ const resourcesList = [
     {   //KNOWLEDGE
         name: resNames.RES_003.name, 
         currentValue: 0, 
-        maxValue: 400, 
+        maxValue: 500, 
         incRatio: 0, 
         unlocked: false,
         unlockedFrom: null

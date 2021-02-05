@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../tooltip.css";
-import {roundNumber} from '../Utilities/UtilityFunctions.js'
+import {formatNumber, formatNumberWPrefix} from '../Utilities/UtilityFunctions.js'
 import {tooltipReverseTimerConverter} from '../Utilities/UtilityFunctions.js'
 
 const Tooltip = (props) => {
@@ -62,10 +62,10 @@ const Tooltip = (props) => {
             {/*--------- UPGRADE COSTS ---------*/}
             {activity.upgradeCost && (activity.upgradeCost.map(upgradeCost => (             
               <span className="Tooltip-EffectRow">
-                {upgradeCost.resource}: {resources.map(resource => (
-                  resource.name === upgradeCost.resource && (
-                    <span className={currentValueColor(resource.currentValue,upgradeCost.cost)}>
-                      {roundNumber(resource.currentValue,2)} / {roundNumber(upgradeCost.cost,2)}{upgradeCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < upgradeCost.cost && (<span> {tooltipReverseTimerConverter(upgradeCost.cost,resource.currentValue,resource.incRatio)}</span>)} 
+                {upgradeCost.resource} 
+                {resources.map(resource => (resource.name === upgradeCost.resource && (
+                    <span style={{float: 'right'}} className={currentValueColor(resource.currentValue,upgradeCost.cost)}>
+                      {formatNumber(resource.currentValue,2)} / {formatNumber(upgradeCost.cost,2)}{upgradeCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < upgradeCost.cost && (<span> {tooltipReverseTimerConverter(upgradeCost.cost,resource.currentValue,resource.incRatio)}</span>)} 
                     </span>)                
                 ))} 
                 <br></br>
@@ -78,7 +78,7 @@ const Tooltip = (props) => {
                 {clickCost.resource}: {resources.map(resource => (
                   resource.name === clickCost.resource && (
                     <span className={currentValueColor(resource.currentValue,clickCost.cost)}>
-                      {roundNumber(resource.currentValue,2)} / {roundNumber(clickCost.cost,0)}{clickCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < clickCost.cost && (<span> {tooltipReverseTimerConverter(clickCost.cost,resource.currentValue,resource.incRatio)}</span>)} 
+                      {formatNumber(resource.currentValue,2)} / {formatNumber(clickCost.cost,0)}{clickCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < clickCost.cost && (<span> {tooltipReverseTimerConverter(clickCost.cost,resource.currentValue,resource.incRatio)}</span>)} 
                     </span>)
                 ))}
                 <br></br>
@@ -88,7 +88,7 @@ const Tooltip = (props) => {
             {/*--------- ROOM SLOT COSTS ---------*/}
             {activity.requiredSlot != null &&(
               <span className="Tooltip-EffectRow">
-                Room Slot: {activity.requiredSlot}
+                Room Slot <span style={{float: "right"}}>{activity.requiredSlot}</span>
               </span>
             )}
 
@@ -98,11 +98,11 @@ const Tooltip = (props) => {
             {activity.effect.map(effect => (
 
               <span className="Tooltip-EffectRow">             
-                {effect.perSecRatio && (<span>{effect.resource}: {roundNumber(effect.perSecRatio,2)}/<span className="Tooltip-Sec">sec</span></span>)}  
-                {effect.percRatio && (<span>{effect.resource}: {roundNumber(effect.percRatio,2)}% /<span className="Tooltip-Sec">sec</span></span>)}
-                {effect.maxValue && (<span>Max {effect.resource}: +{roundNumber(effect.maxValue,2)} </span>)} 
-                {effect.percMaxValue && (<span>Max {effect.resource}: +{roundNumber(effect.percMaxValue,2)}% </span>)}     
-                {effect.clickRatio && (<span>{effect.resource}: {effect.clickRatio > 0 ? "+" : ""}{roundNumber(effect.clickRatio,2)} </span>)}           
+                {effect.perSecRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.perSecRatio,2)}/<span className="Tooltip-Sec">sec</span></span>)}  
+                {effect.percRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.percRatio,2)}% /<span className="Tooltip-Sec">sec</span></span>)}
+                {effect.maxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.maxValue,2)} </span>)} 
+                {effect.percMaxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.percMaxValue,2)}% </span>)}     
+                {effect.clickRatio && (<span>{effect.resource}: {effect.clickRatio > 0 ? "+" : ""}{formatNumberWPrefix(effect.clickRatio,2)} </span>)}           
                 <br></br>
               </span>
 
@@ -112,7 +112,7 @@ const Tooltip = (props) => {
                 <span>
                   {activity.effectActivity.map(effect => (
                     <span className="Tooltip-EffectRow">
-                      {effect.percRatio && (<span>{effect.activity}: {effect.percRatio}%</span>)}
+                      {effect.percRatio && (<span>{effect.activity}: {formatNumberWPrefix(effect.percRatio,2)}%</span>)}
                       <br></br>
                     </span>
                     

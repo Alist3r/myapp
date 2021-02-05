@@ -23,7 +23,7 @@ class ResourceTab extends React.Component {
 
         return (
             <div>
-                {resources.map(resource => (                                     
+                {resources.map(resource => (                    
                     <div style={{'visibility': resource.type !== constants.RES_TYPE_002.name ? 'visible' : 'hidden'}}>
                         {this.unlockResource(resource) && (<Resource  resource={resource} />)}
                     </div>                                     

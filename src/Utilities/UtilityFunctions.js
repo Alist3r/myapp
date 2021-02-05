@@ -119,56 +119,74 @@ export function tooltipReverseTimerConverter (costValue, currentValue, incRatio)
     return formattedTimeStamp
   }
 
-export function countDecimals(value) {
-    let text = value.toString()
-    // verify if number 0.000005 is represented as "5e-6"
-    if (text.indexOf('e-') > -1) {
-      let [base, trail] = text.split('e-');
-      let deg = parseInt(trail, 10);
-      return deg;
+
+export function formatNumber(number, precision) {
+
+    let formattedNumber
+
+    if (number % 1 === 0) {
+        formattedNumber = addSuffix(number, 0)  
+        return formattedNumber
     }
-    // count decimals for number in representation like "0.123456"
-    if (Math.floor(value) !== value) {
-      return value.toString().split(".")[1].length || 0;
+
+    if(Math.abs(number) < 0.001) { 
+        formattedNumber = number.toFixed(2) + "..."
+        return formattedNumber
     }
-    return 0;
-  }
 
-export function roundNumber(number, decimal) {
+    if(Math.abs(number) < 0.01) {
+        formattedNumber = number.toFixed(3)
+        return formattedNumber
+    }
 
-    let formatNumber = (Math.round(number * 100) / 100).toFixed(decimal)
+    formattedNumber = number.toFixed(precision)
 
-    let numberOfDecimal = countDecimals(number)
-    if(numberOfDecimal >= 3 && number > -1 && number < 1) {
-        formatNumber = (number * 100 / 100).toFixed(3)
-    }    
+    formattedNumber = addSuffix(formattedNumber, precision)  
+ 
+    return formattedNumber
+      
+}
 
-    if(formatNumber > 4999 && formatNumber <= 999999) 
-        formatNumber = (Math.round(number * 1) / 1000).toFixed(decimal) + "K"
+export function formatNumberWPrefix(number, precision) {
+    let formattedNumber = formatNumber(number, precision)
+
+    if(number > 0) {
+        return "+" + formattedNumber
+    }
+
+    return formattedNumber
+}
+
+export function addSuffix(number, precision) {
+
+    let formatNumber = number
+
+    if(Math.abs(formatNumber) > 4999 && formatNumber <= 999999) 
+        formatNumber = (number * 1 / 1000).toFixed(precision) + "K"
     
-    if(formatNumber > 999999 && formatNumber <= 999999999) 
-        formatNumber = (Math.round(number * 1) / 1000000).toFixed(decimal) + "M"  
+    if(Math.abs(formatNumber) > 999999 && formatNumber <= 999999999) 
+        formatNumber = (number * 1 / 1000000).toFixed(precision) + "M"  
     
-    if(formatNumber > 999999999 && formatNumber <= 999999999999)   
-        formatNumber = (Math.round(number * 1) / 1000000000).toFixed(decimal) + "G"  
+    if(Math.abs(formatNumber) > 999999999 && formatNumber <= 999999999999)   
+        formatNumber = (number * 1 / 1000000000).toFixed(precision) + "G"  
     
-    if(formatNumber > 999999999 && formatNumber <= 999999999999999)   
-        formatNumber = (Math.round(number * 1) / 1000000000000).toFixed(decimal) + "T"  
+    if(Math.abs(formatNumber) > 999999999 && formatNumber <= 999999999999999)   
+        formatNumber = (number * 1 / 1000000000000).toFixed(precision) + "T"  
 
-    if(formatNumber > 999999999999999 && formatNumber <= 999999999999999999)   
-        formatNumber = (Math.round(number * 1) / 1000000000000000).toFixed(decimal) + "P"  
+    if(Math.abs(formatNumber) > 999999999999999 && formatNumber <= 999999999999999999)   
+        formatNumber = (number * 1 / 1000000000000000).toFixed(precision) + "P"  
 
-    if(formatNumber > 999999999999999999 && formatNumber <= 999999999999999999999)   
-        formatNumber = (Math.round(number * 1) / 1000000000000000000).toFixed(decimal) + "E"
+    if(Math.abs(formatNumber) > 999999999999999999 && formatNumber <= 999999999999999999999)   
+        formatNumber = (number * 1 / 1000000000000000000).toFixed(precision) + "E"
 
-    if(formatNumber > 999999999999999999999 && formatNumber <= 999999999999999999999999)   
-        formatNumber = (Math.round(number * 1) / 1000000000000000000000).toFixed(decimal) + "Z"
+    if(Math.abs(formatNumber) > 999999999999999999999 && formatNumber <= 999999999999999999999999)   
+        formatNumber = (number * 1 / 1000000000000000000000).toFixed(precision) + "Z"
 
-    if(formatNumber > 999999999999999999999999 && formatNumber <= 999999999999999999999999999)   
-        formatNumber = (Math.round(number * 1) / 1000000000000000000000000).toFixed(decimal) + "Y"
+    if(Math.abs(formatNumber) > 999999999999999999999999 && formatNumber <= 999999999999999999999999999)   
+        formatNumber = (number * 1 / 1000000000000000000000000).toFixed(precision) + "Y"
     
-    if(formatNumber > 999999999999999999999999999)
-        formatNumber = (Math.round(number * 1) / 1000000000000000000000000).toFixed(decimal) + "Y"   
+    if(Math.abs(formatNumber) > 999999999999999999999999999)
+        formatNumber = (number * 1 / 1000000000000000000000000).toFixed(precision) + "Y"   
 
     return formatNumber; 
 }

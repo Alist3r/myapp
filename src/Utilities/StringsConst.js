@@ -11,7 +11,6 @@ export const OPT_GAMESPEED = 1
 export const RES_000 = {
     name: "Food"
 }
-
 export const RES_001 = {
     name: "Athleticism"
 }
