@@ -46,19 +46,17 @@ class Activity extends React.Component {
       if(havetoPay) {
         for(let i=0; i < resourcesList.length;i++) { //for each resource
 
-        let index = costs.findIndex(x => x.resource === resourcesList[i].name) //find the matching cost
-        if(index !== -1) { //if matching cost found
-          resourcesList[i].currentValue -= costs[index].cost  //paying resource
-          if(activityToDo.upgradeCost != null) //if its an upgradable resource, then update the cost value for the next step
-            costs[index].cost += ((costs[index].upgradeCostRatio * costs[index].cost * (activityToDo.stage+1)))
-        } 
-          
-
+          let index = costs.findIndex(x => x.resource === resourcesList[i].name) //find the matching cost
+          if(index !== -1) { //if matching cost found
+            resourcesList[i].currentValue -= costs[index].cost  //paying resource
+            if(activityToDo.upgradeCost != null) //if its an upgradable resource, then update the cost value for the next step
+              costs[index].cost += ((costs[index].upgradeCostRatio * costs[index].cost * (activityToDo.stage+1)))
+          } 
         }
       }
       
       //Apply effects to the resources  
-      applyEffectsToResources(resourcesList, effects, 1, "add")
+      applyEffectsToResources(resourcesList, effects, 1, "add", "activity")
 
       //Upgrade the stage
       if (activityToDo.stage != null) 

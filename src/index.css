@@ -75,6 +75,10 @@ body {
   font-size: 13px;
 }
 
+  .Resource-Cell-IncRatio:hover {
+    font-weight: bold;
+  }
+
 /* MIDDLE PANEL */
 
 .Middle-Panel {

@@ -6,13 +6,13 @@
 }
 
 /* Wrapping */
-.Tooltip-Wrapper {
+.Tooltip-Wrapper, .Tooltip-Wrapper-ResourceIncRatio {
   display: inline-block;
   position: relative;
 }
 
 /* Absolute positioning */
-.Tooltip-Tip {
+.Tooltip-Tip,.Tooltip-Tip-ResourceIncRatio {
   position: absolute;
   left: 50%;
   width: 250px;
@@ -23,6 +23,12 @@
   z-index: 100;
   border: 1px solid black;
   text-align: left;
+}
+
+.Tooltip-Tip-ResourceIncRatio {
+  width: 150px;
+  transform: translateX(75%);
+  font-size: 12px;
 }
 
 .Tooltip-Description {

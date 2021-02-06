@@ -1,5 +1,4 @@
 import * as resNames from '../Utilities/StringsConst.js';
-import resourcesList from './ResourcesList.js';
 
 //RESOURCERS
 //001 Athleticism

@@ -87,7 +87,7 @@ class Game extends React.Component {
                 {/** LEFT PANEL */}
                 <div className="Left-Panel">
                     {/** ACTIVITIY PANEL */}
-                    <ResourceTab resources={gameResources}/>
+                    <ResourceTab resources={gameResources} globalEffects={gameGlobalEffects}/>
                 </div>
 
                 {/** MILLE PANEL */}

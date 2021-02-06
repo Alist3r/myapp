@@ -1,6 +1,6 @@
 import React from 'react'
 import RoomObjectTooltip from '../Components/Tooltips/RoomObjectTooltip.js'
-import {haveEnoughResource, applyEffectsToResources, appluEffectsToActivity} from '../Utilities/UtilityFunctions.js'
+import {haveEnoughResource, applyEffectsToResources, applyEffectsToActivity} from '../Utilities/UtilityFunctions.js'
 
 class RoomObject extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class RoomObject extends React.Component {
 
     //EFFECT APPLIED DIRECTLY TO ACTIVITIES
     if(roomObj.effectActivity != null)
-      this.applyEffectsToActivity(roomObj, this.state.resources, this.state.activities, "add")  
+      applyEffectsToActivity(roomObj, this.state.resources, this.state.activities, "add")  
 
   }
 
@@ -40,7 +40,7 @@ class RoomObject extends React.Component {
 
     //REMOVE EFFECT FROM ACTIVITIES
     if(roomObj.effectActivity != null)
-      this.applyEffectsToActivity(roomObj, this.state.resources, this.state.activities, "remove") 
+      applyEffectsToActivity(roomObj, this.state.resources, this.state.activities, "remove") 
 
   }
 

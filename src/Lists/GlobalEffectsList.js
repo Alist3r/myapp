@@ -12,16 +12,12 @@ const globalEffectsList = [
         activity: 
             { 
                 valueFlat: 0,
-                valuePerc: 0,
-                maxFlat: 0,
-                maxPerc: 0,
+                valuePerc: 0
             } ,
         roomObject:
             {
                 valueFlat: 0,
-                valuePerc: 0,
-                maxFlat: 0,
-                maxPerc: 0,
+                valuePerc: 0
             }
     },
     {   //PSICHE
@@ -29,17 +25,12 @@ const globalEffectsList = [
         activity: 
             { 
                 valueFlat: 0,
-                valuePerc: 0,
-                maxFlat: 0,
-                maxPerc: 0,
+                valuePerc: 0
             } ,
         roomObject:
             {
                 valueFlat: 0,
-                valuePerc: 0,
-                maxFlat: 0,
-                maxPerc: 0,
-
+                valuePerc: 0
             }
     },
     {   //KNOWLEDGE
@@ -47,16 +38,12 @@ const globalEffectsList = [
         activity: 
             { 
                 valueFlat: 0,
-                valuePerc: 0,
-                maxFlat: 0,
-                maxPerc: 0,
+                valuePerc: 0
             } ,
         roomObject:
             {
                 valueFlat: 0,
-                valuePerc: 0,
-                maxFlat: 0,
-                maxPerc: 0,
+                valuePerc: 0
             }
     },
     {   //FREE TIME
@@ -64,16 +51,12 @@ const globalEffectsList = [
         activity: 
             { 
                 valueFlat: 0,
-                valuePerc: 0,
-                maxFlat: 0,
-                maxPerc: 0,
+                valuePerc: 0
             } ,
         roomObject:
             {
                 valueFlat: 0,
-                valuePerc: 0,
-                maxFlat: 0,
-                maxPerc: 0,
+                valuePerc: 0
             }
     },
     {   //DEMIR
@@ -81,16 +64,25 @@ const globalEffectsList = [
         activity: 
             { 
                 valueFlat: 0,
-                valuePerc: 0,
-                maxFlat: 0,
-                maxPerc: 0,
+                valuePerc: 0
             } ,
         roomObject:
             {
                 valueFlat: 0,
-                valuePerc: 0,
-                maxFlat: 0,
-                maxPerc: 0,
+                valuePerc: 0
+            }
+    },
+    {   //FOOD
+        name: resNames.RES_000.name, 
+        activity: 
+            { 
+                valueFlat: 0,
+                valuePerc: 0
+            } ,
+        roomObject:
+            {
+                valueFlat: 0,
+                valuePerc: 0
             }
     }
 ]

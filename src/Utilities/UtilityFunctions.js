@@ -1,3 +1,4 @@
+import globalEffectsList from '../Lists/GlobalEffectsList.js';
 import * as constants from '../Utilities/StringsConst.js'
 
 export function saveState(state) {
@@ -247,7 +248,9 @@ export function haveEnoughResource(costs, resources) {
     return haveEnoughResource
   }
 
-export function applyEffectsToResources(resources, effects, howManyTimes, type) {
+export function applyEffectsToResources(resources, effects, howManyTimes, type, from) {
+
+    let globalEffects = globalEffectsList.slice()
     
     let modifier = 1
     if (type === "remove") // in case we need to remove the effects from the resources
@@ -255,11 +258,13 @@ export function applyEffectsToResources(resources, effects, howManyTimes, type) 
     
     effects.forEach(effect => {
         let index = resources.findIndex(x => x.name === effect.resource) //find the correct resource to modify
+        let globalIndex = globalEffects.findIndex(x => x.name === effect.resource)
         let effectType = wichEffect(effect) //return the correct effect type
 
         switch (effectType) {
 
             case "perSecRatio":     resources[index].incRatio += (effect.perSecRatio * howManyTimes * modifier); // (i.e.: 0.25 = 0.34 * 2 * -1) add 2 times -0.34 to the old ratio
+                                    globalEffects[globalIndex].activity.valueFlat += effect.perSecRatio * howManyTimes * modifier
                                     break;
 
             case "maxValue":        resources[index].maxValue += (effect.maxValue * howManyTimes * modifier);

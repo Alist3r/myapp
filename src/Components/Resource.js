@@ -1,12 +1,14 @@
 import React from 'react'
 import {formatNumber, formatNumberWPrefix} from '../Utilities/UtilityFunctions.js'
+import ResourceIncRatioTooltip from '../Components/Tooltips/ResourceIncRatioTooltip.js'
 import * as constants from '../Utilities/StringsConst.js'
 
 class Resource extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      resource: props.resource
+      resource: props.resource,
+      globalEffects: props.globalEffects
     }
   }
 
@@ -51,14 +53,19 @@ class Resource extends React.Component {
 
   render() {
     let resource = this.state.resource
+    let globalEffects = this.state.globalEffects
 
       return(
+        <ResourceIncRatioTooltip resource={resource} globalEffects={globalEffects}>
           <div>
             <div className="Resource-Cell-Name">{resource.name}</div> 
             <div className="Resource-Cell-Value" style={{'color': resource.currentValue >= (resource.maxValue * 90 /100 ) ? 'darkorange' : 'black'}}>{formatNumber(resource.currentValue,2)}</div>
             <div className="Resource-Cell-MaxValue">/{formatNumber(resource.maxValue,2)}</div> 
-            <div className="Resource-Cell-IncRatio">{formatNumberWPrefix(resource.incRatio * constants.OPT_GAMESPEED,2)} /<span className="Resource-Span-Sec">s</span></div>
-          </div>           
+            
+              <div className="Resource-Cell-IncRatio">{formatNumberWPrefix(resource.incRatio * constants.OPT_GAMESPEED,2)} /<span className="Resource-Span-Sec">s</span></div>
+            
+          </div>      
+          </ResourceIncRatioTooltip>     
       )
     }
 }
