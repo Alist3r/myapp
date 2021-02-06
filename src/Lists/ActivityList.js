@@ -132,7 +132,7 @@ const activityList = [
         modulable: false,
         unlocked: false,
         unlockedFrom: [
-            { resource: resNames.RES_003.name, neededValue: 70}
+            { resource: resNames.RES_003.name, neededValue: 50}
         ],
         percBoost: 0
     },

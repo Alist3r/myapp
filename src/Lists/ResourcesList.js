@@ -13,7 +13,7 @@ const resourcesList = [
         name: resNames.RES_000.name,
         currentValue: 5000,
         maxValue: 5000,
-        incRatio: 125879.7687,
+        incRatio: -2.85,
         unlocked: true,
         unlockedFrom: null
     },
@@ -52,7 +52,7 @@ const resourcesList = [
     {   //DEMIR
         name: resNames.RES_005.name, 
         currentValue: 0, 
-        maxValue: 500, 
+        maxValue: 800, 
         incRatio: 0, 
         unlocked: false,
         unlockedFrom: null,

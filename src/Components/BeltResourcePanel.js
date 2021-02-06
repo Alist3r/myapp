@@ -2,7 +2,7 @@ import React from 'react'
 import {formatNumber} from '../Utilities/UtilityFunctions.js'
 import * as constants from '../Utilities/StringsConst.js'
 import icondemir from '../Images/icon-demir.png'
-import Tooltip from './Tooltip.js'
+import BeltResourceTooltip from './Tooltips/BeltResourceTooltip.js'
 
 class BeltResourcePanel extends React.Component {
   constructor(props) {
@@ -72,9 +72,9 @@ class BeltResourcePanel extends React.Component {
         <div style={this.getResourceNameStyle()}>
           
           <div className="Belt-Resource-Cell-Icon-Container">
-            <Tooltip tooltipType="belt-resource-icon" resource={resource}>
+            <BeltResourceTooltip resource={resource}>
               <img className="Belt-Resource-Cell-Icon-Img" src={icondemir} alt="icon-demir"/>
-            </Tooltip>
+            </BeltResourceTooltip>
           </div> 
           <div style={{display: 'table-cell'}}>
             <div className="Belt-Resource-Cell-Value" style={{'color': resource.currentValue >= (resource.maxValue * 90 /100 ) ? 'darkorange' : 'black'}}>{formatNumber(resource.currentValue,2)}</div>

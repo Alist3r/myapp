@@ -1,5 +1,5 @@
 
-export const OPT_GAMESPEED = 1
+export const OPT_GAMESPEED = 100
 
 //000 Food
 //001 Athleticism

@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import "../tooltip.css";
-import {formatNumber, formatNumberWPrefix} from '../Utilities/UtilityFunctions.js'
-import {tooltipReverseTimerConverter} from '../Utilities/UtilityFunctions.js'
+import "./tooltip.css";
+import {formatNumber, formatNumberWPrefix} from '../../Utilities/UtilityFunctions.js'
+import {tooltipReverseTimerConverter} from '../../Utilities/UtilityFunctions.js'
 
-const Tooltip = (props) => {
+const ActivityTooltip = (props) => {
   let timeout;
   const [active, setActive] = useState(false);
 
   const showTip = () => {
     timeout = setTimeout(() => {
       setActive(true);
-    }, props.delay || 50);
+    }, props.delay || 1);
   };
 
   const hideTip = () => {
@@ -34,12 +34,6 @@ const Tooltip = (props) => {
   if(props.resourcesList != null) 
     resources = props.resourcesList.slice()
 
-  var resource
-  if(props.resource != null) 
-    resource = props.resource
-
-  var tooltipType = props.tooltipType
-
   return (
     <div
       className="Tooltip-Wrapper"
@@ -50,7 +44,7 @@ const Tooltip = (props) => {
     >
       {props.children}
       {/** ACTIVITY TOOLTIP */}
-      {active && tooltipType === "activity" && (
+      {active && (
         <div className={`Tooltip-Tip ${props.direction || "top"}`}>
           <div>
             <div className="Tooltip-Description">{activity.description}</div>
@@ -77,8 +71,8 @@ const Tooltip = (props) => {
               <span className="Tooltip-EffectRow">
                 {clickCost.resource}: {resources.map(resource => (
                   resource.name === clickCost.resource && (
-                    <span className={currentValueColor(resource.currentValue,clickCost.cost)}>
-                      {formatNumber(resource.currentValue,2)} / {formatNumber(clickCost.cost,0)}{clickCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < clickCost.cost && (<span> {tooltipReverseTimerConverter(clickCost.cost,resource.currentValue,resource.incRatio)}</span>)} 
+                    <span style={{float: 'right'}} className={currentValueColor(resource.currentValue,clickCost.cost)}>
+                      {formatNumber(resource.currentValue,2)} / {formatNumber(clickCost.cost, 0)}{clickCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < clickCost.cost && (<span> {tooltipReverseTimerConverter(clickCost.cost,resource.currentValue,resource.incRatio)}</span>)} 
                     </span>)
                 ))}
                 <br></br>
@@ -102,35 +96,18 @@ const Tooltip = (props) => {
                 {effect.percRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.percRatio,2)}% /<span className="Tooltip-Sec">sec</span></span>)}
                 {effect.maxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.maxValue,2)} </span>)} 
                 {effect.percMaxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.percMaxValue,2)}% </span>)}     
-                {effect.clickRatio && (<span>{effect.resource}: {effect.clickRatio > 0 ? "+" : ""}{formatNumberWPrefix(effect.clickRatio,2)} </span>)}           
+                {effect.clickRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.clickRatio,2)} </span>)}           
                 <br></br>
               </span>
 
             ))}  
-
-            {activity.effectActivity != null && (
-                <span>
-                  {activity.effectActivity.map(effect => (
-                    <span className="Tooltip-EffectRow">
-                      {effect.percRatio && (<span>{effect.activity}: {formatNumberWPrefix(effect.percRatio,2)}%</span>)}
-                      <br></br>
-                    </span>
-                    
-                  ))}
-                </span>
-            )}       
+       
           </div>
         </div>
       )}
 
-      {/** BELT RESOURCE TOOLTIP */}
-      {active && tooltipType === "belt-resource-icon" && (
-        <div style={{textAlign: 'center'}} className={`Tooltip-Tip ${props.direction || "top"}`}>
-            {resource.name}
-        </div>  
-      )}
     </div>
   );
 };
 
-export default Tooltip;
+export default ActivityTooltip;

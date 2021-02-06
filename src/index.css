@@ -1,20 +1,6 @@
-@font-face {
-  font-family: 'Roboto-Condensed';
-  src: local('Roboto'), url(./fonts/RobotoCondensed-Regular.ttf) format('truetype');
-}
-
-@font-face {
-  font-family: 'Lato';
-  src: local('Lato'), url(./fonts/Lato-Regular.ttf) format('truetype');
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: local('Poppins'), url(./fonts/Poppins-Regular.ttf) format('truetype');
-}
 
 body {
-  font: 13px "Poppins";
+  font: 13px "Helvetica";
   color: black;
   width: 100%;
   margin: 0px;
@@ -66,10 +52,10 @@ body {
 }
 
 .Resource-Cell-Value {
-  width: 55px;
-  max-width: 55px;
+  width: 60px;
+  max-width: 60px;
   display: table-cell;
-  font-size: 13px;
+  font-size: 14px;
  
 }
 
@@ -83,8 +69,8 @@ body {
 }
 
 .Resource-Cell-IncRatio {
-  width: 50px;
-  max-width: 50px;
+  width: 70px;
+  max-width: 65px;
   display: table-cell;
   font-size: 13px;
 }
@@ -114,7 +100,7 @@ body {
 .Middle-Panel-Tab-Name {
   margin: 3px;
   margin-bottom: 7px;
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
 }
 
@@ -169,12 +155,14 @@ body {
   }
 
   .Activity-Btn:active {
-    background-color: whitesmoke;
+    background-color: white;
   }
 
   .Activity-Btn:focus {
     outline: none;
   }
+
+  .Activity-Btn:
 
 .Activity-Btn-Label {
   display: inline-block;

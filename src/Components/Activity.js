@@ -1,6 +1,6 @@
 import React from 'react'
-import Tooltip from './Tooltip.js'
-import {percValue, removePerc} from '../Utilities/UtilityFunctions.js'
+import ActivityTooltip from './Tooltips/ActivityTooltip.js'
+import {haveEnoughResource, applyEffectsToResources} from '../Utilities/UtilityFunctions.js'
 
 class Activity extends React.Component {
   constructor(props) {
@@ -11,61 +11,12 @@ class Activity extends React.Component {
     }
   }
 
-  applyEffect(resourcesList,effects,type) {
-    let modifier = 1
-    if(type === "remove") // in case we need to remove the effects from the resources
-      modifier = -1
-
-    effects.forEach(effect => {          
-      let index = resourcesList.findIndex(x => x.name === effect.resource)
-      
-      //FLAT EFFECTS
-      if (effect.perSecRatio != null)
-        resourcesList[index].incRatio += (effect.perSecRatio * modifier)
-      if (effect.maxValue != null)
-        resourcesList[index].maxValue += (effect.maxValue * modifier)
-      if (effect.clickRatio != null) 
-        resourcesList[index].currentValue += (effect.clickRatio * modifier)  
-
-      // % EFFECTS  
-      if (effect.percRatio != null) {
-        if(modifier === 1)
-          resourcesList[index].incRatio += percValue(resourcesList[index].incRatio, effect.percRatio)
-        else
-          resourcesList[index].incRatio = removePerc(resourcesList[index].incRatio, effect.percRatio)
-      }
-
-      if (effect.percMaxValue != null) {
-        if(modifier === 1)
-          resourcesList[index].maxValue += percValue(resourcesList[index].maxValue, effect.percMaxValue)
-        else
-          resourcesList[index].maxValue = removePerc(resourcesList[index].maxValue, effect.percMaxValue)
-      }
-
-
-      if(resourcesList[index].unlocked === false)
-        resourcesList[index].unlocked = true   
-    })
-  }
-
-  haveEnoughResource(costs, resources) {
-    let haveEnoughResource = true
-    costs.forEach(cost => { // for each resource cost value
-      let index = resources.findIndex(x => x.name === cost.resource) // find the matching resource
-        if (haveEnoughResource && resources[index].currentValue >= cost.cost) // if the current resource value is major than the cost
-          haveEnoughResource = true
-        else
-          haveEnoughResource = false
-    })
-
-    return haveEnoughResource
-  }
 
   getActivityBtnClass(costs, resources) {
     // if the activity can be upgraded, then the button its more visible
     let cssClass = "Activity-Btn"
     if(costs != null) {
-      if(this.haveEnoughResource(costs, resources)) {
+      if(haveEnoughResource(costs, resources)) {
         cssClass = "Activity-Btn Upgradable"
       }
     }
@@ -84,7 +35,7 @@ class Activity extends React.Component {
     var havetoPay = false
 
     if(costs != null) { // if the activity have costs, then check if the resource are enough
-      upgradable = this.haveEnoughResource(costs, resourcesList)
+      upgradable = haveEnoughResource(costs, resourcesList)
       havetoPay = true
     }
 
@@ -106,11 +57,14 @@ class Activity extends React.Component {
         }
       }
       
-      this.applyEffect(resourcesList,effects,"add")      
+      //Apply effects to the resources  
+      applyEffectsToResources(resourcesList, effects, 1, "add")
 
+      //Upgrade the stage
       if (activityToDo.stage != null) 
         activityToDo.stage += 1
 
+      //Upgrade the grade  
       if(activityToDo.modulable != null) 
         activityToDo.grade += 1
         
@@ -136,7 +90,7 @@ class Activity extends React.Component {
         resources[index].currentValue += cost.cost  
       })
  
-      this.applyEffect(resources,effects,"remove")  
+      applyEffectsToResources(resources, effects, 1, "remove") 
 
       if(activityToSell.modulable === true) {
         if(activityToSell.grade === activityToSell.stage) {
@@ -163,7 +117,7 @@ class Activity extends React.Component {
     if(activity.grade < activity.stage) {
       activity.grade += 1
 
-      this.applyEffect(resources,effects,"add")
+      applyEffectsToResources(resources,effects,1,"add")
 
       this.setState ({
         gameResources: resources,
@@ -180,7 +134,7 @@ class Activity extends React.Component {
     if(activity.grade > 0) {
       activity.grade -= 1
 
-      this.applyEffect(resources,effects,"remove")
+      applyEffectsToResources(resources,effects,1,"remove")
 
       this.setState ({
         gameResources: resources,
@@ -201,11 +155,10 @@ class Activity extends React.Component {
       costs = activity.clickCost
 
       return(
-        <Tooltip activity={activity} resourcesList={resources} tooltipType="activity" direction="right">
+        <ActivityTooltip activity={activity} resourcesList={resources} direction="right">
           <span onClick={() => this.buyActivity(costs)} className={this.getActivityBtnClass(costs,resources)}> 
-            <span className="Activity-Btn-Label">
-              {activity.name} {activity.stage != null && (<span>[{activity.modulable && (<span>{activity.grade}/</span>)}{activity.stage}]</span>)}
-            </span>
+
+            <span className="Activity-Btn-Label">{activity.name} {activity.stage != null && (<span>[{activity.modulable && (<span>{activity.grade}/</span>)}{activity.stage}]</span>)}</span>
             
             {activity.stage != null && (<button onClick={(e) => {e.stopPropagation(); this.sellActivity()}} className="Activity-Btn-Sell">Sell</button>)}
             
@@ -215,8 +168,9 @@ class Activity extends React.Component {
                 <button onClick={(e) => {e.stopPropagation(); this.downGrade()}} className="Activity-Btn-Grade Minus">-</button>
               </span>
             )}
+
           </span>       
-        </Tooltip>    
+        </ActivityTooltip>    
       )
     }
 }
