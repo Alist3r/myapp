@@ -88,7 +88,7 @@ class Activity extends React.Component {
         resources[index].currentValue += cost.cost  
       })
  
-      applyEffectsToResources(resources, effects, 1, "remove") 
+      applyEffectsToResources(resources, effects, 1, "remove", "activity") 
 
       if(activityToSell.modulable === true) {
         if(activityToSell.grade === activityToSell.stage) {
@@ -115,7 +115,7 @@ class Activity extends React.Component {
     if(activity.grade < activity.stage) {
       activity.grade += 1
 
-      applyEffectsToResources(resources,effects,1,"add")
+      applyEffectsToResources(resources,effects,1,"add", "activity")
 
       this.setState ({
         gameResources: resources,
@@ -132,7 +132,7 @@ class Activity extends React.Component {
     if(activity.grade > 0) {
       activity.grade -= 1
 
-      applyEffectsToResources(resources,effects,1,"remove")
+      applyEffectsToResources(resources,effects,1,"remove","activity")
 
       this.setState ({
         gameResources: resources,

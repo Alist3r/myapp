@@ -40,15 +40,19 @@ const ResourceIncRatioTooltip = (props) => {
       {/** BELT RESOURCE TOOLTIP */}
       {active && (
           <div style={{textAlign: 'left'}} className={`Tooltip-Tip-ResourceIncRatio  ${props.direction || "top"}`}>
-            <span><i><b>From Activity</b></i></span><br></br>
-            |- Production: {formatNumberWPrefix(globalEffect.activity.valueFlat,2)} <br></br>
-            |- Boost: {formatNumberWPrefix(globalEffect.activity.valuePerc,2)}% <br></br>
+            
+            <span style={{float: 'right'}}>~{resource.name}~</span>
             <br></br>
-            <span><i><b>From Room Object</b></i></span><br></br>
-            |- Production: {formatNumberWPrefix(globalEffect.roomObject.valueFlat,2)} <br></br>
-            |- Boost: {formatNumberWPrefix(globalEffect.roomObject.valuePerc,2)}% <br></br>
-          </div>  
-       
+            <br></br>
+            {(globalEffect.activity.valueFlat !== 0 || globalEffect.activity.valuePerc !== 0) && (<span><b>From Activity</b><br></br></span>)}
+            {globalEffect.activity.valueFlat !== 0 && (<span>|- Production: {formatNumberWPrefix(globalEffect.activity.valueFlat,2)}/s <br></br></span>)}
+            {globalEffect.activity.valuePerc !== 0 && (<span>|- Boost: {formatNumberWPrefix(globalEffect.activity.valuePerc,2)}% <br></br></span>)}
+            <br></br>
+            {(globalEffect.roomObject.valueFlat !== 0 || globalEffect.roomObject.valuePerc !== 0) && (<span><b>From Room Object</b><br></br></span>)}
+            {globalEffect.roomObject.valueFlat !== 0 && (<span>|- Production: {formatNumberWPrefix(globalEffect.roomObject.valueFlat,2)} <br></br></span>)}
+            {globalEffect.roomObject.valuePerc !== 0 && (<span>|- Boost: {formatNumberWPrefix(globalEffect.roomObject.valuePerc,2)}% <br></br></span>)}
+
+          </div>     
       )}
     </div>
   );

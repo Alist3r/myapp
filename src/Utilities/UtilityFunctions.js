@@ -248,6 +248,26 @@ export function haveEnoughResource(costs, resources) {
     return haveEnoughResource
   }
 
+export function updateGlobalEffects(globalIndex, globalEffects, effectType, effectValue, howManyTimes, modifier, from){
+
+    switch (from) {
+        case "activity":    if(effectType === "flat")
+                                globalEffects[globalIndex].activity.valueFlat += effectValue * howManyTimes * modifier
+                            else if(effectType === "perc")
+                                globalEffects[globalIndex].activity.valuePerc += effectValue * howManyTimes * modifier
+                            break;
+            
+        case "roomObject":  if(effectType === "flat")
+                                globalEffects[globalIndex].roomObject.valueFlat += effectValue * howManyTimes * modifier
+                            else if(effectType === "perc")
+                                globalEffects[globalIndex].roomObject.valuePerc += effectValue * howManyTimes * modifier
+                            break;
+
+        default: break;
+    }
+
+}
+
 export function applyEffectsToResources(resources, effects, howManyTimes, type, from) {
 
     let globalEffects = globalEffectsList.slice()
@@ -264,7 +284,7 @@ export function applyEffectsToResources(resources, effects, howManyTimes, type, 
         switch (effectType) {
 
             case "perSecRatio":     resources[index].incRatio += (effect.perSecRatio * howManyTimes * modifier); // (i.e.: 0.25 = 0.34 * 2 * -1) add 2 times -0.34 to the old ratio
-                                    globalEffects[globalIndex].activity.valueFlat += effect.perSecRatio * howManyTimes * modifier
+                                    updateGlobalEffects(globalIndex, globalEffects, "flat", effect.perSecRatio, howManyTimes, modifier, from)
                                     break;
 
             case "maxValue":        resources[index].maxValue += (effect.maxValue * howManyTimes * modifier);
@@ -273,7 +293,8 @@ export function applyEffectsToResources(resources, effects, howManyTimes, type, 
             case "clickRatio":      resources[index].currentValue += (effect.clickRatio * modifier);
                                     break;
 
-            case "percRatio":       if(modifier === 1) {
+            case "percRatio":       updateGlobalEffects(globalIndex, globalEffects, "perc", effect.percRatio, howManyTimes, modifier, from)
+                                    if(modifier === 1) {
                                         for(let i=0; i < howManyTimes; i++)
                                             resources[index].incRatio += percValue(resources[index].incRatio, effect.percRatio)
                                     }
@@ -346,7 +367,7 @@ export function applyEffectsToActivity(booster, resources, activities, type) {
                                 }           
                                 break;
                               
-        case "maxValue":        resources[resIndex].maxValue -= (actEffect.maxValue * stageOrGrade)
+            case "maxValue":    resources[resIndex].maxValue -= (actEffect.maxValue * stageOrGrade)
 
                                 if(modifier === 1 && booster.isActive) 
                                     actEffect.maxValue = removePerc(actEffect.maxValue, effect.percRatio * howManyToRemove)

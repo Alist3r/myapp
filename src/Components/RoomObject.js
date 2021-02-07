@@ -23,7 +23,7 @@ class RoomObject extends React.Component {
       howManyTimes = 1
     }
     if(roomObj.effect != null)
-      applyEffectsToResources(this.state.resources, roomObj.effect, howManyTimes, "add")
+      applyEffectsToResources(this.state.resources, roomObj.effect, howManyTimes, "add", "roomObject")
 
     //EFFECT APPLIED DIRECTLY TO ACTIVITIES
     if(roomObj.effectActivity != null)
@@ -36,7 +36,7 @@ class RoomObject extends React.Component {
 
     //REMOVE EFFECT FROM RESOURCES
     if(roomObj.effect != null)
-      applyEffectsToResources(this.state.resources, roomObj.effect, roomObj.stage, "remove")
+      applyEffectsToResources(this.state.resources, roomObj.effect, roomObj.stage, "remove","roomObject")
 
     //REMOVE EFFECT FROM ACTIVITIES
     if(roomObj.effectActivity != null)

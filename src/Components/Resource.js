@@ -56,16 +56,16 @@ class Resource extends React.Component {
     let globalEffects = this.state.globalEffects
 
       return(
-        <ResourceIncRatioTooltip resource={resource} globalEffects={globalEffects}>
+        
           <div>
             <div className="Resource-Cell-Name">{resource.name}</div> 
             <div className="Resource-Cell-Value" style={{'color': resource.currentValue >= (resource.maxValue * 90 /100 ) ? 'darkorange' : 'black'}}>{formatNumber(resource.currentValue,2)}</div>
             <div className="Resource-Cell-MaxValue">/{formatNumber(resource.maxValue,2)}</div> 
-            
+            <ResourceIncRatioTooltip resource={resource} globalEffects={globalEffects}>
               <div className="Resource-Cell-IncRatio">{formatNumberWPrefix(resource.incRatio * constants.OPT_GAMESPEED,2)} /<span className="Resource-Span-Sec">s</span></div>
-            
+            </ResourceIncRatioTooltip>   
           </div>      
-          </ResourceIncRatioTooltip>     
+            
       )
     }
 }

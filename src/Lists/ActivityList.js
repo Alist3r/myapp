@@ -105,7 +105,7 @@ const activityList = [
         stage: 0,
         upgradeCost: [
             { resource: resNames.RES_002.name, cost: 23, upgradeCostRatio: 0.03},
-            { resource: resNames.RES_004.name, cost: 100, upgradeCostRatio: 0.02}
+            { resource: resNames.RES_004.name, cost: 70, upgradeCostRatio: 0.02}
         ],
         effect: [
             { resource: resNames.RES_003.name, perSecRatio: 0.27}
