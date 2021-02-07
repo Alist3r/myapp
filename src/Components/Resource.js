@@ -15,7 +15,7 @@ class Resource extends React.Component {
   componentDidMount() {
     this.timerID = setInterval(
       () => this.tick(),
-      100
+      constants.OPT_REFRESHRATE
     );
   }
 
@@ -28,7 +28,7 @@ class Resource extends React.Component {
     let addInc = true
 
     let previewCurrentValue = updatedResource.currentValue
-    previewCurrentValue += ((updatedResource.incRatio * constants.OPT_GAMESPEED) / 10) 
+    previewCurrentValue += ((updatedResource.incRatio * constants.OPT_GAMESPEED) / (1000 / constants.OPT_REFRESHRATE)) 
 
     if(previewCurrentValue > updatedResource.maxValue) {
       updatedResource.currentValue = updatedResource.maxValue
@@ -41,7 +41,7 @@ class Resource extends React.Component {
     }
     
     if(addInc) {
-      updatedResource.currentValue += ((updatedResource.incRatio * constants.OPT_GAMESPEED) / 10)
+      updatedResource.currentValue += ((updatedResource.incRatio * constants.OPT_GAMESPEED) / (1000 / constants.OPT_REFRESHRATE))
     }
 
     this.setState({

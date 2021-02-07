@@ -69,8 +69,8 @@ body {
 }
 
 .Resource-Cell-IncRatio {
-  width: 70px;
-  max-width: 65px;
+  width: 80px;
+  max-width: 85px;
   display: table-cell;
   font-size: 13px;
 }

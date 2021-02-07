@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {formatNumberWPrefix} from '../../Utilities/UtilityFunctions.js'
+import {formatNumberWPrefix, timerConverter} from '../../Utilities/UtilityFunctions.js'
 import "./tooltip.css";
 
 const ResourceIncRatioTooltip = (props) => {
@@ -51,7 +51,10 @@ const ResourceIncRatioTooltip = (props) => {
             {(globalEffect.roomObject.valueFlat !== 0 || globalEffect.roomObject.valuePerc !== 0) && (<span><b>From Room Object</b><br></br></span>)}
             {globalEffect.roomObject.valueFlat !== 0 && (<span>|- Production: {formatNumberWPrefix(globalEffect.roomObject.valueFlat,2)} <br></br></span>)}
             {globalEffect.roomObject.valuePerc !== 0 && (<span>|- Boost: {formatNumberWPrefix(globalEffect.roomObject.valuePerc,2)}% <br></br></span>)}
-
+            <br></br>
+            <br></br>
+            {resource.incRatio > 0 && (<span>To Cap: {timerConverter(resource.maxValue, resource.currentValue, resource.incRatio)}</span>)}
+            {resource.incRatio < 0 && (<span>To Cap: {timerConverter(0, resource.currentValue, resource.incRatio)}</span>)}
           </div>     
       )}
     </div>

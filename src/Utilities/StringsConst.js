@@ -1,5 +1,6 @@
 
 export const OPT_GAMESPEED = 1
+export const OPT_REFRESHRATE = 250 // milliseconds
 
 //000 Food
 //001 Athleticism

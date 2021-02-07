@@ -95,12 +95,12 @@ export function loadState(state) {
     return updatedstate
 }
 
-export function tooltipReverseTimerConverter (costValue, currentValue, incRatio) {
+export function timerConverter(finalValue, currentValue, incRatio) {
     let formattedTimeStamp = ""
 
-    if(incRatio > 0) {
+    //if(incRatio > 0) {
 
-        let timeStamp = Math.floor((costValue - currentValue) / (incRatio * constants.OPT_GAMESPEED))
+        let timeStamp = Math.floor((finalValue - currentValue) / (incRatio * constants.OPT_GAMESPEED))
 
         let hours = Math.floor(timeStamp / 60 / 60)
         let minutes = Math.floor(timeStamp / 60) - (hours * 60);
@@ -114,8 +114,7 @@ export function tooltipReverseTimerConverter (costValue, currentValue, incRatio)
         }
 
         formattedTimeStamp += seconds + "s"
-        formattedTimeStamp = "(" + formattedTimeStamp + ")"
-    }   
+    //}   
 
     return formattedTimeStamp
 }

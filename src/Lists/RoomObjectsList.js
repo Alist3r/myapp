@@ -69,10 +69,9 @@ const roomObjectsList = [
             { resource: resNames.RES_004.name, percMaxValue: 10}
         ],
         effectActivity: [
-            /*{ activity: resNames.ACT_002.name, percRatio: 10},
+            { activity: resNames.ACT_002.name, percRatio: 10},
             { activity: resNames.ACT_003.name, percRatio: 10},
-            { activity: resNames.ACT_007.name, percRatio: 20}*/
-            { activity: resNames.ACT_008.name, percRatio: 10}
+            { activity: resNames.ACT_007.name, percRatio: 20}
         ],
         isBought: false,
         isActive: false,

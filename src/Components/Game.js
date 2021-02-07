@@ -43,7 +43,7 @@ class Game extends React.Component {
     componentDidMount() {
         this.timerID = setInterval(
             () => this.tick(),
-            100
+            constants.OPT_REFRESHRATE
         );
     }
 

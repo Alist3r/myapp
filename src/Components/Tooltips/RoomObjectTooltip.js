@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./tooltip.css";
 import {formatNumber, formatNumberWPrefix} from '../../Utilities/UtilityFunctions.js'
-import {tooltipReverseTimerConverter} from '../../Utilities/UtilityFunctions.js'
+import {timerConverter} from '../../Utilities/UtilityFunctions.js'
 
 const RoomObjectTooltip = (props) => {
   let timeout;
@@ -61,7 +61,7 @@ const RoomObjectTooltip = (props) => {
                 {resources.map(resource => (
                   resource.name === upgradeCost.resource && (
                     <span style={{float: 'right'}} className={currentValueColor(resource.currentValue,upgradeCost.cost)}>
-                      {formatNumber(resource.currentValue,2)} / {formatNumber(upgradeCost.cost,2)}{upgradeCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < upgradeCost.cost && (<span> {tooltipReverseTimerConverter(upgradeCost.cost,resource.currentValue,resource.incRatio)}</span>)} 
+                      {formatNumber(resource.currentValue,2)} / {formatNumber(upgradeCost.cost,2)}{upgradeCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < upgradeCost.cost && (<span> ({timerConverter(upgradeCost.cost,resource.currentValue,resource.incRatio)})</span>)} 
                     </span>
                   )                
                 ))} 
@@ -75,7 +75,7 @@ const RoomObjectTooltip = (props) => {
                 {clickCost.resource}: {resources.map(resource => (
                   resource.name === clickCost.resource && (
                     <span className={currentValueColor(resource.currentValue,clickCost.cost)}>
-                      {formatNumber(resource.currentValue,2)} / {formatNumber(clickCost.cost,0)}{clickCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < clickCost.cost && (<span> {tooltipReverseTimerConverter(clickCost.cost,resource.currentValue,resource.incRatio)}</span>)} 
+                      {formatNumber(resource.currentValue,2)} / {formatNumber(clickCost.cost,0)}{clickCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < clickCost.cost && (<span> ({timerConverter(clickCost.cost,resource.currentValue,resource.incRatio)})</span>)} 
                     </span>)
                 ))}
                 <br></br>
