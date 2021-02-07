@@ -26,6 +26,11 @@ const ActivityTooltip = (props) => {
     return classColor
   }
 
+  const isResourceUnlocked = (effect, resources) => {
+    let index = resources.findIndex(x => x.name === effect.resource)
+    return resources[index].unlocked
+  }
+
   var activity 
   if(props.activity != null) 
     activity = props.activity 
@@ -59,7 +64,7 @@ const ActivityTooltip = (props) => {
                 {upgradeCost.resource} 
                 {resources.map(resource => (resource.name === upgradeCost.resource && (
                     <span style={{float: 'right'}} className={currentValueColor(resource.currentValue,upgradeCost.cost)}>
-                      {formatNumber(resource.currentValue,2)} / {formatNumber(upgradeCost.cost,2)}{upgradeCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < upgradeCost.cost && (<span> ({timerConverter(upgradeCost.cost,resource.currentValue,resource.incRatio)})</span>)} 
+                      {formatNumber(resource.currentValue,2)} / {formatNumber(upgradeCost.cost,2)}{upgradeCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < upgradeCost.cost && resource.incRatio !== 0 && (<span> ({timerConverter(upgradeCost.cost,resource.currentValue,resource.incRatio)})</span>)} 
                     </span>)                
                 ))} 
                 <br></br>
@@ -72,7 +77,7 @@ const ActivityTooltip = (props) => {
                 {clickCost.resource}: {resources.map(resource => (
                   resource.name === clickCost.resource && (
                     <span style={{float: 'right'}} className={currentValueColor(resource.currentValue,clickCost.cost)}>
-                      {formatNumber(resource.currentValue,2)} / {formatNumber(clickCost.cost, 0)}{clickCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < clickCost.cost && (<span> ({timerConverter(clickCost.cost,resource.currentValue,resource.incRatio)})</span>)} 
+                      {formatNumber(resource.currentValue,2)} / {formatNumber(clickCost.cost, 0)}{clickCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < clickCost.cost && resource.incRatio !== 0 && (<span> ({timerConverter(clickCost.cost,resource.currentValue,resource.incRatio)})</span>)} 
                     </span>)
                 ))}
                 <br></br>
@@ -90,16 +95,18 @@ const ActivityTooltip = (props) => {
             <div className="Tooltip-Title">Effects</div>
             <div className="Tooltip-Divider"></div>
             {activity.effect.map(effect => (
-
-              <span className="Tooltip-EffectRow">             
-                {effect.perSecRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.perSecRatio,2)}/<span className="Tooltip-Sec">sec</span></span>)}  
-                {effect.percRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.percRatio,2)}% /<span className="Tooltip-Sec">sec</span></span>)}
-                {effect.maxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.maxValue,2)} </span>)} 
-                {effect.percMaxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.percMaxValue,2)}% </span>)}     
-                {effect.clickRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.clickRatio,2)} </span>)}           
-                <br></br>
+              <span>
+                {isResourceUnlocked(effect, resources) && (
+                  <span className="Tooltip-EffectRow">             
+                    {effect.perSecRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.perSecRatio,2)}/<span className="Tooltip-Sec">sec</span></span>)}  
+                    {effect.percRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.percRatio,2)}% /<span className="Tooltip-Sec">sec</span></span>)}
+                    {effect.maxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.maxValue,2)} </span>)} 
+                    {effect.percMaxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.percMaxValue,2)}% </span>)}     
+                    {effect.clickRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.clickRatio,2)} </span>)}           
+                    <br></br>
+                  </span>
+                )}
               </span>
-
             ))}  
        
           </div>

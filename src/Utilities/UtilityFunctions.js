@@ -98,7 +98,7 @@ export function loadState(state) {
 export function timerConverter(finalValue, currentValue, incRatio) {
     let formattedTimeStamp = ""
 
-    //if(incRatio > 0) {
+    if(incRatio !== 0) {
 
         let timeStamp = Math.floor((finalValue - currentValue) / (incRatio * constants.OPT_GAMESPEED))
 
@@ -114,7 +114,7 @@ export function timerConverter(finalValue, currentValue, incRatio) {
         }
 
         formattedTimeStamp += seconds + "s"
-    //}   
+    }   
 
     return formattedTimeStamp
 }
