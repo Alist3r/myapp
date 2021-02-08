@@ -22,7 +22,7 @@ export const RES_003 = {
     name: "Knowledge"
 }
 export const RES_004 = {
-    name: "Free Time"
+    name: "Energy"
 }
 export const RES_005 = {
     name: "Demir"
@@ -47,8 +47,8 @@ export const RES_TYPE_002 = {
 //009 Cook Food
 
 export const ACT_001 = {
-        name: "Walking",
-        description: "Just walking... step by step"
+        name: "Save Energy",
+        description: "Save some life energy..."
     }
 export const ACT_002 = {
     name: "Meditate",
@@ -87,6 +87,7 @@ export const ACT_009 = {
 //001 Treadmill
 //002 Library
 //003 Agenda
+//004 Training Mat
 
 export const OBJ_001 = {
     name: "Treadmill",
@@ -101,6 +102,11 @@ export const OBJ_002 = {
 export const OBJ_003 = {
     name: "Agenda",
     description: "With a new agenda, you can optimize most of your activities",
+}
+
+export const OBJ_004 = {
+    name: "Training Mat",
+    description: "A simple Training Mat.",
 }
 
 //TABS

@@ -1,10 +1,10 @@
 import * as resNames from '../Utilities/StringsConst.js';
 
-//000 
+//000 Food
 //001 Athleticism
 //002 Psiche
 //003 Knowledge
-//004 Free Time
+//004 Energy
 //005 Demir
 
 
@@ -41,10 +41,10 @@ const resourcesList = [
         unlocked: false,
         unlockedFrom: null
     },
-    {   //FREE TIME
+    {   //ENERGY
         name: resNames.RES_004.name, 
         currentValue: 0, 
-        maxValue: 500, 
+        maxValue: 3500, 
         incRatio: 0, 
         unlocked: false,
         unlockedFrom: null

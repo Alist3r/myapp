@@ -7,7 +7,7 @@ import * as resNames from '../Utilities/StringsConst.js'
 //004 Free Time
 
 //ACTIVITIES
-//001 Walking
+//001 Save Energy
 //002 Meditate
 //003 Jogging
 //004 Rest
@@ -17,14 +17,13 @@ import * as resNames from '../Utilities/StringsConst.js'
 //008 Cook Food
 
 const activityList = [
-    {   //WALKING
+    {   //SAVE ENERGY
         name: resNames.ACT_001.name, 
         description: resNames.ACT_001.description,
         stage: null,
         upgradeCost: null,
         effect: [
-            { resource: resNames.RES_001.name, clickRatio: 1},
-            { resource: resNames.RES_000.name, clickRatio: -1}
+            { resource: resNames.RES_004.name, clickRatio: 1}
         ],
         unlocked: true,
         unlockedFrom: null
@@ -32,16 +31,17 @@ const activityList = [
     {   //REST
         name: resNames.ACT_004.name,
         description: resNames.ACT_004.description,
-        stage: null,
-        upgradeCost: null,
-        clickCost: [
-            { resource: resNames.RES_001.name, cost: 100}
+        stage: 0,
+        upgradeCost: [
+            { resource: resNames.RES_001.name, cost: 12, upgradeCostRatio: 0.06}
         ],
         effect: [
-            { resource: resNames.RES_002.name, clickRatio: 1}
+            { resource: resNames.RES_004.name, perSecRatio: 0.08}
         ],
-        unlocked: true,
-        unlockedFrom: null
+        unlocked: false,
+        unlockedFrom: [
+            { activity: resNames.ACT_003.name, neededStage: 5}
+        ]
     },
     {   //JOGGING
         name: resNames.ACT_003.name,
@@ -49,7 +49,7 @@ const activityList = [
         grade: 0,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_001.name, cost: 10, upgradeCostRatio: 0.01}
+            { resource: resNames.RES_004.name, cost: 10, upgradeCostRatio: 0.02}
         ],
         effect: [
             { resource: resNames.RES_001.name, perSecRatio: 0.56},
@@ -58,7 +58,7 @@ const activityList = [
         modulable: true,
         unlocked: false,
         unlockedFrom: [
-            { resource: resNames.RES_001.name, neededValue: 10}
+            { resource: resNames.RES_004.name, neededValue: 10}
         ]
     },
     {   //MEDITATE
@@ -66,14 +66,14 @@ const activityList = [
         description: resNames.ACT_002.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_002.name, cost: 3, upgradeCostRatio: 0.02 }
+            { resource: resNames.RES_004.name, cost: 3, upgradeCostRatio: 0.02 }
         ],
         effect: [
             { resource: resNames.RES_002.name, perSecRatio: 0.36}
         ],
         unlocked: false,
         unlockedFrom: [
-            { resource: resNames.RES_002.name, neededValue: 1}
+            { roomObject: resNames.OBJ_004.name}
         ]
     },
     {   //SAVE TIME
@@ -81,17 +81,13 @@ const activityList = [
         description: resNames.ACT_006.description,
         stage: null,
         clickCost: [
-            { resource: resNames.RES_001.name, cost: 200},
-            { resource: resNames.RES_002.name, cost: 100}
+            { resource: resNames.RES_001.name, cost: 100}
         ],
         effect: [
             { resource: resNames.RES_004.name, clickRatio: 37}
         ],
         unlocked: false,
-        unlockedFrom: [
-            { activity: resNames.ACT_003.name, neededStage: 13},
-            { activity: resNames.ACT_002.name, neededStage: 5}
-        ]
+        unlockedFrom: null
     },
     {   //READING BOOK
         name: resNames.ACT_005.name,
@@ -100,7 +96,7 @@ const activityList = [
         stage: 0,
         upgradeCost: [
             { resource: resNames.RES_002.name, cost: 23, upgradeCostRatio: 0.03},
-            { resource: resNames.RES_004.name, cost: 70, upgradeCostRatio: 0.02}
+            { resource: resNames.RES_004.name, cost: 25, upgradeCostRatio: 0.03}
         ],
         effect: [
             { resource: resNames.RES_003.name, perSecRatio: 0.27}
@@ -108,7 +104,7 @@ const activityList = [
         modulable: false,
         unlocked: false,
         unlockedFrom: [
-            {resource: resNames.RES_004.name, neededValue: 100}
+            {roomObject: resNames.OBJ_002.name}
         ]
     },
     {   //GO TO JOB
@@ -117,16 +113,15 @@ const activityList = [
         grade: null,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_003.name, cost: 60, upgradeCostRatio: 0.03}
+            { resource: resNames.RES_004.name, cost: 31, upgradeCostRatio: 0.03}
         ],
         effect: [
-            { resource: resNames.RES_005.name, perSecRatio: 0.09},
-            { resource: resNames.RES_004.name, perSecRatio: -0.003}
+            { resource: resNames.RES_005.name, perSecRatio: 0.1}
         ],
         modulable: false,
         unlocked: false,
         unlockedFrom: [
-            { resource: resNames.RES_003.name, neededValue: 50}
+            { activity: resNames.ACT_004.name, neededStage: 5}
         ]
     },
     {   //MASSAGE
@@ -135,13 +130,12 @@ const activityList = [
         grade: null,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_004.name, cost: 80, upgradeCostRatio: 0.03},
             { resource: resNames.RES_005.name, cost: 25, upgradeCostRatio: 0.03}
         ],
         effect: [
             { resource: resNames.RES_001.name, maxValue: 800},
-            { resource: resNames.RES_002.name, maxValue: 300},
-            { resource: resNames.RES_003.name, maxValue: 100},
+            { resource: resNames.RES_004.name, maxValue: 500}
+            //{ resource: resNames.RES_003.name, maxValue: 100},
         ],
         modulable: false,
         unlocked: false,
@@ -156,7 +150,7 @@ const activityList = [
         stage: 0,
         upgradeCost: [
             { resource: resNames.RES_003.name, cost: 10, upgradeCostRatio: 0.01},
-            { resource: resNames.RES_004.name, cost: 40, upgradeCostRatio: 0.02}
+            { resource: resNames.RES_004.name, cost: 25, upgradeCostRatio: 0.02}
         ],
         effect: [
             { resource: resNames.RES_000.name, perSecRatio: 0.62},

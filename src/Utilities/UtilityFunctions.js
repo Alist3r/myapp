@@ -203,31 +203,42 @@ export function removePerc(finalValue, percent) {
     return result
 }
 
-export function checkUnlockCondition(resourcesList, activityList, unlockCondition) {
+export function checkUnlockCondition(resourcesList, activityList, roomObjectsList, unlockCondition) {
 
     let unlockable = true
+    if(unlockCondition != null) {
 
-    for (let i=0; i < unlockCondition.length; i++) {
+        for (let i=0; i < unlockCondition.length; i++) {
 
-        //UNLOCK BY RESOURCES VALUES
-        if(unlockable && unlockCondition[i].resource != null) {
-            let index = resourcesList.findIndex(x => x.name === unlockCondition[i].resource) 
-            if (resourcesList[index].currentValue >= unlockCondition[i].neededValue)
-                unlockable = true
-            else {
-                unlockable = false
-            }   
+            //UNLOCK BY RESOURCES VALUES
+            if(unlockable && unlockCondition[i].resource != null) {
+                let index = resourcesList.findIndex(x => x.name === unlockCondition[i].resource) 
+                if (resourcesList[index].currentValue >= unlockCondition[i].neededValue)
+                    unlockable = true
+                else {
+                    unlockable = false
+                }   
+            }
+
+            //UNLOCK BY ACTIVITY STAGE
+            if(unlockable && unlockCondition[i].activity != null) {
+                let index = activityList.findIndex(x => x.name === unlockCondition[i].activity)
+                if (activityList[index].stage >= unlockCondition[i].neededStage)
+                    unlockable = true
+                else
+                    unlockable = false
+            }
+
+            //UNLOCK BY ROOMOBJECT
+            if(unlockable && unlockCondition[i].roomObject != null) {
+                let index = roomObjectsList.findIndex(x => x.name === unlockCondition[i].roomObject)
+                if(roomObjectsList[index].isBought)
+                    unlockable = true
+                else
+                    unlockable = false
+            }
+        
         }
-
-        //UNLOCK BY ACTIVITY STAGE
-        if(unlockable && unlockCondition[i].activity != null) {
-            let index = activityList.findIndex(x => x.name === unlockCondition[i].activity)
-            if (activityList[index].stage >= unlockCondition[i].neededStage)
-                unlockable = true
-            else
-                unlockable = false
-        }
-       
     }
 
     return unlockable
@@ -316,7 +327,7 @@ export function applyEffectsToResources(resources, effects, howManyTimes, type, 
             default: break;
         }    
 
-        if(resources[index].unlocked === false)
+        if(resources[index].unlocked === false && resources[index].incRatio > 0)
             resources[index].unlocked = true   
     });
 

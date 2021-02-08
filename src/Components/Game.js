@@ -31,7 +31,7 @@ class Game extends React.Component {
             roomSlotUsed: 0,
         
         }     
-        
+    
         //If a storage exist, then load the datas
         this.state = utility.loadState(this.state);   
     }
@@ -95,16 +95,38 @@ class Game extends React.Component {
                     {/** TABS SELECTOR */}
                     <div className="Middle-Panel-Tabs-Container">
                         {tabList.map(tab => (
-                            <TabSelector tab={tab} isActive={this.state.activeTab === tab.name ? true : false} resources={gameResources} activities={gameActivities} updateActiveTab={this.updateActiveTab}/>
+                            <TabSelector 
+                                tab={tab} 
+                                isActive={this.state.activeTab === tab.name ? true : false} 
+                                resources={gameResources} 
+                                activities={gameActivities} 
+                                roomObjects={gameRoomObjects}
+                                updateActiveTab={this.updateActiveTab}
+                            />
                         ))}
                     </div>
                     
                     <div className="Middle-Panel-Game-View">
                         {/** ACTIVITY TAB */}
-                        <ActivityTab updateResources={this.updateResources} activities={gameActivities} resources={gameResources} globalEffects={gameGlobalEffects} activeTab={this.state.activeTab} />
+                        <ActivityTab 
+                            updateResources={this.updateResources} 
+                            activities={gameActivities} 
+                            roomObjects={gameRoomObjects} 
+                            resources={gameResources} 
+                            globalEffects={gameGlobalEffects} 
+                            activeTab={this.state.activeTab} 
+                        />
 
                         {/** YOUR ROOM TAB */}
-                        <RoomObjectTab changeRoomSlotUsed={this.changeRoomSlotUsed} roomObjects={gameRoomObjects} resources={gameResources} activities={gameActivities} activeTab={this.state.activeTab} roomSlotUsed={this.state.roomSlotUsed} roomSlotMax={this.state.roomSlotMax}/>
+                        <RoomObjectTab 
+                            changeRoomSlotUsed={this.changeRoomSlotUsed} 
+                            roomObjects={gameRoomObjects} 
+                            resources={gameResources} 
+                            activities={gameActivities} 
+                            activeTab={this.state.activeTab} 
+                            roomSlotUsed={this.state.roomSlotUsed} 
+                            roomSlotMax={this.state.roomSlotMax}
+                        />
                         
                     </div>  
 

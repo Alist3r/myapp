@@ -26,6 +26,11 @@ const RoomObjectTooltip = (props) => {
     return classColor
   }
 
+  const isResourceUnlocked = (effect, resources) => {
+    let index = resources.findIndex(x => x.name === effect.resource)
+    return resources[index].unlocked
+  }
+
   var roomObj 
   if(props.roomObj != null) 
     roomObj = props.roomObj 
@@ -93,16 +98,18 @@ const RoomObjectTooltip = (props) => {
             <div className="Tooltip-Title">Effects</div>
             <div className="Tooltip-Divider"></div>
             {roomObj.effect.map(effect => (
-
-              <span className="Tooltip-EffectRow">             
-                {effect.perSecRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.perSecRatio,2)}/<span className="Tooltip-Sec">sec</span></span>)}  
-                {effect.percRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.percRatio,2)}% /<span className="Tooltip-Sec">sec</span></span>)}
-                {effect.maxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.maxValue,2)} </span>)} 
-                {effect.percMaxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.percMaxValue,2)}% </span>)}     
-                {effect.clickRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.clickRatio,2)} </span>)}           
-                <br></br>
+              <span>
+                {isResourceUnlocked(effect, resources) && (
+                  <span className="Tooltip-EffectRow">             
+                    {effect.perSecRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.perSecRatio,2)}/<span className="Tooltip-Sec">sec</span></span>)}  
+                    {effect.percRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.percRatio,2)}% /<span className="Tooltip-Sec">sec</span></span>)}
+                    {effect.maxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.maxValue,2)} </span>)} 
+                    {effect.percMaxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.percMaxValue,2)}% </span>)}     
+                    {effect.clickRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.clickRatio,2)} </span>)}           
+                    <br></br>
+                  </span>
+                )}
               </span>
-
             ))}  
 
             {roomObj.effectActivity != null && (
