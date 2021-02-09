@@ -47,18 +47,20 @@ const activityList = [
             { resource: resNames.RES_004.name, neededValue: 10}
         ]
     },
-    {   //SAVE TIME
-        name: resNames.ACT_006.name,
-        description: resNames.ACT_006.description,
-        stage: null,
-        clickCost: [
-            { resource: resNames.RES_001.name, cost: 100}
+    {   //REST
+        name: resNames.ACT_004.name,
+        description: resNames.ACT_004.description,
+        stage: 0,
+        upgradeCost: [
+            { resource: resNames.RES_001.name, cost: 12, upgradeCostRatio: 0.06}
         ],
         effect: [
-            { resource: resNames.RES_004.name, clickRatio: 37}
+            { resource: resNames.RES_004.name, perSecRatio: 0.08}
         ],
         unlocked: false,
-        unlockedFrom: null
+        unlockedFrom: [
+            { activity: resNames.ACT_003.name, neededStage: 5}
+        ]
     },
     {   //GO TO JOB
         name: resNames.ACT_007.name,
@@ -75,21 +77,6 @@ const activityList = [
         unlocked: false,
         unlockedFrom: [
             { activity: resNames.ACT_004.name, neededStage: 5}
-        ]
-    },
-    {   //REST
-        name: resNames.ACT_004.name,
-        description: resNames.ACT_004.description,
-        stage: 0,
-        upgradeCost: [
-            { resource: resNames.RES_001.name, cost: 12, upgradeCostRatio: 0.06}
-        ],
-        effect: [
-            { resource: resNames.RES_004.name, perSecRatio: 0.08}
-        ],
-        unlocked: false,
-        unlockedFrom: [
-            { activity: resNames.ACT_003.name, neededStage: 5}
         ]
     },
     {   //MEDITATE
@@ -161,8 +148,20 @@ const activityList = [
         unlockedFrom: [
             { activity: resNames.ACT_005.name, neededStage: 5}
         ]
-    }
-
+    },
+    /*{   //SAVE TIME
+        name: resNames.ACT_006.name,
+        description: resNames.ACT_006.description,
+        stage: null,
+        clickCost: [
+            { resource: resNames.RES_001.name, cost: 100}
+        ],
+        effect: [
+            { resource: resNames.RES_004.name, clickRatio: 37}
+        ],
+        unlocked: false,
+        unlockedFrom: null
+    },*/
 ]
 
 export default activityList;

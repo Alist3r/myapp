@@ -112,6 +112,6 @@ export const OBJ_004 = {
 //TABS
 
 export const TAB_001 = "Activities"
-export const TAB_002 = "Your Room"
+export const TAB_002 = "Home"
 
 
