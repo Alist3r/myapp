@@ -57,6 +57,24 @@ const roomObjectsList = [
         unlocked: true,
         unlockedFrom: null
     },
+    {   //TRAINING MAT
+        name: resNames.OBJ_004.name,
+        description: resNames.OBJ_004.description,
+        stage: 0,
+        upgradeCost: [
+            { resource: resNames.RES_005.name, cost: 20, upgradeCostRatio: 0.8}
+        ],
+        effect: [
+            { resource: resNames.RES_002.name, perSecRatio: 0.12},
+            { resource: resNames.RES_002.name, percMaxValue: 10}
+        ],
+        effectActivity: null,
+        isBought: false,
+        isActive: false,
+        requiredSlot: 1,
+        unlocked: true,
+        unlockedFrom: null
+    },
     {   //AGENDA
         name: resNames.OBJ_003.name,
         description: resNames.OBJ_003.description,
@@ -79,24 +97,6 @@ const roomObjectsList = [
         unlocked: false,
         unlockedFrom: null
     },
-    {   //TRAINING MAT
-        name: resNames.OBJ_004.name,
-        description: resNames.OBJ_004.description,
-        stage: 0,
-        upgradeCost: [
-            { resource: resNames.RES_005.name, cost: 20, upgradeCostRatio: 0.8}
-        ],
-        effect: [
-            { resource: resNames.RES_002.name, perSecRatio: 0.12},
-            { resource: resNames.RES_002.name, percMaxValue: 10}
-        ],
-        effectActivity: null,
-        isBought: false,
-        isActive: false,
-        requiredSlot: 1,
-        unlocked: true,
-        unlockedFrom: null
-    }
 ]
 
 export default roomObjectsList;
