@@ -7,8 +7,7 @@ class ResourceTab extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            resources: props.resources,
-            globalEffects: props.globalEffects
+            gameState: props.gameState
         }
     }
 
@@ -20,14 +19,13 @@ class ResourceTab extends React.Component {
     }
 
     render() {
-        let resources = this.state.resources.slice()
-        let globalEffects = this.state.globalEffects.slice()
+        let resources = this.state.gameState.gameResources.slice()
 
         return (
             <div>
                 {resources.map(resource => (                    
                     <div style={{'visibility': resource.type !== constants.RES_TYPE_002.name ? 'visible' : 'hidden'}}>
-                        {this.unlockResource(resource) && (<Resource  resource={resource} globalEffects={globalEffects}/>)}
+                        {this.unlockResource(resource) && (<Resource  resource={resource} gameState={this.state.gameState}/>)}
                     </div>                                     
                 ))}
            </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {formatNumberWPrefix, timerConverter} from '../../Utilities/UtilityFunctions.js'
+import {formatNumberWPrefix, timerConverter, wichEffect} from '../../Utilities/UtilityFunctions.js'
 import "./tooltip.css";
 
 const ResourceIncRatioTooltip = (props) => {
@@ -17,16 +17,19 @@ const ResourceIncRatioTooltip = (props) => {
     setActive(false);
   };
 
-  var resource
-  if(props.resource != null) 
-    resource = props.resource
+  const getStageOrGrade = (activity) => {
+    if(activity.modulable)
+      return activity.grade
+    else
+      return activity.stage
+  }
 
-  var globalEffects
-  if(props.globalEffects != null)
-    globalEffects = props.globalEffects
+  let gameState = props.gameState
+  let resource = props.resource
+  let activities = gameState.gameActivities
+  let roomObjects = gameState.gameRoomObjects
 
-  let globalIndex = globalEffects.findIndex(x => x.name === resource.name)  
-  let globalEffect = globalEffects[globalIndex]
+  
   return (
     <div
       className="Tooltip-Wrapper-ResourceIncRatio"
@@ -40,21 +43,48 @@ const ResourceIncRatioTooltip = (props) => {
       {/** BELT RESOURCE TOOLTIP */}
       {active && (
           <div style={{textAlign: 'left'}} className={`Tooltip-Tip-ResourceIncRatio  ${props.direction || "top"}`}>
+          <span style={{float: 'right'}}>~{resource.name}~</span>
+          <br></br>
+          <br></br>
             
-            <span style={{float: 'right'}}>~{resource.name}~</span>
+          <span>
+            {/* ACTIVITIES*/}
+            {activities.map(activity =>(
+              <span>
+              {activity.unlocked && activity.effect != null && (
+                activity.effect.map(effect => (
+                    <span>
+                      {effect.resource === resource.name && wichEffect(effect) === 'perSecRatio' && 
+                        (<span>{activity.name}: {formatNumberWPrefix(effect.perSecRatio * getStageOrGrade(activity),2)}/s <br></br></span>)}
+                      {effect.resource === resource.name && wichEffect(effect) === 'percRatio' && 
+                        (<span>{activity.name}: {formatNumberWPrefix(effect.percRatio * getStageOrGrade(activity),2)}% <br></br></span>)}
+                    </span>
+                ))
+              )}
+              </span>
+            ))}
+            {/* HOME OBJECTS}*/}
+            {roomObjects.map(roomObj =>(
+              <span>
+              {roomObj.unlocked && roomObj.isActive && roomObj.effect != null && (
+                roomObj.effect.map(effect => (
+                    <span>
+                      {effect.resource === resource.name && wichEffect(effect) === 'perSecRatio' && 
+                        (<span>{roomObj.name}: {formatNumberWPrefix(effect.perSecRatio * roomObj.stage,2)}/s</span>)}
+                      {effect.resource === resource.name && wichEffect(effect) === 'percRatio' && 
+                        (<span>{roomObj.name}: {formatNumberWPrefix(effect.percRatio * roomObj.stage,2)}%</span>)}
+                    </span>
+                ))
+              )}
+              </span>
+            ))}
             <br></br>
-            <br></br>
-            {(globalEffect.activity.valueFlat !== 0 || globalEffect.activity.valuePerc !== 0) && (<span><b>From Activity</b><br></br></span>)}
-            {globalEffect.activity.valueFlat !== 0 && (<span>|- Production: {formatNumberWPrefix(globalEffect.activity.valueFlat,2)}/s <br></br></span>)}
-            {globalEffect.activity.valuePerc !== 0 && (<span>|- Boost: {formatNumberWPrefix(globalEffect.activity.valuePerc,2)}% <br></br></span>)}
-            <br></br>
-            {(globalEffect.roomObject.valueFlat !== 0 || globalEffect.roomObject.valuePerc !== 0) && (<span><b>From Room Object</b><br></br></span>)}
-            {globalEffect.roomObject.valueFlat !== 0 && (<span>|- Production: {formatNumberWPrefix(globalEffect.roomObject.valueFlat,2)} <br></br></span>)}
-            {globalEffect.roomObject.valuePerc !== 0 && (<span>|- Boost: {formatNumberWPrefix(globalEffect.roomObject.valuePerc,2)}% <br></br></span>)}
-            <br></br>
-            <br></br>
+            <br></br>   
+            <div className="Tooltip-Divider"></div>
             {resource.incRatio > 0 && (<span>To Cap: {timerConverter(resource.maxValue, resource.currentValue, resource.incRatio)}</span>)}
-            {resource.incRatio < 0 && (<span>To Cap: {timerConverter(0, resource.currentValue, resource.incRatio)}</span>)}
+            {resource.incRatio < 0 && (<span>To Zero: {timerConverter(0, resource.currentValue, resource.incRatio)}</span>)}
+          </span>
+
           </div>     
       )}
     </div>

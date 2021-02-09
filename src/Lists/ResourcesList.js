@@ -9,12 +9,20 @@ import * as resNames from '../Utilities/StringsConst.js';
 
 
 const resourcesList = [
-    {
+    {   //FOOD
         name: resNames.RES_000.name,
         currentValue: 5000,
         maxValue: 5000,
         incRatio: -2.85,
         unlocked: true,
+        unlockedFrom: null
+    },
+    {   //ENERGY
+        name: resNames.RES_004.name, 
+        currentValue: 0, 
+        maxValue: 3500, 
+        incRatio: 0, 
+        unlocked: false,
         unlockedFrom: null
     },
     {   //ATHLETICISM
@@ -37,14 +45,6 @@ const resourcesList = [
         name: resNames.RES_003.name, 
         currentValue: 0, 
         maxValue: 500, 
-        incRatio: 0, 
-        unlocked: false,
-        unlockedFrom: null
-    },
-    {   //ENERGY
-        name: resNames.RES_004.name, 
-        currentValue: 0, 
-        maxValue: 3500, 
         incRatio: 0, 
         unlocked: false,
         unlockedFrom: null

@@ -8,6 +8,7 @@ class Resource extends React.Component {
     super(props)
     this.state = {
       resource: props.resource,
+      gameState: props.gameState,
       globalEffects: props.globalEffects
     }
   }
@@ -53,6 +54,7 @@ class Resource extends React.Component {
 
   render() {
     let resource = this.state.resource
+    let gameState = this.state.gameState
     let globalEffects = this.state.globalEffects
 
       return(
@@ -61,9 +63,11 @@ class Resource extends React.Component {
             <div className="Resource-Cell-Name">{resource.name}</div> 
             <div className="Resource-Cell-Value" style={{'color': resource.currentValue >= (resource.maxValue * 90 /100 ) ? 'darkorange' : 'black'}}>{formatNumber(resource.currentValue,2)}</div>
             <div className="Resource-Cell-MaxValue">/{formatNumber(resource.maxValue,2)}</div> 
-            <ResourceIncRatioTooltip resource={resource} globalEffects={globalEffects}>
+            <span style={{visibility: resource.incRatio !== 0 ? 'visible' : 'hidden', display: 'table-cell'}}>
+            <ResourceIncRatioTooltip resource={resource} gameState={gameState} globalEffects={globalEffects}>
               <div className="Resource-Cell-IncRatio">{formatNumberWPrefix(resource.incRatio * constants.OPT_GAMESPEED,2)} /<span className="Resource-Span-Sec">s</span></div>
             </ResourceIncRatioTooltip>   
+            </span>
           </div>      
             
       )

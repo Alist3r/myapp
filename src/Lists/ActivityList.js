@@ -16,6 +16,7 @@ import * as resNames from '../Utilities/StringsConst.js'
 //007 Go to Job
 //008 Cook Food
 
+
 const activityList = [
     {   //SAVE ENERGY
         name: resNames.ACT_001.name, 
@@ -27,21 +28,6 @@ const activityList = [
         ],
         unlocked: true,
         unlockedFrom: null
-    },
-    {   //REST
-        name: resNames.ACT_004.name,
-        description: resNames.ACT_004.description,
-        stage: 0,
-        upgradeCost: [
-            { resource: resNames.RES_001.name, cost: 12, upgradeCostRatio: 0.06}
-        ],
-        effect: [
-            { resource: resNames.RES_004.name, perSecRatio: 0.08}
-        ],
-        unlocked: false,
-        unlockedFrom: [
-            { activity: resNames.ACT_003.name, neededStage: 5}
-        ]
     },
     {   //JOGGING
         name: resNames.ACT_003.name,
@@ -61,6 +47,51 @@ const activityList = [
             { resource: resNames.RES_004.name, neededValue: 10}
         ]
     },
+    {   //SAVE TIME
+        name: resNames.ACT_006.name,
+        description: resNames.ACT_006.description,
+        stage: null,
+        clickCost: [
+            { resource: resNames.RES_001.name, cost: 100}
+        ],
+        effect: [
+            { resource: resNames.RES_004.name, clickRatio: 37}
+        ],
+        unlocked: false,
+        unlockedFrom: null
+    },
+    {   //GO TO JOB
+        name: resNames.ACT_007.name,
+        description: resNames.ACT_007.description,
+        grade: null,
+        stage: 0,
+        upgradeCost: [
+            { resource: resNames.RES_004.name, cost: 31, upgradeCostRatio: 0.03}
+        ],
+        effect: [
+            { resource: resNames.RES_005.name, perSecRatio: 0.1}
+        ],
+        modulable: false,
+        unlocked: false,
+        unlockedFrom: [
+            { activity: resNames.ACT_004.name, neededStage: 5}
+        ]
+    },
+    {   //REST
+        name: resNames.ACT_004.name,
+        description: resNames.ACT_004.description,
+        stage: 0,
+        upgradeCost: [
+            { resource: resNames.RES_001.name, cost: 12, upgradeCostRatio: 0.06}
+        ],
+        effect: [
+            { resource: resNames.RES_004.name, perSecRatio: 0.08}
+        ],
+        unlocked: false,
+        unlockedFrom: [
+            { activity: resNames.ACT_003.name, neededStage: 5}
+        ]
+    },
     {   //MEDITATE
         name: resNames.ACT_002.name, 
         description: resNames.ACT_002.description,
@@ -75,19 +106,6 @@ const activityList = [
         unlockedFrom: [
             { roomObject: resNames.OBJ_004.name}
         ]
-    },
-    {   //SAVE TIME
-        name: resNames.ACT_006.name,
-        description: resNames.ACT_006.description,
-        stage: null,
-        clickCost: [
-            { resource: resNames.RES_001.name, cost: 100}
-        ],
-        effect: [
-            { resource: resNames.RES_004.name, clickRatio: 37}
-        ],
-        unlocked: false,
-        unlockedFrom: null
     },
     {   //READING BOOK
         name: resNames.ACT_005.name,
@@ -105,23 +123,6 @@ const activityList = [
         unlocked: false,
         unlockedFrom: [
             {roomObject: resNames.OBJ_002.name}
-        ]
-    },
-    {   //GO TO JOB
-        name: resNames.ACT_007.name,
-        description: resNames.ACT_007.description,
-        grade: null,
-        stage: 0,
-        upgradeCost: [
-            { resource: resNames.RES_004.name, cost: 31, upgradeCostRatio: 0.03}
-        ],
-        effect: [
-            { resource: resNames.RES_005.name, perSecRatio: 0.1}
-        ],
-        modulable: false,
-        unlocked: false,
-        unlockedFrom: [
-            { activity: resNames.ACT_004.name, neededStage: 5}
         ]
     },
     {   //MASSAGE
