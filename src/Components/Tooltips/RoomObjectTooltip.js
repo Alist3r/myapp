@@ -97,7 +97,9 @@ const RoomObjectTooltip = (props) => {
             {/*--------- EFFECTS ---------*/}
             <div className="Tooltip-Title">Effects</div>
             <div className="Tooltip-Divider"></div>
-            {roomObj.effect.map(effect => (
+
+            
+            {roomObj.effect != null && roomObj.effect.map(effect => (
               <span>
                 {isResourceUnlocked(effect, resources) && (
                   <span className="Tooltip-EffectRow">             

@@ -43,9 +43,6 @@ const ResourceIncRatioTooltip = (props) => {
       {/** BELT RESOURCE TOOLTIP */}
       {active && (
           <div style={{textAlign: 'left'}} className={`Tooltip-Tip-ResourceIncRatio  ${props.direction || "top"}`}>
-          <span style={{float: 'right'}}>~{resource.name}~</span>
-          <br></br>
-          <br></br>
             
           <span>
             {/* ACTIVITIES*/}
@@ -55,14 +52,15 @@ const ResourceIncRatioTooltip = (props) => {
                 activity.effect.map(effect => (
                     <span>
                       {effect.resource === resource.name && wichEffect(effect) === 'perSecRatio' && 
-                        (<span>{activity.name}: {formatNumberWPrefix(effect.perSecRatio * getStageOrGrade(activity),2)}/s <br></br></span>)}
+                        (<span>{activity.name} <span style={{float: "right"}}>{formatNumberWPrefix(effect.perSecRatio * getStageOrGrade(activity),2)}/s</span> <br></br></span>)}
                       {effect.resource === resource.name && wichEffect(effect) === 'percRatio' && 
-                        (<span>{activity.name}: {formatNumberWPrefix(effect.percRatio * getStageOrGrade(activity),2)}% <br></br></span>)}
+                        (<span>{activity.name} <span style={{float: "right"}}>{formatNumberWPrefix(effect.percRatio * getStageOrGrade(activity),2)}% </span><br></br></span>)}
                     </span>
                 ))
               )}
               </span>
             ))}
+
             {/* HOME OBJECTS}*/}
             {roomObjects.map(roomObj =>(
               <span>
@@ -70,15 +68,15 @@ const ResourceIncRatioTooltip = (props) => {
                 roomObj.effect.map(effect => (
                     <span>
                       {effect.resource === resource.name && wichEffect(effect) === 'perSecRatio' && 
-                        (<span>{roomObj.name}: {formatNumberWPrefix(effect.perSecRatio * roomObj.stage,2)}/s</span>)}
+                        (<span>{roomObj.name} <span style={{float: "right"}}>{formatNumberWPrefix(effect.perSecRatio * roomObj.stage,2)}/s</span><br></br></span>)}
                       {effect.resource === resource.name && wichEffect(effect) === 'percRatio' && 
-                        (<span>{roomObj.name}: {formatNumberWPrefix(effect.percRatio * roomObj.stage,2)}%</span>)}
+                        (<span>{roomObj.name} <span style={{float: "right"}}>{formatNumberWPrefix(effect.percRatio * roomObj.stage,2)}%</span><br></br></span>)}
                     </span>
                 ))
               )}
               </span>
             ))}
-            <br></br>
+            
             <br></br>   
             <div className="Tooltip-Divider"></div>
             {resource.incRatio > 0 && (<span>To Cap: {timerConverter(resource.maxValue, resource.currentValue, resource.incRatio)}</span>)}

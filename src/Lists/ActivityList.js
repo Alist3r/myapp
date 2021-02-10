@@ -52,10 +52,10 @@ const activityList = [
         description: resNames.ACT_004.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_001.name, cost: 12, upgradeCostRatio: 0.06}
+            { resource: resNames.RES_001.name, cost: 15, upgradeCostRatio: 0.02}
         ],
         effect: [
-            { resource: resNames.RES_004.name, perSecRatio: 0.08}
+            { resource: resNames.RES_004.name, perSecRatio: 0.27}
         ],
         unlocked: false,
         unlockedFrom: [
@@ -68,7 +68,7 @@ const activityList = [
         grade: null,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_004.name, cost: 31, upgradeCostRatio: 0.03}
+            { resource: resNames.RES_004.name, cost: 37, upgradeCostRatio: 0.05}
         ],
         effect: [
             { resource: resNames.RES_005.name, perSecRatio: 0.1}
@@ -84,10 +84,10 @@ const activityList = [
         description: resNames.ACT_002.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_004.name, cost: 3, upgradeCostRatio: 0.02 }
+            { resource: resNames.RES_004.name, cost: 3, upgradeCostRatio: 0.03 }
         ],
         effect: [
-            { resource: resNames.RES_002.name, perSecRatio: 0.36}
+            { resource: resNames.RES_002.name, percRatio: 7}
         ],
         unlocked: false,
         unlockedFrom: [
@@ -104,7 +104,7 @@ const activityList = [
             { resource: resNames.RES_004.name, cost: 25, upgradeCostRatio: 0.03}
         ],
         effect: [
-            { resource: resNames.RES_003.name, perSecRatio: 0.27}
+            { resource: resNames.RES_003.name, percRatio: 3}
         ],
         modulable: false,
         unlocked: false,
@@ -121,9 +121,10 @@ const activityList = [
             { resource: resNames.RES_005.name, cost: 25, upgradeCostRatio: 0.03}
         ],
         effect: [
-            { resource: resNames.RES_001.name, maxValue: 800},
-            { resource: resNames.RES_004.name, maxValue: 500}
-            //{ resource: resNames.RES_003.name, maxValue: 100},
+            { resource: resNames.RES_004.name, maxValue: 800},
+            { resource: resNames.RES_001.name, maxValue: 750},
+            { resource: resNames.RES_002.name, maxValue: 500},
+            { resource: resNames.RES_003.name, maxValue: 200}
         ],
         modulable: false,
         unlocked: false,

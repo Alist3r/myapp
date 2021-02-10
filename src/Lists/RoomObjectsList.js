@@ -28,7 +28,7 @@ const roomObjectsList = [
         description: resNames.OBJ_001.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_005.name, cost: 40, upgradeCostRatio: 1.3},
+            { resource: resNames.RES_005.name, cost: 40, upgradeCostRatio: 1.2},
         ],
         effect: [
             { resource: resNames.RES_001.name, percRatio: 10},
@@ -45,10 +45,10 @@ const roomObjectsList = [
         description: resNames.OBJ_002.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_005.name, cost: 55, upgradeCostRatio: 1.3}
+            { resource: resNames.RES_005.name, cost: 55, upgradeCostRatio: 1.2}
         ],
         effect: [
-            { resource: resNames.RES_003.name, perSecRatio: 0.02},
+            { resource: resNames.RES_003.name, perSecRatio: 0.45},
             { resource: resNames.RES_003.name, percMaxValue: 15}
         ],
         isBought: false,
@@ -62,10 +62,10 @@ const roomObjectsList = [
         description: resNames.OBJ_004.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_005.name, cost: 20, upgradeCostRatio: 0.8}
+            { resource: resNames.RES_005.name, cost: 20, upgradeCostRatio: 1.1}
         ],
         effect: [
-            { resource: resNames.RES_002.name, perSecRatio: 0.12},
+            { resource: resNames.RES_002.name, perSecRatio: 0.18},
             { resource: resNames.RES_002.name, percMaxValue: 10}
         ],
         effectActivity: null,
@@ -82,10 +82,7 @@ const roomObjectsList = [
         upgradeCost: [
             { resource: resNames.RES_005.name, cost: 66, upgradeCostRatio: 1.3}
         ],
-        effect: [
-            //{ resource: resNames.RES_004.name, perSecRatio: 0.01},
-            { resource: resNames.RES_004.name, percMaxValue: 10}
-        ],
+        effect: null,
         effectActivity: [
             { activity: resNames.ACT_002.name, percRatio: 10},
             { activity: resNames.ACT_003.name, percRatio: 10},
@@ -94,7 +91,7 @@ const roomObjectsList = [
         isBought: false,
         isActive: false,
         requiredSlot: 2,
-        unlocked: false,
+        unlocked: true,
         unlockedFrom: null
     },
 ]
