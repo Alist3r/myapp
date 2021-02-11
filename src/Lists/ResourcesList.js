@@ -14,14 +14,20 @@ const resourcesList = [
         currentValue: 5000,
         maxValue: 5000,
         incRatio: -3.92,
+        boost: 0,
+        flatRatio: -3.92,
         unlocked: true,
         unlockedFrom: null
+
     },
     {   //ENERGY
         name: resNames.RES_004.name, 
         currentValue: 0, 
         maxValue: 4000, 
-        incRatio: 0, 
+        baseRatio: 0, 
+        incRatio: 0,
+        boost: 0,
+        flatRatio: 0,
         unlocked: false,
         unlockedFrom: null
     },
@@ -30,6 +36,8 @@ const resourcesList = [
         currentValue: 0, 
         maxValue: 4000, 
         incRatio: 0, 
+        boost: 0,
+        flatRatio: 0,
         unlocked: false,
         unlockedFrom: null
     },
@@ -38,6 +46,8 @@ const resourcesList = [
         currentValue: 0, 
         maxValue: 2500, 
         incRatio: 0, 
+        boost: 0,
+        flatRatio: 0,
         unlocked: false,
         unlockedFrom: null
     },
@@ -46,6 +56,8 @@ const resourcesList = [
         currentValue: 0, 
         maxValue: 1000, 
         incRatio: 0, 
+        boost: 0,
+        flatRatio: 0,
         unlocked: false,
         unlockedFrom: null
     },
@@ -54,6 +66,8 @@ const resourcesList = [
         currentValue: 0, 
         maxValue: 800, 
         incRatio: 0, 
+        boost: 0,
+        flatRatio: 0,
         unlocked: false,
         unlockedFrom: null,
         type: resNames.RES_TYPE_002.name,

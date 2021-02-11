@@ -14,33 +14,29 @@ class RoomObject extends React.Component {
     }
   }
 
-  applyEffects() {
+  applyEffects(howManyTimes) {
     let roomObj = this.state.roomObject
 
     //EFFECT APPLIED DIRECTLY TO RESOURCES
-    let howManyTimes = roomObj.stage
-    if(roomObj.isActive) {
-      howManyTimes = 1
-    }
     if(roomObj.effect != null)
-      applyEffectsToResources(this.state.resources, roomObj.effect, howManyTimes, "add", "roomObject")
+      applyEffectsToResources(this.state.resources, roomObj.effect, howManyTimes, "add")
 
     //EFFECT APPLIED DIRECTLY TO ACTIVITIES
     if(roomObj.effectActivity != null)
-      applyEffectsToActivity(roomObj, this.state.resources, this.state.activities, "add")  
+      applyEffectsToActivity(roomObj, this.state.resources, this.state.activities, howManyTimes, "add")  
 
   }
 
-  removeEffects() {
+  removeEffects(howManyTimes) {
     let roomObj = this.state.roomObject
 
     //REMOVE EFFECT FROM RESOURCES
     if(roomObj.effect != null)
-      applyEffectsToResources(this.state.resources, roomObj.effect, roomObj.stage, "remove","roomObject")
+      applyEffectsToResources(this.state.resources, roomObj.effect, howManyTimes, "remove")
 
     //REMOVE EFFECT FROM ACTIVITIES
     if(roomObj.effectActivity != null)
-      applyEffectsToActivity(roomObj, this.state.resources, this.state.activities, "remove") 
+      applyEffectsToActivity(roomObj, this.state.resources, this.state.activities, howManyTimes, "remove") 
 
   }
 
@@ -76,12 +72,13 @@ class RoomObject extends React.Component {
       roomObj.upgradeCost = upgradeCosts.slice()
       roomObj.isBought = true
 
+      if(roomObj.isActive) {
+        this.applyEffects(1)
+      }
+
       if (roomObj.stage != null) 
         roomObj.stage += 1
 
-      if(roomObj.isActive) {
-        this.applyEffects()
-      }
         
       this.setState ({
         resources: resources,
@@ -102,7 +99,7 @@ class RoomObject extends React.Component {
       roomSlotUsed += roomObj.requiredSlot
 
       //applying effects
-      this.applyEffects()
+      this.applyEffects(roomObj.stage) //need to apply the boost multiple times
       roomObj.isActive = true
        
       this.setState({
@@ -122,7 +119,7 @@ class RoomObject extends React.Component {
       roomSlotUsed -= roomObj.requiredSlot
 
       //Remove Effect 
-      this.removeEffects()
+      this.removeEffects(roomObj.stage)
 
       this.setState({
         roomSlotUsed: roomSlotUsed,

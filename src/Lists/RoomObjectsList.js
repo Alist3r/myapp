@@ -32,7 +32,7 @@ const roomObjectsList = [
         ],
         effect: [
             { resource: resNames.RES_001.name, percRatio: 10},
-            { resource: resNames.RES_001.name, percMaxValue: 20}
+            { resource: resNames.RES_001.name, maxValue: 2000}
         ],
         isBought: false,
         isActive: false,
@@ -49,7 +49,7 @@ const roomObjectsList = [
         ],
         effect: [
             { resource: resNames.RES_003.name, perSecRatio: 0.45},
-            { resource: resNames.RES_003.name, percMaxValue: 15}
+            { resource: resNames.RES_003.name, maxValue: 1000}
         ],
         isBought: false,
         isActive: false,
@@ -66,7 +66,7 @@ const roomObjectsList = [
         ],
         effect: [
             { resource: resNames.RES_002.name, perSecRatio: 0.18},
-            { resource: resNames.RES_002.name, percMaxValue: 10}
+            { resource: resNames.RES_002.name, maxValue: 1500}
         ],
         effectActivity: null,
         isBought: false,
@@ -85,7 +85,7 @@ const roomObjectsList = [
         effect: null,
         effectActivity: [
             { activity: resNames.ACT_002.name, percRatio: 10},
-            { activity: resNames.ACT_003.name, percRatio: 10},
+            { activity: resNames.ACT_008.name, percRatio: 10},
             { activity: resNames.ACT_007.name, percRatio: 20}
         ],
         isBought: false,

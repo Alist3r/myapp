@@ -1,4 +1,4 @@
-import globalEffectsList from '../Lists/GlobalEffectsList.js';
+
 import * as constants from '../Utilities/StringsConst.js'
 
 export function saveState(state) {
@@ -256,7 +256,14 @@ export function haveEnoughResource(costs, resources) {
     })
 
     return haveEnoughResource
-  }
+}
+
+export function getResourceIncRatio(incRatio, boost) {
+    let totalIncRatio
+    totalIncRatio = (incRatio + percValue(incRatio, boost)) * constants.OPT_GAMESPEED
+
+    return totalIncRatio
+}
 
 export function updateGlobalEffects(globalIndex, globalEffects, effectType, effectValue, howManyTimes, modifier, from){
 
@@ -280,7 +287,6 @@ export function updateGlobalEffects(globalIndex, globalEffects, effectType, effe
 
 export function applyEffectsToResources(resources, effects, howManyTimes, type, from) {
 
-    let globalEffects = globalEffectsList.slice()
     
     let modifier = 1
     if (type === "remove") // in case we need to remove the effects from the resources
@@ -288,13 +294,13 @@ export function applyEffectsToResources(resources, effects, howManyTimes, type, 
     
     effects.forEach(effect => {
         let index = resources.findIndex(x => x.name === effect.resource) //find the correct resource to modify
-        let globalIndex = globalEffects.findIndex(x => x.name === effect.resource)
+        let resource = resources[index]
         let effectType = wichEffect(effect) //return the correct effect type
 
         switch (effectType) {
 
-            case "perSecRatio":     resources[index].incRatio += (effect.perSecRatio * howManyTimes * modifier); // (i.e.: 0.25 = 0.34 * 2 * -1) add 2 times -0.34 to the old ratio
-                                    updateGlobalEffects(globalIndex, globalEffects, "flat", effect.perSecRatio, howManyTimes, modifier, from)
+            case "perSecRatio":     resource.flatRatio += (effect.perSecRatio * howManyTimes * modifier)
+                                    resource.incRatio = resource.flatRatio + percValue(resource.flatRatio, resource.boost)
                                     break;
 
             case "maxValue":        resources[index].maxValue += (effect.maxValue * howManyTimes * modifier);
@@ -303,26 +309,9 @@ export function applyEffectsToResources(resources, effects, howManyTimes, type, 
             case "clickRatio":      resources[index].currentValue += (effect.clickRatio * modifier);
                                     break;
 
-            case "percRatio":       updateGlobalEffects(globalIndex, globalEffects, "perc", effect.percRatio, howManyTimes, modifier, from)
-                                    if(modifier === 1) {
-                                        for(let i=0; i < howManyTimes; i++)
-                                            resources[index].incRatio += percValue(resources[index].incRatio, effect.percRatio)
-                                    }
-                                    else {
-                                        for(let i=0; i < howManyTimes; i++)
-                                            resources[index].incRatio = removePerc(resources[index].incRatio, effect.percRatio)
-                                    }
-                                    break;
-            
-            case "percMaxValue":    if(modifier === 1) {
-                                        for(let i=0; i < howManyTimes; i++)
-                                            resources[index].maxValue += percValue(resources[index].maxValue, effect.percMaxValue)
-                                    }
-                                    else {
-                                        for(let i=0; i < howManyTimes; i++)
-                                            resources[index].maxValue = removePerc(resources[index].maxValue, effect.percMaxValue)
-                                    }
-                                    break; 
+            case "percRatio":       resources[index].boost += effect.percRatio * howManyTimes * modifier
+                                    resource.incRatio = resource.flatRatio + percValue(resource.flatRatio, resource.boost)
+                                    break;          
         
             default: break;
         }    
@@ -333,96 +322,81 @@ export function applyEffectsToResources(resources, effects, howManyTimes, type, 
 
 }
 
-export function applyEffectsToActivity(booster, resources, activities, type) {
+export function applyEffectsToActivity(booster, resources, activities, howManyTimes, type) {
     
     let modifier = 1
     if(type === "remove")
       modifier = -1
 
-    let effects = booster.effectActivity.slice()
+    let boosterEffects = booster.effectActivity.slice()
 
-    effects.forEach(effect => {
-      let index = activities.findIndex(x => x.name === effect.activity) //find the correct activity to boost
-      //activities[index].percBoost += effect.percRatio
+    boosterEffects.forEach(effect => {
+        let index = activities.findIndex(x => x.name === effect.activity) //find the correct activity to boost
+        let activityToBoost = activities[index]
+        let activityEffects
 
-      let activityEffects = activities[index].effect //effects to boost
-      let stageOrGrade
-      if (activities[index].modulable) //we need to reference to the current stage or grade of the activity to boost
-        stageOrGrade = activities[index].grade
-      else  
-        stageOrGrade = activities[index].stage
 
-      activityEffects.forEach(actEffect => {
-        /* It's necessary to modifing the resource 
-        according to the boost received by the activity*/
-        let resIndex = resources.findIndex(x => x.name === actEffect.resource) // find the resource to modify
-        let effectType = wichEffect(actEffect)
-        let howManyToRemove = booster.stage
-        if(booster.stage > 1)
-          howManyToRemove -= 1
+        activityToBoost.boost += effect.percRatio * howManyTimes * modifier  //update the boost to the activity
+        activityEffects = activityToBoost.effect //effects of the activity
+
+        let stageOrGrade
+        if (activityToBoost.modulable) //we need to reference to the current stage or grade of the activity to boost
+            stageOrGrade = activityToBoost.grade
+        else  
+            stageOrGrade = activityToBoost.stage
+
+        activityEffects.forEach(actEffect => {
+            /* It's necessary to remove from the resource the actual bonus from thea activity
+            according to the boost received by the activity*/
+            let resourceToUpdate
+            let resIndex = resources.findIndex(x => x.name === actEffect.resource) // find the resource to modify
+            let effectType = wichEffect(actEffect)
+            
+            resourceToUpdate = resources[resIndex]
 
         
         switch (effectType) {
-          case "perSecRatio":   if(actEffect.perSecRatio > 0) { //applies only to positive effects of the activity
-                                  resources[resIndex].incRatio -= (actEffect.perSecRatio * stageOrGrade) //remove the entire old perSecRatio from the resource
-                                  
-                                  if(modifier === 1 && booster.isActive)  //if we are adding the effects to the activity and the booster was active
-                                    actEffect.perSecRatio = removePerc(actEffect.perSecRatio, effect.percRatio * howManyToRemove) //Removing the old boost
-                                  if(modifier === 1)
-                                    actEffect.perSecRatio += percValue(actEffect.perSecRatio, effect.percRatio * booster.stage) //add the boost
-                                  else
-                                    actEffect.perSecRatio = removePerc(actEffect.perSecRatio, effect.percRatio * booster.stage) ///or remove the boost
-                                  
-                                  resources[resIndex].incRatio += (actEffect.perSecRatio * stageOrGrade) //recalculate the incRatio of the resource
+            // OK OK OK OK 
+            case "perSecRatio": if(actEffect.perSecRatio > 0) { //applies only to positive effects of the activity
+                                    resourceToUpdate.flatRatio -= (actEffect.perSecRatio * stageOrGrade) //remove from the resource the actual value from the activity
+
+                                    actEffect.perSecRatio = actEffect.flatValue + percValue(actEffect.flatValue, activityToBoost.boost)
+
+                                    if(stageOrGrade > 0) {
+                                        resourceToUpdate.flatRatio += (actEffect.perSecRatio * stageOrGrade)
+                                        resourceToUpdate.incRatio = resourceToUpdate.flatRatio + percValue(resourceToUpdate.flatRatio, resourceToUpdate.boost)
+                                    }
                                 }           
                                 break;
-                              
-            case "maxValue":    resources[resIndex].maxValue -= (actEffect.maxValue * stageOrGrade)
+            // OK OK OK OK
+            case "percRatio":   if(actEffect.percRatio > 0) {
+                                    resourceToUpdate.boost -= (actEffect.percRatio * stageOrGrade)
 
-                                if(modifier === 1 && booster.isActive) 
-                                    actEffect.maxValue = removePerc(actEffect.maxValue, effect.percRatio * howManyToRemove)
-                                if(modifier === 1)
-                                  actEffect.maxValue += percValue(actEffect.maxValue, effect.percRatio * booster.stage)
-                                else
-                                  actEffect.maxValue = removePerc(actEffect.maxValue, effect.percRatio * booster.stage) 
-                                  
-                                resources[resIndex].maxValue += (actEffect.maxValue * stageOrGrade)                                    
-                                break;    
+                                    actEffect.percRatio = actEffect.flatValue + percValue(actEffect.flatValue, activityToBoost.boost)
 
-          case "clickRatio":    if(actEffect.clickRatio > 0 ) {
-                                  if(modifier === 1)
-                                    actEffect.clickRatio += percValue(actEffect.clickRatio, effect.percRatio * booster.stage)
-                                  else
-                                    actEffect.clickRatio = removePerc(actEffect.clickRatio, effect.percRatio * booster.stage)
-                                }    
-                                break;
-                                
-          case "percRatio":     if(actEffect.percRatio > 0) {
-                                  resources[resIndex].incRatio -= percValue(resources[resIndex].incRatio, actEffect.percRatio) * stageOrGrade
-
-                                  if(modifier === 1 && booster.isActive) 
-                                    actEffect.percRatio = removePerc(actEffect.percRatio, effect.percRatio * howManyToRemove)
-                                  if(modifier === 1)
-                                    actEffect.percRatio += percValue(actEffect.percRatio, effect.percRatio * booster.stage)
-                                  else
-                                    actEffect.percRatio = removePerc(actEffect.percRatio, effect.percRatio * booster.stage)
-
-                                  resources[resIndex].incRatio += percValue(resources[resIndex].incRatio, actEffect.percRatio) * stageOrGrade
+                                    if(stageOrGrade > 0) {
+                                        resourceToUpdate.boost += (actEffect.percRatio * stageOrGrade)
+                                        resourceToUpdate.incRatio = resourceToUpdate.flatRatio + percValue(resourceToUpdate.flatRatio, resourceToUpdate.boost)
+                                    }
                                 }
-                                break;    
-                                
-          
-          case "percMaxValue":  resources[resIndex].maxValue -= percValue(resources[resIndex].maxValue, actEffect.percRatio) * stageOrGrade
-                                
-                                if(modifier === 1 && booster.isActive) 
-                                  actEffect.percMaxValue = removePerc(actEffect.percMaxValue, effect.percRatio * howManyToRemove)
-                                if(modifier === 1)
-                                  actEffect.percMaxValue += percValue(actEffect.percMaxValue, effect.percRatio * booster.stage)
-                                else  
-                                  actEffect.percMaxValue = removePerc(actEffect.percMaxValue, effect.percRatio * booster.stage)
-
-                                resources[resIndex].maxValue += percValue(resources[resIndex].maxValue, actEffect.percRatio) * stageOrGrade
                                 break;
+            // OK OK OK OK               
+            case "maxValue":    resourceToUpdate.maxValue -= (actEffect.maxValue * stageOrGrade)
+                                
+                                actEffect.maxValue = actEffect.flatValue + percValue(actEffect.flatValue, activityToBoost.boost)
+
+                                if(stageOrGrade > 0) {
+                                    resourceToUpdate.maxValue += (actEffect.maxValue * stageOrGrade)
+                                }
+                                break;
+            // OK OK OK OK
+            case "clickRatio":  if(actEffect.clickRatio > 0 )
+                                    actEffect.clickRatio = actEffect.flatValue + percValue(actEffect.flatValue, activityToBoost.boost)
+                                   
+                                break;
+                                
+            
+                                
           default: break;
         }
 

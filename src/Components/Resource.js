@@ -25,28 +25,30 @@ class Resource extends React.Component {
   }  
 
   tick() {
-    var updatedResource = this.state.resource
+    let resourceToUpdate = this.state.resource
+    let refreshRateModifier = 1000 / constants.OPT_REFRESHRATE
     let addInc = true
 
-    let previewCurrentValue = updatedResource.currentValue
-    previewCurrentValue += ((updatedResource.incRatio * constants.OPT_GAMESPEED) / (1000 / constants.OPT_REFRESHRATE)) 
+    let previewCurrentValue = resourceToUpdate.currentValue
+    previewCurrentValue += resourceToUpdate.incRatio / refreshRateModifier
 
-    if(previewCurrentValue > updatedResource.maxValue) {
-      updatedResource.currentValue = updatedResource.maxValue
+    if(previewCurrentValue > resourceToUpdate.maxValue) {
+      resourceToUpdate.currentValue = resourceToUpdate.maxValue
       addInc = false
     }
 
     if(previewCurrentValue < 0) {
-      updatedResource.currentValue = 0
+      resourceToUpdate.currentValue = 0
       addInc = false
     }
     
     if(addInc) {
-      updatedResource.currentValue += ((updatedResource.incRatio * constants.OPT_GAMESPEED) / (1000 / constants.OPT_REFRESHRATE))
+      
+      resourceToUpdate.currentValue += (resourceToUpdate.incRatio * constants.OPT_GAMESPEED) / refreshRateModifier
     }
 
     this.setState({
-      resource: updatedResource
+      resource: resourceToUpdate
     });
   }
 

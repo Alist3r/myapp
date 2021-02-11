@@ -24,8 +24,9 @@ const activityList = [
         stage: null,
         upgradeCost: null,
         effect: [
-            { resource: resNames.RES_004.name, clickRatio: 1}
+            { resource: resNames.RES_004.name, clickRatio: 1, flatValue: 1}
         ],
+        boost: 0,
         unlocked: true,
         unlockedFrom: null
     },
@@ -38,9 +39,10 @@ const activityList = [
             { resource: resNames.RES_004.name, cost: 10, upgradeCostRatio: 0.02}
         ],
         effect: [
-            { resource: resNames.RES_001.name, perSecRatio: 0.56},
-            { resource: resNames.RES_000.name, perSecRatio: -0.16}
+            { resource: resNames.RES_001.name, perSecRatio: 0.56, flatValue: 0.56},
+            { resource: resNames.RES_000.name, perSecRatio: -0.16, flatValue: -0.16}
         ],
+        boost: 0,
         modulable: true,
         unlocked: false,
         unlockedFrom: [
@@ -55,8 +57,9 @@ const activityList = [
             { resource: resNames.RES_001.name, cost: 15, upgradeCostRatio: 0.02}
         ],
         effect: [
-            { resource: resNames.RES_004.name, perSecRatio: 0.27}
+            { resource: resNames.RES_004.name, perSecRatio: 0.27, flatValue: 0.27}
         ],
+        boost: 0,
         unlocked: false,
         unlockedFrom: [
             { activity: resNames.ACT_003.name, neededStage: 5}
@@ -71,8 +74,9 @@ const activityList = [
             { resource: resNames.RES_004.name, cost: 37, upgradeCostRatio: 0.05}
         ],
         effect: [
-            { resource: resNames.RES_005.name, perSecRatio: 0.1}
+            { resource: resNames.RES_005.name, perSecRatio: 0.1, flatValue: 0.1}
         ],
+        boost: 0,
         modulable: false,
         unlocked: false,
         unlockedFrom: [
@@ -87,8 +91,9 @@ const activityList = [
             { resource: resNames.RES_004.name, cost: 3, upgradeCostRatio: 0.03 }
         ],
         effect: [
-            { resource: resNames.RES_002.name, percRatio: 7}
+            { resource: resNames.RES_002.name, percRatio: 7, flatValue: 7}
         ],
+        boost: 0,
         unlocked: false,
         unlockedFrom: [
             { roomObject: resNames.OBJ_004.name}
@@ -104,8 +109,9 @@ const activityList = [
             { resource: resNames.RES_004.name, cost: 25, upgradeCostRatio: 0.03}
         ],
         effect: [
-            { resource: resNames.RES_003.name, percRatio: 3}
+            { resource: resNames.RES_003.name, percRatio: 3, flatValue: 3}
         ],
+        boost: 0,
         modulable: false,
         unlocked: false,
         unlockedFrom: [
@@ -121,11 +127,12 @@ const activityList = [
             { resource: resNames.RES_005.name, cost: 25, upgradeCostRatio: 0.03}
         ],
         effect: [
-            { resource: resNames.RES_004.name, maxValue: 800},
-            { resource: resNames.RES_001.name, maxValue: 750},
-            { resource: resNames.RES_002.name, maxValue: 500},
-            { resource: resNames.RES_003.name, maxValue: 200}
+            { resource: resNames.RES_004.name, maxValue: 800, flatValue: 800},
+            { resource: resNames.RES_001.name, maxValue: 750, flatValue: 750},
+            { resource: resNames.RES_002.name, maxValue: 500, flatValue: 500},
+            { resource: resNames.RES_003.name, maxValue: 200, flatValue: 200}
         ],
+        boost: 0,
         modulable: false,
         unlocked: false,
         unlockedFrom: [
@@ -142,8 +149,9 @@ const activityList = [
             { resource: resNames.RES_004.name, cost: 25, upgradeCostRatio: 0.02}
         ],
         effect: [
-            { resource: resNames.RES_000.name, perSecRatio: 0.62},
+            { resource: resNames.RES_000.name, perSecRatio: 0.62, flatValue: 0.62},
         ],
+        boost: 0,
         modulable: false,
         unlocked: false,
         unlockedFrom: [
