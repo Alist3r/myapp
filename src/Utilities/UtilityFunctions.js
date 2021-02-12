@@ -6,7 +6,6 @@ export function saveState(state) {
     localStorage.setItem("gameResources", JSON.stringify(state.gameResources));
     localStorage.setItem("gameActivities", JSON.stringify(state.gameActivities));
     localStorage.setItem("gameRoomObjects", JSON.stringify(state.gameRoomObjects));
-    localStorage.setItem("gameGlobalEffects", JSON.stringify(state.gameGlobalEffects));
     localStorage.setItem("activeTab", state.activeTab);
     localStorage.setItem("roomSlotMax", JSON.stringify(state.roomSlotMax));
     localStorage.setItem("roomSlotUsed", JSON.stringify(state.roomSlotUsed));
@@ -18,7 +17,6 @@ export function loadState(state) {
     let gameResources
     let gameActivities
     let gameRoomObjects
-    let gameGlobalEffects
     let activeTab
     let roomSlotMax
     let roomSlotUsed
@@ -51,13 +49,6 @@ export function loadState(state) {
         gameRoomObjects = state.gameRoomObjects
     }
 
-    if(JSON.parse(localStorage.getItem("gameGlobalEffects"))) {
-        gameGlobalEffects = JSON.parse(localStorage.getItem("gameGlobalEffects"))
-    }
-    else {
-        gameGlobalEffects = state.gameGlobalEffects
-    }
-
     if(localStorage.getItem('activeTab')) {
         activeTab = localStorage.getItem('activeTab')
     }
@@ -86,7 +77,6 @@ export function loadState(state) {
         gameResources,
         gameActivities,
         gameRoomObjects,
-        gameGlobalEffects,
         activeTab,
         roomSlotMax,
         roomSlotUsed
@@ -257,153 +247,6 @@ export function haveEnoughResource(costs, resources) {
 
     return haveEnoughResource
 }
-
-export function getResourceIncRatio(incRatio, boost) {
-    let totalIncRatio
-    totalIncRatio = (incRatio + percValue(incRatio, boost)) * constants.OPT_GAMESPEED
-
-    return totalIncRatio
-}
-
-export function updateGlobalEffects(globalIndex, globalEffects, effectType, effectValue, howManyTimes, modifier, from){
-
-    switch (from) {
-        case "activity":    if(effectType === "flat")
-                                globalEffects[globalIndex].activity.valueFlat += effectValue * howManyTimes * modifier
-                            else if(effectType === "perc")
-                                globalEffects[globalIndex].activity.valuePerc += effectValue * howManyTimes * modifier
-                            break;
-            
-        case "roomObject":  if(effectType === "flat")
-                                globalEffects[globalIndex].roomObject.valueFlat += effectValue * howManyTimes * modifier
-                            else if(effectType === "perc")
-                                globalEffects[globalIndex].roomObject.valuePerc += effectValue * howManyTimes * modifier
-                            break;
-
-        default: break;
-    }
-
-}
-
-export function applyEffectsToResources(resources, effects, howManyTimes, type, from) {
-
-    
-    let modifier = 1
-    if (type === "remove") // in case we need to remove the effects from the resources
-        modifier = -1
-    
-    effects.forEach(effect => {
-        let index = resources.findIndex(x => x.name === effect.resource) //find the correct resource to modify
-        let resource = resources[index]
-        let effectType = wichEffect(effect) //return the correct effect type
-
-        switch (effectType) {
-
-            case "perSecRatio":     resource.flatRatio += (effect.perSecRatio * howManyTimes * modifier)
-                                    resource.incRatio = resource.flatRatio + percValue(resource.flatRatio, resource.boost)
-                                    break;
-
-            case "maxValue":        resources[index].maxValue += (effect.maxValue * howManyTimes * modifier);
-                                    break;
-
-            case "clickRatio":      resources[index].currentValue += (effect.clickRatio * modifier);
-                                    break;
-
-            case "percRatio":       resources[index].boost += effect.percRatio * howManyTimes * modifier
-                                    resource.incRatio = resource.flatRatio + percValue(resource.flatRatio, resource.boost)
-                                    break;          
-        
-            default: break;
-        }    
-
-        if(resources[index].unlocked === false && resources[index].incRatio > 0)
-            resources[index].unlocked = true   
-    });
-
-}
-
-export function applyEffectsToActivity(booster, resources, activities, howManyTimes, type) {
-    
-    let modifier = 1
-    if(type === "remove")
-      modifier = -1
-
-    let boosterEffects = booster.effectActivity.slice()
-
-    boosterEffects.forEach(effect => {
-        let index = activities.findIndex(x => x.name === effect.activity) //find the correct activity to boost
-        let activityToBoost = activities[index]
-        let activityEffects
-
-
-        activityToBoost.boost += effect.percRatio * howManyTimes * modifier  //update the boost to the activity
-        activityEffects = activityToBoost.effect //effects of the activity
-
-        let stageOrGrade
-        if (activityToBoost.modulable) //we need to reference to the current stage or grade of the activity to boost
-            stageOrGrade = activityToBoost.grade
-        else  
-            stageOrGrade = activityToBoost.stage
-
-        activityEffects.forEach(actEffect => {
-            /* It's necessary to remove from the resource the actual bonus from thea activity
-            according to the boost received by the activity*/
-            let resourceToUpdate
-            let resIndex = resources.findIndex(x => x.name === actEffect.resource) // find the resource to modify
-            let effectType = wichEffect(actEffect)
-            
-            resourceToUpdate = resources[resIndex]
-
-        
-        switch (effectType) {
-            // OK OK OK OK 
-            case "perSecRatio": if(actEffect.perSecRatio > 0) { //applies only to positive effects of the activity
-                                    resourceToUpdate.flatRatio -= (actEffect.perSecRatio * stageOrGrade) //remove from the resource the actual value from the activity
-
-                                    actEffect.perSecRatio = actEffect.flatValue + percValue(actEffect.flatValue, activityToBoost.boost)
-
-                                    if(stageOrGrade > 0) {
-                                        resourceToUpdate.flatRatio += (actEffect.perSecRatio * stageOrGrade)
-                                        resourceToUpdate.incRatio = resourceToUpdate.flatRatio + percValue(resourceToUpdate.flatRatio, resourceToUpdate.boost)
-                                    }
-                                }           
-                                break;
-            // OK OK OK OK
-            case "percRatio":   if(actEffect.percRatio > 0) {
-                                    resourceToUpdate.boost -= (actEffect.percRatio * stageOrGrade)
-
-                                    actEffect.percRatio = actEffect.flatValue + percValue(actEffect.flatValue, activityToBoost.boost)
-
-                                    if(stageOrGrade > 0) {
-                                        resourceToUpdate.boost += (actEffect.percRatio * stageOrGrade)
-                                        resourceToUpdate.incRatio = resourceToUpdate.flatRatio + percValue(resourceToUpdate.flatRatio, resourceToUpdate.boost)
-                                    }
-                                }
-                                break;
-            // OK OK OK OK               
-            case "maxValue":    resourceToUpdate.maxValue -= (actEffect.maxValue * stageOrGrade)
-                                
-                                actEffect.maxValue = actEffect.flatValue + percValue(actEffect.flatValue, activityToBoost.boost)
-
-                                if(stageOrGrade > 0) {
-                                    resourceToUpdate.maxValue += (actEffect.maxValue * stageOrGrade)
-                                }
-                                break;
-            // OK OK OK OK
-            case "clickRatio":  if(actEffect.clickRatio > 0 )
-                                    actEffect.clickRatio = actEffect.flatValue + percValue(actEffect.flatValue, activityToBoost.boost)
-                                   
-                                break;
-                                
-            
-                                
-          default: break;
-        }
-
-      });
-    });
-    
-  }
 
 export function wichEffect(effect) {
         

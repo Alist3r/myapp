@@ -1,6 +1,7 @@
 import React from 'react'
 import ActivityTooltip from './Tooltips/ActivityTooltip.js'
-import {haveEnoughResource, applyEffectsToResources} from '../Utilities/UtilityFunctions.js'
+import {haveEnoughResource} from '../Utilities/UtilityFunctions.js'
+import {applyEffectsToResources} from '../Lists/ResourcesUtilities.js'
 
 class Activity extends React.Component {
   constructor(props) {

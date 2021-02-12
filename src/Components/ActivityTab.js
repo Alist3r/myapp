@@ -11,7 +11,6 @@ class ActivityTab extends React.Component {
             activities: props.activities,
             resources: props.resources,
             roomObjects: props.roomObjects,
-            globalEffects: props.globalEffects,
             activeTab: props.activeTab
         }
     }
@@ -42,14 +41,13 @@ class ActivityTab extends React.Component {
     render() {
         let activities = this.state.activities.slice()
         let resources = this.state.resources.slice()
-        let globalEffects = this.state.globalEffects.slice()
 
         return (
             <div className="Middle-Panel-Activity-Tab" style={{'display': this.state.activeTab === constants.TAB_001 ? 'block' : 'none'}}>
                 {activities.map(activity => (                  
                     this.isUnlocked(activity) && (
                         <div className="Middle-Panel-Activity-Container" > 
-                            <Activity updateResources={this.props.updateResources} activity={activity} resources={resources} globalEffects={globalEffects} />
+                            <Activity updateResources={this.props.updateResources} activity={activity} resources={resources} />
                         </div>
                     )             
                 ))}     

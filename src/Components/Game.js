@@ -5,10 +5,9 @@ import RoomObjectTab from './RoomObjectTab.js'
 import TopBar from './TopBar.js'
 import BeltResourcePanel from './BeltResourcePanel.js'
 
-import resourcesList from '../Lists/ResourcesList.js'
-import activityList from '../Lists/ActivityList.js'
+import * as resources from '../Lists/ResourcesUtilities.js'
+import * as activities from '../Lists/ActivityUtilities.js'
 import roomObjectsList from '../Lists/RoomObjectsList.js'
-import globalEffectsList from '../Lists/GlobalEffectsList.js'
 import tabList from '../Lists/TabList.js'
 import * as utility from '../Utilities/UtilityFunctions.js'
 import * as constants from '../Utilities/StringsConst.js'
@@ -22,10 +21,9 @@ class Game extends React.Component {
 
         this.state = {
             gameTime: 0,
-            gameResources: resourcesList.slice(),
-            gameActivities: activityList.slice(),
+            gameResources: resources.resourcesList.slice(),
+            gameActivities: activities.activityList.slice(),
             gameRoomObjects: roomObjectsList.slice(),
-            gameGlobalEffects: globalEffectsList.slice(),
             activeTab: constants.TAB_001,
             roomSlotMax: 3,
             roomSlotUsed: 0,
@@ -75,7 +73,6 @@ class Game extends React.Component {
         let gameResources = this.state.gameResources.slice()
         let gameActivities = this.state.gameActivities.slice()
         let gameRoomObjects = this.state.gameRoomObjects.slice()
-        let gameGlobalEffects = this.state.gameGlobalEffects.slice()
  
         return(
             
@@ -86,11 +83,11 @@ class Game extends React.Component {
 
                 {/** LEFT PANEL */}
                 <div className="Left-Panel">
-                    {/** ACTIVITIY PANEL */}
+                    {/** RESOURCES PANEL */}
                     <ResourceTab gameState={this.state} />
                 </div>
 
-                {/** MILLE PANEL */}
+                {/** MIDDLE PANEL */}
                 <div className="Middle-Panel">
                     {/** TABS SELECTOR */}
                     <div className="Middle-Panel-Tabs-Container">
@@ -109,11 +106,9 @@ class Game extends React.Component {
                     <div className="Middle-Panel-Game-View">
                         {/** ACTIVITY TAB */}
                         <ActivityTab 
-                            updateResources={this.updateResources} 
                             activities={gameActivities} 
                             roomObjects={gameRoomObjects} 
                             resources={gameResources} 
-                            globalEffects={gameGlobalEffects} 
                             activeTab={this.state.activeTab} 
                         />
 

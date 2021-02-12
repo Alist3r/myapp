@@ -1,6 +1,8 @@
 import React from 'react'
 import RoomObjectTooltip from '../Components/Tooltips/RoomObjectTooltip.js'
-import {haveEnoughResource, applyEffectsToResources, applyEffectsToActivity} from '../Utilities/UtilityFunctions.js'
+import {haveEnoughResource} from '../Utilities/UtilityFunctions.js'
+import {applyEffectsToResources} from '../Lists/ResourcesUtilities.js'
+import {applyEffectsToActivity} from '../Lists/ActivityUtilities.js'
 
 class RoomObject extends React.Component {
   constructor(props) {
