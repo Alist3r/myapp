@@ -90,7 +90,7 @@ const RoomObjectTooltip = (props) => {
             {/*--------- ROOM SLOT COSTS ---------*/}
             {roomObj.requiredSlot != null &&(
               <span className="Tooltip-EffectRow">
-                Room Slot <span style={{float: "right"}}>{roomObj.requiredSlot}</span>
+                Home Slot <span style={{float: "right"}}>{roomObj.requiredSlot}</span>
               </span>
             )}
 

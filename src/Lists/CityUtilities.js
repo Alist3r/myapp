@@ -17,25 +17,25 @@ import * as resNames from '../Utilities/StringsConst.js';
 //008 Massage
 
 //ROOMOBJECTS
-//001 Treadmill
+//001 Jump Rope
 //002 Library
 //003 Agenda
 //004 Training Mat
 
-const roomObjectsList = [
-    {   //TREADMILL
+export const homeObjectsList = [
+    {   //JUMP ROPE
         name: resNames.OBJ_001.name,
         description: resNames.OBJ_001.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_005.name, cost: 40, upgradeCostRatio: 1.2},
+            { resource: resNames.RES_005.name, cost: 30, upgradeCostRatio: 1.2},
         ],
         effect: [
-            { resource: resNames.RES_001.name, percRatio: 10},
-            { resource: resNames.RES_001.name, maxValue: 2000}
+            { resource: resNames.RES_006.name, perSecRatio: 0.45}
         ],
         isBought: false,
         isActive: false,
+        isPassive: false,
         requiredSlot: 1,
         unlocked: true,
         unlockedFrom: null
@@ -48,11 +48,11 @@ const roomObjectsList = [
             { resource: resNames.RES_005.name, cost: 55, upgradeCostRatio: 1.2}
         ],
         effect: [
-            { resource: resNames.RES_003.name, perSecRatio: 0.45},
-            { resource: resNames.RES_003.name, maxValue: 1000}
+            { resource: resNames.RES_003.name, perSecRatio: 0.45}
         ],
         isBought: false,
         isActive: false,
+        isPassive: false,
         requiredSlot: 1,
         unlocked: true,
         unlockedFrom: null
@@ -65,12 +65,12 @@ const roomObjectsList = [
             { resource: resNames.RES_005.name, cost: 20, upgradeCostRatio: 1.1}
         ],
         effect: [
-            { resource: resNames.RES_002.name, perSecRatio: 0.18},
-            { resource: resNames.RES_002.name, maxValue: 1500}
+            { resource: resNames.RES_002.name, perSecRatio: 0.32}
         ],
         effectActivity: null,
         isBought: false,
         isActive: false,
+        isPassive: false,
         requiredSlot: 1,
         unlocked: true,
         unlockedFrom: null
@@ -84,16 +84,33 @@ const roomObjectsList = [
         ],
         effect: null,
         effectActivity: [
+            { activity: resNames.ACT_001.name, percRatio: 10},
             { activity: resNames.ACT_002.name, percRatio: 10},
-            { activity: resNames.ACT_008.name, percRatio: 10},
             { activity: resNames.ACT_007.name, percRatio: 20}
         ],
         isBought: false,
         isActive: false,
+        isPassive: false,
         requiredSlot: 2,
         unlocked: true,
         unlockedFrom: null
     },
+    {   //VAULT
+        name: resNames.OBJ_005.name,
+        description: resNames.OBJ_005.description,
+        stage: 0,
+        upgradeCost: [
+            { resource: resNames.RES_005.name, cost: 150, upgradeCostRatio: 1.3}
+        ],
+        effect: [
+            { resource: resNames.RES_005.name, maxValue: 500}
+        ],
+        effectActivity: null,
+        isBought: false,
+        isActive: false,
+        isPassive: true,
+        requiredSlot: 0,
+        unlocked: true,
+        unlockedFrom: null
+    },
 ]
-
-export default roomObjectsList;

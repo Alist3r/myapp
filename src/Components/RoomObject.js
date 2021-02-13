@@ -74,9 +74,12 @@ class RoomObject extends React.Component {
       roomObj.upgradeCost = upgradeCosts.slice()
       roomObj.isBought = true
 
-      if(roomObj.isActive) {
+      if(roomObj.isPassive && roomObj.isActive === false)
+        roomObj.isActive = true
+
+      if(roomObj.isActive) 
         this.applyEffects(1)
-      }
+      
 
       if (roomObj.stage != null) 
         roomObj.stage += 1
@@ -164,8 +167,8 @@ class RoomObject extends React.Component {
           {roomObject.name} {roomObject.stage != null && roomObject.isBought && (<span>[{roomObject.stage}]</span>)}
         </span>
 
-        {roomObject.isActive === false && roomObject.isBought === true && (<button onClick={(e) => {e.stopPropagation(); this.objectON(roomObject)}} className="RoomObject-Btn-Sell">On</button>)}
-        {roomObject.isActive === true && roomObject.isBought === true && (<button onClick={(e) => {e.stopPropagation(); this.objectOFF(roomObject)}} className="RoomObject-Btn-Sell">Off</button>)}
+        {roomObject.isActive === false && roomObject.isBought === true && !roomObject.isPassive && (<button onClick={(e) => {e.stopPropagation(); this.objectON(roomObject)}} className="RoomObject-Btn-Sell">On</button>)}
+        {roomObject.isActive === true && roomObject.isBought === true && !roomObject.isPassive && (<button onClick={(e) => {e.stopPropagation(); this.objectOFF(roomObject)}} className="RoomObject-Btn-Sell">Off</button>)}
 
       </div>
       </RoomObjectTooltip>

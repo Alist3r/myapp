@@ -40,7 +40,7 @@ class RoomObjectTab extends React.Component {
 
         return (
             <div className="Middle-Panel-Room-Tab" style={{'display': this.state.activeTab === constants.TAB_002 ? 'block' : 'none'}}>
-                <div className="Middle-Panel-Room-Slot-Label">Room Slot</div>
+                <div className="Middle-Panel-Room-Slot-Label">Home Slot</div>
                 <div className="Middle-Panel-Room-Slot-Value">{this.state.roomSlotUsed}/{this.state.roomSlotMax}</div>
 
                 <div className="Middle-Panel-Room-Panel">

@@ -1,95 +1,128 @@
 import * as constants from '../Utilities/StringsConst.js'
 import * as utilities from '../Utilities/UtilityFunctions.js'
 
-//RESOURCERS
+//RESOURCES
+//000 Food
 //001 Athleticism
 //002 Psiche
 //003 Knowledge
-//004 Free Time
+//004 Energy
+//005 Demir
+//006 Agility
 
 //ACTIVITIES
+//000 Eat a Cookie
 //001 Save Energy
-//002 Meditate
-//003 Jogging
-//004 Rest
-//005 Reading Books
-//006 Save Time
-//007 Go to Job
-//008 Cook Food
+//002 Cooking Food
+//003 Concentration
+//004 Jogging
+//005 Rest
+//006 Meditate
+//007 Reading Book
+//008 Obstacle Course
+//009 Massage
 
 
 export const activityList = [
-    {   //SAVE ENERGY
-        name: constants.ACT_001.name, 
-        description: constants.ACT_001.description,
+    {   //EAT A COOKIE
+        name: constants.ACT_000.name,
+        description: constants.ACT_000.description,
         stage: null,
         upgradeCost: null,
         effect: [
-            { resource: constants.RES_004.name, clickRatio: 1, flatValue: 1}
+            { resource: constants.RES_000.name, clickRatio: 1, flatValue: 1}
         ],
         boost: 0,
         unlocked: true,
         unlockedFrom: null
     },
-    {   //JOGGING
+    {   //SAVE ENERGY
+        name: constants.ACT_001.name, 
+        description: constants.ACT_001.description,
+        stage: null,
+        upgradeCost: [
+            { resource: constants.RES_000.name, cost: 100, upgradeCostRatio: 0}
+        ],
+        effect: [
+            { resource: constants.RES_004.name, clickRatio: 1, flatValue: 1}
+        ],
+        boost: 0,
+        unlocked: true,
+        unlockedFrom: false
+    },
+    {   //COOKING FOOD
+        name: constants.ACT_002.name, 
+        description: constants.ACT_002.description,
+        stage: 0,
+        upgradeCost: [
+            { resource: constants.RES_000.name, cost: 10, upgradeCostRatio: 0.01}
+        ],
+        effect: [
+            { resource: constants.RES_000.name, perSecRatio: 0.56, flatValue: 0.56}
+        ],
+        boost: 0,
+        unlocked: false,
+        unlockedFrom: [
+            { resource: constants.RES_000.name, neededValue: 5}
+        ]
+    },
+    {   //CONCENTRATION
         name: constants.ACT_003.name,
         description: constants.ACT_003.description,
+        stage: 0,
+        upgradeCost: [
+            { resource: constants.RES_004.name, cost: 10, upgradeCostRatio: 0.6}
+        ],
+        effect: [
+            { resource: constants.RES_007.name, clickRatio: 2, flatRatio: 2}
+        ],
+        boost: 0,
+        unlocked: false,
+        unlockedFrom: [
+            { resource: constants.RES_004.name, neededValue: 1}
+        ]
+    },
+    {   //JOGGING
+        name: constants.ACT_004.name,
+        description: constants.ACT_004.description,
         grade: 0,
         stage: 0,
         upgradeCost: [
             { resource: constants.RES_004.name, cost: 10, upgradeCostRatio: 0.02}
         ],
         effect: [
-            { resource: constants.RES_001.name, perSecRatio: 0.56, flatValue: 0.56},
+            { resource: constants.RES_001.name, perSecRatio: 0.32, flatValue: 0.32},
             { resource: constants.RES_000.name, perSecRatio: -0.16, flatValue: -0.16}
         ],
         boost: 0,
         modulable: true,
         unlocked: false,
         unlockedFrom: [
-            { resource: constants.RES_004.name, neededValue: 10}
+            { activity: constants.ACT_002.name, neededStage: 15}
         ]
     },
     {   //REST
-        name: constants.ACT_004.name,
-        description: constants.ACT_004.description,
+        name: constants.ACT_005.name,
+        description: constants.ACT_005.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_001.name, cost: 15, upgradeCostRatio: 0.02}
+            { resource: constants.RES_004.name, cost: 15, upgradeCostRatio: 0.02}
         ],
         effect: [
-            { resource: constants.RES_004.name, perSecRatio: 0.27, flatValue: 0.27}
+            { resource: constants.RES_004.name, perSecRatio: 0.56, flatValue: 0.56}
         ],
         boost: 0,
         unlocked: false,
         unlockedFrom: [
-            { activity: constants.ACT_003.name, neededStage: 5}
-        ]
-    },
-    {   //GO TO JOB
-        name: constants.ACT_007.name,
-        description: constants.ACT_007.description,
-        grade: null,
-        stage: 0,
-        upgradeCost: [
-            { resource: constants.RES_004.name, cost: 37, upgradeCostRatio: 0.05}
-        ],
-        effect: [
-            { resource: constants.RES_005.name, perSecRatio: 0.1, flatValue: 0.1}
-        ],
-        boost: 0,
-        modulable: false,
-        unlocked: false,
-        unlockedFrom: [
-            { activity: constants.ACT_004.name, neededStage: 5}
+            { resource: constants.RES_001.name, neededValue: 10}
         ]
     },
     {   //MEDITATE
-        name: constants.ACT_002.name, 
-        description: constants.ACT_002.description,
+        name: constants.ACT_006.name, 
+        description: constants.ACT_006.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_004.name, cost: 3, upgradeCostRatio: 0.03 }
+            { resource: constants.RES_002.name, cost: 30, upgradeCostRatio: 0.05 }
         ],
         effect: [
             { resource: constants.RES_002.name, percRatio: 7, flatValue: 7}
@@ -101,16 +134,15 @@ export const activityList = [
         ]
     },
     {   //READING BOOK
-        name: constants.ACT_005.name,
-        description: constants.ACT_005.description,
+        name: constants.ACT_007.name,
+        description: constants.ACT_007.description,
         grade: null,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_002.name, cost: 23, upgradeCostRatio: 0.03},
-            { resource: constants.RES_004.name, cost: 25, upgradeCostRatio: 0.03}
+            { resource: constants.RES_002.name, cost: 23, upgradeCostRatio: 0.03}
         ],
         effect: [
-            { resource: constants.RES_003.name, percRatio: 3, flatValue: 3}
+            { resource: constants.RES_003.name, percRatio: 10, flatValue: 10}
         ],
         boost: 0,
         modulable: false,
@@ -119,19 +151,41 @@ export const activityList = [
             {roomObject: constants.OBJ_002.name}
         ]
     },
-    {   //MASSAGE
+    {   //OBSTACLE COURSE
         name: constants.ACT_008.name,
         description: constants.ACT_008.description,
+        grade: 0,
+        stage: 0,
+        upgradeCost: [
+            { resource: constants.RES_001.name, cost: 100, upgradeCostRatio: 0.03},
+            { resource: constants.RES_006.name, cost: 50, upgradeCostRatio: 0.03}
+        ],
+        effect: [
+            { resource: constants.RES_001.name, percRatio: 10, flatValue: 10},
+            { resource: constants.RES_006.name, percRatio: 10, flatValue: 10},
+            { resource: constants.RES_000.name, perSecRatio: -0.12, flatValue: -0.12}
+        ],
+        boost: 0,
+        modulable: true,
+        unlocked: false,
+        unlockedFrom: [
+            {roomObject: constants.OBJ_001.name}
+        ]
+    },
+    {   //MASSAGE
+        name: constants.ACT_009.name,
+        description: constants.ACT_009.description,
         grade: null,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_005.name, cost: 25, upgradeCostRatio: 0.03}
+            { resource: constants.RES_005.name, cost: 25, upgradeCostRatio: 0.8}
         ],
         effect: [
-            { resource: constants.RES_004.name, maxValue: 800, flatValue: 800},
-            { resource: constants.RES_001.name, maxValue: 750, flatValue: 750},
-            { resource: constants.RES_002.name, maxValue: 500, flatValue: 500},
-            { resource: constants.RES_003.name, maxValue: 200, flatValue: 200}
+            { resource: constants.RES_004.name, maxValue: 2500, flatValue: 2500},
+            { resource: constants.RES_002.name, maxValue: 2500, flatValue: 2500},
+            { resource: constants.RES_001.name, maxValue: 2000, flatValue: 2000},
+            { resource: constants.RES_003.name, maxValue: 1000, flatValue: 1000},
+            { resource: constants.RES_006.name, maxValue: 1000, flatValue: 1000},
         ],
         boost: 0,
         modulable: false,
@@ -139,39 +193,7 @@ export const activityList = [
         unlockedFrom: [
             { resource: constants.RES_005.name, neededValue: 0.01}
         ]
-    },
-    {   //COOK FOOD
-        name: constants.ACT_009.name,
-        description: constants.ACT_009.description,
-        grade: null,
-        stage: 0,
-        upgradeCost: [
-            { resource: constants.RES_003.name, cost: 10, upgradeCostRatio: 0.01},
-            { resource: constants.RES_004.name, cost: 25, upgradeCostRatio: 0.02}
-        ],
-        effect: [
-            { resource: constants.RES_000.name, perSecRatio: 0.62, flatValue: 0.62},
-        ],
-        boost: 0,
-        modulable: false,
-        unlocked: false,
-        unlockedFrom: [
-            { activity: constants.ACT_005.name, neededStage: 5}
-        ]
-    },
-    /*{   //SAVE TIME
-        name: constants.ACT_006.name,
-        description: constants.ACT_006.description,
-        stage: null,
-        clickCost: [
-            { resource: constants.RES_001.name, cost: 100}
-        ],
-        effect: [
-            { resource: constants.RES_004.name, clickRatio: 37}
-        ],
-        unlocked: false,
-        unlockedFrom: null
-    },*/
+    }
 ]
 
 export function applyEffectsToActivity(booster, resources, activities, howManyTimes, type) {

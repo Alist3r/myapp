@@ -1,4 +1,4 @@
-import * as resNames from '../Utilities/StringsConst.js';
+import * as constants from '../Utilities/StringsConst.js';
 
 //RESOURCERS
 //001 Athleticism
@@ -17,15 +17,15 @@ import * as resNames from '../Utilities/StringsConst.js';
 
 const tabList = [
     {   //ACTIVITIES
-        name: resNames.TAB_001, 
+        name: constants.TAB_001, 
         unlocked: true,
         unlockedFrom: null    
     },
     {   //ROOM
-        name: resNames.TAB_002,
+        name: constants.TAB_002,
         unlocked: false,
         unlockedFrom: [
-            { resource: resNames.RES_005.name, neededValue: 0.1}
+            { resource: constants.RES_007.name, neededValue: 1}
         ]
     }
 ]

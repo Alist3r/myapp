@@ -50,16 +50,16 @@ class BeltResourcePanel extends React.Component {
   }*/
 
   getResourceNameStyle() {
-    let resource = this.state.resource
+    //let resource = this.state.resource
     let style = {}
 
-    if(resource.color != null) {
+    //if(resource.color != null) {
       style = {
         padding: '5px',
         border: '1px solid black', 
         borderRadius: '5px',  
         maxWidth: '100px'
-      }
+      //}
     }
     
     return style

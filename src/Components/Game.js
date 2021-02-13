@@ -1,13 +1,13 @@
 import React from 'react'
 import ResourceTab from './ResourceTab.js'
 import ActivityTab from './ActivityTab.js'
-import RoomObjectTab from './RoomObjectTab.js'
+import RoomObjectTab from './CityTab.js'
 import TopBar from './TopBar.js'
 import BeltResourcePanel from './BeltResourcePanel.js'
 
 import * as resources from '../Lists/ResourcesUtilities.js'
 import * as activities from '../Lists/ActivityUtilities.js'
-import roomObjectsList from '../Lists/RoomObjectsList.js'
+import * as city from '../Lists/CityUtilities.js'
 import tabList from '../Lists/TabList.js'
 import * as utility from '../Utilities/UtilityFunctions.js'
 import * as constants from '../Utilities/StringsConst.js'
@@ -15,15 +15,13 @@ import TabSelector from './TabSelector.js'
 
 class Game extends React.Component {
     constructor(props) {
-        super(props)
-
-        
+        super(props)      
 
         this.state = {
             gameTime: 0,
             gameResources: resources.resourcesList.slice(),
             gameActivities: activities.activityList.slice(),
-            gameRoomObjects: roomObjectsList.slice(),
+            gameRoomObjects: city.homeObjectsList.slice(),
             activeTab: constants.TAB_001,
             roomSlotMax: 3,
             roomSlotUsed: 0,

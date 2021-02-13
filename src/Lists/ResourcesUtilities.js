@@ -7,15 +7,16 @@ import * as utilities from '../Utilities/UtilityFunctions.js'
 //003 Knowledge
 //004 Energy
 //005 Demir
+//006 Agility
 
 export const resourcesList = [
     {   //FOOD
         name: constants.RES_000.name,
-        currentValue: 5000,
+        currentValue: 0,
         maxValue: 5000,
-        incRatio: -3.92,
+        incRatio: 0,
         boost: 0,
-        flatRatio: -3.92,
+        flatRatio: 0,
         unlocked: true,
         unlockedFrom: null
 
@@ -23,19 +24,9 @@ export const resourcesList = [
     {   //ENERGY
         name: constants.RES_004.name, 
         currentValue: 0, 
-        maxValue: 4000, 
+        maxValue: 3000, 
         baseRatio: 0, 
         incRatio: 0,
-        boost: 0,
-        flatRatio: 0,
-        unlocked: false,
-        unlockedFrom: null
-    },
-    {   //ATHLETICISM
-        name: constants.RES_001.name, 
-        currentValue: 0, 
-        maxValue: 4000, 
-        incRatio: 0, 
         boost: 0,
         flatRatio: 0,
         unlocked: false,
@@ -44,7 +35,18 @@ export const resourcesList = [
     {   //PSICHE
         name: constants.RES_002.name, 
         currentValue: 0, 
-        maxValue: 2500, 
+        maxValue: 3000, 
+        incRatio: 0, 
+        boost: 0,
+        flatRatio: 0,
+        unlocked: false,
+        unlockedFrom: null
+    },
+    {   //ATHLETICISM
+        name: constants.RES_001.name, 
+        type: constants.RES_TYPE_000.name,
+        currentValue: 0, 
+        maxValue: 2000, 
         incRatio: 0, 
         boost: 0,
         flatRatio: 0,
@@ -53,9 +55,31 @@ export const resourcesList = [
     },
     {   //KNOWLEDGE
         name: constants.RES_003.name, 
+        type: constants.RES_TYPE_001.name,
         currentValue: 0, 
-        maxValue: 1000, 
+        maxValue: 1500, 
         incRatio: 0, 
+        boost: 0,
+        flatRatio: 0,
+        unlocked: false,
+        unlockedFrom: null
+    },
+    {   //AGILITY
+        name: constants.RES_006.name, 
+        type: constants.RES_TYPE_000.name,
+        currentValue: 0, 
+        maxValue: 1500, 
+        incRatio: 0, 
+        boost: 0,
+        flatRatio: 0,
+        unlocked: false,
+        unlockedFrom: null
+    },
+    {   //COMMITMENT
+        name: constants.RES_007.name,
+        currentValue: 0,
+        maxValue: null,
+        incRatio: 0,
         boost: 0,
         flatRatio: 0,
         unlocked: false,
@@ -63,15 +87,14 @@ export const resourcesList = [
     },
     {   //DEMIR
         name: constants.RES_005.name, 
+        type: constants.RES_TYPE_002.name,
         currentValue: 0, 
         maxValue: 800, 
         incRatio: 0, 
         boost: 0,
         flatRatio: 0,
         unlocked: false,
-        unlockedFrom: null,
-        type: constants.RES_TYPE_002.name,
-        color: "darkorange"
+        unlockedFrom: null
     }
 ]
 

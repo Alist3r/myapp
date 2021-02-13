@@ -8,8 +8,7 @@ class Resource extends React.Component {
     super(props)
     this.state = {
       resource: props.resource,
-      gameState: props.gameState,
-      globalEffects: props.globalEffects
+      gameState: props.gameState
     }
   }
 
@@ -32,7 +31,7 @@ class Resource extends React.Component {
     let previewCurrentValue = resourceToUpdate.currentValue
     previewCurrentValue += resourceToUpdate.incRatio / refreshRateModifier
 
-    if(previewCurrentValue > resourceToUpdate.maxValue) {
+    if(resourceToUpdate.maxValue != null && previewCurrentValue > resourceToUpdate.maxValue) {
       resourceToUpdate.currentValue = resourceToUpdate.maxValue
       addInc = false
     }
@@ -42,8 +41,7 @@ class Resource extends React.Component {
       addInc = false
     }
     
-    if(addInc) {
-      
+    if(addInc) {    
       resourceToUpdate.currentValue += (resourceToUpdate.incRatio * constants.OPT_GAMESPEED) / refreshRateModifier
     }
 
@@ -63,7 +61,7 @@ class Resource extends React.Component {
           <div>
             <div className="Resource-Cell-Name">{resource.name}</div> 
             <div className="Resource-Cell-Value" style={{'color': resource.currentValue >= (resource.maxValue * 90 /100 ) ? 'darkorange' : 'black'}}>{formatNumber(resource.currentValue,2)}</div>
-            <div className="Resource-Cell-MaxValue">/{formatNumber(resource.maxValue,2)}</div> 
+            <div className="Resource-Cell-MaxValue">{resource.maxValue != null && (<span>/{formatNumber(resource.maxValue,2)}</span>)}</div> 
             <span style={{visibility: resource.incRatio !== 0 && resource.type !== constants.RES_TYPE_002.name ? 'visible' : 'hidden', display: 'table-cell'}}>
             <ResourceIncRatioTooltip resource={resource} gameState={gameState}>
               <div className="Resource-Cell-IncRatio">{formatNumberWPrefix(resource.incRatio * constants.OPT_GAMESPEED,2)} /<span className="Resource-Span-Sec">s</span></div>
