@@ -227,8 +227,9 @@ body {
 
 /* MIDDLE PANEL ROOM */
 
-.Middle-Panel-Room-Tab {
-  padding: 10px;
+.Middle-Panel-City-Tab {
+  margin: 5px;
+  padding: 3px
 }
 
 .Middle-Panel-Room-Panel {
@@ -251,12 +252,18 @@ body {
   margin-left: 10px;
 }
 
-.Middle-Panel-Room-Slot-Label {
-  font-size: 11px;
+.Middle-Panel-City-Section-Container {
+  border: 1px solid black;
+  padding: 7px;
+  margin: 10px;
+}
+
+.Middle-Panel-Section-Title {
+  font-size: 19px;
 }
 
 .Middle-Panel-Room-Slot-Value {
-  font-size: 18px;
+  font-size: 12px;
 }
 
 .RoomObject-Btn {

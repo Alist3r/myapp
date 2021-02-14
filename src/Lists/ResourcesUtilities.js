@@ -75,7 +75,7 @@ export const resourcesList = [
         unlocked: false,
         unlockedFrom: null
     },
-    {   //COMMITMENT
+    {   //TIME SLOT
         name: constants.RES_007.name,
         currentValue: 0,
         maxValue: null,
@@ -88,8 +88,8 @@ export const resourcesList = [
     {   //DEMIR
         name: constants.RES_005.name, 
         type: constants.RES_TYPE_002.name,
-        currentValue: 0, 
-        maxValue: 800, 
+        currentValue: 1000, 
+        maxValue: 1000, 
         incRatio: 0, 
         boost: 0,
         flatRatio: 0,

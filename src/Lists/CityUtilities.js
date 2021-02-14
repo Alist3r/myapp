@@ -29,6 +29,7 @@ export const homeObjectsList = [
         stage: 0,
         upgradeCost: [
             { resource: resNames.RES_005.name, cost: 30, upgradeCostRatio: 1.2},
+            { resource: resNames.RES_007.name, cost: 1, upgradeCostRatio: 0}
         ],
         effect: [
             { resource: resNames.RES_006.name, perSecRatio: 0.45}
@@ -36,7 +37,6 @@ export const homeObjectsList = [
         isBought: false,
         isActive: false,
         isPassive: false,
-        requiredSlot: 1,
         unlocked: true,
         unlockedFrom: null
     },
@@ -45,7 +45,8 @@ export const homeObjectsList = [
         description: resNames.OBJ_002.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_005.name, cost: 55, upgradeCostRatio: 1.2}
+            { resource: resNames.RES_005.name, cost: 55, upgradeCostRatio: 1.2},
+            { resource: resNames.RES_007.name, cost: 1, upgradeCostRatio: 0}
         ],
         effect: [
             { resource: resNames.RES_003.name, perSecRatio: 0.45}
@@ -53,7 +54,6 @@ export const homeObjectsList = [
         isBought: false,
         isActive: false,
         isPassive: false,
-        requiredSlot: 1,
         unlocked: true,
         unlockedFrom: null
     },
@@ -62,7 +62,8 @@ export const homeObjectsList = [
         description: resNames.OBJ_004.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_005.name, cost: 20, upgradeCostRatio: 1.1}
+            { resource: resNames.RES_005.name, cost: 20, upgradeCostRatio: 1.1},
+            { resource: resNames.RES_007.name, cost: 1, upgradeCostRatio: 0}
         ],
         effect: [
             { resource: resNames.RES_002.name, perSecRatio: 0.32}
@@ -71,16 +72,16 @@ export const homeObjectsList = [
         isBought: false,
         isActive: false,
         isPassive: false,
-        requiredSlot: 1,
         unlocked: true,
         unlockedFrom: null
     },
-    {   //AGENDA
+    /*{   //AGENDA
         name: resNames.OBJ_003.name,
         description: resNames.OBJ_003.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_005.name, cost: 66, upgradeCostRatio: 1.3}
+            { resource: resNames.RES_005.name, cost: 66, upgradeCostRatio: 1.3},
+            { resource: resNames.RES_007.name, cost: 1, upgradeCostRatio: 0}
         ],
         effect: null,
         effectActivity: [
@@ -91,16 +92,16 @@ export const homeObjectsList = [
         isBought: false,
         isActive: false,
         isPassive: false,
-        requiredSlot: 2,
         unlocked: true,
         unlockedFrom: null
-    },
+    },*/
     {   //VAULT
         name: resNames.OBJ_005.name,
         description: resNames.OBJ_005.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_005.name, cost: 150, upgradeCostRatio: 1.3}
+            { resource: resNames.RES_005.name, cost: 150, upgradeCostRatio: 1.3},
+            { resource: resNames.RES_007.name, cost: 0, upgradeCostRatio: 0}
         ],
         effect: [
             { resource: resNames.RES_005.name, maxValue: 500}
@@ -109,7 +110,6 @@ export const homeObjectsList = [
         isBought: false,
         isActive: false,
         isPassive: true,
-        requiredSlot: 0,
         unlocked: true,
         unlockedFrom: null
     },

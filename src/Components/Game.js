@@ -60,11 +60,11 @@ class Game extends React.Component {
         })
     }
 
-    changeRoomSlotUsed = (roomSlotUsed) => {
+    /*changeRoomSlotUsed = (roomSlotUsed) => {
         this.setState({
             roomSlotUsed: roomSlotUsed
         })
-    }
+    }*/
    
 
     render() {
@@ -112,7 +112,7 @@ class Game extends React.Component {
 
                         {/** YOUR ROOM TAB */}
                         <RoomObjectTab 
-                            changeRoomSlotUsed={this.changeRoomSlotUsed} 
+                            //changeRoomSlotUsed={this.changeRoomSlotUsed} 
                             roomObjects={gameRoomObjects} 
                             resources={gameResources} 
                             activities={gameActivities} 

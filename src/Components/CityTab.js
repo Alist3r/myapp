@@ -3,7 +3,7 @@ import RoomObject from './RoomObject.js'
 
 import * as constants from '../Utilities/StringsConst.js'
 
-class RoomObjectTab extends React.Component {
+class CityTab extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -39,22 +39,29 @@ class RoomObjectTab extends React.Component {
         let activities = this.state.activities.slice()
 
         return (
-            <div className="Middle-Panel-Room-Tab" style={{'display': this.state.activeTab === constants.TAB_002 ? 'block' : 'none'}}>
-                <div className="Middle-Panel-Room-Slot-Label">Home Slot</div>
-                <div className="Middle-Panel-Room-Slot-Value">{this.state.roomSlotUsed}/{this.state.roomSlotMax}</div>
+            <div className="Middle-Panel-City-Tab" style={{'display': this.state.activeTab === constants.TAB_002 ? 'block' : 'none'}}>
+                <span>{resources[6].name} : {resources[6].currentValue}</span>
+                <div className="Middle-Panel-City-Section-Container">
+                    <div className="Middle-Panel-Section-Title">Job</div>
 
-                <div className="Middle-Panel-Room-Panel">
-                    {roomObjects.map(roomObject => (
-                        this.isUnlocked(roomObject) && (
-                            <div className="Middle-Panel-RoomObj-Container">
-                                <RoomObject changeRoomSlotUsed={this.props.changeRoomSlotUsed} roomObject={roomObject} resources={resources} activities={activities} roomSlotUsed={this.state.roomSlotUsed} roomSlotMax={this.state.roomSlotMax}/>
-                            </div>
-                        )
-                    ))}
+                    
+                </div>
+                <div className="Middle-Panel-City-Section-Container">
+                    <div className="Middle-Panel-Section-Title">Home</div>
+
+                    <div className="Middle-Panel-Room-Panel">
+                        {roomObjects.map(roomObject => (
+                            this.isUnlocked(roomObject) && (
+                                <div className="Middle-Panel-RoomObj-Container">
+                                    <RoomObject roomObject={roomObject} resources={resources} activities={activities} />
+                                </div>
+                            )
+                        ))}
+                    </div>
                 </div>
             </div>
         )
     }
 }
 
-export default RoomObjectTab;
+export default CityTab;

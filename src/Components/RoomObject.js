@@ -1,5 +1,6 @@
 import React from 'react'
 import RoomObjectTooltip from '../Components/Tooltips/RoomObjectTooltip.js'
+import * as constants from '..//Utilities/StringsConst.js'
 import {haveEnoughResource} from '../Utilities/UtilityFunctions.js'
 import {applyEffectsToResources} from '../Lists/ResourcesUtilities.js'
 import {applyEffectsToActivity} from '../Lists/ActivityUtilities.js'
@@ -64,8 +65,16 @@ class RoomObject extends React.Component {
           if(upgradeCosts.length > 0) {
             let index = upgradeCosts.findIndex(x => x.resource === resources[i].name)  
             if(index !== -1) {
-              resources[i].currentValue -= upgradeCosts[index].cost  
-              upgradeCosts[index].cost += ((upgradeCosts[index].upgradeCostRatio * upgradeCosts[index].cost * (roomObj.stage+1)))
+              if(upgradeCosts[index].resource !== constants.RES_007.name) {
+                resources[i].currentValue -= upgradeCosts[index].cost  
+                upgradeCosts[index].cost += ((upgradeCosts[index].upgradeCostRatio * upgradeCosts[index].cost * (roomObj.stage+1)))
+              }
+              else {
+                if(roomObj.isActive === false) {
+                  resources[i].currentValue -= upgradeCosts[index].cost  
+                  upgradeCosts[index].cost += ((upgradeCosts[index].upgradeCostRatio * upgradeCosts[index].cost * (roomObj.stage+1)))
+                }
+              }
             } 
           }
         }
@@ -74,10 +83,10 @@ class RoomObject extends React.Component {
       roomObj.upgradeCost = upgradeCosts.slice()
       roomObj.isBought = true
 
-      if(roomObj.isPassive && roomObj.isActive === false)
+      //if(roomObj.isPassive && roomObj.isActive === false)
         roomObj.isActive = true
 
-      if(roomObj.isActive) 
+      //if(roomObj.isActive) 
         this.applyEffects(1)
       
 
@@ -96,42 +105,54 @@ class RoomObject extends React.Component {
   }
 
   objectON(roomObj) {
-    let roomSlotUsed = this.state.roomSlotUsed
-    let roomSlotMax = this.state.roomSlotMax
+    //let roomSlotUsed = this.state.roomSlotUsed
+    let resources = this.state.resources
 
-    if ((roomSlotUsed + roomObj.requiredSlot) <= roomSlotMax) {
+    let index = resources.findIndex(x => x.name === constants.RES_007.name)
+    let timeSlot = resources[index]
+
+    let costIndex = roomObj.upgradeCost.findIndex(x => x.resource === constants.RES_007.name)
+    let timeSlotRequired = roomObj.upgradeCost[costIndex]
+
+    if ((timeSlot.currentValue - timeSlotRequired.cost) >= 0) {
      
-      roomSlotUsed += roomObj.requiredSlot
+      timeSlot.currentValue -= timeSlotRequired.cost
 
       //applying effects
       this.applyEffects(roomObj.stage) //need to apply the boost multiple times
       roomObj.isActive = true
        
       this.setState({
-        roomSlotUsed: roomSlotUsed,
+        resources: resources,
         roomObject: roomObj
       })
 
-      this.props.changeRoomSlotUsed(roomSlotUsed)
+      //this.props.changeRoomSlotUsed(roomSlotUsed)
     }   
   }
 
   objectOFF(roomObj) {
-    let roomSlotUsed = this.state.roomSlotUsed
+    let resources = this.state.resources
 
-    if (roomSlotUsed > 0) {
+    let index = resources.findIndex(x => x.name === constants.RES_007.name)
+    let timeSlot = resources[index]
+
+    let costIndex = roomObj.upgradeCost.findIndex(x => x.resource === constants.RES_007.name)
+    let timeSlotRequired = roomObj.upgradeCost[costIndex]
+
+    if (timeSlotRequired.cost > 0) {
       roomObj.isActive = false
-      roomSlotUsed -= roomObj.requiredSlot
+      timeSlot.currentValue += timeSlotRequired.cost
 
       //Remove Effect 
       this.removeEffects(roomObj.stage)
 
       this.setState({
-        roomSlotUsed: roomSlotUsed,
+        resources: resources,
         roomObject: roomObj
       })
 
-      this.props.changeRoomSlotUsed(roomSlotUsed)
+      //this.props.changeRoomSlotUsed(roomSlotUsed)
     }
   }
 
