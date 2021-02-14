@@ -6,9 +6,11 @@ export function saveState(state) {
     localStorage.setItem("gameResources", JSON.stringify(state.gameResources));
     localStorage.setItem("gameActivities", JSON.stringify(state.gameActivities));
     localStorage.setItem("gameRoomObjects", JSON.stringify(state.gameRoomObjects));
+    localStorage.setItem("gameJobs", JSON.stringify(state.gameJobs));
     localStorage.setItem("activeTab", state.activeTab);
-    localStorage.setItem("roomSlotMax", JSON.stringify(state.roomSlotMax));
-    localStorage.setItem("roomSlotUsed", JSON.stringify(state.roomSlotUsed));
+
+    //localStorage.setItem("roomSlotMax", JSON.stringify(state.roomSlotMax));
+    //localStorage.setItem("roomSlotUsed", JSON.stringify(state.roomSlotUsed));
 }
 
 export function loadState(state) {
@@ -17,9 +19,8 @@ export function loadState(state) {
     let gameResources
     let gameActivities
     let gameRoomObjects
+    let gameJobs
     let activeTab
-    let roomSlotMax
-    let roomSlotUsed
 
     if(parseInt(localStorage.getItem('gameTime'))) {
         gameTime = parseInt(localStorage.getItem('gameTime'))
@@ -49,6 +50,13 @@ export function loadState(state) {
         gameRoomObjects = state.gameRoomObjects
     }
 
+    if(JSON.parse(localStorage.getItem("gameJobs"))) {
+        gameJobs = JSON.parse(localStorage.getItem("gameJobs"))
+    }
+    else {
+        gameJobs = state.gameJobs
+    }
+
     if(localStorage.getItem('activeTab')) {
         activeTab = localStorage.getItem('activeTab')
     }
@@ -56,30 +64,14 @@ export function loadState(state) {
         activeTab = state.activeTab
     }
 
-    if(parseInt(localStorage.getItem('roomSlotMax'))) {
-        roomSlotMax = parseInt(localStorage.getItem('roomSlotMax'))
-    }
-    else {
-        roomSlotMax = state.roomSlotMax
-    }
-
-    if(parseInt(localStorage.getItem('roomSlotUsed'))) {
-        roomSlotUsed = parseInt(localStorage.getItem('roomSlotUsed'))
-    }
-    else {
-        roomSlotUsed = state.roomSlotUsed
-    }
-
     
-
     updatedstate = {
         gameTime,
         gameResources,
         gameActivities,
         gameRoomObjects,
-        activeTab,
-        roomSlotMax,
-        roomSlotUsed
+        gameJobs,
+        activeTab
     }
 
     return updatedstate

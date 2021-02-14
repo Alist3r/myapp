@@ -11,9 +11,7 @@ class RoomObject extends React.Component {
     this.state = {
       roomObject: props.roomObject,
       resources: props.resources,
-      activities: props.activities,
-      roomSlotUsed: props.roomSlotUsed,
-      roomSlotMax: props.roomSlotMax
+      activities: props.activities
     }
   }
 

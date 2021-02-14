@@ -1,4 +1,4 @@
-import * as resNames from '../Utilities/StringsConst.js';
+import * as constants from '../Utilities/StringsConst.js';
 
 //RESOURCERS
 //001 Athleticism
@@ -24,15 +24,15 @@ import * as resNames from '../Utilities/StringsConst.js';
 
 export const homeObjectsList = [
     {   //JUMP ROPE
-        name: resNames.OBJ_001.name,
-        description: resNames.OBJ_001.description,
+        name: constants.OBJ_001.name,
+        description: constants.OBJ_001.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_005.name, cost: 30, upgradeCostRatio: 1.2},
-            { resource: resNames.RES_007.name, cost: 1, upgradeCostRatio: 0}
+            { resource: constants.RES_005.name, cost: 30, upgradeCostRatio: 1.2},
+            { resource: constants.RES_007.name, cost: 1, upgradeCostRatio: 0}
         ],
         effect: [
-            { resource: resNames.RES_006.name, perSecRatio: 0.45}
+            { resource: constants.RES_006.name, perSecRatio: 0.45}
         ],
         isBought: false,
         isActive: false,
@@ -41,15 +41,15 @@ export const homeObjectsList = [
         unlockedFrom: null
     },
     {   //LIBRARY
-        name: resNames.OBJ_002.name,
-        description: resNames.OBJ_002.description,
+        name: constants.OBJ_002.name,
+        description: constants.OBJ_002.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_005.name, cost: 55, upgradeCostRatio: 1.2},
-            { resource: resNames.RES_007.name, cost: 1, upgradeCostRatio: 0}
+            { resource: constants.RES_005.name, cost: 55, upgradeCostRatio: 1.2},
+            { resource: constants.RES_007.name, cost: 1, upgradeCostRatio: 0}
         ],
         effect: [
-            { resource: resNames.RES_003.name, perSecRatio: 0.45}
+            { resource: constants.RES_003.name, perSecRatio: 0.45}
         ],
         isBought: false,
         isActive: false,
@@ -58,15 +58,15 @@ export const homeObjectsList = [
         unlockedFrom: null
     },
     {   //TRAINING MAT
-        name: resNames.OBJ_004.name,
-        description: resNames.OBJ_004.description,
+        name: constants.OBJ_004.name,
+        description: constants.OBJ_004.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_005.name, cost: 20, upgradeCostRatio: 1.1},
-            { resource: resNames.RES_007.name, cost: 1, upgradeCostRatio: 0}
+            { resource: constants.RES_005.name, cost: 20, upgradeCostRatio: 1.1},
+            { resource: constants.RES_007.name, cost: 1, upgradeCostRatio: 0}
         ],
         effect: [
-            { resource: resNames.RES_002.name, perSecRatio: 0.32}
+            { resource: constants.RES_002.name, perSecRatio: 0.32}
         ],
         effectActivity: null,
         isBought: false,
@@ -76,18 +76,18 @@ export const homeObjectsList = [
         unlockedFrom: null
     },
     /*{   //AGENDA
-        name: resNames.OBJ_003.name,
-        description: resNames.OBJ_003.description,
+        name: constants.OBJ_003.name,
+        description: constants.OBJ_003.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_005.name, cost: 66, upgradeCostRatio: 1.3},
-            { resource: resNames.RES_007.name, cost: 1, upgradeCostRatio: 0}
+            { resource: constants.RES_005.name, cost: 66, upgradeCostRatio: 1.3},
+            { resource: constants.RES_007.name, cost: 1, upgradeCostRatio: 0}
         ],
         effect: null,
         effectActivity: [
-            { activity: resNames.ACT_001.name, percRatio: 10},
-            { activity: resNames.ACT_002.name, percRatio: 10},
-            { activity: resNames.ACT_007.name, percRatio: 20}
+            { activity: constants.ACT_001.name, percRatio: 10},
+            { activity: constants.ACT_002.name, percRatio: 10},
+            { activity: constants.ACT_007.name, percRatio: 20}
         ],
         isBought: false,
         isActive: false,
@@ -96,15 +96,15 @@ export const homeObjectsList = [
         unlockedFrom: null
     },*/
     {   //VAULT
-        name: resNames.OBJ_005.name,
-        description: resNames.OBJ_005.description,
+        name: constants.OBJ_005.name,
+        description: constants.OBJ_005.description,
         stage: 0,
         upgradeCost: [
-            { resource: resNames.RES_005.name, cost: 150, upgradeCostRatio: 1.3},
-            { resource: resNames.RES_007.name, cost: 0, upgradeCostRatio: 0}
+            { resource: constants.RES_005.name, cost: 150, upgradeCostRatio: 1.3},
+            { resource: constants.RES_007.name, cost: 0, upgradeCostRatio: 0}
         ],
         effect: [
-            { resource: resNames.RES_005.name, maxValue: 500}
+            { resource: constants.RES_005.name, maxValue: 500}
         ],
         effectActivity: null,
         isBought: false,
@@ -113,4 +113,17 @@ export const homeObjectsList = [
         unlocked: true,
         unlockedFrom: null
     },
+]
+
+export const jobMansionsList = [
+    {
+        name: "Deliverfood Courier",
+        description: "You start a job for a famous delivery food multinational",
+        timeSlot: 0,
+        effect: [
+            { resource: constants.RES_005.name, perSecRatio: 0.10, flatValue: 0.10}
+        ],
+        unlocked: true,
+        unlockedFrom: false
+    }
 ]

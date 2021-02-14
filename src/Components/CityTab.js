@@ -10,9 +10,8 @@ class CityTab extends React.Component {
             roomObjects: props.roomObjects,
             resources: props.resources,
             activities: props.activities,
+            jobs: props.jobs,
             activeTab: props.activeTab,
-            roomSlotUsed: props.roomSlotUsed,
-            roomSlotMax: props.roomSlotMax
         }
     }
 
@@ -23,8 +22,8 @@ class CityTab extends React.Component {
         })
     } 
 
-    isUnlocked(roomObj) {
-        let unlocked = roomObj.unlocked
+    isUnlocked(obj) {
+        let unlocked = obj.unlocked
 
         if (unlocked === false) {
             /** TO DO */
@@ -37,13 +36,25 @@ class CityTab extends React.Component {
         let roomObjects = this.state.roomObjects.slice()
         let resources = this.state.resources.slice()
         let activities = this.state.activities.slice()
+        let jobs = this.state.jobs.slice()
 
         return (
             <div className="Middle-Panel-City-Tab" style={{'display': this.state.activeTab === constants.TAB_002 ? 'block' : 'none'}}>
                 <span>{resources[6].name} : {resources[6].currentValue}</span>
                 <div className="Middle-Panel-City-Section-Container">
                     <div className="Middle-Panel-Section-Title">Job</div>
-
+                    
+                    <div className="Middle-Panel-Room-Panel">
+                        {jobs.map(job =>(
+                            this.isUnlocked(job) && (
+                                <div className="Middle-Panel-RoomObj-Container">
+                                    {job.name}<br></br>
+                                    {job.description}<br></br>
+                                    <br></br>
+                                </div>
+                            )
+                        ))}
+                    </div>
                     
                 </div>
                 <div className="Middle-Panel-City-Section-Container">

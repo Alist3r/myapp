@@ -1,7 +1,7 @@
 import React from 'react'
 import ResourceTab from './ResourceTab.js'
 import ActivityTab from './ActivityTab.js'
-import RoomObjectTab from './CityTab.js'
+import CityTab from './CityTab.js'
 import TopBar from './TopBar.js'
 import BeltResourcePanel from './BeltResourcePanel.js'
 
@@ -22,10 +22,8 @@ class Game extends React.Component {
             gameResources: resources.resourcesList.slice(),
             gameActivities: activities.activityList.slice(),
             gameRoomObjects: city.homeObjectsList.slice(),
-            activeTab: constants.TAB_001,
-            roomSlotMax: 3,
-            roomSlotUsed: 0,
-        
+            gameJobs: city.jobMansionsList.slice(),
+            activeTab: constants.TAB_001,     
         }     
     
         //If a storage exist, then load the datas
@@ -71,6 +69,7 @@ class Game extends React.Component {
         let gameResources = this.state.gameResources.slice()
         let gameActivities = this.state.gameActivities.slice()
         let gameRoomObjects = this.state.gameRoomObjects.slice()
+        let gameJobs = this.state.gameJobs.slice()
  
         return(
             
@@ -111,14 +110,13 @@ class Game extends React.Component {
                         />
 
                         {/** YOUR ROOM TAB */}
-                        <RoomObjectTab 
+                        <CityTab 
                             //changeRoomSlotUsed={this.changeRoomSlotUsed} 
                             roomObjects={gameRoomObjects} 
                             resources={gameResources} 
                             activities={gameActivities} 
+                            jobs={gameJobs}
                             activeTab={this.state.activeTab} 
-                            roomSlotUsed={this.state.roomSlotUsed} 
-                            roomSlotMax={this.state.roomSlotMax}
                         />
                         
                     </div>  
