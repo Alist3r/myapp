@@ -8,6 +8,7 @@ body {
   -webkit-user-select: none;  
   -moz-user-select: none;    
   -ms-user-select: none; 
+  user-select: none;
 }
 
 .Game-Main-Container {
@@ -165,8 +166,6 @@ body {
   .Activity-Btn:focus {
     outline: none;
   }
-
-  .Activity-Btn:
 
 .Activity-Btn-Label {
   display: inline-block;
