@@ -2,6 +2,7 @@
 export const OPT_GAMESPEED = 1
 export const OPT_REFRESHRATE = 250 // milliseconds
 
+//RESOURCES
 //000 Food
 //001 Athleticism
 //002 Psiche
@@ -9,6 +10,7 @@ export const OPT_REFRESHRATE = 250 // milliseconds
 //004 Free Time
 //005 Demir
 //006 Agility
+//007 Commitment
 
 export const RES_000 = {
     name: "Food"

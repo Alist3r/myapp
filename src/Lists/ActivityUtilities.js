@@ -39,12 +39,12 @@ export const activityList = [
     {   //SAVE ENERGY
         name: constants.ACT_001.name, 
         description: constants.ACT_001.description,
-        stage: null,
+        stage: 0,
         upgradeCost: [
-            { resource: constants.RES_000.name, cost: 100, upgradeCostRatio: 0}
+            { resource: constants.RES_000.name, cost: 15, upgradeCostRatio: 0.8}
         ],
         effect: [
-            { resource: constants.RES_004.name, clickRatio: 1, flatValue: 1}
+            { resource: constants.RES_004.name, perSecRatio: 0.01, flatValue: 0.01}
         ],
         boost: 0,
         unlocked: true,
@@ -106,10 +106,10 @@ export const activityList = [
         description: constants.ACT_005.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_004.name, cost: 15, upgradeCostRatio: 0.02}
+            { resource: constants.RES_001.name, cost: 100, upgradeCostRatio: 0.02}
         ],
         effect: [
-            { resource: constants.RES_004.name, perSecRatio: 0.56, flatValue: 0.56}
+            { resource: constants.RES_004.name, percRatio: 10, flatValue: 10}
         ],
         boost: 0,
         unlocked: false,
