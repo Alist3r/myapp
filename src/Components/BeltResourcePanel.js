@@ -3,12 +3,14 @@ import {formatNumber} from '../Utilities/UtilityFunctions.js'
 import * as constants from '../Utilities/StringsConst.js'
 import icondemir from '../Images/icon-demir.png'
 import BeltResourceTooltip from './Tooltips/BeltResourceTooltip.js'
+import ResourceIncRatioTooltip from './Tooltips/ResourceIncRatioTooltip.js'
 
 class BeltResourcePanel extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      resource: props.resource
+      resource: props.resource,
+      gameState: props.gameState
     }
   }
 
@@ -67,6 +69,7 @@ class BeltResourcePanel extends React.Component {
 
   render() {
     let resource = this.state.resource
+    let gameState = this.state.gameState
 
     return(
         <div style={this.getResourceNameStyle()}>
@@ -79,7 +82,9 @@ class BeltResourcePanel extends React.Component {
           <div style={{display: 'table-cell'}}>
             <div className="Belt-Resource-Cell-Value" style={{'color': resource.currentValue >= (resource.maxValue * 90 /100 ) ? 'darkorange' : 'black'}}>{formatNumber(resource.currentValue,2)}</div>
             <div className="Belt-Resource-Cell-MaxValue">/{formatNumber(resource.maxValue)}</div> 
-            <div className="Belt-Resource-Cell-IncRatio">{formatNumber(resource.incRatio * constants.OPT_GAMESPEED,2)}/<span className="Resource-Span-Sec">sec</span></div>
+            <ResourceIncRatioTooltip style={{display: "none"}} resource={resource} gameState={gameState}>
+              <div className="Belt-Resource-Cell-IncRatio">{formatNumber(resource.incRatio * constants.OPT_GAMESPEED,2)}/<span className="Resource-Span-Sec">sec</span></div>
+            </ResourceIncRatioTooltip>
           </div>
           
         </div>           

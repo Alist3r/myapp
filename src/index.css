@@ -123,7 +123,7 @@ body {
   padding: 15px;
 }
 
-.Middle-Panel-Activity-Container,.Middle-Panel-RoomObj-Container {
+.Middle-Panel-Activity-Container,.Middle-Panel-RoomObj-Container,.Middle-Panel-Job-Container {
   width: 250;
   display: inline-block;
   padding-left: 10px;
@@ -231,7 +231,7 @@ body {
   padding: 3px
 }
 
-.Middle-Panel-Room-Panel {
+.Middle-Panel-Room-Panel, .Middle-Panel-Job-Panel {
   text-align: center;
   margin-top: 10px;
 }
@@ -305,6 +305,55 @@ body {
 
 .RoomObject-Btn-Label {
   display: inline-block;
+  font-size: 90%;
+}
+
+/* MIDDLE PANEL JOB */
+
+.Middle-Panel-Job-Container {
+  display: inline;
+}
+
+.Job-Btn {
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 1px solid black;
+  color: black;
+  padding: 5px;
+  width: 200px;
+  max-width: 200px;
+  border-radius: 3px;
+  text-align: center;
+  display: inline-block;
+  -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+}
+
+.Job-Btn-Label {
+  display: inline-block;
+  font-size: 90%;
+}
+
+.Job-Btn-Plus, .Job-Btn-Minus {
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 5px;
+  padding: 5px;
+  background-color: lightgrey;
+  border-radius: 3px;
+  color: grey;
+  width: 10px;
+}
+
+  .Job-Btn-Plus:hover, .Job-Btn-Minus:hover {
+    color: black
+  }
+  
+.Job-TimeSlot-Label {
+  display: inline-block;
+  margin-left: 5px;
 }
 
 /* MIDDLE PANEL BAG RESOURCE */
@@ -352,5 +401,9 @@ body {
   text-align: left;
   min-width: 110px;
   max-width: 110px;
+}
+
+.Belt-Resource-Cell-IncRatio:hover {
+  font-weight: bold;
 }
 

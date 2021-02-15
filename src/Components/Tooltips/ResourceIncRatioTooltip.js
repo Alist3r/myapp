@@ -28,6 +28,7 @@ const ResourceIncRatioTooltip = (props) => {
   let resource = props.resource
   let activities = gameState.gameActivities
   let roomObjects = gameState.gameRoomObjects
+  let jobs = gameState.gameJobs
 
   
   return (
@@ -81,7 +82,21 @@ const ResourceIncRatioTooltip = (props) => {
               )}
               </span>
             ))}
-            
+
+            {/* JOB */}
+            {jobs.map(job => (
+              <span>
+                {job.unlocked && job.effect != null && (
+                  job.effect.map(effect => (
+                    <span>
+                      {effect.resource === resource.name && wichEffect(effect) === 'perSecRatio' && 
+                        (<span>{job.name} <span style={{float: "right"}}>{formatNumberWPrefix(effect.perSecRatio * job.timeSlot,2)}/s</span><br></br></span>)}
+                    </span>
+                  ))
+                )}
+              </span>
+            ))}
+
             <br></br>   
             <div className="Tooltip-Divider"></div>
             {resource.incRatio > 0 && (<span>To Cap: {timerConverter(resource.maxValue, resource.currentValue, resource.incRatio)}</span>)}

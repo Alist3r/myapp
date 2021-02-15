@@ -124,7 +124,7 @@ class Game extends React.Component {
                     {/** BELT RESOURCE PANEL */}
                     <div className="Middle-Panel-Bag-Resources">
                         {gameResources.map(resource => (                                     
-                            resource.type === constants.RES_TYPE_002.name && (<div>{this.unlockResource(resource) && (<BeltResourcePanel  resource={resource} />)}</div>)                               
+                            resource.type === constants.RES_TYPE_002.name && (<div>{this.unlockResource(resource) && (<BeltResourcePanel  resource={resource} gameState={this.state} />)}</div>)                               
                         ))}
                     </div> 
                 </div>

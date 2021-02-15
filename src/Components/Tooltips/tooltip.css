@@ -7,12 +7,7 @@
 
 /* Wrapping */
 .Tooltip-Wrapper, .Tooltip-Wrapper-ResourceIncRatio {
-  display: inline-block;
   position: relative;
-}
-
-.Tooltip-Wrapper-ResourceIncRatio {
-  display: table-cell;
 }
 
 /* Absolute positioning */
