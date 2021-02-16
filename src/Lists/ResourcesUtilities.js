@@ -88,8 +88,8 @@ export const resourcesList = [
     {   //DEMIR
         name: constants.RES_005.name, 
         type: constants.RES_TYPE_002.name,
-        currentValue: 1000, 
-        maxValue: 1000, 
+        currentValue: 0, 
+        maxValue: 800, 
         incRatio: 0, 
         boost: 0,
         flatRatio: 0,

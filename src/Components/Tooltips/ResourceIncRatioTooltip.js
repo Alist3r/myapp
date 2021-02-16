@@ -29,7 +29,6 @@ const ResourceIncRatioTooltip = (props) => {
   let activities = gameState.gameActivities
   let roomObjects = gameState.gameRoomObjects
   let jobs = gameState.gameJobs
-
   
   return (
     <div
@@ -54,7 +53,7 @@ const ResourceIncRatioTooltip = (props) => {
             {/* ACTIVITIES*/}
             {activities.map(activity =>(
               <span>
-              {activity.unlocked && activity.effect != null && (
+              {activity.unlocked && activity.effect != null && activity.stage > 0 && (
                 activity.effect.map(effect => (
                     <span>
                       {effect.resource === resource.name && wichEffect(effect) === 'perSecRatio' && 
@@ -86,7 +85,7 @@ const ResourceIncRatioTooltip = (props) => {
             {/* JOB */}
             {jobs.map(job => (
               <span>
-                {job.unlocked && job.effect != null && (
+                {job.unlocked && job.effect != null && job.timeSlot > 0 && (
                   job.effect.map(effect => (
                     <span>
                       {effect.resource === resource.name && wichEffect(effect) === 'perSecRatio' && 

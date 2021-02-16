@@ -41,10 +41,10 @@ export const activityList = [
         description: constants.ACT_001.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_000.name, cost: 15, upgradeCostRatio: 0.8}
+            { resource: constants.RES_000.name, cost: 15, upgradeCostRatio: 0.4}
         ],
         effect: [
-            { resource: constants.RES_004.name, perSecRatio: 0.01, flatValue: 0.01}
+            { resource: constants.RES_004.name, perSecRatio: 0.02, flatValue: 0.02}
         ],
         boost: 0,
         unlocked: true,

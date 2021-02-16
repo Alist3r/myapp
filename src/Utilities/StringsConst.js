@@ -1,5 +1,5 @@
 
-export const OPT_GAMESPEED = 100
+export const OPT_GAMESPEED = 1
 export const OPT_REFRESHRATE = 250 // milliseconds
 
 //RESOURCES

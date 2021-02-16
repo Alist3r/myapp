@@ -1,6 +1,7 @@
 import React from 'react'
 import * as constants from '../Utilities/StringsConst.js'
 import {applyEffectsToResources} from '../Lists/ResourcesUtilities.js'
+import JobTooltip from './Tooltips/JobTooltip.js'
 
 
 class Job extends React.Component {
@@ -27,7 +28,7 @@ class Job extends React.Component {
 
   decTimeSlot(job) {
     let resourceTimeSlotIndex = this.state.resources.findIndex(x => x.name === constants.RES_007.name)
-    let timeSlotRes = this.state.resources[resourceTimeSlotIndex]
+    //let timeSlotRes = this.state.resources[resourceTimeSlotIndex]
 
     if(job.timeSlot > 0) {
       job.timeSlot -= 1
@@ -40,7 +41,7 @@ class Job extends React.Component {
     let job = this.state.job
 
     return(
-      <div>
+        <JobTooltip job={job} resources={this.state.resources} direction="right" >
         <div className="Job-Btn">
           <span className="Job-Btn-Label">
             {job.name} [{job.timeSlot}]
@@ -52,7 +53,7 @@ class Job extends React.Component {
         <div onClick={() => this.decTimeSlot(job)} className="Job-Btn-Minus">
           -
         </div>
-      </div> 
+        </JobTooltip>
     )
   }
 }

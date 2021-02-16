@@ -311,7 +311,7 @@ body {
 /* MIDDLE PANEL JOB */
 
 .Middle-Panel-Job-Container {
-  display: inline;
+  display: table-row-group;
 }
 
 .Job-Btn {
@@ -325,6 +325,8 @@ body {
   border-radius: 3px;
   text-align: center;
   display: inline-block;
+  margin-bottom: 5px;
+  margin-left: 30px;
   -webkit-user-select: none;  
   -moz-user-select: none;    
   -ms-user-select: none;      

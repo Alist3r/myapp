@@ -88,8 +88,9 @@ class Activity extends React.Component {
         cost.cost -= ((cost.upgradeCostRatio * cost.cost * (activityToSell.stage)))
         resources[index].currentValue += cost.cost  
       })
- 
-      applyEffectsToResources(resources, effects, 1, "remove", "activity") 
+      
+      if((activityToSell.modulable === true && activityToSell.grade >0) || activityToSell.modulable === false) 
+        applyEffectsToResources(resources, effects, 1, "remove", "activity") 
 
       if(activityToSell.modulable === true) {
         if(activityToSell.grade === activityToSell.stage) {

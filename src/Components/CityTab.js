@@ -72,9 +72,11 @@ class CityTab extends React.Component {
                     <div className="Middle-Panel-Room-Panel">
                         {roomObjects.map(roomObject => (
                             this.isUnlocked(roomObject) && (
-                                <div className="Middle-Panel-RoomObj-Container">
-                                    <RoomObject roomObject={roomObject} resources={resources} activities={activities} />
-                                </div>
+                                <span>
+                                    <div className="Middle-Panel-RoomObj-Container">
+                                        <RoomObject roomObject={roomObject} resources={resources} activities={activities} />
+                                    </div>
+                                </span>
                             )
                         ))}
                     </div>

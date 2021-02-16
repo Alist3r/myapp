@@ -121,7 +121,8 @@ export const jobMansionsList = [
         description: "You start a job for a famous delivery food multinational",
         timeSlot: 0,
         effect: [
-            { resource: constants.RES_005.name, perSecRatio: 0.10, flatValue: 0.10}
+            { resource: constants.RES_005.name, perSecRatio: 0.10, flatValue: 0.10},
+            { resource: constants.RES_000.name, perSecRatio: -3.34, flatValue: -3.34}
         ],
         unlocked: true,
         unlockedFrom: false
