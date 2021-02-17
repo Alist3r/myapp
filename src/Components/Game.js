@@ -57,14 +57,7 @@ class Game extends React.Component {
             activeTab: tabToActivate
         })
     }
-
-    /*changeRoomSlotUsed = (roomSlotUsed) => {
-        this.setState({
-            roomSlotUsed: roomSlotUsed
-        })
-    }*/
    
-
     render() {
         let gameResources = this.state.gameResources.slice()
         let gameActivities = this.state.gameActivities.slice()

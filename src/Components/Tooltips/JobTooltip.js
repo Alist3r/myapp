@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./tooltip.css";
-import {formatNumber, formatNumberWPrefix} from '../../Utilities/UtilityFunctions.js'
-import {timerConverter} from '../../Utilities/UtilityFunctions.js'
+import {formatNumberWPrefix} from '../../Utilities/UtilityFunctions.js'
 
 const JobTooltip = (props) => {
   let timeout;
@@ -18,13 +17,13 @@ const JobTooltip = (props) => {
     setActive(false);
   };
 
-  const currentValueColor = (currentValue, costValue) => {
+  /*const currentValueColor = (currentValue, costValue) => {
     let classColor = "Tooltip-Resource-CurrentValue-Color-Grey"
     if(currentValue < costValue) 
       classColor = "Tooltip-Resource-CurrentValue-Color-Red"
     
     return classColor
-  }
+  }*/
 
   const isResourceUnlocked = (effect, resources) => {
     let index = resources.findIndex(x => x.name === effect.resource)

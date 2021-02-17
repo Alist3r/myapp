@@ -52,6 +52,7 @@ class CityTab extends React.Component {
         return (
             <div className="Middle-Panel-City-Tab" style={{'display': this.state.activeTab === constants.TAB_002 ? 'block' : 'none'}}>
                 <span>{resources[6].name} : {this.getTimeSlotUsed()}/{resources[6].currentValue}</span>
+
                 <div className="Middle-Panel-City-Section-Container">
                     <div className="Middle-Panel-Section-Title">Job</div>
                     

@@ -65,12 +65,12 @@ class RoomObject extends React.Component {
             if(index !== -1) {
               if(upgradeCosts[index].resource !== constants.RES_007.name) {
                 resources[i].currentValue -= upgradeCosts[index].cost  
-                upgradeCosts[index].cost += ((upgradeCosts[index].upgradeCostRatio * upgradeCosts[index].cost * (roomObj.stage+1)))
+                upgradeCosts[index].cost += (upgradeCosts[index].upgradeCostRatio * upgradeCosts[index].cost)
               }
               else {
                 if(roomObj.isActive === false) {
                   resources[i].currentValue -= upgradeCosts[index].cost  
-                  upgradeCosts[index].cost += ((upgradeCosts[index].upgradeCostRatio * upgradeCosts[index].cost * (roomObj.stage+1)))
+                  upgradeCosts[index].cost += (upgradeCosts[index].upgradeCostRatio * upgradeCosts[index].cost)
                 }
               }
             } 

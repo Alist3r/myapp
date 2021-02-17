@@ -64,7 +64,7 @@ class Resource extends React.Component {
             <div className="Resource-Cell-MaxValue">{resource.maxValue != null && (<span>/{formatNumber(resource.maxValue,2)}</span>)}</div> 
             <span style={{visibility: resource.incRatio !== 0 && resource.type !== constants.RES_TYPE_002.name ? 'visible' : 'hidden', display: 'table-cell'}}>
             <ResourceIncRatioTooltip resource={resource} gameState={gameState}>
-              <div className="Resource-Cell-IncRatio">{formatNumberWPrefix(resource.incRatio * constants.OPT_GAMESPEED,2)} /<span className="Resource-Span-Sec">s</span></div>
+              <div className="Resource-Cell-IncRatio">{formatNumberWPrefix(resource.incRatio * constants.OPT_GAMESPEED,2)}/<span className="Resource-Span-Sec">s</span></div>
             </ResourceIncRatioTooltip>   
             </span>
           </div>      

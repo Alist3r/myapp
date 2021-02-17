@@ -120,9 +120,36 @@ export const jobMansionsList = [
         name: "Deliverfood Courier",
         description: "You start a job for a famous delivery food multinational",
         timeSlot: 0,
+        jobExpModifier: 0.015,
+        jobExp: {
+            grade: "Novice",
+            current: 0,
+            toLvUp: 1000,
+            modifier: 0.015,
+        },
         effect: [
             { resource: constants.RES_005.name, perSecRatio: 0.10, flatValue: 0.10},
-            { resource: constants.RES_000.name, perSecRatio: -3.34, flatValue: -3.34}
+            { resource: constants.RES_000.name, perSecRatio: -3.34, flatValue: -3.34},
+            { resource: constants.RES_004.name, perSecRatio: -0.003, flatValue: -0.003}
+        ],
+        unlocked: true,
+        unlockedFrom: false
+    },
+    {
+        name: "Asdasdasdadsad",
+        description: "You start a job for a famous delivery food multinational",
+        timeSlot: 0,
+        jobExpModifier: 0.015,
+        jobExp: {
+            grade: "Novice",
+            current: 0,
+            toLvUp: 1000,
+            modifier: 0.030,
+        },
+        effect: [
+            { resource: constants.RES_005.name, perSecRatio: 0.10, flatValue: 0.10},
+            { resource: constants.RES_000.name, perSecRatio: -3.34, flatValue: -3.34},
+            { resource: constants.RES_004.name, perSecRatio: -0.003, flatValue: -0.003}
         ],
         unlocked: true,
         unlockedFrom: false

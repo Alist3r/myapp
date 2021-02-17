@@ -51,7 +51,7 @@ class Activity extends React.Component {
           if(index !== -1) { //if matching cost found
             resourcesList[i].currentValue -= costs[index].cost  //paying resource
             if(activityToDo.upgradeCost != null) //if its an upgradable resource, then update the cost value for the next step
-              costs[index].cost += ((costs[index].upgradeCostRatio * costs[index].cost * (activityToDo.stage+1)))
+              costs[index].cost += (costs[index].upgradeCostRatio * costs[index].cost)
           } 
         }
       }
