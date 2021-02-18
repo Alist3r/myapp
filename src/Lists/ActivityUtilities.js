@@ -41,10 +41,10 @@ export const activityList = [
         description: constants.ACT_001.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_000.name, cost: 15, upgradeCostRatio: 0.7}
+            { resource: constants.RES_000.name, cost: 12, upgradeCostRatio: 0.7}
         ],
         effect: [
-            { resource: constants.RES_004.name, perSecRatio: 0.02, flatValue: 0.02}
+            { resource: constants.RES_004.name, perSecRatio: 0.035, flatValue: 0.02}
         ],
         boost: 0,
         unlocked: true,
@@ -55,7 +55,7 @@ export const activityList = [
         description: constants.ACT_002.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_000.name, cost: 10, upgradeCostRatio: 0.15}
+            { resource: constants.RES_000.name, cost: 10, upgradeCostRatio: 0.12}
         ],
         effect: [
             { resource: constants.RES_000.name, perSecRatio: 0.56, flatValue: 0.56}
@@ -74,7 +74,8 @@ export const activityList = [
             { resource: constants.RES_004.name, cost: 10, upgradeCostRatio: 0.6}
         ],
         effect: [
-            { resource: constants.RES_007.name, clickRatio: 2, flatRatio: 2}
+            { resource: constants.RES_007.name, clickRatio: 2, flatRatio: 2},
+            { resource: constants.RES_007.name, maxValue: 2, flatRatio: 2}
         ],
         boost: 0,
         unlocked: false,
@@ -106,7 +107,7 @@ export const activityList = [
         description: constants.ACT_005.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_001.name, cost: 100, upgradeCostRatio: 0.03}
+            { resource: constants.RES_001.name, cost: 25, upgradeCostRatio: 0.05}
         ],
         effect: [
             { resource: constants.RES_004.name, percRatio: 10, flatValue: 10}

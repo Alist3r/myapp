@@ -78,7 +78,7 @@ export const resourcesList = [
     {   //TIME SLOT
         name: constants.RES_007.name,
         currentValue: 0,
-        maxValue: null,
+        maxValue: 0,
         incRatio: 0,
         boost: 0,
         flatRatio: 0,

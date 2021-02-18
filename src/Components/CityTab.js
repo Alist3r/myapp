@@ -32,16 +32,21 @@ class CityTab extends React.Component {
         return unlocked
     }
 
-    getTimeSlotUsed() {
+    /*getTimeSlotUsed() {
         let timeSlotUsed = 0
         let jobs = this.state.jobs.slice()
+        let roomObjs = this.state.roomObjects.slice()
 
         jobs.forEach(job => {
             timeSlotUsed += job.timeSlot
         });
 
+        roomObjs.forEach(roomObj => {
+            timeSlotUsed += roomObj.timeSlot
+        });
+
         return timeSlotUsed
-    }
+    }*/
 
     render() {
         let roomObjects = this.state.roomObjects.slice()
@@ -51,7 +56,7 @@ class CityTab extends React.Component {
 
         return (
             <div className="Middle-Panel-City-Tab" style={{'display': this.state.activeTab === constants.TAB_002 ? 'block' : 'none'}}>
-                <span>{resources[6].name} : {this.getTimeSlotUsed()}/{resources[6].currentValue}</span>
+                <span>{resources[6].name} : {resources[6].currentValue}/{resources[6].maxValue}</span>
 
                 <div className="Middle-Panel-City-Section-Container">
                     <div className="Middle-Panel-Section-Title">Job</div>

@@ -28,12 +28,12 @@ export const homeObjectsList = [
         description: constants.OBJ_001.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_005.name, cost: 30, upgradeCostRatio: 1.2},
-            { resource: constants.RES_007.name, cost: 1, upgradeCostRatio: 0}
+            { resource: constants.RES_005.name, cost: 30, upgradeCostRatio: 1.2}
         ],
         effect: [
             { resource: constants.RES_006.name, perSecRatio: 0.45}
         ],
+        timeSlot: 0,
         isBought: false,
         isActive: false,
         isPassive: false,
@@ -45,12 +45,12 @@ export const homeObjectsList = [
         description: constants.OBJ_002.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_005.name, cost: 55, upgradeCostRatio: 1.2},
-            { resource: constants.RES_007.name, cost: 1, upgradeCostRatio: 0}
+            { resource: constants.RES_005.name, cost: 55, upgradeCostRatio: 1.2}
         ],
         effect: [
             { resource: constants.RES_003.name, perSecRatio: 0.45}
         ],
+        timeSlot: 0,
         isBought: false,
         isActive: false,
         isPassive: false,
@@ -63,11 +63,11 @@ export const homeObjectsList = [
         stage: 0,
         upgradeCost: [
             { resource: constants.RES_005.name, cost: 20, upgradeCostRatio: 1.1},
-            { resource: constants.RES_007.name, cost: 1, upgradeCostRatio: 0}
         ],
         effect: [
             { resource: constants.RES_002.name, perSecRatio: 0.32}
         ],
+        timeSlot: 0,
         effectActivity: null,
         isBought: false,
         isActive: false,
@@ -75,37 +75,17 @@ export const homeObjectsList = [
         unlocked: true,
         unlockedFrom: null
     },
-    /*{   //AGENDA
-        name: constants.OBJ_003.name,
-        description: constants.OBJ_003.description,
-        stage: 0,
-        upgradeCost: [
-            { resource: constants.RES_005.name, cost: 66, upgradeCostRatio: 1.3},
-            { resource: constants.RES_007.name, cost: 1, upgradeCostRatio: 0}
-        ],
-        effect: null,
-        effectActivity: [
-            { activity: constants.ACT_001.name, percRatio: 10},
-            { activity: constants.ACT_002.name, percRatio: 10},
-            { activity: constants.ACT_007.name, percRatio: 20}
-        ],
-        isBought: false,
-        isActive: false,
-        isPassive: false,
-        unlocked: true,
-        unlockedFrom: null
-    },*/
     {   //VAULT
         name: constants.OBJ_005.name,
         description: constants.OBJ_005.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_005.name, cost: 150, upgradeCostRatio: 1.3},
-            { resource: constants.RES_007.name, cost: 0, upgradeCostRatio: 0}
+            { resource: constants.RES_005.name, cost: 150, upgradeCostRatio: 1.3}
         ],
         effect: [
             { resource: constants.RES_005.name, maxValue: 500}
         ],
+        timeSlot: 0,
         effectActivity: null,
         isBought: false,
         isActive: false,
@@ -129,26 +109,7 @@ export const jobMansionsList = [
         },
         effect: [
             { resource: constants.RES_005.name, perSecRatio: 0.10, flatValue: 0.10},
-            { resource: constants.RES_000.name, perSecRatio: -3.34, flatValue: -3.34},
-            { resource: constants.RES_004.name, perSecRatio: -0.003, flatValue: -0.003}
-        ],
-        unlocked: true,
-        unlockedFrom: false
-    },
-    {
-        name: "Asdasdasdadsad",
-        description: "You start a job for a famous delivery food multinational",
-        timeSlot: 0,
-        jobExpModifier: 0.015,
-        jobExp: {
-            grade: "Novice",
-            current: 0,
-            toLvUp: 1000,
-            modifier: 0.030,
-        },
-        effect: [
-            { resource: constants.RES_005.name, perSecRatio: 0.10, flatValue: 0.10},
-            { resource: constants.RES_000.name, perSecRatio: -3.34, flatValue: -3.34},
+            { resource: constants.RES_000.name, perSecRatio: -2.24, flatValue: -2.24},
             { resource: constants.RES_004.name, perSecRatio: -0.003, flatValue: -0.003}
         ],
         unlocked: true,

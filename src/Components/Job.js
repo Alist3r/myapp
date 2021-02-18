@@ -21,19 +21,22 @@ class Job extends React.Component {
     let resourceTimeSlotIndex = this.state.resources.findIndex(x => x.name === constants.RES_007.name)
     let timeSlotRes = this.state.resources[resourceTimeSlotIndex]
 
-    if(timeSlotRes.currentValue > 0 && ((job.timeSlot+1) <= timeSlotRes.currentValue)) {
+    if(timeSlotRes.maxValue > 0 && ((timeSlotRes.currentValue - 1) >= 0)) {
       job.timeSlot += 1
+      timeSlotRes.currentValue -= 1
 
       applyEffectsToResources(this.state.resources, job.effect, 1, "add")
     }
   }
 
   decTimeSlot(job) {
-    //let resourceTimeSlotIndex = this.state.resources.findIndex(x => x.name === constants.RES_007.name)
-    //let timeSlotRes = this.state.resources[resourceTimeSlotIndex]
+    let resourceTimeSlotIndex = this.state.resources.findIndex(x => x.name === constants.RES_007.name)
+    let timeSlotRes = this.state.resources[resourceTimeSlotIndex]
 
-    if(job.timeSlot > 0) {
+    if(timeSlotRes.currentValue + 1 <= timeSlotRes.maxValue) {
       job.timeSlot -= 1
+      timeSlotRes.currentValue += 1
+
 
       applyEffectsToResources(this.state.resources, job.effect, 1, "remove")
     }

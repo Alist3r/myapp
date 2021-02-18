@@ -252,7 +252,7 @@ body {
 }
 
 .Middle-Panel-City-Section-Container {
-  border: 1px solid black;
+  border-bottom: 1px dashed black;
   padding: 7px;
   margin: 10px;
 }
@@ -351,6 +351,7 @@ body {
   border-radius: 3px;
   color: grey;
   width: 10px;
+  text-align: center;
 }
 
   .Job-Btn-Plus:hover, .Job-Btn-Minus:hover {
