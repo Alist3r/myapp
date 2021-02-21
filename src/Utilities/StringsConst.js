@@ -108,6 +108,10 @@ export const ACT_009 = {
     name: "Massage",
     description: "Spend some time to receive a massage. Expande your physic and mental status"
 }
+export const ACT_010 = {
+    name: "Yoga",
+    description: "? ? ? ? ? ?"
+}
 
 
 //ROOMOBJECT

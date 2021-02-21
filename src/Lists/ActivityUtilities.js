@@ -21,6 +21,7 @@ import * as utilities from '../Utilities/UtilityFunctions.js'
 //007 Reading Book
 //008 Obstacle Course
 //009 Massage
+//010 Yoga
 
 
 export const activityList = [
@@ -41,10 +42,10 @@ export const activityList = [
         description: constants.ACT_001.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_000.name, cost: 12, upgradeCostRatio: 0.7}
+            { resource: constants.RES_000.name, cost: 12, upgradeCostRatio: 0.5}
         ],
         effect: [
-            { resource: constants.RES_004.name, perSecRatio: 0.035, flatValue: 0.02}
+            { resource: constants.RES_004.name, perSecRatio: 0.08, flatValue: 0.02}
         ],
         boost: 0,
         unlocked: true,
@@ -55,10 +56,10 @@ export const activityList = [
         description: constants.ACT_002.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_000.name, cost: 10, upgradeCostRatio: 0.12}
+            { resource: constants.RES_000.name, cost: 10, upgradeCostRatio: 0.10}
         ],
         effect: [
-            { resource: constants.RES_000.name, perSecRatio: 0.56, flatValue: 0.56}
+            { resource: constants.RES_000.name, perSecRatio: 0.64, flatValue: 0.56}
         ],
         boost: 0,
         unlocked: false,
@@ -83,13 +84,31 @@ export const activityList = [
             { resource: constants.RES_004.name, neededValue: 1}
         ]
     },
+    {   //YOGA
+        name: constants.ACT_010.name,
+        description: constants.ACT_010.description,
+        grade: null,
+        stage: 0,
+        upgradeCost: [
+            { resource: constants.RES_004.name, cost: 20, upgradeCostRatio: 0.3}
+        ],
+        effect: [
+            { resource: constants.RES_002.name, perSecRatio: 0.32, flatValue: 0.32}
+        ],
+        boost: 0,
+        modulable: false,
+        unlocked: false,
+        unlockedFrom: [
+            { resource: constants.RES_004.name, neededValue: 8}
+        ]
+    },
     {   //JOGGING
         name: constants.ACT_004.name,
         description: constants.ACT_004.description,
         grade: 0,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_004.name, cost: 10, upgradeCostRatio: 0.03}
+            { resource: constants.RES_004.name, cost: 10, upgradeCostRatio: 0.2}
         ],
         effect: [
             { resource: constants.RES_001.name, perSecRatio: 0.32, flatValue: 0.32},
@@ -102,12 +121,12 @@ export const activityList = [
             { activity: constants.ACT_002.name, neededStage: 15}
         ]
     },
-    {   //REST
+    /*{   //REST
         name: constants.ACT_005.name,
         description: constants.ACT_005.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_001.name, cost: 25, upgradeCostRatio: 0.05}
+            { resource: constants.RES_001.name, cost: 25, upgradeCostRatio: 0.2}
         ],
         effect: [
             { resource: constants.RES_004.name, percRatio: 10, flatValue: 10}
@@ -117,7 +136,7 @@ export const activityList = [
         unlockedFrom: [
             { resource: constants.RES_001.name, neededValue: 10}
         ]
-    },
+    },*/
     {   //MEDITATE
         name: constants.ACT_006.name, 
         description: constants.ACT_006.description,
@@ -152,7 +171,7 @@ export const activityList = [
             {roomObject: constants.OBJ_002.name}
         ]
     },
-    {   //OBSTACLE COURSE
+    /*{   //OBSTACLE COURSE
         name: constants.ACT_008.name,
         description: constants.ACT_008.description,
         grade: 0,
@@ -172,7 +191,7 @@ export const activityList = [
         unlockedFrom: [
             {roomObject: constants.OBJ_001.name}
         ]
-    },
+    },*/
     {   //MASSAGE
         name: constants.ACT_009.name,
         description: constants.ACT_009.description,
@@ -195,6 +214,7 @@ export const activityList = [
             { resource: constants.RES_005.name, neededValue: 0.01}
         ]
     }
+    
 ]
 
 export function applyEffectsToActivity(booster, resources, activities, howManyTimes, type) {

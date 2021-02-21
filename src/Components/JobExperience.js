@@ -1,6 +1,7 @@
 import React from 'react'
 import * as constants from '../Utilities/StringsConst.js'
 import {formatNumberWPrefix}  from '../Utilities/UtilityFunctions.js'
+import {jobGrades} from '../Lists/CityUtilities.js'
 
 class JobExperience extends React.Component {
   constructor(props) {
@@ -50,6 +51,7 @@ class JobExperience extends React.Component {
       let expDifference = calculatedExp - jobExp.toLvUp 
       jobExp.current = expDifference
       jobExp.toLvUp *= 1.2
+      jobExp.grade += 1
     }
 
   }
@@ -73,7 +75,7 @@ class JobExperience extends React.Component {
 
     return(
       <div className="Middle-Panel-JobExp-Container">
-        <span className="Middle-Panel-JobExp-Grade">{job.jobExp.grade}</span>
+        <span className="Middle-Panel-JobExp-Grade">{jobGrades[job.jobExp.grade]}</span>
         <div className="Middle-Panel-JobExp-Exp-Container" style={{display: "inline-block"}}>
           <div className="Middle-Panel-JobExp-Exp-Filler" style={this.getExpFiller(job.jobExp)}></div>
         </div>

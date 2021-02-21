@@ -37,7 +37,7 @@ export const homeObjectsList = [
         isBought: false,
         isActive: false,
         isPassive: false,
-        unlocked: true,
+        unlocked: false,
         unlockedFrom: null
     },
     {   //LIBRARY
@@ -72,7 +72,7 @@ export const homeObjectsList = [
         isBought: false,
         isActive: false,
         isPassive: false,
-        unlocked: true,
+        unlocked: false,
         unlockedFrom: null
     },
     {   //VAULT
@@ -100,19 +100,24 @@ export const jobMansionsList = [
         name: "Deliverfood Courier",
         description: "You start a job for a famous delivery food multinational",
         timeSlot: 0,
-        jobExpModifier: 0.015,
         jobExp: {
-            grade: "Novice",
+            grade: 0,
             current: 0,
             toLvUp: 1000,
-            modifier: 0.015,
+            modifier: 0.018,
         },
         effect: [
-            { resource: constants.RES_005.name, perSecRatio: 0.10, flatValue: 0.10},
+            { resource: constants.RES_005.name, perSecRatio: 0.12, flatValue: 0.12},
             { resource: constants.RES_000.name, perSecRatio: -2.24, flatValue: -2.24},
-            { resource: constants.RES_004.name, perSecRatio: -0.003, flatValue: -0.003}
+            { resource: constants.RES_004.name, perSecRatio: -0.004, flatValue: -0.004}
         ],
         unlocked: true,
         unlockedFrom: false
     }
+]
+
+export const jobGrades = [
+    "Novice",
+    "Proficient",
+    "Master"
 ]

@@ -13,6 +13,7 @@ class CityTab extends React.Component {
             activities: props.activities,
             jobs: props.jobs,
             activeTab: props.activeTab,
+            homeUnlocked: false
         }
     }
 
@@ -32,27 +33,23 @@ class CityTab extends React.Component {
         return unlocked
     }
 
-    /*getTimeSlotUsed() {
-        let timeSlotUsed = 0
-        let jobs = this.state.jobs.slice()
-        let roomObjs = this.state.roomObjects.slice()
-
-        jobs.forEach(job => {
-            timeSlotUsed += job.timeSlot
-        });
-
-        roomObjs.forEach(roomObj => {
-            timeSlotUsed += roomObj.timeSlot
-        });
-
-        return timeSlotUsed
-    }*/
+    isRoomUnlocked(demir) {
+        if(this.state.homeUnlocked === false && demir > 30) {
+            this.setState({
+                homeUnlocked: true
+            })
+        }
+        
+        return this.state.homeUnlocked
+    }
 
     render() {
         let roomObjects = this.state.roomObjects.slice()
         let resources = this.state.resources.slice()
         let activities = this.state.activities.slice()
         let jobs = this.state.jobs.slice()
+
+        let demirIndex = resources.findIndex(x => x.name === constants.RES_005.name)
 
         return (
             <div className="Middle-Panel-City-Tab" style={{'display': this.state.activeTab === constants.TAB_002 ? 'block' : 'none'}}>
@@ -72,7 +69,7 @@ class CityTab extends React.Component {
                     </div>
                     
                 </div>
-                <div className="Middle-Panel-City-Section-Container">
+                {this.isRoomUnlocked(resources[demirIndex].currentValue) && (<div className="Middle-Panel-City-Section-Container">
                     <div className="Middle-Panel-Section-Title">Home</div>
 
                     <div className="Middle-Panel-Room-Panel">
@@ -86,7 +83,7 @@ class CityTab extends React.Component {
                             )
                         ))}
                     </div>
-                </div>
+                </div>)}
             </div>
         )
     }
