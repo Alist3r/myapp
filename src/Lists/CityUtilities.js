@@ -22,76 +22,32 @@ import * as constants from '../Utilities/StringsConst.js';
 //003 Agenda
 //004 Training Mat
 
-export const homeObjectsList = [
-    {   //JUMP ROPE
-        name: constants.OBJ_001.name,
-        description: constants.OBJ_001.description,
-        stage: 0,
+export const shopItemsList = [
+    {   // Running Shoes
+        name: constants.SHP_001.name,
+        description: constants.SHP_001.description,
         upgradeCost: [
-            { resource: constants.RES_005.name, cost: 30, upgradeCostRatio: 1.2}
+            { resource: constants.RES_005.name, cost: 100, upgradeCostRatio: 0}
         ],
-        effect: [
-            { resource: constants.RES_006.name, perSecRatio: 0.45}
-        ],
-        timeSlot: 0,
+        effect: null,
+        effectActivity: null,
         isBought: false,
-        isActive: false,
-        isPassive: false,
-        unlocked: false,
-        unlockedFrom: null
-    },
-    {   //LIBRARY
-        name: constants.OBJ_002.name,
-        description: constants.OBJ_002.description,
-        stage: 0,
-        upgradeCost: [
-            { resource: constants.RES_005.name, cost: 55, upgradeCostRatio: 1.2}
-        ],
-        effect: [
-            { resource: constants.RES_003.name, perSecRatio: 0.45}
-        ],
-        timeSlot: 0,
-        isBought: false,
-        isActive: false,
-        isPassive: false,
         unlocked: true,
         unlockedFrom: null
     },
-    {   //TRAINING MAT
-        name: constants.OBJ_004.name,
-        description: constants.OBJ_004.description,
-        stage: 0,
+    {   // Training Mat
+        name: constants.SHP_002.name,
+        description: constants.SHP_002.description,
         upgradeCost: [
-            { resource: constants.RES_005.name, cost: 20, upgradeCostRatio: 1.1},
+            { resource: constants.RES_005.name, cost: 120, upgradeCostRatio: 0},
         ],
-        effect: [
-            { resource: constants.RES_002.name, perSecRatio: 0.32}
-        ],
-        timeSlot: 0,
+        effect: null,
         effectActivity: null,
         isBought: false,
-        isActive: false,
-        isPassive: false,
         unlocked: false,
-        unlockedFrom: null
-    },
-    {   //VAULT
-        name: constants.OBJ_005.name,
-        description: constants.OBJ_005.description,
-        stage: 0,
-        upgradeCost: [
-            { resource: constants.RES_005.name, cost: 150, upgradeCostRatio: 1.3}
-        ],
-        effect: [
-            { resource: constants.RES_005.name, maxValue: 500}
-        ],
-        timeSlot: 0,
-        effectActivity: null,
-        isBought: false,
-        isActive: false,
-        isPassive: true,
-        unlocked: true,
-        unlockedFrom: null
+        unlockedFrom: [
+            { shopItem: constants.SHP_001.name }
+        ]
     },
 ]
 

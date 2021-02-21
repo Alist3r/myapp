@@ -9,7 +9,7 @@ class TabSelector extends React.Component {
       isActive: props.isActive,
       resources: props.resources,
       activities: props.activities,
-      roomObjects: props.roomObjects
+      shopItems: props.shopItems
     }
   }
 
@@ -17,12 +17,12 @@ class TabSelector extends React.Component {
     let tab = this.state.tab
     let resources = this.state.resources.slice()
     let activities = this.state.activities.slice()
-    let roomObjects = this.state.roomObjects.slice()
+    let shopItems = this.state.shopItems.slice()
     
     if(tab.unlocked === false) {
       let unlockCondition = tab.unlockedFrom.slice()
       
-      let unlockable = checkUnlockCondition(resources, activities, roomObjects, unlockCondition)
+      let unlockable = checkUnlockCondition(resources, activities, shopItems, unlockCondition)
 
       if(unlockable) {
         tab.unlocked = true

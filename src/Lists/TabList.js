@@ -27,6 +27,13 @@ const tabList = [
         unlockedFrom: [
             { activity: constants.ACT_003.name, neededStage: 1}
         ]
+    },
+    {   //KNOWLEDGE
+        name: constants.TAB_003,
+        unlocked: false,
+        unlockedFrom: [
+            { resource: constants.RES_003.name, neededValue: 10}
+        ]
     }
 ]
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import RoomObjectTooltip from '../Components/Tooltips/RoomObjectTooltip.js'
+import RoomObjectTooltip from './Tooltips/ShopItemTooltip.js'
 import * as constants from '..//Utilities/StringsConst.js'
 import {haveEnoughResource} from '../Utilities/UtilityFunctions.js'
 import {applyEffectsToResources} from '../Lists/ResourcesUtilities.js'

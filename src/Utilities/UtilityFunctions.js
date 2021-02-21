@@ -5,7 +5,7 @@ export function saveState(state) {
     localStorage.setItem('gameTime', state.gameTime);
     localStorage.setItem("gameResources", JSON.stringify(state.gameResources));
     localStorage.setItem("gameActivities", JSON.stringify(state.gameActivities));
-    localStorage.setItem("gameRoomObjects", JSON.stringify(state.gameRoomObjects));
+    localStorage.setItem("gameShopItems", JSON.stringify(state.gameShopItems));
     localStorage.setItem("gameJobs", JSON.stringify(state.gameJobs));
     localStorage.setItem("activeTab", state.activeTab);
 
@@ -18,7 +18,7 @@ export function loadState(state) {
     let gameTime
     let gameResources
     let gameActivities
-    let gameRoomObjects
+    let gameShopItems
     let gameJobs
     let activeTab
 
@@ -43,11 +43,11 @@ export function loadState(state) {
         gameActivities = state.gameActivities
     }
 
-    if(JSON.parse(localStorage.getItem("gameRoomObjects"))) {
-        gameRoomObjects = JSON.parse(localStorage.getItem("gameRoomObjects"))
+    if(JSON.parse(localStorage.getItem("gameShopItems"))) {
+        gameShopItems = JSON.parse(localStorage.getItem("gameShopItems"))
     }
     else {
-        gameRoomObjects = state.gameRoomObjects
+        gameShopItems = state.gameShopItems
     }
 
     if(JSON.parse(localStorage.getItem("gameJobs"))) {
@@ -69,7 +69,7 @@ export function loadState(state) {
         gameTime,
         gameResources,
         gameActivities,
-        gameRoomObjects,
+        gameShopItems,
         gameJobs,
         activeTab
     }
@@ -185,7 +185,7 @@ export function removePerc(finalValue, percent) {
     return result
 }
 
-export function checkUnlockCondition(resourcesList, activityList, roomObjectsList, unlockCondition) {
+export function checkUnlockCondition(resourcesList, activityList, shopItems, unlockCondition) {
 
     let unlockable = true
     if(unlockCondition != null) {
@@ -210,16 +210,15 @@ export function checkUnlockCondition(resourcesList, activityList, roomObjectsLis
                 else
                     unlockable = false
             }
-
-            //UNLOCK BY ROOMOBJECT
-            if(unlockable && unlockCondition[i].roomObject != null) {
-                let index = roomObjectsList.findIndex(x => x.name === unlockCondition[i].roomObject)
-                if(roomObjectsList[index].isBought)
+            
+            //UNLOCK BY SHOP
+            if(unlockable && unlockCondition[i].shopItem != null) {
+                let index = shopItems.findIndex(x => x.name === unlockCondition[i].shopItem)
+                if(index !== -1 && shopItems[index].isBought)
                     unlockable = true
                 else
                     unlockable = false
             }
-        
         }
     }
 

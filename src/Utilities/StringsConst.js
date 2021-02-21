@@ -1,5 +1,5 @@
 
-export const OPT_GAMESPEED = 1
+export const OPT_GAMESPEED = 100
 export const OPT_REFRESHRATE = 250 // milliseconds
 
 //RESOURCES
@@ -113,41 +113,28 @@ export const ACT_010 = {
     description: "? ? ? ? ? ?"
 }
 
+//SHOP ITEMS
+//001 Running Shoes
 
-//ROOMOBJECT
-//001 Treadmill
-//002 Library
-//003 Agenda
-//004 Training Mat
-
-export const OBJ_001 = {
-    name: "Jump Rope",
-    description: "Your home have enough space to jumping with a rope",
+export const SHP_001 = {
+    name: "Running Shoes",
+    description: "Buy a new pair of shoes. You can go out and run around."
 }
 
-export const OBJ_002 = {
-    name: "Library",
-    description: "Buying and assemble an entire new Library",
-}
-
-export const OBJ_003 = {
-    name: "Agenda",
-    description: "With a new agenda, you can optimize most of your activities",
-}
-
-export const OBJ_004 = {
+export const SHP_002 = {
     name: "Training Mat",
-    description: "A simple Training Mat.",
+    description: "A simple Training Mat"
 }
 
-export const OBJ_005 = {
-    name: "Vault",
-    description: "A secret vault where you can store your precious resources"
+export const SHP_003 = {
+    name: "Library",
+    description: "? ? ? ? ? ?"
 }
 
 //TABS
 
 export const TAB_001 = "Activities"
 export const TAB_002 = "City"
+export const TAB_003 = "Knowledge"
 
 

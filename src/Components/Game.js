@@ -21,7 +21,7 @@ class Game extends React.Component {
             gameTime: 0,
             gameResources: resources.resourcesList.slice(),
             gameActivities: activities.activityList.slice(),
-            gameRoomObjects: city.homeObjectsList.slice(),
+            gameShopItems: city.shopItemsList.slice(),
             gameJobs: city.jobMansionsList.slice(),
             activeTab: constants.TAB_001,     
         }     
@@ -61,7 +61,7 @@ class Game extends React.Component {
     render() {
         let gameResources = this.state.gameResources.slice()
         let gameActivities = this.state.gameActivities.slice()
-        let gameRoomObjects = this.state.gameRoomObjects.slice()
+        let gameShopItems = this.state.gameShopItems.slice()
         let gameJobs = this.state.gameJobs.slice()
  
         return(
@@ -87,7 +87,7 @@ class Game extends React.Component {
                                 isActive={this.state.activeTab === tab.name ? true : false} 
                                 resources={gameResources} 
                                 activities={gameActivities} 
-                                roomObjects={gameRoomObjects}
+                                shopItems={gameShopItems}
                                 updateActiveTab={this.updateActiveTab}
                             />
                         ))}
@@ -97,7 +97,7 @@ class Game extends React.Component {
                         {/** ACTIVITY TAB */}
                         <ActivityTab 
                             activities={gameActivities} 
-                            roomObjects={gameRoomObjects} 
+                            shopItems={gameShopItems} 
                             resources={gameResources} 
                             activeTab={this.state.activeTab} 
                         />
@@ -105,7 +105,7 @@ class Game extends React.Component {
                         {/** YOUR ROOM TAB */}
                         <CityTab 
                             //changeRoomSlotUsed={this.changeRoomSlotUsed} 
-                            roomObjects={gameRoomObjects} 
+                            shopItems={gameShopItems}
                             resources={gameResources} 
                             activities={gameActivities} 
                             jobs={gameJobs}

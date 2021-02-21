@@ -1,50 +1,59 @@
 import React from 'react'
-import RoomObject from './RoomObject.js'
 import Job from './Job.js'
 
 import * as constants from '../Utilities/StringsConst.js'
+import ShopItem from './ShopItem.js'
+import { checkUnlockCondition } from '../Utilities/UtilityFunctions.js'
 
 class CityTab extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            roomObjects: props.roomObjects,
+            shopItems: props.shopItems,
             resources: props.resources,
             activities: props.activities,
             jobs: props.jobs,
             activeTab: props.activeTab,
-            homeUnlocked: false
+            shopUnlocked: false
         }
     }
 
-    componentWillReceiveProps({activeTab, roomSlotUsed}) {
+    componentWillReceiveProps({activeTab}) {
         this.setState({
             activeTab: activeTab
         })
     } 
 
     isUnlocked(obj) {
-        let unlocked = obj.unlocked
 
-        if (unlocked === false) {
-            /** TO DO */
+        if(obj.unlocked === false && obj.unlockedFrom !== null) {
+            let unlockCondition = obj.unlockedFrom.slice()
+            let resourcesList = this.state.resources.slice()
+            let activityList = this.state.activities.slice()
+            let shopItems = this.state.shopItems.slice()
+
+            let unlockable = checkUnlockCondition(resourcesList, activityList, shopItems, unlockCondition)
+
+            if(unlockable) {
+                obj.unlocked = true
+            }
         }
 
-        return unlocked
+        return obj.unlocked
     }
 
-    isRoomUnlocked(demir) {
-        if(this.state.homeUnlocked === false && demir > 30) {
+    isShopUnlocked(demir) {
+        if(this.state.shopUnlocked === false && demir > 30) {
             this.setState({
-                homeUnlocked: true
+                shopUnlocked: true
             })
         }
         
-        return this.state.homeUnlocked
+        return this.state.shopUnlocked
     }
 
     render() {
-        let roomObjects = this.state.roomObjects.slice()
+        let shopItems = this.state.shopItems.slice()
         let resources = this.state.resources.slice()
         let activities = this.state.activities.slice()
         let jobs = this.state.jobs.slice()
@@ -69,21 +78,24 @@ class CityTab extends React.Component {
                     </div>
                     
                 </div>
-                {this.isRoomUnlocked(resources[demirIndex].currentValue) && (<div className="Middle-Panel-City-Section-Container">
-                    <div className="Middle-Panel-Section-Title">Home</div>
+
+                {this.isShopUnlocked(resources[demirIndex].currentValue) && (<div className="Middle-Panel-City-Section-Container">
+                    <div className="Middle-Panel-Section-Title">Shop</div>
 
                     <div className="Middle-Panel-Room-Panel">
-                        {roomObjects.map(roomObject => (
-                            this.isUnlocked(roomObject) && (
+                        {shopItems.map(item => (
+                            this.isUnlocked(item) && item.isBought === false && (
                                 <span>
                                     <div className="Middle-Panel-RoomObj-Container">
-                                        <RoomObject roomObject={roomObject} resources={resources} activities={activities} />
+                                        <ShopItem item={item} resources={resources} activities={activities} />
                                     </div>
                                 </span>
                             )
                         ))}
                     </div>
                 </div>)}
+               
+              
             </div>
         )
     }

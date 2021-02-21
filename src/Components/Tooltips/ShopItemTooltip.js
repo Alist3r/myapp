@@ -3,7 +3,7 @@ import "./tooltip.css";
 import {formatNumber, formatNumberWPrefix} from '../../Utilities/UtilityFunctions.js'
 import {timerConverter} from '../../Utilities/UtilityFunctions.js'
 
-const RoomObjectTooltip = (props) => {
+const ShopItemTooltip = (props) => {
   let timeout;
   const [active, setActive] = useState(false);
 
@@ -31,9 +31,9 @@ const RoomObjectTooltip = (props) => {
     return resources[index].unlocked
   }
 
-  var roomObj 
-  if(props.roomObj != null) 
-    roomObj = props.roomObj 
+  var item 
+  if(props.item != null) 
+    item = props.item 
 
   var resources
   if(props.resourcesList != null) 
@@ -49,18 +49,18 @@ const RoomObjectTooltip = (props) => {
       onMouseLeave={hideTip}
     >
       {props.children}
-      {/** roomObj TOOLTIP */}
+      {/** item TOOLTIP */}
       {active  && (
         <div className={`Tooltip-Tip ${props.direction || "top"}`}>
           <div>
-            <div className="Tooltip-Description">{roomObj.description}</div>
+            <div className="Tooltip-Description">{item.description}</div>
 
             
             <div className="Tooltip-Title">Costs</div>
             <div className="Tooltip-Divider"></div>
 
             {/*--------- UPGRADE COSTS ---------*/}
-            {roomObj.upgradeCost && (roomObj.upgradeCost.map(upgradeCost => (             
+            {item.upgradeCost && (item.upgradeCost.map(upgradeCost => (             
               <span className="Tooltip-EffectRow">
                 {upgradeCost.resource} 
                 {resources.map(resource => (
@@ -74,32 +74,12 @@ const RoomObjectTooltip = (props) => {
               </span>                         
             )))}
 
-            {/*--------- CLICK COSTS ---------*/}
-            {roomObj.clickCost && (roomObj.clickCost.map(clickCost =>
-              <span className="Tooltip-EffectRow">
-                {clickCost.resource}: {resources.map(resource => (
-                  resource.name === clickCost.resource && (
-                    <span className={currentValueColor(resource.currentValue,clickCost.cost)}>
-                      {formatNumber(resource.currentValue,2)} / {formatNumber(clickCost.cost,0)}{clickCost.cost > resource.maxValue && (<span>*</span>)}{resource.currentValue < clickCost.cost && resource.incRatio !== 0 && (<span> ({timerConverter(clickCost.cost,resource.currentValue,resource.incRatio)})</span>)} 
-                    </span>)
-                ))}
-                <br></br>
-              </span>
-            ))}
-
-            {/*--------- ROOM SLOT COSTS ---------*/}
-            {roomObj.requiredSlot != null &&(
-              <span className="Tooltip-EffectRow">
-                Home Slot <span style={{float: "right"}}>{roomObj.requiredSlot}</span>
-              </span>
-            )}
-
             {/*--------- EFFECTS ---------*/}
             <div className="Tooltip-Title">Effects</div>
             <div className="Tooltip-Divider"></div>
 
             
-            {roomObj.effect != null && roomObj.effect.map(effect => (
+            {item.effect != null && item.effect.map(effect => (
               <span>
                 {isResourceUnlocked(effect, resources) && (
                   <span className="Tooltip-EffectRow">             
@@ -114,9 +94,9 @@ const RoomObjectTooltip = (props) => {
               </span>
             ))}  
 
-            {roomObj.effectActivity != null && (
+            {item.effectActivity != null && (
                 <span>
-                  {roomObj.effectActivity.map(effect => (
+                  {item.effectActivity.map(effect => (
                     <span className="Tooltip-EffectRow">
                       {effect.percRatio && (<span>{effect.activity}: {formatNumberWPrefix(effect.percRatio,2)}%</span>)}
                       <br></br>
@@ -132,4 +112,4 @@ const RoomObjectTooltip = (props) => {
   );
 };
 
-export default RoomObjectTooltip;
+export default ShopItemTooltip;

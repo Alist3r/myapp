@@ -99,7 +99,7 @@ export const activityList = [
         modulable: false,
         unlocked: false,
         unlockedFrom: [
-            { resource: constants.RES_004.name, neededValue: 8}
+            { shopItem: constants.SHP_002.name}
         ]
     },
     {   //JOGGING
@@ -118,7 +118,7 @@ export const activityList = [
         modulable: true,
         unlocked: false,
         unlockedFrom: [
-            { activity: constants.ACT_002.name, neededStage: 15}
+            { shopItem: constants.SHP_001.name}
         ]
     },
     /*{   //REST
@@ -150,7 +150,7 @@ export const activityList = [
         boost: 0,
         unlocked: false,
         unlockedFrom: [
-            { roomObject: constants.OBJ_004.name}
+            { shopItem: constants.SHP_002.name}
         ]
     },
     {   //READING BOOK
@@ -168,7 +168,7 @@ export const activityList = [
         modulable: false,
         unlocked: false,
         unlockedFrom: [
-            {roomObject: constants.OBJ_002.name}
+            {shopItem: constants.SHP_003.name}
         ]
     },
     /*{   //OBSTACLE COURSE
