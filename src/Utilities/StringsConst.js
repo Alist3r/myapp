@@ -1,6 +1,6 @@
 
-export const OPT_GAMESPEED = 100
-export const OPT_REFRESHRATE = 250 // milliseconds
+export const OPT_GAMESPEED = 1
+export const OPT_REFRESHRATE = 100 // milliseconds
 
 //RESOURCES
 //000 Food
