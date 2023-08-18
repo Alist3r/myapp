@@ -1,11 +1,10 @@
 import React from 'react'
-import Job from './Job.js'
 
 import * as constants from '../Utilities/StringsConst.js'
-import ShopItem from './ShopItem.js'
+import Talent from './Talent.js'
 import { checkUnlockCondition } from '../Utilities/UtilityFunctions.js'
 
-class CityTab extends React.Component {
+class TalentsTab extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -67,7 +66,7 @@ class CityTab extends React.Component {
                             this.isUnlocked(talent) && talent.isBought === false && (
                                 <span>
                                     <div className="Middle-Panel-RoomObj-Container">
-                                        <ShopItem talent={talent} resources={resources} activities={activities} />
+                                        <Talent talent={talent} resources={resources} activities={activities} />
                                     </div>
                                 </span>
                             )
@@ -80,4 +79,4 @@ class CityTab extends React.Component {
     }
 }
 
-export default CityTab;
+export default TalentsTab;

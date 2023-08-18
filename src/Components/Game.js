@@ -1,9 +1,8 @@
 import React from 'react'
 import ResourceTab from './ResourceTab.js'
 import ActivityTab from './ActivityTab.js'
-import CityTab from './CityTab.js'
+import TalentsTab from './TalentsTab.js'
 import TopBar from './TopBar.js'
-import BeltResourcePanel from './BeltResourcePanel.js'
 
 import * as resources from '../Lists/ResourcesUtilities.js'
 import * as activities from '../Lists/ActivityUtilities.js'
@@ -103,7 +102,7 @@ class Game extends React.Component {
                         />
 
                         {/** YOUR ROOM TAB */}
-                        <CityTab 
+                        <TalentsTab 
                             talents={gameTalents}
                             resources={gameResources} 
                             activities={gameActivities} 

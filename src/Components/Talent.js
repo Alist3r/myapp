@@ -4,7 +4,7 @@ import {haveEnoughResource} from '../Utilities/UtilityFunctions.js'
 import {applyEffectsToResources} from '../Lists/ResourcesUtilities.js'
 import {applyEffectsToActivity} from '../Lists/ActivityUtilities.js'
 
-class ShopItem extends React.Component {
+class Talent extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -97,5 +97,5 @@ class ShopItem extends React.Component {
   }
 }
 
-export default ShopItem;
+export default Talent;
 

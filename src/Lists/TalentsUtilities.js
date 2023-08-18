@@ -29,9 +29,7 @@ export const talentsList = [
         upgradeCost: [
             { resource: constants.RES_000.name, cost: 200, upgradeCostRatio: 0}
         ],
-        effect: [
-            { activity: constants.ACT_002.name, percRatio}
-        ],
+        effect: null,
         effectActivity: null,
         isBought: false,
         unlocked: true,
