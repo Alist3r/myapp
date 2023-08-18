@@ -27,8 +27,8 @@ const ResourceIncRatioTooltip = (props) => {
   let gameState = props.gameState
   let resource = props.resource
   let activities = gameState.gameActivities
-  let roomObjects = gameState.gameRoomObjects
-  let jobs = gameState.gameJobs
+  //let roomObjects = gameState.gameRoomObjects
+  //let jobs = gameState.gameJobs
   
   return (
     <div
@@ -67,7 +67,7 @@ const ResourceIncRatioTooltip = (props) => {
             ))}
 
             {/* HOME OBJECTS}*/}
-            {roomObjects.map(roomObj =>(
+            {/*roomObjects.map(roomObj =>(
               <span>
               {roomObj.unlocked && roomObj.isActive && roomObj.effect != null && (
                 roomObj.effect.map(effect => (
@@ -80,10 +80,10 @@ const ResourceIncRatioTooltip = (props) => {
                 ))
               )}
               </span>
-            ))}
+            ))*/}
 
             {/* JOB */}
-            {jobs.map(job => (
+            {/*jobs.map(job => (
               <span>
                 {job.unlocked && job.effect != null && job.timeSlot > 0 && (
                   job.effect.map(effect => (
@@ -94,7 +94,7 @@ const ResourceIncRatioTooltip = (props) => {
                   ))
                 )}
               </span>
-            ))}
+            ))*/}
 
             <br></br>   
             <div className="Tooltip-Divider"></div>

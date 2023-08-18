@@ -13,10 +13,10 @@ export const OPT_REFRESHRATE = 100 // milliseconds
 //007 Time Slot
 
 export const RES_000 = {
-    name: "Food"
+    name: "Physical Energy"
 }
 export const RES_001 = {
-    name: "Athleticism"
+    name: "Physical Condition"
 }
 export const RES_002 = {
     name: "Psiche"
@@ -57,28 +57,28 @@ export const RES_TYPE_002 = {
 }
 
 //ACTIVITIES
-//000 Eat a Cookie
-//001 Save Energy
-//002 Cooking Food
-//003 Concentration
-//004 Jogging
-//005 Rest
-//006 Meditate
-//007 Reading Book
-//008 Obstacle Course
-//009 Massage
+//000 Collect Energy!
+//001 
+//002 
+//003 
+//004 
+//005 
+//006 
+//007 
+//008 
+//009 
 
 export const ACT_000 = {
-    name: "Eat a Cookie",
-    description: "Eat a cookie"
+    name: "Collect Energy!",
+    description: "Collect Some Energy"
 }
 export const ACT_001 = {
-        name: "Save Energy",
-        description: "Save some life energy..."
+        name: "Running",
+        description: "Running has several benefits: it increases physical performance, strengthens the immune system, counteracts stress."
     }
 export const ACT_002 = {
-    name: "Cooking Food",
-    description: "You learned how to cook some food"
+    name: "Short Rest",
+    description: "A short rest can help you accumulate energy: regulate blood pressure, and improve psychophysical balance."
 }
 export const ACT_003 = {
     name: "Concentration",
@@ -116,7 +116,7 @@ export const ACT_010 = {
 //SHOP ITEMS
 //001 Running Shoes
 
-export const SHP_001 = {
+/*export const SHP_001 = {
     name: "Running Shoes",
     description: "Buy a new pair of shoes. You can go out and run around."
 }
@@ -129,7 +129,7 @@ export const SHP_002 = {
 export const SHP_003 = {
     name: "Library",
     description: "? ? ? ? ? ?"
-}
+}*/
 
 //TABS
 

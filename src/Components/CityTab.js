@@ -18,7 +18,7 @@ class CityTab extends React.Component {
         }
     }
 
-    componentWillReceiveProps({activeTab}) {
+    /*componentWillReceiveProps({activeTab}) {
         this.setState({
             activeTab: activeTab
         })
@@ -98,7 +98,7 @@ class CityTab extends React.Component {
               
             </div>
         )
-    }
+    }*/
 }
 
 export default CityTab;

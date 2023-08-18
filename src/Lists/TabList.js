@@ -21,7 +21,7 @@ const tabList = [
         unlocked: true,
         unlockedFrom: null    
     },
-    {   //ROOM
+    /*{   //ROOM
         name: constants.TAB_002,
         unlocked: false,
         unlockedFrom: [
@@ -34,7 +34,7 @@ const tabList = [
         unlockedFrom: [
             { resource: constants.RES_003.name, neededValue: 10}
         ]
-    }
+    }*/
 ]
 
 export default tabList;

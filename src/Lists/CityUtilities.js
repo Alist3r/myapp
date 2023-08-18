@@ -22,7 +22,7 @@ import * as constants from '../Utilities/StringsConst.js';
 //003 Agenda
 //004 Training Mat
 
-export const shopItemsList = [
+/*export const shopItemsList = [
     {   // Running Shoes
         name: constants.SHP_001.name,
         description: constants.SHP_001.description,
@@ -76,4 +76,4 @@ export const jobGrades = [
     "Novice",
     "Proficient",
     "Master"
-]
+]*/

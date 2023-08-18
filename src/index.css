@@ -44,8 +44,8 @@ body {
 }
 
 .Resource-Cell-Name {
-  width: 80px;
-  max-width: 100px;
+  width: 140px;
+  max-width: 140px;
   display: table-cell;
   padding: 1px;
   padding-left: 3px;
@@ -144,6 +144,9 @@ body {
   border-radius: 3px;
   text-align: center;
   display: table-cell;
+  height: 50px;
+  vertical-align: middle;
+  line-height: 1;
   -webkit-user-select: none;  
   -moz-user-select: none;    
   -ms-user-select: none;      
@@ -161,14 +164,31 @@ body {
 
   .Activity-Btn:active {
     background-color: white;
+    border-color: white;
   }
 
   .Activity-Btn:focus {
     outline: none;
   }
 
+
 .Activity-Btn-Label {
   display: inline-block;
+  padding-bottom: 5px;
+}
+
+.Activity-Btn-CostContainer {
+    display: block;
+    border: 1px dotted black;
+    padding: 5px;
+    margin-left: 30px;
+    margin-right: 30px;
+    border-radius: 3px;
+}
+
+.Activity-Btn-CostRow {
+  font-size: 10px;
+  display: block;
 }
 
 .Activity-Btn-Sell {

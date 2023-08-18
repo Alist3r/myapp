@@ -2,6 +2,7 @@ import React from 'react'
 import ActivityTooltip from './Tooltips/ActivityTooltip.js'
 import {haveEnoughResource} from '../Utilities/UtilityFunctions.js'
 import {applyEffectsToResources} from '../Lists/ResourcesUtilities.js'
+import {formatNumber, formatNumberWPrefix} from '../Utilities/UtilityFunctions.js'
 
 class Activity extends React.Component {
   constructor(props) {
@@ -74,7 +75,7 @@ class Activity extends React.Component {
     }
   }
 
-  sellActivity() {
+  /*sellActivity() {
     let activityToSell = this.state.activity
     let resources = this.state.resources
     
@@ -107,7 +108,7 @@ class Activity extends React.Component {
       })
     }
 
-  }
+  }*/
 
   upGrade() {
     let activity = this.state.activity
@@ -158,9 +159,22 @@ class Activity extends React.Component {
         <ActivityTooltip activity={activity} resourcesList={resources} direction="right">
           <span onClick={() => this.buyActivity(costs)} className={this.getActivityBtnClass(costs,resources)}> 
 
-            <span className="Activity-Btn-Label">{activity.name} {activity.stage != null && (<span>[{activity.modulable && (<span>{activity.grade}/</span>)}{activity.stage}]</span>)}</span>
-            
-            {activity.stage != null && (<button onClick={(e) => {e.stopPropagation(); this.sellActivity()}} className="Activity-Btn-Sell">Sell</button>)}
+            <span className="Activity-Btn-Label">{activity.name} {activity.stage != null && (<span>Lv. {activity.modulable && (<span>{activity.grade}/</span>)}{activity.stage}</span>)}</span>
+            <span className="Activity-Btn-CostContainer">
+            {activity.upgradeCost && (activity.upgradeCost.map(upgradeCost => (             
+              <span className="Activity-Btn-CostRow">
+                <b>{upgradeCost.resource}</b> required
+                {resources.map(resource => (resource.name === upgradeCost.resource && (
+                    <span> {[formatNumber(upgradeCost.cost,2)]}</span>)                
+                ))} 
+                <br></br>
+              </span>                         
+            )))}
+            {!activity.upgradeCost && (
+              <span className="Activity-Btn-CostRow"> Free </span>
+            )}
+            </span>
+            {/*activity.stage != null && (<button onClick={(e) => {e.stopPropagation(); this.sellActivity()}} className="Activity-Btn-Sell">Sell</button>)*/}
             
             {activity.modulable === true && (
               <span>

@@ -2,30 +2,30 @@ import * as constants from '../Utilities/StringsConst.js'
 import * as utilities from '../Utilities/UtilityFunctions.js'
 
 //RESOURCES
-//000 Food
-//001 Athleticism
-//002 Psiche
-//003 Knowledge
-//004 Energy
-//005 Demir
-//006 Agility
+//000 Energy
+//001 
+//002 
+//003 
+//004 
+//005 
+//006 
 
 //ACTIVITIES
-//000 Eat a Cookie
-//001 Save Energy
-//002 Cooking Food
-//003 Concentration
-//004 Jogging
-//005 Rest
-//006 Meditate
-//007 Reading Book
-//008 Obstacle Course
-//009 Massage
-//010 Yoga
+//000 Collect Energy!
+//001 Running
+//002
+//003 
+//004 
+//005 
+//006 
+//007 
+//008 
+//009 
+//010 
 
 
 export const activityList = [
-    {   //EAT A COOKIE
+    {   //Collect Energy!
         name: constants.ACT_000.name,
         description: constants.ACT_000.description,
         stage: null,
@@ -37,7 +37,7 @@ export const activityList = [
         unlocked: true,
         unlockedFrom: null
     },
-    {   //SAVE ENERGY
+    {   //RUNNING
         name: constants.ACT_001.name, 
         description: constants.ACT_001.description,
         stage: 0,
@@ -45,13 +45,15 @@ export const activityList = [
             { resource: constants.RES_000.name, cost: 12, upgradeCostRatio: 0.5}
         ],
         effect: [
-            { resource: constants.RES_004.name, perSecRatio: 0.08, flatValue: 0.02}
+            { resource: constants.RES_001.name, perSecRatio: 0.08, flatValue: 0.02},
         ],
         boost: 0,
-        unlocked: true,
-        unlockedFrom: false
+        unlocked: false,
+        unlockedFrom: [
+            { resource: constants.RES_000.name, neededValue: 12}
+        ]
     },
-    {   //COOKING FOOD
+    {   //Short Rest
         name: constants.ACT_002.name, 
         description: constants.ACT_002.description,
         stage: 0,
@@ -64,10 +66,10 @@ export const activityList = [
         boost: 0,
         unlocked: false,
         unlockedFrom: [
-            { resource: constants.RES_000.name, neededValue: 5}
+            { activity: constants.ACT_001.name, neededStage: 4} //Unlocked from Running
         ]
     },
-    {   //CONCENTRATION
+    /*{   //CONCENTRATION
         name: constants.ACT_003.name,
         description: constants.ACT_003.description,
         stage: 0,
@@ -136,7 +138,7 @@ export const activityList = [
         unlockedFrom: [
             { resource: constants.RES_001.name, neededValue: 10}
         ]
-    },*/
+    },
     {   //MEDITATE
         name: constants.ACT_006.name, 
         description: constants.ACT_006.description,
@@ -171,7 +173,7 @@ export const activityList = [
             {shopItem: constants.SHP_003.name}
         ]
     },
-    /*{   //OBSTACLE COURSE
+    {   //OBSTACLE COURSE
         name: constants.ACT_008.name,
         description: constants.ACT_008.description,
         grade: 0,
@@ -191,7 +193,7 @@ export const activityList = [
         unlockedFrom: [
             {roomObject: constants.OBJ_001.name}
         ]
-    },*/
+    },
     {   //MASSAGE
         name: constants.ACT_009.name,
         description: constants.ACT_009.description,
@@ -213,7 +215,7 @@ export const activityList = [
         unlockedFrom: [
             { resource: constants.RES_005.name, neededValue: 0.01}
         ]
-    }
+    }*/
     
 ]
 

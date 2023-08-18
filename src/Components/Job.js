@@ -17,7 +17,7 @@ class Job extends React.Component {
     
   }
 
-  incTimeSlot(job) {
+  /*incTimeSlot(job) {
     let resourceTimeSlotIndex = this.state.resources.findIndex(x => x.name === constants.RES_007.name)
     let timeSlotRes = this.state.resources[resourceTimeSlotIndex]
 
@@ -64,7 +64,7 @@ class Job extends React.Component {
         
       </div>
     )
-  }
+  }*/
 }
 
 export default Job;

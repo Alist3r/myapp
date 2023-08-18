@@ -21,8 +21,8 @@ class Game extends React.Component {
             gameTime: 0,
             gameResources: resources.resourcesList.slice(),
             gameActivities: activities.activityList.slice(),
-            gameShopItems: city.shopItemsList.slice(),
-            gameJobs: city.jobMansionsList.slice(),
+            //gameShopItems: city.shopItemsList.slice(),
+            //gameJobs: city.jobMansionsList.slice(),
             activeTab: constants.TAB_001,     
         }     
     
@@ -61,8 +61,8 @@ class Game extends React.Component {
     render() {
         let gameResources = this.state.gameResources.slice()
         let gameActivities = this.state.gameActivities.slice()
-        let gameShopItems = this.state.gameShopItems.slice()
-        let gameJobs = this.state.gameJobs.slice()
+        //let gameShopItems = this.state.gameShopItems.slice()
+        //let gameJobs = this.state.gameJobs.slice()
  
         return(
             
@@ -87,7 +87,7 @@ class Game extends React.Component {
                                 isActive={this.state.activeTab === tab.name ? true : false} 
                                 resources={gameResources} 
                                 activities={gameActivities} 
-                                shopItems={gameShopItems}
+                                //shopItems={gameShopItems}
                                 updateActiveTab={this.updateActiveTab}
                             />
                         ))}
@@ -97,29 +97,18 @@ class Game extends React.Component {
                         {/** ACTIVITY TAB */}
                         <ActivityTab 
                             activities={gameActivities} 
-                            shopItems={gameShopItems} 
+                            //shopItems={gameShopItems} 
                             resources={gameResources} 
                             activeTab={this.state.activeTab} 
                         />
 
                         {/** YOUR ROOM TAB */}
-                        <CityTab 
-                            //changeRoomSlotUsed={this.changeRoomSlotUsed} 
-                            shopItems={gameShopItems}
-                            resources={gameResources} 
-                            activities={gameActivities} 
-                            jobs={gameJobs}
-                            activeTab={this.state.activeTab} 
-                        />
+                        
                         
                     </div>  
 
                     {/** BELT RESOURCE PANEL */}
-                    <div className="Middle-Panel-Bag-Resources">
-                        {gameResources.map(resource => (                                     
-                            resource.type === constants.RES_TYPE_002.name && (<div>{this.unlockResource(resource) && (<BeltResourcePanel  resource={resource} gameState={this.state} />)}</div>)                               
-                        ))}
-                    </div> 
+                    
                 </div>
             </div>                        
             

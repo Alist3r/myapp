@@ -1,17 +1,17 @@
 import * as constants from '../Utilities/StringsConst.js';
 import * as utilities from '../Utilities/UtilityFunctions.js'
 
-//000 Food
-//001 Athleticism
-//002 Psiche
-//003 Knowledge
-//004 Energy
-//005 Demir
-//006 Agility
+//000 Physical Energy
+//001 Physical Condition
+//002 
+//003 
+//004 
+//005 
 
 export const resourcesList = [
-    {   //FOOD
-        name: constants.RES_000.name,
+    {   //Physical Energy
+        name: constants.RES_000.name, 
+        type: constants.RES_TYPE_000.name,
         currentValue: 0,
         maxValue: 800,
         incRatio: 0,
@@ -21,8 +21,8 @@ export const resourcesList = [
         unlockedFrom: null
 
     },
-    {   //ENERGY
-        name: constants.RES_004.name, 
+    {   //Physical Condition
+        name: constants.RES_001.name, 
         currentValue: 0, 
         maxValue: 400, 
         baseRatio: 0, 
@@ -32,7 +32,7 @@ export const resourcesList = [
         unlocked: false,
         unlockedFrom: null
     },
-    {   //PSICHE
+    /*{   //PSICHE
         name: constants.RES_002.name, 
         currentValue: 0, 
         maxValue: 400, 
@@ -95,7 +95,7 @@ export const resourcesList = [
         flatRatio: 0,
         unlocked: false,
         unlockedFrom: null
-    }
+    }*/
 ]
 
 export function applyEffectsToResources(resources, effects, howManyTimes, type) {

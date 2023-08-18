@@ -14,7 +14,7 @@ class JobExperience extends React.Component {
     
   }
 
-  componentDidMount() {
+  /*componentDidMount() {
     this.timerID = setInterval(
       () => this.tick(),
       constants.OPT_REFRESHRATE
@@ -82,7 +82,7 @@ class JobExperience extends React.Component {
         <span style={{fontSize: "12px", display: "inline-block", marginLeft: "4px"}}>{formatNumberWPrefix(this.state.incRate,3)}/s</span>
       </div>
     )
-  }
+  }*/
 }
 
 export default JobExperience;
