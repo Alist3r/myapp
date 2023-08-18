@@ -10,7 +10,7 @@ class ActivityTab extends React.Component {
         this.state = {
             activities: props.activities,
             resources: props.resources,
-            //shopItems: props.shopItems,
+            talents: props.talents,
             activeTab: props.activeTab
         }
     }
@@ -21,7 +21,7 @@ class ActivityTab extends React.Component {
             let unlockCondition = activity.unlockedFrom.slice()
             let resourcesList = this.state.resources.slice()
             let activityList = this.state.activities.slice()
-            //let shopItems = this.state.shopItems.slice()
+            let talentsList = this.state.talents.slice()
 
             let unlockable = checkUnlockCondition(resourcesList, activityList, unlockCondition)
 

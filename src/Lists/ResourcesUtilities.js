@@ -13,7 +13,7 @@ export const resourcesList = [
         name: constants.RES_000.name, 
         type: constants.RES_TYPE_000.name,
         currentValue: 0,
-        maxValue: 800,
+        maxValue: 200,
         incRatio: 0,
         boost: 0,
         flatRatio: 0,
@@ -24,7 +24,7 @@ export const resourcesList = [
     {   //Physical Condition
         name: constants.RES_001.name, 
         currentValue: 0, 
-        maxValue: 400, 
+        maxValue: 150, 
         baseRatio: 0, 
         incRatio: 0,
         boost: 0,

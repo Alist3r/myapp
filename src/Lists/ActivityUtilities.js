@@ -37,20 +37,20 @@ export const activityList = [
         unlocked: true,
         unlockedFrom: null
     },
-    {   //RUNNING
+    {   //Running
         name: constants.ACT_001.name, 
         description: constants.ACT_001.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_000.name, cost: 12, upgradeCostRatio: 0.5}
+            { resource: constants.RES_000.name, cost: 12, upgradeCostRatio: 0.13}
         ],
         effect: [
-            { resource: constants.RES_001.name, perSecRatio: 0.08, flatValue: 0.02},
+            { resource: constants.RES_001.name, perSecRatio: 0.09, flatValue: 0.09},
         ],
         boost: 0,
         unlocked: false,
         unlockedFrom: [
-            { resource: constants.RES_000.name, neededValue: 12}
+            { resource: constants.RES_000.name, neededValue: 12} //Unlocked from Physical Energy
         ]
     },
     {   //Short Rest
@@ -58,10 +58,10 @@ export const activityList = [
         description: constants.ACT_002.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_000.name, cost: 10, upgradeCostRatio: 0.10}
+            { resource: constants.RES_000.name, cost: 10, upgradeCostRatio: 0.40 }
         ],
         effect: [
-            { resource: constants.RES_000.name, perSecRatio: 0.64, flatValue: 0.56}
+            { resource: constants.RES_000.name, perSecRatio: 0.18, flatValue: 0.32}
         ],
         boost: 0,
         unlocked: false,
@@ -69,24 +69,25 @@ export const activityList = [
             { activity: constants.ACT_001.name, neededStage: 4} //Unlocked from Running
         ]
     },
-    /*{   //CONCENTRATION
+    {   //Sleep
         name: constants.ACT_003.name,
         description: constants.ACT_003.description,
         stage: 0,
         upgradeCost: [
-            { resource: constants.RES_004.name, cost: 10, upgradeCostRatio: 0.6}
+            { resource: constants.RES_000.name, cost: 10, upgradeCostRatio: 1.2}
         ],
         effect: [
-            { resource: constants.RES_007.name, clickRatio: 2, flatRatio: 2},
-            { resource: constants.RES_007.name, maxValue: 2, flatRatio: 2}
+            { resource: constants.RES_000.name, perSecRatio: 0.35, flatRatio: 0.35},
+            { resource: constants.RES_000.name, maxValue: 50, flatRatio: 50}
         ],
         boost: 0,
         unlocked: false,
         unlockedFrom: [
-            { resource: constants.RES_004.name, neededValue: 1}
+            { activity: constants.ACT_001.name, neededStage: 6},//Unlocked from Running
+            { activity: constants.ACT_001.name, neededStage: 5} //Unlocked from Short Rest
         ]
     },
-    {   //YOGA
+    /*{   //YOGA
         name: constants.ACT_010.name,
         description: constants.ACT_010.description,
         grade: null,

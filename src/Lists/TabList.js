@@ -16,19 +16,19 @@ import * as constants from '../Utilities/StringsConst.js';
 //007 Go to Job
 
 const tabList = [
-    {   //ACTIVITIES
+    {   //Activities
         name: constants.TAB_001, 
         unlocked: true,
         unlockedFrom: null    
     },
-    /*{   //ROOM
+    {   //Talents
         name: constants.TAB_002,
         unlocked: false,
         unlockedFrom: [
-            { activity: constants.ACT_003.name, neededStage: 1}
+            { activity: constants.ACT_001.name, neededStage: 4}
         ]
     },
-    {   //KNOWLEDGE
+    /*{   //KNOWLEDGE
         name: constants.TAB_003,
         unlocked: false,
         unlockedFrom: [

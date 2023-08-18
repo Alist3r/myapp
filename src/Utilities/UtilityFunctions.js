@@ -5,7 +5,7 @@ export function saveState(state) {
     localStorage.setItem('gameTime', state.gameTime);
     localStorage.setItem("gameResources", JSON.stringify(state.gameResources));
     localStorage.setItem("gameActivities", JSON.stringify(state.gameActivities));
-    //localStorage.setItem("gameShopItems", JSON.stringify(state.gameShopItems));
+    localStorage.setItem("gameTalents", JSON.stringify(state.gameTalents));
     //localStorage.setItem("gameJobs", JSON.stringify(state.gameJobs));
     localStorage.setItem("activeTab", state.activeTab);
 
@@ -18,7 +18,7 @@ export function loadState(state) {
     let gameTime
     let gameResources
     let gameActivities
-    //let gameShopItems
+    let gameTalents
     //let gameJobs
     let activeTab
 
@@ -43,14 +43,14 @@ export function loadState(state) {
         gameActivities = state.gameActivities
     }
 
-    /*if(JSON.parse(localStorage.getItem("gameShopItems"))) {
-        gameShopItems = JSON.parse(localStorage.getItem("gameShopItems"))
+    if(JSON.parse(localStorage.getItem("gameTalents"))) {
+        gameTalents = JSON.parse(localStorage.getItem("gameTalents"))
     }
     else {
-        gameShopItems = state.gameShopItems
+        gameTalents = state.gameTalents
     }
 
-    if(JSON.parse(localStorage.getItem("gameJobs"))) {
+    /*if(JSON.parse(localStorage.getItem("gameJobs"))) {
         gameJobs = JSON.parse(localStorage.getItem("gameJobs"))
     }
     else {
@@ -69,7 +69,7 @@ export function loadState(state) {
         gameTime,
         gameResources,
         gameActivities,
-        //gameShopItems,
+        gameTalents,
         //gameJobs,
         activeTab
     }

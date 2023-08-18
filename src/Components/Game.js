@@ -7,7 +7,7 @@ import BeltResourcePanel from './BeltResourcePanel.js'
 
 import * as resources from '../Lists/ResourcesUtilities.js'
 import * as activities from '../Lists/ActivityUtilities.js'
-import * as city from '../Lists/CityUtilities.js'
+import * as talents from '../Lists/TalentsUtilities.js'
 import tabList from '../Lists/TabList.js'
 import * as utility from '../Utilities/UtilityFunctions.js'
 import * as constants from '../Utilities/StringsConst.js'
@@ -21,7 +21,7 @@ class Game extends React.Component {
             gameTime: 0,
             gameResources: resources.resourcesList.slice(),
             gameActivities: activities.activityList.slice(),
-            //gameShopItems: city.shopItemsList.slice(),
+            gameTalents: talents.talentsList.slice(),
             //gameJobs: city.jobMansionsList.slice(),
             activeTab: constants.TAB_001,     
         }     
@@ -61,7 +61,7 @@ class Game extends React.Component {
     render() {
         let gameResources = this.state.gameResources.slice()
         let gameActivities = this.state.gameActivities.slice()
-        //let gameShopItems = this.state.gameShopItems.slice()
+        let gameTalents = this.state.gameTalents.slice()
         //let gameJobs = this.state.gameJobs.slice()
  
         return(
@@ -87,7 +87,7 @@ class Game extends React.Component {
                                 isActive={this.state.activeTab === tab.name ? true : false} 
                                 resources={gameResources} 
                                 activities={gameActivities} 
-                                //shopItems={gameShopItems}
+                                talents={gameTalents}
                                 updateActiveTab={this.updateActiveTab}
                             />
                         ))}
@@ -97,13 +97,18 @@ class Game extends React.Component {
                         {/** ACTIVITY TAB */}
                         <ActivityTab 
                             activities={gameActivities} 
-                            //shopItems={gameShopItems} 
+                            talents={gameTalents} 
                             resources={gameResources} 
                             activeTab={this.state.activeTab} 
                         />
 
                         {/** YOUR ROOM TAB */}
-                        
+                        <CityTab 
+                            talents={gameTalents}
+                            resources={gameResources} 
+                            activities={gameActivities} 
+                            activeTab={this.state.activeTab} 
+                        />
                         
                     </div>  
 

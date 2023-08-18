@@ -31,9 +31,9 @@ const ShopItemTooltip = (props) => {
     return resources[index].unlocked
   }
 
-  var item 
-  if(props.item != null) 
-    item = props.item 
+  var talent 
+  if(props.talent != null) 
+  talent = props.talent 
 
   var resources
   if(props.resourcesList != null) 
@@ -53,14 +53,14 @@ const ShopItemTooltip = (props) => {
       {active  && (
         <div className={`Tooltip-Tip ${props.direction || "top"}`}>
           <div>
-            <div className="Tooltip-Description">{item.description}</div>
+            <div className="Tooltip-Description">{talent.description}</div>
 
             
             <div className="Tooltip-Title">Costs</div>
             <div className="Tooltip-Divider"></div>
 
             {/*--------- UPGRADE COSTS ---------*/}
-            {item.upgradeCost && (item.upgradeCost.map(upgradeCost => (             
+            {talent.upgradeCost && (talent.upgradeCost.map(upgradeCost => (             
               <span className="Tooltip-EffectRow">
                 {upgradeCost.resource} 
                 {resources.map(resource => (
@@ -79,7 +79,7 @@ const ShopItemTooltip = (props) => {
             <div className="Tooltip-Divider"></div>
 
             
-            {item.effect != null && item.effect.map(effect => (
+            {talent.effect != null && talent.effect.map(effect => (
               <span>
                 {isResourceUnlocked(effect, resources) && (
                   <span className="Tooltip-EffectRow">             
@@ -94,9 +94,9 @@ const ShopItemTooltip = (props) => {
               </span>
             ))}  
 
-            {item.effectActivity != null && (
+            {talent.effectActivity != null && (
                 <span>
-                  {item.effectActivity.map(effect => (
+                  {talent.effectActivity.map(effect => (
                     <span className="Tooltip-EffectRow">
                       {effect.percRatio && (<span>{effect.activity}: {formatNumberWPrefix(effect.percRatio,2)}%</span>)}
                       <br></br>

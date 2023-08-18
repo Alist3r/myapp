@@ -81,8 +81,8 @@ export const ACT_002 = {
     description: "A short rest can help you accumulate energy: regulate blood pressure, and improve psychophysical balance."
 }
 export const ACT_003 = {
-    name: "Concentration",
-    description: "? ? ? ? ? ?"
+    name: "Sleep",
+    description: "The hours of nightly rest allow us to recharge our body through the transition between two states that occur multiple times during the night: REM sleep and non-REM sleep."
 }
 export const ACT_004 = {
     name: "Jogging",
@@ -113,28 +113,18 @@ export const ACT_010 = {
     description: "? ? ? ? ? ?"
 }
 
-//SHOP ITEMS
-//001 Running Shoes
+//TALENTS
+//001 Deep Sleep
 
-/*export const SHP_001 = {
-    name: "Running Shoes",
-    description: "Buy a new pair of shoes. You can go out and run around."
+export const TLN_001 = {
+    name: "Deep Sleep",
+    description: "descrizione di prova"
 }
-
-export const SHP_002 = {
-    name: "Training Mat",
-    description: "A simple Training Mat"
-}
-
-export const SHP_003 = {
-    name: "Library",
-    description: "? ? ? ? ? ?"
-}*/
 
 //TABS
 
 export const TAB_001 = "Activities"
-export const TAB_002 = "City"
+export const TAB_002 = "Talents"
 export const TAB_003 = "Knowledge"
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import * as constants from '../Utilities/StringsConst.js'
 import {formatNumberWPrefix}  from '../Utilities/UtilityFunctions.js'
-import {jobGrades} from '../Lists/CityUtilities.js'
+import {jobGrades} from '../Lists/TalentsUtilities.js'
 
 class JobExperience extends React.Component {
   constructor(props) {
