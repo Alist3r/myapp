@@ -18,8 +18,7 @@ export const resourcesList = [
         boost: 0,
         flatRatio: 0,
         unlocked: true,
-        unlockedFrom: null
-
+        unlockedFrom: null,
     },
     {   //Physical Condition
         name: constants.RES_001.name, 
@@ -113,17 +112,20 @@ export function applyEffectsToResources(resources, effects, howManyTimes, type) 
         switch (effectType) {
 
             case "perSecRatio":     resource.flatRatio += (effect.perSecRatio * howManyTimes * modifier)
-                                    resource.incRatio = resource.flatRatio + utilities.percValue(resource.flatRatio, resource.boost)
+                                    if(resource.boost > 0)
+                                        resource.incRatio = resource.flatRatio * resource.boost
+                                    else
+                                        resource.incRatio = resource.flatRatio
                                     break;
 
-            case "maxValue":        resources[index].maxValue += (effect.maxValue * howManyTimes * modifier);
+            case "maxValue":        resource.maxValue += (effect.maxValue * howManyTimes * modifier);
                                     break;
 
-            case "clickRatio":      resources[index].currentValue += (effect.clickRatio * modifier);
+            case "clickRatio":      resource.currentValue += (effect.clickRatio * modifier);
                                     break;
 
-            case "percRatio":       resources[index].boost += effect.percRatio * howManyTimes * modifier
-                                    resource.incRatio = resource.flatRatio + utilities.percValue(resource.flatRatio, resource.boost)
+            case "multiRatio":      resource.boost += effect.multiRatio * howManyTimes * modifier
+                                    resource.incRatio = resource.flatRatio * resource.boost                               
                                     break;          
         
             default: break;

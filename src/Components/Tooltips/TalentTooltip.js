@@ -3,7 +3,7 @@ import "./tooltip.css";
 import {formatNumber, formatNumberWPrefix} from '../../Utilities/UtilityFunctions.js'
 import {timerConverter} from '../../Utilities/UtilityFunctions.js'
 
-const ShopItemTooltip = (props) => {
+const TalentTooltip = (props) => {
   let timeout;
   const [active, setActive] = useState(false);
 
@@ -84,7 +84,7 @@ const ShopItemTooltip = (props) => {
                 {isResourceUnlocked(effect, resources) && (
                   <span className="Tooltip-EffectRow">             
                     {effect.perSecRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.perSecRatio,2)}/<span className="Tooltip-Sec">sec</span></span>)}  
-                    {effect.percRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.percRatio,2)}% /<span className="Tooltip-Sec">sec</span></span>)}
+                    {effect.multiRatio && (<span>{effect.resource}: x{effect.multiRatio}</span>)}
                     {effect.maxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.maxValue,2)} </span>)} 
                     {effect.percMaxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.percMaxValue,2)}% </span>)}     
                     {effect.clickRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.clickRatio,2)} </span>)}           
@@ -98,7 +98,7 @@ const ShopItemTooltip = (props) => {
                 <span>
                   {talent.effectActivity.map(effect => (
                     <span className="Tooltip-EffectRow">
-                      {effect.percRatio && (<span>{effect.activity}: {formatNumberWPrefix(effect.percRatio,2)}%</span>)}
+                      {effect.multiRatio && (<span>{effect.activity}: x{effect.multiRatio}</span>)}
                       <br></br>
                     </span>
                     
@@ -112,4 +112,4 @@ const ShopItemTooltip = (props) => {
   );
 };
 
-export default ShopItemTooltip;
+export default TalentTooltip;

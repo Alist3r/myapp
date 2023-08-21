@@ -245,8 +245,8 @@ export function wichEffect(effect) {
         return "perSecRatio"
     }
 
-    if(effect.percRatio != null) {
-        return "percRatio"
+    if(effect.multiRatio != null) {
+        return "multiRatio"
     }    
 
     if(effect.maxValue != null) {
@@ -254,7 +254,7 @@ export function wichEffect(effect) {
     } 
 
     if(effect.percMaxValue != null) {
-        return "percMaxValue"
+        return "multiMaxValue"
     } 
 
     if(effect.clickRatio != null) {

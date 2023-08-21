@@ -1,5 +1,6 @@
 import * as constants from '../Utilities/StringsConst.js'
 import * as utilities from '../Utilities/UtilityFunctions.js'
+import {applyEffectsToResources} from '../Lists/ResourcesUtilities.js'
 
 //RESOURCES
 //000 Energy
@@ -61,12 +62,12 @@ export const activityList = [
             { resource: constants.RES_000.name, cost: 10, upgradeCostRatio: 0.40 }
         ],
         effect: [
-            { resource: constants.RES_000.name, perSecRatio: 0.18, flatValue: 0.32}
+            { resource: constants.RES_000.name, perSecRatio: 1, flatValue: 1}
         ],
         boost: 0,
         unlocked: false,
         unlockedFrom: [
-            { activity: constants.ACT_001.name, neededStage: 4} //Unlocked from Running
+            { activity: constants.ACT_001.name, neededStage: 1} //Unlocked from Running
         ]
     },
     {   //Sleep
@@ -77,15 +78,16 @@ export const activityList = [
             { resource: constants.RES_000.name, cost: 10, upgradeCostRatio: 1.2}
         ],
         effect: [
-            { resource: constants.RES_000.name, perSecRatio: 0.35, flatRatio: 0.35},
+            { resource: constants.RES_000.name, perSecRatio: 2, flatRatio: 2},
             { resource: constants.RES_000.name, maxValue: 50, flatRatio: 50}
         ],
         boost: 0,
         unlocked: false,
         unlockedFrom: [
-            { activity: constants.ACT_001.name, neededStage: 6},//Unlocked from Running
-            { activity: constants.ACT_001.name, neededStage: 5} //Unlocked from Short Rest
-        ]
+            { activity: constants.ACT_001.name, neededStage: 1}//Unlocked from Running
+            //{ activity: constants.ACT_001.name, neededStage: 1} //Unlocked from Short Rest
+        ],
+        modul: false
     },
     /*{   //YOGA
         name: constants.ACT_010.name,
@@ -234,17 +236,17 @@ export function applyEffectsToActivity(booster, resources, activities, howManyTi
         let activityEffects
 
 
-        activityToBoost.boost += effect.percRatio * howManyTimes * modifier  //update the boost to the activity
+        activityToBoost.boost += effect.multiRatio * howManyTimes * modifier  //update the boost to the activity
         activityEffects = activityToBoost.effect //effects of the activity
 
         let stageOrGrade
-        if (activityToBoost.modulable) //we need to reference to the current stage or grade of the activity to boost
+        if (activityToBoost.modul) //we need to reference to the current stage or grade of the activity to boost
             stageOrGrade = activityToBoost.grade
         else  
             stageOrGrade = activityToBoost.stage
 
         activityEffects.forEach(actEffect => {
-            /* It's necessary to remove from the resource the actual bonus from thea activity
+            /* It's necessary to remove from the resource the actual bonus from the activity
             according to the boost received by the activity*/
             let resourceToUpdate
             let resIndex = resources.findIndex(x => x.name === actEffect.resource) // find the resource to modify
@@ -253,52 +255,54 @@ export function applyEffectsToActivity(booster, resources, activities, howManyTi
             resourceToUpdate = resources[resIndex]
 
         
-        switch (effectType) {
-            // OK OK OK OK 
-            case "perSecRatio": if(actEffect.perSecRatio > 0) { //applies only to positive effects of the activity
-                                    resourceToUpdate.flatRatio -= (actEffect.perSecRatio * stageOrGrade) //remove from the resource the actual value from the activity
+            switch (effectType) {
+                // OK OK OK OK 
+                case "perSecRatio": if(actEffect.perSecRatio > 0) { //applies only to positive effects of the activity
+                                        resourceToUpdate.flatRatio -= (actEffect.perSecRatio * stageOrGrade) //remove from the resource the actual value from the activity
+                                        actEffect.perSecRatio = actEffect.perSecRatio * activityToBoost.boost
 
-                                    actEffect.perSecRatio = actEffect.flatValue + utilities.percValue(actEffect.flatValue, activityToBoost.boost)
+                                        
 
-                                    if(stageOrGrade > 0) {
-                                        resourceToUpdate.flatRatio += (actEffect.perSecRatio * stageOrGrade)
-                                        resourceToUpdate.incRatio = resourceToUpdate.flatRatio + utilities.percValue(resourceToUpdate.flatRatio, resourceToUpdate.boost)
+                                        if(stageOrGrade > 0) {
+                                            resourceToUpdate.flatRatio += (actEffect.perSecRatio * stageOrGrade)
+                                            if(resourceToUpdate.boost > 0)
+                                                resourceToUpdate.incRatio = resourceToUpdate.flatRatio * resourceToUpdate.boost
+                                            else
+                                                resourceToUpdate.incRatio = resourceToUpdate.flatRatio
+                                        }
+                                    }           
+                                    break;
+                // OK OK OK OK
+                case "multiRatio":   if(actEffect.multiRatio > 0) {
+                                        resourceToUpdate.boost -= (actEffect.multiRatio * stageOrGrade)
+
+                                        actEffect.multiRatio = actEffect.flatValue + utilities.percValue(actEffect.flatValue, activityToBoost.boost)
+
+                                        if(stageOrGrade > 0) {
+                                            resourceToUpdate.boost += (actEffect.multiRatio * stageOrGrade)
+                                            resourceToUpdate.incRatio = resourceToUpdate.flatRatio + utilities.percValue(resourceToUpdate.flatRatio, resourceToUpdate.boost)
+                                        }
                                     }
-                                }           
-                                break;
-            // OK OK OK OK
-            case "percRatio":   if(actEffect.percRatio > 0) {
-                                    resourceToUpdate.boost -= (actEffect.percRatio * stageOrGrade)
-
-                                    actEffect.percRatio = actEffect.flatValue + utilities.percValue(actEffect.flatValue, activityToBoost.boost)
-
+                                    break;
+                // OK OK OK OK               
+                case "maxValue":    resourceToUpdate.maxValue -= (actEffect.maxValue * stageOrGrade)                                   
+                                    actEffect.maxValue = actEffect.flatRatio * activityToBoost.boost                                 
                                     if(stageOrGrade > 0) {
-                                        resourceToUpdate.boost += (actEffect.percRatio * stageOrGrade)
-                                        resourceToUpdate.incRatio = resourceToUpdate.flatRatio + utilities.percValue(resourceToUpdate.flatRatio, resourceToUpdate.boost)
+                                        resourceToUpdate.maxValue += (actEffect.maxValue * stageOrGrade)
                                     }
-                                }
-                                break;
-            // OK OK OK OK               
-            case "maxValue":    resourceToUpdate.maxValue -= (actEffect.maxValue * stageOrGrade)
-                                
-                                actEffect.maxValue = actEffect.flatValue + utilities.percValue(actEffect.flatValue, activityToBoost.boost)
+                                    break;
+                // OK OK OK OK
+                case "clickRatio":  if(actEffect.clickRatio > 0 )
+                                        actEffect.clickRatio = actEffect.flatRatio + utilities.percValue(actEffect.flatValue, activityToBoost.boost)
+                                    
+                                    break;
+                                    
+                
+                                    
+            default: break;
+            }
 
-                                if(stageOrGrade > 0) {
-                                    resourceToUpdate.maxValue += (actEffect.maxValue * stageOrGrade)
-                                }
-                                break;
-            // OK OK OK OK
-            case "clickRatio":  if(actEffect.clickRatio > 0 )
-                                    actEffect.clickRatio = actEffect.flatValue + utilities.percValue(actEffect.flatValue, activityToBoost.boost)
-                                   
-                                break;
-                                
-            
-                                
-          default: break;
-        }
-
-      });
+        });
     });
     
 }

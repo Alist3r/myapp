@@ -45,7 +45,7 @@ const ResourceIncRatioTooltip = (props) => {
           <div style={{textAlign: 'left'}} className={`Tooltip-Tip-ResourceIncRatio  ${props.direction || "top"}`}>
             
           <span><i>Production: {formatNumberWPrefix(resource.flatRatio,2)}/s</i></span><br></br>
-          <span><i>Boost: {formatNumberWPrefix(resource.boost,2)}%</i></span>
+          <span><i>Boost: x{resource.boost}</i></span>
           <br></br>
           <br></br>
 
@@ -58,8 +58,8 @@ const ResourceIncRatioTooltip = (props) => {
                     <span>
                       {effect.resource === resource.name && wichEffect(effect) === 'perSecRatio' && 
                         (<span>{activity.name} <span style={{float: "right"}}>{formatNumberWPrefix(effect.perSecRatio * getStageOrGrade(activity),2)}/s</span> <br></br></span>)}
-                      {effect.resource === resource.name && wichEffect(effect) === 'percRatio' && 
-                        (<span>{activity.name} <span style={{float: "right"}}>{formatNumberWPrefix(effect.percRatio * getStageOrGrade(activity),2)}% </span><br></br></span>)}
+                      {effect.resource === resource.name && wichEffect(effect) === 'multiRatio' && 
+                        (<span>{activity.name} <span style={{float: "right"}}>x{effect.multiRatio * getStageOrGrade(activity)} </span><br></br></span>)}
                     </span>
                 ))
               )}
@@ -74,8 +74,8 @@ const ResourceIncRatioTooltip = (props) => {
                     <span>
                       {effect.resource === resource.name && wichEffect(effect) === 'perSecRatio' && 
                         (<span>{roomObj.name} <span style={{float: "right"}}>{formatNumberWPrefix(effect.perSecRatio * roomObj.stage,2)}/s</span><br></br></span>)}
-                      {effect.resource === resource.name && wichEffect(effect) === 'percRatio' && 
-                        (<span>{roomObj.name} <span style={{float: "right"}}>{formatNumberWPrefix(effect.percRatio * roomObj.stage,2)}%</span><br></br></span>)}
+                      {effect.resource === resource.name && wichEffect(effect) === 'multiRatio' && 
+                        (<span>{roomObj.name} <span style={{float: "right"}}>{formatNumberWPrefix(effect.multiRatio * roomObj.stage,2)}%</span><br></br></span>)}
                     </span>
                 ))
               )}

@@ -27,10 +27,12 @@ export const talentsList = [
         name: constants.TLN_001.name,
         description: constants.TLN_001.description,
         upgradeCost: [
-            { resource: constants.RES_000.name, cost: 200, upgradeCostRatio: 0}
+            { resource: constants.RES_000.name, cost: 20, upgradeCostRatio: 0}
         ],
         effect: null,
-        effectActivity: null,
+        effectActivity: [
+            { activity: constants.ACT_003.name, multiRatio: 2, flatRatio: 2}
+        ],
         isBought: false,
         unlocked: true,
         unlockedFrom: null

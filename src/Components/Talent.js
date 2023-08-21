@@ -1,5 +1,5 @@
 import React from 'react'
-import ShopItemTooltip from './Tooltips/ShopItemTooltip.js'
+import TalentTooltip from './Tooltips/TalentTooltip.js'
 import {haveEnoughResource} from '../Utilities/UtilityFunctions.js'
 import {applyEffectsToResources} from '../Lists/ResourcesUtilities.js'
 import {applyEffectsToActivity} from '../Lists/ActivityUtilities.js'
@@ -86,13 +86,13 @@ class Talent extends React.Component {
     let costs = talent.upgradeCost
 
     return(
-      <ShopItemTooltip talent={talent} resourcesList={resources} direction="right">
+      <TalentTooltip talent={talent} resourcesList={resources} direction="right">
       <div onClick={() => this.buyObject()} className={this.getRoomObjectStyle(costs,resources)}>
         <span className="RoomObject-Btn-Label">
           {talent.name}
         </span>
       </div>
-      </ShopItemTooltip>
+      </TalentTooltip>
     )
   }
 }
