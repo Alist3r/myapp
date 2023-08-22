@@ -1,8 +1,9 @@
 import React from 'react'
 
 import * as constants from '../Utilities/StringsConst.js'
-import Talent from './Talent.js'
+import TalentGroup from './TalentGroup.js'
 import { checkUnlockCondition } from '../Utilities/UtilityFunctions.js'
+import * as groups from '../Lists/GroupList.js'
 
 class TalentsTab extends React.Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class TalentsTab extends React.Component {
         })
     } 
 
-    isUnlocked(talent) {
+    /*isUnlocked(talent) {
 
         if(talent.unlocked === false && talent.unlockedFrom !== null) {
             let unlockCondition = talent.unlockedFrom.slice()
@@ -37,12 +38,31 @@ class TalentsTab extends React.Component {
         }
 
         return talent.unlocked
+    }*/
+
+    isUnlocked(group) {
+        if(group.unlocked === false && group.unlockedFrom !== null) {
+            let unlockCondition = group.unlockedFrom.slice()
+            let resourcesList = this.state.resources.slice()
+            let activityList = this.state.activities.slice()
+            let talentList = this.state.talents.slice()
+
+            let unlockable = checkUnlockCondition(resourcesList, activityList, talentList, unlockCondition)
+
+            if(unlockable) {
+                group.unlocked = true
+            }
+        }
+
+        return group.unlocked
+
     }
 
     render() {
         let talents = this.state.talents.slice()
         let resources = this.state.resources.slice()
         let activities = this.state.activities.slice()
+        let groupList = groups.talentGroupList.slice()
 
         return (
             <div className="Middle-Panel-City-Tab" style={{'display': this.state.activeTab === constants.TAB_002 ? 'block' : 'none'}}>
@@ -50,11 +70,11 @@ class TalentsTab extends React.Component {
                 <div className="Middle-Panel-City-Section-Container">
                 
                     <div className="Middle-Panel-Room-Panel">
-                        {talents.map(talent => (
-                            this.isUnlocked(talent) && talent.isBought === false && (
+                        {groupList.map(group => (
+                            this.isUnlocked(group) && (
                                 <span>
                                     <div className="Middle-Panel-RoomObj-Container">
-                                        <Talent talent={talent} resources={resources} activities={activities} />
+                                        <TalentGroup group={group} talents={talents} resources={resources} activities={activities} />
                                     </div>
                                 </span>
                             )
