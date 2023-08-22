@@ -22,7 +22,7 @@ class TabSelector extends React.Component {
     if(tab.unlocked === false) {
       let unlockCondition = tab.unlockedFrom.slice()
       
-      let unlockable = checkUnlockCondition(resources, activities, unlockCondition)
+      let unlockable = checkUnlockCondition(resources, activities, talents, unlockCondition)
 
       if(unlockable) {
         tab.unlocked = true
@@ -42,7 +42,7 @@ class TabSelector extends React.Component {
                 style={{'font-weight': this.props.isActive ? 'bold' : 'normal'}} 
                 onClick={() => this.props.updateActiveTab(tab.name)}
           >
-                  {tab.name}
+                {tab.name}
           </span>       
           <span> / </span>
         </span>)} 

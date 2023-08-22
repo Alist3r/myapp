@@ -18,11 +18,10 @@ class Game extends React.Component {
 
         this.state = {
             gameTime: 0,
+            activeTab: constants.TAB_001,
             gameResources: resources.resourcesList.slice(),
             gameActivities: activities.activityList.slice(),
-            gameTalents: talents.talentsList.slice(),
-            //gameJobs: city.jobMansionsList.slice(),
-            activeTab: constants.TAB_001,     
+            gameTalents: talents.talentsList.slice()
         }     
     
         //If a storage exist, then load the datas
@@ -61,6 +60,7 @@ class Game extends React.Component {
         let gameResources = this.state.gameResources.slice()
         let gameActivities = this.state.gameActivities.slice()
         let gameTalents = this.state.gameTalents.slice()
+        let activeTab = this.state.activeTab
         //let gameJobs = this.state.gameJobs.slice()
  
         return(
@@ -83,7 +83,7 @@ class Game extends React.Component {
                         {tabList.map(tab => (
                             <TabSelector 
                                 tab={tab} 
-                                isActive={this.state.activeTab === tab.name ? true : false} 
+                                isActive={activeTab === tab.name ? true : false} 
                                 resources={gameResources} 
                                 activities={gameActivities} 
                                 talents={gameTalents}
@@ -94,21 +94,22 @@ class Game extends React.Component {
                     
                     <div className="Middle-Panel-Game-View">
                         {/** ACTIVITY TAB */}
-                        <ActivityTab 
+                        {activeTab === constants.TAB_001 && (<ActivityTab 
                             activities={gameActivities} 
                             talents={gameTalents} 
                             resources={gameResources} 
                             activeTab={this.state.activeTab} 
                         />
+                        )}
 
-                        {/** YOUR ROOM TAB */}
-                        <TalentsTab 
+                        {/** TALENTS TAB */}
+                        {activeTab === constants.TAB_002 && (<TalentsTab 
                             talents={gameTalents}
                             resources={gameResources} 
                             activities={gameActivities} 
                             activeTab={this.state.activeTab} 
                         />
-                        
+                        )}
                     </div>  
 
                     {/** BELT RESOURCE PANEL */}

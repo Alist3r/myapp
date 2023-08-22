@@ -3,6 +3,7 @@ import ActivityTooltip from './Tooltips/ActivityTooltip.js'
 import {haveEnoughResource} from '../Utilities/UtilityFunctions.js'
 import {applyEffectsToResources} from '../Lists/ResourcesUtilities.js'
 import {formatNumber, formatNumberWPrefix} from '../Utilities/UtilityFunctions.js'
+import { activityList } from '../Lists/ActivityUtilities.js'
 
 class Activity extends React.Component {
   constructor(props) {
@@ -52,7 +53,7 @@ class Activity extends React.Component {
           if(index !== -1) { //if matching cost found
             resourcesList[i].currentValue -= costs[index].cost  //paying resource
             if(activityToDo.upgradeCost != null) //if its an upgradable resource, then update the cost value for the next step
-              costs[index].cost += (costs[index].upgradeCostRatio * costs[index].cost)
+              costs[index].cost += (costs[index].upgradeCostRatio * costs[index].cost * activityToDo.stage) 
           } 
         }
       }

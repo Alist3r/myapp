@@ -32,71 +32,7 @@ export const resourcesList = [
         multiplier: 0,
         unlocked: false,
         unlockedFrom: null
-    },
-    /*{   //PSICHE
-        name: constants.RES_002.name, 
-        currentValue: 0, 
-        maxValue: 400, 
-        incRatio: 0, 
-        boost: 0,
-        flatRatio: 0,
-        unlocked: false,
-        unlockedFrom: null
-    },
-    {   //ATHLETICISM
-        name: constants.RES_001.name, 
-        type: constants.RES_TYPE_000.name,
-        currentValue: 0, 
-        maxValue: 400, 
-        incRatio: 0, 
-        boost: 0,
-        flatRatio: 0,
-        unlocked: false,
-        unlockedFrom: null
-    },
-    {   //KNOWLEDGE
-        name: constants.RES_003.name, 
-        type: constants.RES_TYPE_001.name,
-        currentValue: 0, 
-        maxValue: 400, 
-        incRatio: 0, 
-        boost: 0,
-        flatRatio: 0,
-        unlocked: false,
-        unlockedFrom: null
-    },
-    {   //AGILITY
-        name: constants.RES_006.name, 
-        type: constants.RES_TYPE_000.name,
-        currentValue: 0, 
-        maxValue: 400, 
-        incRatio: 0, 
-        boost: 0,
-        flatRatio: 0,
-        unlocked: false,
-        unlockedFrom: null
-    },
-    {   //TIME SLOT
-        name: constants.RES_007.name,
-        currentValue: 0,
-        maxValue: 0,
-        incRatio: 0,
-        boost: 0,
-        flatRatio: 0,
-        unlocked: false,
-        unlockedFrom: null
-    },
-    {   //DEMIR
-        name: constants.RES_005.name, 
-        type: constants.RES_TYPE_002.name,
-        currentValue: 0, 
-        maxValue: 400, 
-        incRatio: 0, 
-        boost: 0,
-        flatRatio: 0,
-        unlocked: false,
-        unlockedFrom: null
-    }*/
+    }
 ]
 
 export function applyEffectToResource(resource, effect, howManyTimes) {

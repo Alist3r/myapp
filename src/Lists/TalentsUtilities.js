@@ -23,35 +23,53 @@ import * as constants from '../Utilities/StringsConst.js';
 //004 Training Mat
 
 export const talentsList = [
-    {   // Deep Sleep
+    {   // Light Sleep
         name: constants.TLN_001.name,
         description: constants.TLN_001.description,
+        group: constants.TGR_001,
         upgradeCost: [
             { resource: constants.RES_000.name, cost: 20, upgradeCostRatio: 0}
         ],
-        effect: [
-            { resource: constants.RES_000.name, multiRatio: 2, flatRatio: 2}
-        ],
+        effect: null, //[
+            //{ resource: constants.RES_000.name, multiRatio: 2, flatRatio: 2}
+        //],
         effectActivity: [
+            { activity: constants.ACT_002.name, multiRatio: 1.5, flatRatio: 2},
             { activity: constants.ACT_003.name, multiRatio: 2, flatRatio: 2}
         ],
         isBought: false,
         unlocked: true,
         unlockedFrom: null
     },
-    {   // Deep Sleep 2
+    {   // Deep Sleep 
         name: constants.TLN_002.name,
-        description: constants.TLN_001.description,
+        description: constants.TLN_002.description,
+        group: constants.TGR_001,
         upgradeCost: [
-            { resource: constants.RES_000.name, cost: 20, upgradeCostRatio: 0}
+            { resource: constants.RES_000.name, cost: 200, upgradeCostRatio: 0}
         ],
         effect: null,
         effectActivity: [
-            { activity: constants.ACT_002.name, multiRatio: 3, flatRatio: 3}
+            { activity: constants.ACT_003.name, multiRatio: 2, flatRatio: 2}
         ],
         isBought: false,
-        unlocked: [{ talent: constants.TLN_001}],
-        unlockedFrom: null
+        unlocked: false,
+        unlockedFrom: [{ talent: constants.TLN_001.name}]
+    },
+    {   // REM Phase 
+        name: constants.TLN_003.name,
+        description: constants.TLN_003.description,
+        group: constants.TGR_001,
+        upgradeCost: [
+            { resource: constants.RES_000.name, cost: 1500, upgradeCostRatio: 0}
+        ],
+        effect: null,
+        effectActivity: [
+            { activity: constants.ACT_003.name, multiRatio: 3, flatRatio: 3}
+        ],
+        isBought: false,
+        unlocked: false,
+        unlockedFrom: [{ talent: constants.TLN_002.name}]
     }
 ]
 

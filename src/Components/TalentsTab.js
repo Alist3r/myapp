@@ -21,10 +21,10 @@ class TalentsTab extends React.Component {
         })
     } 
 
-    isUnlocked(obj) {
+    isUnlocked(talent) {
 
-        if(obj.unlocked === false && obj.unlockedFrom !== null) {
-            let unlockCondition = obj.unlockedFrom.slice()
+        if(talent.unlocked === false && talent.unlockedFrom !== null) {
+            let unlockCondition = talent.unlockedFrom.slice()
             let resourcesList = this.state.resources.slice()
             let activityList = this.state.activities.slice()
             let talentList = this.state.talents.slice()
@@ -32,29 +32,17 @@ class TalentsTab extends React.Component {
             let unlockable = checkUnlockCondition(resourcesList, activityList, talentList, unlockCondition)
 
             if(unlockable) {
-                obj.unlocked = true
+                talent.unlocked = true
             }
         }
 
-        return obj.unlocked
+        return talent.unlocked
     }
-
-    /*isShopUnlocked(demir) {
-        if(this.state.shopUnlocked === false && demir > 30) {
-            this.setState({
-                shopUnlocked: true
-            })
-        }
-        
-        return this.state.shopUnlocked
-    }*/
 
     render() {
         let talents = this.state.talents.slice()
         let resources = this.state.resources.slice()
         let activities = this.state.activities.slice()
-
-       //let demirIndex = resources.findIndex(x => x.name === constants.RES_005.name)
 
         return (
             <div className="Middle-Panel-City-Tab" style={{'display': this.state.activeTab === constants.TAB_002 ? 'block' : 'none'}}>

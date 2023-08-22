@@ -84,46 +84,23 @@ export const ACT_003 = {
     name: "Sleep",
     description: "The hours of nightly rest allow us to recharge our body through the transition between two states that occur multiple times during the night: REM sleep and non-REM sleep."
 }
-export const ACT_004 = {
-    name: "Jogging",
-    description: "Just doing some Jogging around, helping you to produce Athleticism"
-}
-export const ACT_005 = {
-    name: "Rest",
-    description: "Rest and consume some of your Athleticism"
-}
-export const ACT_006 = {
-    name: "Meditate",
-    description: "? ? ? ? ? ?"
-}
-export const ACT_007 = {
-    name: "Reading Books",
-    description: "Spends your Free Time to reading books"
-}
-export const ACT_008 = {
-    name: "Obstacle Course",
-    description: "? ? ? ? ? ?"
-}
-export const ACT_009 = {
-    name: "Massage",
-    description: "Spend some time to receive a massage. Expande your physic and mental status"
-}
-export const ACT_010 = {
-    name: "Yoga",
-    description: "? ? ? ? ? ?"
-}
 
 //TALENTS
 //001 Deep Sleep
 
 export const TLN_001 = {
-    name: "Deep Sleep",
-    description: "descrizione di prova"
+    name: "Light Sleep",
+    description: "The contact with the external environment gradually diminishes, and the muscles relax even further. If muscle contractions occur during this stage, it's because one is transitioning toward the phase of deep sleep."
 }
 
 export const TLN_002 = {
-    name: "Deep Sleep2",
-    description: "descrizione di prova"
+    name: "Deep Sleep",
+    description: "In the subsequent phase of deep sleep, the activity of the heart and circulation minimizes. Blood pressure and body temperature decrease, and the body slowly enters a standby phase. The periods of deep sleep are more extended, especially in the first half of the night, and can last up to an hour."
+}
+
+export const TLN_003 = {
+    name: "REM Phase",
+    description: "It is a sleep stage occasionally also referred to as 'paradoxical' sleep, because during this phase the awakening threshold is extremely high, despite our brain being very active. In this phase, our muscles are completely relaxed. This is crucial since it's precisely in this stage that we dream. Due to the inactivity of the muscles, we are unable to enact the movements of the dream. However, if we awaken during this phase, we remember quite well what we were dreaming. Aside from some body contractions, the only muscular activity is the rapid movement of the eyes. For this reason, this stage is also called the REM phase, acronym for Rapid Eye Movement. It's believed that the REM phase plays a fundamental role in processing lived experiences and in long-term memory consolidation."
 }
 
 //TABS
@@ -132,4 +109,5 @@ export const TAB_001 = "Activities"
 export const TAB_002 = "Talents"
 export const TAB_003 = "Knowledge"
 
+export const TGR_001 = "Sleep"
 

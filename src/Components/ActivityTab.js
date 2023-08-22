@@ -23,7 +23,7 @@ class ActivityTab extends React.Component {
             let activityList = this.state.activities.slice()
             let talentsList = this.state.talents.slice()
 
-            let unlockable = checkUnlockCondition(resourcesList, activityList, unlockCondition)
+            let unlockable = checkUnlockCondition(resourcesList, activityList, talentsList, unlockCondition)
 
             if(unlockable) {
                 activity.unlocked = true
