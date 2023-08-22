@@ -185,7 +185,7 @@ export function removePerc(finalValue, percent) {
     return result
 }
 
-export function checkUnlockCondition(resourcesList, activityList, unlockCondition) {
+export function checkUnlockCondition(resourcesList, activityList, talentList, unlockCondition) {
 
     let unlockable = true
     if(unlockCondition != null) {
@@ -211,14 +211,14 @@ export function checkUnlockCondition(resourcesList, activityList, unlockConditio
                     unlockable = false
             }
             
-            //UNLOCK BY SHOP
-            /*if(unlockable && unlockCondition[i].shopItem != null) {
-                let index = shopItems.findIndex(x => x.name === unlockCondition[i].shopItem)
-                if(index !== -1 && shopItems[index].isBought)
+            //UNLOCK BY TALENT
+            if(unlockable && unlockCondition[i].talent != null) {
+                let index = talentList.findIndex(x => x.name === unlockCondition[i].talent)
+                if(index !== -1 && talentList[index].isBought)
                     unlockable = true
                 else
                     unlockable = false
-            }*/
+            }
         }
     }
 

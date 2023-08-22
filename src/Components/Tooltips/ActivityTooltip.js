@@ -98,7 +98,7 @@ const ActivityTooltip = (props) => {
               <span>
                 {isResourceUnlocked(effect, resources) && (
                   <span className="Tooltip-EffectRow">             
-                    {effect.perSecRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.perSecRatio,2)}/<span className="Tooltip-Sec">sec</span></span>)}  
+                    {effect.perSecRatio && (<span>{effect.resource}: {formatNumberWPrefix(effect.perSecRatio,2)}/<span className="Tooltip-Sec">sec (+{effect.baseRatio}/s x{activity.multiplier})  </span></span>)}  
                     {effect.multiRatio && (<span>{effect.resource}: x{effect.multiRatio}</span>)}
                     {effect.maxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.maxValue,2)} </span>)} 
                     {effect.percMaxValue && (<span>Max {effect.resource}: {formatNumberWPrefix(effect.percMaxValue,2)}% </span>)}     

@@ -44,8 +44,8 @@ const ResourceIncRatioTooltip = (props) => {
       {active && (
           <div style={{textAlign: 'left'}} className={`Tooltip-Tip-ResourceIncRatio  ${props.direction || "top"}`}>
             
-          <span><i>Production: {formatNumberWPrefix(resource.flatRatio,2)}/s</i></span><br></br>
-          <span><i>Boost: x{resource.boost}</i></span>
+          <span><i>Production: {formatNumberWPrefix(resource.baseIncRatio,2)}/s</i></span><br></br>
+          <span><i>Boost: x{resource.multiplier}</i></span>
           <br></br>
           <br></br>
 

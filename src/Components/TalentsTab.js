@@ -27,9 +27,9 @@ class TalentsTab extends React.Component {
             let unlockCondition = obj.unlockedFrom.slice()
             let resourcesList = this.state.resources.slice()
             let activityList = this.state.activities.slice()
-            let shopItems = this.state.shopItems.slice()
+            let talentList = this.state.talents.slice()
 
-            let unlockable = checkUnlockCondition(resourcesList, activityList, shopItems, unlockCondition)
+            let unlockable = checkUnlockCondition(resourcesList, activityList, talentList, unlockCondition)
 
             if(unlockable) {
                 obj.unlocked = true

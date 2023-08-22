@@ -29,15 +29,33 @@ export const talentsList = [
         upgradeCost: [
             { resource: constants.RES_000.name, cost: 20, upgradeCostRatio: 0}
         ],
-        effect: null,
+        effect: [
+            { resource: constants.RES_000.name, multiRatio: 2, flatRatio: 2}
+        ],
         effectActivity: [
             { activity: constants.ACT_003.name, multiRatio: 2, flatRatio: 2}
         ],
         isBought: false,
         unlocked: true,
         unlockedFrom: null
+    },
+    {   // Deep Sleep 2
+        name: constants.TLN_002.name,
+        description: constants.TLN_001.description,
+        upgradeCost: [
+            { resource: constants.RES_000.name, cost: 20, upgradeCostRatio: 0}
+        ],
+        effect: null,
+        effectActivity: [
+            { activity: constants.ACT_002.name, multiRatio: 3, flatRatio: 3}
+        ],
+        isBought: false,
+        unlocked: [{ talent: constants.TLN_001}],
+        unlockedFrom: null
     }
 ]
+
+
 
 /*export const jobMansionsList = [
     {

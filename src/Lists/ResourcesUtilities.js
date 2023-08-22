@@ -14,20 +14,22 @@ export const resourcesList = [
         type: constants.RES_TYPE_000.name,
         currentValue: 0,
         maxValue: 200,
+        baseMaxValue: 200,
         incRatio: 0,
-        boost: 0,
-        flatRatio: 0,
+        multiplier: 0,
+        baseIncRatio: 0,
         unlocked: true,
         unlockedFrom: null,
     },
     {   //Physical Condition
         name: constants.RES_001.name, 
+        type: constants.RES_TYPE_000.name,
         currentValue: 0, 
         maxValue: 150, 
-        baseRatio: 0, 
+        baseMaxValue: 150,
         incRatio: 0,
-        boost: 0,
-        flatRatio: 0,
+        baseIncRatio: 0, 
+        multiplier: 0,
         unlocked: false,
         unlockedFrom: null
     },
@@ -97,39 +99,53 @@ export const resourcesList = [
     }*/
 ]
 
+export function applyEffectToResource(resource, effect, howManyTimes) {
+
+    let effectType = utilities.wichEffect(effect) //return the correct effect type
+
+    switch (effectType) {
+
+        case "perSecRatio":     resource.baseIncRatio += (effect.perSecRatio * howManyTimes) //increases the base n times
+                                if(resource.multiplier > 0) //if we have a multiplier on the resource
+                                    resource.incRatio = resource.baseIncRatio * resource.multiplier // multiplies the base and the multiplier
+                                else
+                                    resource.incRatio = resource.baseIncRatio //else the new incRatio is equal to the base
+                                break;
+
+        case "maxValue":        resource.baseMaxValue += (effect.maxValue * howManyTimes);
+                                if(resource.multiplier > 0) //if we have a multiplier on the resource
+                                    resource.maxValue = resource.baseMaxValue * resource.multiplier // multiplies the base and the multiplier
+                                else
+                                    resource.maxValue = resource.baseMaxValue //else the new incRatio is equal to the base
+                                break;
+
+        case "clickRatio":      resource.currentValue += (effect.clickRatio);
+                                break;
+
+        case "multiRatio":      if(resource.multiplier > 0)
+                                    resource.multiplier *= (effect.multiRatio * howManyTimes)
+                                else    
+                                    resource.multiplier += (effect.multiRatio * howManyTimes)
+                                resource.incRatio = resource.baseRatio * resource.multiplier                               
+                                break;          
+    
+        default: break;
+    }    
+
+}
+
 export function applyEffectsToResources(resources, effects, howManyTimes, type) {
 
-    
-    let modifier = 1
-    if (type === "remove") // in case we need to remove the effects from the resources
-        modifier = -1
+  
+    //let modifier = 1
+    //if (type === "remove") // in case we need to remove the effects from the resources
+        //modifier = -1
     
     effects.forEach(effect => {
         let index = resources.findIndex(x => x.name === effect.resource) //find the correct resource to modify
         let resource = resources[index]
-        let effectType = utilities.wichEffect(effect) //return the correct effect type
 
-        switch (effectType) {
-
-            case "perSecRatio":     resource.flatRatio += (effect.perSecRatio * howManyTimes * modifier)
-                                    if(resource.boost > 0)
-                                        resource.incRatio = resource.flatRatio * resource.boost
-                                    else
-                                        resource.incRatio = resource.flatRatio
-                                    break;
-
-            case "maxValue":        resource.maxValue += (effect.maxValue * howManyTimes * modifier);
-                                    break;
-
-            case "clickRatio":      resource.currentValue += (effect.clickRatio * modifier);
-                                    break;
-
-            case "multiRatio":      resource.boost += effect.multiRatio * howManyTimes * modifier
-                                    resource.incRatio = resource.flatRatio * resource.boost                               
-                                    break;          
-        
-            default: break;
-        }    
+        applyEffectToResource(resource,effect,howManyTimes)
 
         if(resources[index].unlocked === false && resources[index].incRatio > 0)
             resources[index].unlocked = true   

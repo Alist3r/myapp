@@ -121,6 +121,11 @@ export const TLN_001 = {
     description: "descrizione di prova"
 }
 
+export const TLN_002 = {
+    name: "Deep Sleep2",
+    description: "descrizione di prova"
+}
+
 //TABS
 
 export const TAB_001 = "Activities"
